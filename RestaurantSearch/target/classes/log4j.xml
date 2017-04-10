@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+<!-- 로그를 출력할때의 출력양식을 지정  -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p:%C{1}.%M()] %m%n" />
+		</layout>
+	</appender>
+
+<!-- 실제로 디버깅모드로 설정할 패키지를 지정하는 곳
+	  category name="최상위패키지명....  -->
+	<category name="restaurant.controller" additivity="false">
+		<priority value="debug" />
+		<appender-ref ref="STDOUT" />
+	</category>
+
+<!-- 에러를 출력할때  -->
+	<root>
+		<priority value="error" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</log4j:configuration>
