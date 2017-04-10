@@ -100,13 +100,13 @@ body {
 
 /** 03. Top Nav
  **************************************************************** **/
-#header_shadow {
+/* #header_shadow {
 	background:url('../images/header_shadow.png') no-repeat top center;
 	position:fixed;
 	top:81px; left:0; right:0;
 	height:75px; 
-	z-index:99; /* same with header#page-title .container */
-}
+	z-index:99; same with header#page-title .container
+} */
 
 header#topHead {
 	height:43px;

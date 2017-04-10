@@ -245,17 +245,63 @@
 								// 만약 검색리스트에서 선택하였을때 선택한 데이터에 의한 이벤트발생
 							}
 						});
-						
-						$('#pwdSearch').click(function(){
-							alert("패스워드 찾기")
-							//var memInfoForm=document.memInfoForm;
-							//var url="pwdSearch.do";
-						    window.open('pwdSearchView.do','memProfile','width=540,height=260,left=550,top=300,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
-						   // memInfoForm.action=url;
-						   // memInfoForm.method="post";
-						    //memInfoForm.target="memProfile";
-						   // memInfoForm.submit();
-						})
+
+						$('#pwdSearch')
+								.click(
+										function() {
+											alert("패스워드 찾기")
+											//var memInfoForm=document.memInfoForm;
+											//var url="pwdSearch.do";
+											window
+													.open(
+															'pwdSearchView.do',
+															'memProfile',
+															'width=540,height=260,left=550,top=300,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
+											// memInfoForm.action=url;
+											// memInfoForm.method="post";
+											//memInfoForm.target="memProfile";
+											// memInfoForm.submit();
+										})
+						$(document)
+								.mousedown(
+										function(e) {
+											$('.subbox')
+													.each(
+															function() {
+																if ($(this)
+																		.css(
+																				'display') == 'block') {
+																	var l_position = $(
+																			this)
+																			.offset();
+																	l_position.right = parseInt(l_position.left)
+																			+ ($(this)
+																					.width());
+																	l_position.bottom = parseInt(l_position.top)
+																			+ parseInt($(
+																					this)
+																					.height());
+
+																	if ((l_position.left <= e.pageX && e.pageX <= l_position.right)
+																			&& (l_position.top <= e.pageY && e.pageY <= l_position.bottom)) {
+																		//alert( 'popup in click' );
+																	} else {
+																		//alert( 'popup out click' );
+																		$(this)
+																				.hide(
+																						"fast");
+																	}
+																}
+															});
+										});
+
+						$(window).scroll(function() {
+							if ($(this).scrollTop() > 585) {
+								$('.containerSearch').css("display", "block");
+							} else {
+								$('.containerSearch').css("display", "none");
+							}
+						});
 
 					});
 
@@ -289,6 +335,9 @@
 			<a class="logo" href="index.jsp"> <img
 				src="design/images/logo.png" alt="Atropos" />
 			</a>
+
+
+
 
 			<!-- Top Nav -->
 			<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
@@ -328,16 +377,19 @@
 					<div class="pull-right nav signin-dd">
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
-								<div class="navbar-collapse nav-main-collapse collapse pull-right">
-									<a class="dropdown-toggle" href="list.do">게시판 <i class="fa fa-angle-down"></i>
-								</a>
-								</div>
-							
-						<div class="dropdown-menu" role="menu"	aria-labelledby="quick_sign_in">
+						<div class="navbar-collapse nav-main-collapse collapse pull-right">
+							<a class="dropdown-toggle" href="list.do">게시판 <i
+								class="fa fa-angle-down"></i>
+							</a>
+						</div>
+
+						<div class="dropdown-menu" role="menu"
+							aria-labelledby="quick_sign_in">
 
 							<h4>
-								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-								<a href="#" data-toggle="modal" id="pwdSearch"><font color="red">패스워드 찾기</font></a> 
+								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
+									data-toggle="modal" id="pwdSearch"><font color="red">패스워드
+										찾기</font></a>
 							</h4>
 							<form name="memInfo" role="form" method="post"
 								action="memberLogin.do">
@@ -378,7 +430,8 @@
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원 가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원
+										가입</font></a>
 							</p>
 						</div>
 					</div>
@@ -387,11 +440,23 @@
 			</c:choose>
 
 		</div>
+		<div class="containerSearch">
+			<form action="restaurantSearch.do" method="get">
+				<input type="text" class="input_text" id="topSearchBox"
+					name="keyword" autocomplete="off" /> <input type="hidden"
+					id="pageNum" name="pageNum" value="1" />
+				<!-- view more button -->
+				<input type="submit" value="검색"
+					class="btn btn-default btn-m view-more pull-right"
+					style="margin-top: 10px">
+			</form>
+			<span class="clearfix"></span>
+		</div>
 
 		<!-- 		</div> -->
 	</header>
 
-	<span id="header_shadow"></span>
+	<!-- <span id="header_shadow"></span> -->
 	<!-- /TOP NAV -->
 
 	<!-- <div id="darkLayover"> -->
@@ -423,9 +488,8 @@
 										점심을 혼자 먹으려고 하는데..</span> <br>
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
-											name="keyword" />
-										<input type="hidden" id="pageNum"
-											name="pageNum" value="1"/>
+											name="keyword" /> <input type="hidden" id="pageNum"
+											name="pageNum" value="1" />
 										<!-- view more button -->
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
