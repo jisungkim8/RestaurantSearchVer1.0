@@ -203,19 +203,22 @@
 										})
 
 						$('#memLeave').click(function() {
-
-							$.ajax({
-								url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
-								//2.data:{매개변수명:값,매개변수명2:값2,,,,}
-								data : {
-									id : $("#memberId").val()
-								},
-								type : "POST",
-								//3.success:콜백함수명(매개변수)
-								success : function(args) {
-									alert("삭제성공")
-								}
-							})
+							if(confirm("정말 탈퇴하시겠습니까?")==true){
+								$.ajax({
+									url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+									//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+									data : {
+										id : $("#memberId").val()
+									},
+									type : "POST",
+									//3.success:콜백함수명(매개변수)
+									success : function(args) {
+										alert("회원 탈퇴가 성공적으로 되었습니다.")
+									}
+								})
+							}else{
+								return;
+							}
 						})
 
 						$("#searchBox").autocomplete({
@@ -325,13 +328,15 @@
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="pull-right nav signin-dd">
-						<a id="quick_sign_in" href="page-signin.html"
-							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
-								<div class="navbar-collapse nav-main-collapse collapse pull-right">
-									<a class="dropdown-toggle" href="list.do">게시판 <i class="fa fa-angle-down"></i>
-								</a>
-								</div>
+						<div class="pull-right nav signin-dd">
+							<div  class="navbar-collapse nav-main-collapse collapse pull-right">
+								<a id="quick_board" href="list.do"	><span class="btn btn-success">게시판</span></a>	
+							</div>
+									<!-- <a class="dropdown-toggle" href="list.do">게시판 <i class="fa fa-angle-down"></i>
+								</a> -->
+							
+								<a id="quick_sign_in" href="page-signin.html" data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
+							
 							
 						<div class="dropdown-menu" role="menu"	aria-labelledby="quick_sign_in">
 

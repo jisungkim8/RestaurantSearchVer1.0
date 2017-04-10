@@ -320,17 +320,17 @@ $(function(){
 	<!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="design/images/boxed_background/1.jpg"  -->
 
 	<!-- Top Bar -->
-	<header id="topHead">
+	<!-- <header id="topHead">
 	<div class="container">
 
-		<!-- PHONE/EMAIL -->
+		PHONE/EMAIL
 		<span class="quick-contact pull-left"> <i class="fa fa-phone"></i>
 			1800-555-1234 &bull; <a class="hidden-xs"
 			href="mailto:mail@yourdomain.com">mail@domain.com</a>
 		</span>
-		<!-- /PHONE/EMAIL -->
+		/PHONE/EMAIL
 
-		<!-- LANGUAGE -->
+		LANGUAGE
 		<div class="btn-group pull-right hidden-xs">
 			<button class="dropdown-toggle language" type="button"
 				data-toggle="dropdown">
@@ -353,10 +353,10 @@ $(function(){
 				</a></li>
 			</ul>
 		</div>
-		<!-- /LANGUAGE -->
+		/LANGUAGE
 
 
-		<!-- SIGN IN -->
+		SIGN IN
 		<div class="pull-right nav signin-dd">
 			<a id="quick_sign_in" href="page-signin.html" data-toggle="dropdown"><i
 				class="fa fa-users"></i><span class="hidden-xs"> Sign In</span></a>
@@ -367,18 +367,18 @@ $(function(){
 				<form action="page-signin.html" method="post" role="form">
 
 					<div class="form-group">
-						<!-- email -->
+						email
 						<input required type="email" class="form-control"
 							placeholder="Username or email">
 					</div>
 
 					<div class="input-group">
 
-						<!-- password -->
+						password
 						<input required type="password" class="form-control"
 							placeholder="Password">
 
-						<!-- submit button -->
+						submit button
 						<span class="input-group-btn">
 							<button class="btn btn-primary">Sign In</button>
 						</span>
@@ -386,7 +386,7 @@ $(function(){
 					</div>
 
 					<div class="checkbox">
-						<!-- remmember -->
+						remmember
 						<label> <input type="checkbox"> Remember me &bull;
 							<a href="page-signin.html">Forgot password?</a>
 						</label>
@@ -400,48 +400,47 @@ $(function(){
 					class="fa fa-facebook"></i> Connect With Facebook</a> <a href="#"
 					class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i>
 					Connect With Twitter</a>
-				<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
+				<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>
 
 				<p class="bottom-create-account">
 					<a href="page-signup.html">Manual create account</a>
 				</p>
 			</div>
 		</div>
-		<!-- /SIGN IN -->
+		/SIGN IN
 
-		<!-- CART MOBILE BUTTON -->
+		CART MOBILE BUTTON
 		<a class="pull-right" id="btn-mobile-quick-cart" href="shop-cart.html"><i
 			class="fa fa-shopping-cart"></i></a>
-		<!-- CART MOBILE BUTTON -->
+		CART MOBILE BUTTON
 
-		<!-- LINKS -->
+		LINKS
 		<div class="pull-right nav hidden-xs">
 			<a href="page-about-us.html"><i class="fa fa-angle-right"></i>
 				About</a> <a href="contact-us.html"><i class="fa fa-angle-right"></i>
 				Contact</a>
 		</div>
-		<!-- /LINKS -->
-
+		/LINKS
 	</div>
-	</header>
+	</header> -->
 	<!-- /Top Bar -->
 
 	<!-- TOP NAV -->
-	<header id="topNav" class="topHead"><!-- remove class="topHead" if no topHead used! -->
+	<!-- <header id="topNav" class="topHead">remove class="topHead" if no topHead used!
 	<div class="container">
 
-		<!-- Mobile Menu Button -->
+		Mobile Menu Button
 		<button class="btn btn-mobile" data-toggle="collapse"
 			data-target=".nav-main-collapse">
 			<i class="fa fa-bars"></i>
 		</button>
 
-		<!-- Logo text or image -->
+		Logo text or image
 		<a class="logo" href="index.html"> <img
 			src="design/images/logo.png" alt="Atropos" />
 		</a>
 
-		<!-- Top Nav -->
+		Top Nav
 		<div class="navbar-collapse nav-main-collapse collapse pull-right">
 			<nav class="nav-main mega-menu">
 			<ul class="nav nav-pills nav-main scroll-menu" id="topMain">
@@ -719,9 +718,9 @@ $(function(){
 								Full Slider</a></li>
 					</ul></li>
 
-				<!-- GLOBAL SEARCH -->
+				GLOBAL SEARCH
 				<li class="search">
-					<!-- search form -->
+					search form
 					<form method="get" action="#" class="input-group pull-right">
 						<input type="text" class="form-control" name="k" id="k" value=""
 							placeholder="Search"> <span class="input-group-btn">
@@ -729,11 +728,11 @@ $(function(){
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
-					</form> <!-- /search form -->
+					</form> /search form
 				</li>
-				<!-- /GLOBAL SEARCH -->
+				/GLOBAL SEARCH
 
-				<!-- QUICK SHOP CART -->
+				QUICK SHOP CART
 				<li class="quick-cart"><span class="badge pull-right">3</span>
 
 					<div class="quick-cart-content">
@@ -743,7 +742,7 @@ $(function(){
 						</p>
 
 						<a class="item" href="shop-product-full-width.html">
-							<!-- item 1 --> <img class="pull-left"
+							item 1 <img class="pull-left"
 							src="design/images/demo/shop/thumb/1.jpg" width="40"
 							alt="quick cart" />
 							<div class="inline-block">
@@ -751,10 +750,10 @@ $(function(){
 									&times; $44.00</span>
 							</div>
 						</a>
-						<!-- /item 1 -->
+						/item 1
 
 						<a class="item" href="shop-product-full-width.html">
-							<!-- item 2 --> <img class="pull-left"
+							item 2 <img class="pull-left"
 							src="design/images/demo/shop/thumb/2.jpg" width="40"
 							alt="quick cart" />
 							<div class="inline-block">
@@ -762,10 +761,10 @@ $(function(){
 									Man...</span> <span class="price">2 &times; $44.00</span>
 							</div>
 						</a>
-						<!-- /item 2 -->
+						/item 2
 
 						<a class="item" href="shop-product-full-width.html">
-							<!-- item 3 --> <img class="pull-left"
+							item 3 <img class="pull-left"
 							src="design/images/demo/shop/thumb/4.jpg" width="40"
 							alt="quick cart" />
 							<div class="inline-block">
@@ -773,9 +772,9 @@ $(function(){
 									class="price">1 &times; $67.32</span>
 							</div>
 						</a>
-						<!-- /item 3 -->
+						/item 3
 
-						<!-- QUICK CART BUTTONS -->
+						QUICK CART BUTTONS
 						<div class="row cart-footer">
 							<div class="col-md-6 nopadding-right">
 								<a href="shop-cart.html"
@@ -785,18 +784,18 @@ $(function(){
 								<a href="shop-cc-pay.html" class="btn btn-info btn-xs fullwidth">CHECKOUT</a>
 							</div>
 						</div>
-						<!-- /QUICK CART BUTTONS -->
+						/QUICK CART BUTTONS
 
 					</div></li>
-				<!-- /QUICK SHOP CART -->
+				/QUICK SHOP CART
 
 			</ul>
 			</nav>
 		</div>
-		<!-- /Top Nav -->
+		/Top Nav
 
 	</div>
-	</header>
+	</header> -->
 
 	<span id="header_shadow"></span>
 	<!-- /TOP NAV -->
@@ -878,7 +877,7 @@ $(function(){
 		<div id="shop">
 
 			<!-- PAGE TITLE -->
-			<header id="page-title">
+			<!-- <header id="page-title">
 			<div class="container">
 				<h1>Sign UP</h1>
 
@@ -887,7 +886,7 @@ $(function(){
 					<li class="active">Sign UP</li>
 				</ul>
 			</div>
-			</header>
+			</header> -->
 
 
 			<section class="container">
@@ -1100,94 +1099,99 @@ $(function(){
 
 
 
-	<!-- FOOTER -->
-	<footer> <!-- copyright , scrollTo Top -->
-	<div class="footer-bar">
-		<div class="container">
-			<span class="copyright">Copyright &copy; Your Company, LLC .
-				All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO TOP
-				<i class="fa fa-arrow-circle-up"></i>
-			</a>
+<!-- FOOTER -->
+	<footer>
+
+		<!-- copyright , scrollTo Top -->
+		<div class="footer-bar">
+			<div class="container">
+				<span class="copyright">Copyright &copy; git 짜증나요..., LLC .
+					All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO
+					TOP <i class="fa fa-arrow-circle-up"></i>
+				</a>
+			</div>
 		</div>
-	</div>
-	<!-- copyright , scrollTo Top --> <!-- footer content -->
-	<div class="footer-content">
-		<div class="container">
-
-			<div class="row">
+		<!-- copyright , scrollTo Top -->
 
 
-				<!-- FOOTER CONTACT INFO -->
-				<div class="column col-md-4">
-					<h3>CONTACT</h3>
+		<!-- footer content -->
+		<div class="footer-content">
+			<div class="container">
 
-					<p class="contact-desc">Atropos is a very powerful HTML5
-						template, you will be able to create an awesome website in a very
-						simple way.</p>
-					<address class="font-opensans">
-						<ul>
-							<li class="footer-sprite address">PO Box 21132<br /> Here
-								Weare St, Melbourne<br /> Vivas 2355 Australia<br />
-							</li>
-							<li class="footer-sprite phone">Phone: 1-800-565-2390</li>
-							<li class="footer-sprite email"><a
-								href="mailto:support@yourname.com">support@yourname.com</a></li>
-						</ul>
-					</address>
+				<div class="row">
+
+
+					<!-- FOOTER CONTACT INFO -->
+					<div class="column col-md-4">
+						<h3>CONTACT</h3>
+
+						<p class="contact-desc">더이상 시간을 낭비하지 마시고 원하는 음식을 바로 찾으세요!</p>
+						<address class="font-opensans">
+							<ul>
+								<li class="footer-sprite address">서울시 강남구 테헤란로<br /> 1길 10
+									세경빌딩<br />
+								</li>
+								<li class="footer-sprite phone">Phone: +82)31-8282-8949</li>
+								<li class="footer-sprite email"><a
+									href="mailto:support@yourname.com">FoodSearch@right.now</a></li>
+							</ul>
+						</address>
+
+					</div>
+					<!-- /FOOTER CONTACT INFO -->
+
+
+					<!-- FOOTER LOGO -->
+					<div class="column logo col-md-4 text-center">
+						<div class="logo-content">
+							<img class="animate_fade_in" src="design/images/logo_footer.png"
+								width="200" alt="" />
+							<h4>ATROPOS TEMPLATE</h4>
+						</div>
+					</div>
+					<!-- /FOOTER LOGO -->
+
+
+					<!-- FOOTER LATEST POSTS -->
+					<div class="column col-md-4 text-right">
+						<h3>최신 등록글</h3>
+
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+
+						<a href="blog-masonry-sidebar.html" class="view-more pull-right">View
+							Blog <i class="fa fa-arrow-right"></i>
+						</a>
+
+					</div>
+					<!-- /FOOTER LATEST POSTS -->
 
 				</div>
-				<!-- /FOOTER CONTACT INFO -->
-
-
-				<!-- FOOTER LOGO -->
-				<div class="column logo col-md-4 text-center">
-					<div class="logo-content">
-						<img class="animate_fade_in" src="design/images/logo_footer.png"
-							width="200" alt="" />
-						<h4>ATROPOS TEMPLATE</h4>
-					</div>
-				</div>
-				<!-- /FOOTER LOGO -->
-
-
-				<!-- FOOTER LATEST POSTS -->
-				<div class="column col-md-4 text-right">
-					<h3>RECENT POSTS</h3>
-
-					<div class="post-item">
-						<small>JANUARY 2, 2014 BY ADMIN</small>
-						<h3>
-							<a href="blog-post.html">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit</a>
-						</h3>
-					</div>
-					<div class="post-item">
-						<small>JANUARY 2, 2014 BY ADMIN</small>
-						<h3>
-							<a href="blog-post.html">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit</a>
-						</h3>
-					</div>
-					<div class="post-item">
-						<small>JANUARY 2, 2014 BY ADMIN</small>
-						<h3>
-							<a href="blog-post.html">Lorem ipsum dolor sit amet,
-								consectetur adipiscing elit</a>
-						</h3>
-					</div>
-
-					<a href="blog-masonry-sidebar.html" class="view-more pull-right">View
-						Blog <i class="fa fa-arrow-right"></i>
-					</a>
-
-				</div>
-				<!-- /FOOTER LATEST POSTS -->
 
 			</div>
-
 		</div>
-	</div>
-	<!-- footer content --> </footer>
+		<!-- footer content -->
+
+	</footer>
 	<!-- /FOOTER -->
 
 
