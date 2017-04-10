@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ShopPhoto">
+	<select id="selectShopPhotoSepNum1DetView" parameterType="int" resultType="ShopPhotoDto">
+		SELECT *
+		FROM (SELECT a.*, rownum rnum 
+			FROM (SELECT * 
+				FROM SHOPPHOTO
+				ORDER BY restaurantId desc) a)
+		WHERE RESTAURANTID=#{restaurantId} AND PHOTOSEPNUM=1
+	</select>
+	
+	<select id="selectShopPhotoSepNum2DetView" parameterType="int" resultType="ShopPhotoDto">
+		SELECT *
+		FROM (SELECT a.*, rownum rnum 
+			FROM (SELECT * 
+				FROM SHOPPHOTO
+				ORDER BY restaurantId desc) a)
+		WHERE RESTAURANTID=#{restaurantId} AND PHOTOSEPNUM=2
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

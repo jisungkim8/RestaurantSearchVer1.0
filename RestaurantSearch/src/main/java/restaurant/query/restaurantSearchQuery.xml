@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RestaurantSearch">
+	<select id="selectRestaurantSearchViewCount" parameterType="list" resultType="int">
+		SELECT COUNT(*)
+			FROM RESTAURANT	
+		<where>
+			<foreach collection="list" index="index" item="keyword">
+				<if test="index > 0">AND</if>
+				keyword like '%'||#{keyword}||'%'
+			</foreach>
+		</where>
+	</select>
+		
+	<select id="selectRestaurantSearchView" parameterType="hashmap" resultType="RestaurantDto2">
+		SELECT *
+		FROM (SELECT a.*, rownum rnum 
+			FROM (SELECT * 
+				FROM RESTAURANT
+				ORDER BY restaurantId desc) a	
+			<where>
+				<foreach collection="keyword" index="index" item="keyword">
+					<if test="index > 0">AND</if>
+					keyword like '%'||#{keyword}||'%'
+				</foreach>
+			</where>
+			)
+		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

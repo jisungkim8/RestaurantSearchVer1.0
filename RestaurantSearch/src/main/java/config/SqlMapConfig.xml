@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- DTO의 별칭부여 -->
+	<typeAliases>
+		<typeAlias alias="BoardCommand" type="restaurant.dto.BoardCommand" />
+		<typeAlias alias="MemDetInfoDto" type="restaurant.dto.MemDetInfoDto" />
+		<typeAlias alias="MemSimInfoDto" type="restaurant.dto.MemSimInfoDto" />
+		<typeAlias alias="RestaurantDto" type="restaurant.dto.RestaurantDto" />
+		<typeAlias alias="ShopDetInfoDto" type="restaurant.dto.ShopDetInfoDto" />
+		<typeAlias alias="ShopPhotoDto" type="restaurant.dto.ShopPhotoDto" />
+		<typeAlias alias="ShopReviewDto" type="restaurant.dto.ShopReviewDto" />
+		<typeAlias alias="ReviewPhotoDto" type="restaurant.dto.ReviewPhotoDto" />
+		<typeAlias alias="MainRestaurantListDto" type="restaurant.dto.MainRestaurantListDto" />
+		<typeAlias alias="RestaurantDto2" type="restaurant.dto.RestaurantDto2" />
+	</typeAliases>
+
+	<!-- 불러올 테이블의 정보(xml파일) -->
+	<mappers>
+		<mapper resource="restaurant/query/BoardMapper.xml" />
+		<mapper resource="restaurant/query/memDetInfoQuery.xml" />
+		<mapper resource="restaurant/query/memSimInfoQuery.xml" />
+		<mapper resource="restaurant/query/restaurantQuery.xml" />
+		<mapper resource="restaurant/query/shopDetInfoQuery.xml" />
+		<mapper resource="restaurant/query/shopPhotoQuery.xml" />
+		<mapper resource="restaurant/query/shopReviewQuery.xml" />
+		<mapper resource="restaurant/query/reviewPhotoQuery.xml" />
+		<mapper resource="restaurant/query/mainRestaurantListQuery.xml" />
+		<mapper resource="restaurant/query/restaurantSearchQuery.xml" />
+	</mappers>
+
+</configuration>
