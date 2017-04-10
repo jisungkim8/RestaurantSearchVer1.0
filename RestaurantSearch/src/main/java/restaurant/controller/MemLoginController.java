@@ -137,10 +137,16 @@ public class MemLoginController {
        		session.setAttribute("userLoginInfo", memSimInfo);
        	}
     	
+      	 List<MainRestaurantListDto> list=mainRestaurantListDao.selectMainRestaurantList();
+ 		List<MainRestaurantListDto> newlist=mainRestaurantListDao.selectNewRestaurantList();
+ 		
     	ModelAndView  mav = new ModelAndView();
 		mav.setViewName("restaurantMainView");
 		mav.addObject("memSimInfo", memSimInfo);
 		mav.addObject("registerCheck", registerCheck );
+		mav.addObject("list", list);
+		mav.addObject("newlist", newlist);
+		
 		return mav;
     }
     
