@@ -500,10 +500,11 @@
 															</div>
 														</div>
 													</div>
+													<c:set var="count" value="${vs.count}" />
 												</c:forEach>
 											</div>
 											
-											<div id="test"></div>
+											<div id="getMoreReview"></div>
 											
 											<div>
 												<h4 align="center">
@@ -525,7 +526,7 @@
 														</div>
 														<!-- /modal header -->
 														
-														<form action="reviewWrite.do?restaurantId=${restaurantId}" enctype="multipart/form-data" method="post">
+														<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=1" enctype="multipart/form-data" method="post">
 															
 															<!-- modal body -->
 															<div class="modal-body">
