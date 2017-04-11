@@ -69,6 +69,9 @@ public class RestaurantDetViewController {
 		Integer totCntOfReviewEnd = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		Integer totCntOfReviewStart = totCntOfReviewEnd - 2;
 		
+		System.out.println("totCntOfReviewStart = " + totCntOfReviewStart);
+		System.out.println("totCntOfReviewEnd = " + totCntOfReviewEnd);
+		
 		if (totCntOfReviewStart < 0) {
 			totCntOfReviewStart = 0;
 		}
@@ -234,7 +237,7 @@ public class RestaurantDetViewController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId;
+		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount;
 	}
 	
 	@RequestMapping(value="/recommend.do", method=RequestMethod.POST)
@@ -260,6 +263,7 @@ public class RestaurantDetViewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer totCntOfReviewEnd = shopReviewDao.getTotalShopReviewDetView(restaurantId) - moreCount*3;
 		Integer totCntOfReviewStart = totCntOfReviewEnd - 2;
+		boolean checkMoreReview = true;
 		
 		if (totCntOfReviewEnd < 0) {
 			totCntOfReviewEnd = 0;
@@ -267,7 +271,11 @@ public class RestaurantDetViewController {
 		
 		if (totCntOfReviewStart < 0) {
 			totCntOfReviewStart = 0;
+			checkMoreReview = false;
 		}
+
+		System.out.println("totCntOfReviewStart = " + totCntOfReviewStart);
+		System.out.println("totCntOfReviewEnd = " + totCntOfReviewEnd);
 		
 		map.put("restaurantId", restaurantId);
 		map.put("start", start);
@@ -284,6 +292,7 @@ public class RestaurantDetViewController {
 		
 		mav.addObject("shopReviewDto", shopReviewDto);
 		mav.addObject("reviewPhotoDto", reviewPhotoDto);
+		mav.addObject("checkMoreReview", checkMoreReview);
 		
 		return mav;
 	}

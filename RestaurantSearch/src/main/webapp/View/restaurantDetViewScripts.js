@@ -31,8 +31,6 @@ $(document).ready(function() {
 	var moreCount = urlParam("moreCount");
 	var restaurantId = urlParam("restaurantId");
 	
-	$("#test").load("View/NewFile.jsp");
-	
 	$("#moreReviewPhotoFile").on("click", function(e) {
 		var content = "";
 		var number = $("#reviewPhotoFileGroup input").length + 1;
@@ -83,12 +81,16 @@ $(document).ready(function() {
 			method : "GET", 
 			data : {restaurantId:restaurantId, start:start, end:end, moreCount:moreCount}, 
 			success : function(args) {
-				alert("more Clicked!! moreCount = " + moreCount);
-				alert("start = " + start);
-				alert("end = " + end);
-				$("#test").append(args);
+//				alert("more Clicked!! moreCount = " + moreCount);
+//				alert("start = " + start);
+//				alert("end = " + end);
+				$("#getMoreReview").append(args);
 				moreCount = moreCount*1 + 1;
-				alert("moreCount After = " + moreCount)
+//				alert("moreCount After = " + moreCount)
+				alert("test = " + $("#checkMoreReview").val());
+				
+				if ($("#checkMoreReview").val() == "false")
+					$("#more").remove();
 			}
 		})
 

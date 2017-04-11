@@ -111,6 +111,9 @@
 		</div>
 	</div>
 </c:forEach>
+<c:if test="${checkMoreReview == false}">
+	<input type="hidden" id="checkMoreReview" value="false">
+</c:if>
 
 
 
