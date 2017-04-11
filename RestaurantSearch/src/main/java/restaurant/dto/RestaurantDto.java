@@ -1,13 +1,13 @@
 package restaurant.dto;
 
 public class RestaurantDto {
-	int restaurantId;
-	String restaurantName;
-	String addr;
-	String phoneNumber;
-	String representPhoto;
-	String keyword;
-	int foodId;
+	private int restaurantId;
+	private String restaurantName;
+	private String addr;
+	private String phoneNumber;
+	private String representPhoto;
+	private String keyword;
+	private int foodId;
 	
 	public int getRestaurantId() {
 		return restaurantId;

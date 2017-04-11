@@ -4,17 +4,28 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ReviewPhoto">
-	<select id="selectReviewPhotoDetView" parameterType="int" resultType="ReviewPhotoDto">
+	<select id="selectReviewPhotoDetView" parameterType="map" resultType="ReviewPhotoDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
-			FROM (SELECT * 
+			FROM (SELECT REVIEWPHOTO.REVIEWID, REVIEWPHOTO.PHOTOID, REVIEWPHOTO.PHOTOPATH 
 				FROM SHOPREVIEW
 				INNER JOIN REVIEWPHOTO
 				ON SHOPREVIEW.REVIEWID=REVIEWPHOTO.REVIEWID
+				WHERE RESTAURANTID=#{restaurantId}
 				ORDER BY SHOPREVIEW.reviewId desc) a)
-		WHERE RESTAURANTID=#{restaurantId}
+		<![CDATA[
+			WHERE REVIEWID >= #{totCntOfReviewStart} AND REVIEWID <= #{totCntOfReviewEnd}
+		]]>
 	</select>
 	
+	<select id="getNewReviewPhotoDetView" resultType="int">
+		SELECT MAX(photoId) FROM REVIEWPHOTO
+	</select>
+	
+	<insert id="insertReviewPhotoDetView" parameterType="ReviewPhotoDto">
+		INSERT INTO REVIEWPHOTO(photoId, photoPath, reviewId)
+		VALUES(#{photoId}, #{photoPath}, #{reviewId})
+	</insert>
 </mapper>
 
 
