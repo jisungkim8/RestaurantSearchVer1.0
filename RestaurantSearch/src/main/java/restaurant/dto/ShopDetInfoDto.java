@@ -1,16 +1,16 @@
 package restaurant.dto;
 
 public class ShopDetInfoDto {
-	int restaurantId;
-	String shortDesc;
-	String representMenu;
-	String operStartDate;
-	String representative;
-	String homepage;
-	String operHour;
-	String modifyDate;
-	float averageScore;
-	int regionId;
+	private int restaurantId;
+	private String shortDesc;
+	private String representMenu;
+	private String operStartDate;
+	private String representative;
+	private String homepage;
+	private String operHour;
+	private String modifyDate;
+	private float averageScore;
+	private int regionId;
 	
 	public int getRestaurantId() {
 		return restaurantId;

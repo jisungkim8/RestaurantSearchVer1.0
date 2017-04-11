@@ -5,12 +5,34 @@
 
 <mapper namespace="ShopReview">
 	<select id="selectShopReviewDetView" parameterType="int" resultType="ShopReviewDto">
-		SELECT *
-		FROM (SELECT a.*, rownum rnum 
+		SELECT * 
+		FROM (SELECT a.*, rownum rnum
 			FROM (SELECT * 
-				FROM SHOPREVIEW
-				ORDER BY reviewId desc) a)
-		WHERE RESTAURANTID=#{restaurantId}
+				FROM (SELECT * 
+					FROM SHOPREVIEW
+					ORDER BY reviewId desc))a
+			WHERE RESTAURANTID=#{restaurantId})
+		<![CDATA[
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+		]]>
+	</select>
+	
+	<select id="getNewShopReviewDetView" resultType="int">
+		SELECT MAX(reviewId) FROM SHOPREVIEW
+	</select>
+	
+	<insert id="insertShopReviewDetView" parameterType="ShopReviewCommand">
+		INSERT INTO SHOPREVIEW(reviewId, title, writeDate, content, recommendCnt, visitTime, dinnerOrLunch, memberId, restaurantId)
+		VALUES(#{reviewId}, #{title}, sysdate, #{content}, 0, #{visitTime}, #{dinnerOrLunch}, #{memberId}, #{restaurantId})
+	</insert>
+	
+	<update id="increaseRecommendCnt" parameterType="int">
+		UPDATE SHOPREVIEW SET recommendCnt = recommendCnt + 1
+		WHERE REVIEWID = #{reviewId}
+	</update>
+	
+	<select id="getTotalShopReviewDetView" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM SHOPREVIEW WHERE RESTAURANTID = #{restaurantId}
 	</select>
 	
 </mapper>

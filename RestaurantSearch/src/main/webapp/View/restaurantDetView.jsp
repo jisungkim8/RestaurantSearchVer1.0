@@ -3,6 +3,11 @@
     
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
@@ -13,6 +18,10 @@
 		<title>
 			${restaurantDto.restaurantName}
 		</title>
+		
+		<spring:hasBindErrors name="reviewCommand"/>
+		<form:errors path="reviewCommand"/>
+		
 		<meta name="keywords" content="HTML5,CSS3,Template" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
@@ -61,7 +70,9 @@
 
 		<!-- Morenizr -->
 		<script type="text/javascript" src="<c:url value="design/plugins/modernizr.min.js" />"></script>
-		
+		<script type="text/javascript">
+			
+		</script>
 	</head>
 	<body><!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="<c:url value="design/images/boxed_background/1.jpg" />"  -->
 		
@@ -85,7 +96,7 @@
 					<button type="button" class="btn btn-danger">회원가입</button>
 					<button type="button" class="btn btn-success">로그인</button> -->
 				<!-- SIGN IN -->
-				<div class="pull-right nav signin-dd">
+				<div class="pull-right nav signin-dd" id="login">
 					<a id="quick_sign_in" href="page-signin.html" data-toggle="dropdown"><span
 						class="btn btn-success">로그인</span></a>
 					<div class="dropdown-menu" role="menu"
@@ -157,10 +168,70 @@
 						<div class="white-row">
 							<h1 class="page-header margin-bottom40">
 								<strong class="styleColor">${restaurantDto.restaurantName}</strong>
-								<i class="featured-icon half empty fa fa-heart-o"></i>
+								<c:if test="${sessionScope.userLoginInfo == null}">
+
+									<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="addLikeSessionNotExists()">
+										<i class="featured-icon half empty fa fa-heart-o"></i>
+									</button>
+
+									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+			
+												<div class="modal-header"><!-- modal header -->
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+												</div><!-- /modal header -->
+			
+												<!-- modal body -->
+												<div class="modal-body">
+													로그인을 먼저 하세요.
+												</div>
+												<!-- /modal body -->
+			
+												<div class="modal-footer"><!-- modal footer -->
+													<button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary">Save changes</button>
+												</div><!-- /modal footer -->
+			
+											</div>
+										</div>
+									</div>
+
+												
+								</c:if>
+								
+								<c:if test="${sessionScope.userLoginInfo != null}">
+									<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="addLikeSessionExists()">
+										<i class="featured-icon half empty fa fa-heart-o"></i>
+									</button>
+									
+									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+			
+												<div class="modal-header"><!-- modal header -->
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+												</div><!-- /modal header -->
+			
+												<!-- modal body -->
+												<div class="modal-body">
+													좋아요 리스트에 추가되었습니다.
+												</div>
+												<!-- /modal body -->
+			
+												<div class="modal-footer"><!-- modal footer -->
+													<button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary">Save changes</button>
+												</div><!-- /modal footer -->
+			
+											</div>
+										</div>
+									</div>
+												
+								</c:if>
 								<i class="featured-icon half fa fa-heart-o"></i>
 							</h1>
-								
+						
 						</div>
 						<!-- /park -->
 						
@@ -246,7 +317,7 @@
 
 								<!-- tabs -->
 								<ul class="nav nav-tabs">
-									<li class="active">
+									<li>
 										<a href="#tab1" data-toggle="tab">
 											<i class="fa fa-heart"></i> 상세정보
 										</a>
@@ -256,7 +327,7 @@
 											<i class="fa fa-cogs"></i> 위치
 										</a>
 									</li>
-									<li>
+									<li class="active">
 										<a href="#tab3" data-toggle="tab">
 											<i class="fa fa-cogs"></i> 리뷰
 										</a>
@@ -267,13 +338,13 @@
 								<div class="tab-content">
 								
 									<!-- detail information tab -->
-									<div id="tab1" class="tab-pane active">
+									<div id="tab1" class="tab-pane">
 										<br>
 										
 										<!-- views, reviews, likes -->
 										<p>
 											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> 55,621 &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> 12 &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> ${shopReviewDto.size()} &nbsp;&nbsp;&nbsp;
 											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> 51 &nbsp;&nbsp;&nbsp;
 										</p>
 										<!-- /views, reviews, likes -->
@@ -383,29 +454,16 @@
 												<div class="toggle active">
 													<label>상세 정보</label>
 													<div class="toggle-content">
-														<div class="col-md-3">
+														<div class="col-md-12">
 															<p>
-																상호명 : <br>
-																대표자 : <br>
-																영업시간 : <br>
-																주소 : <br>
-																전화번호 : <br>
-																홈페이지 : <br>
-																영업 시작일 : <br>
-																최종 수정일 : <br>
-															</p>
-														</div>
-														
-														<div class="col-md-9">
-															<p>
-																${restaurantDto.restaurantName} <br>
-																${shopDetInfoDto.representative} <br>
-																${shopDetInfoDto.operHour} <br>
-																${restaurantDto.addr} <br>
-																${restaurantDto.phoneNumber} <br>
-																<a href="${shopDetInfoDto.homepage}">${shopDetInfoDto.homepage}</a> <br>
-																${shopDetInfoDto.operStartDate.substring(0, 10)} <br>
-																${shopDetInfoDto.modifyDate.substring(0, 10)} <br>
+																상호명 : ${restaurantDto.restaurantName} <br>
+																대표자 : ${shopDetInfoDto.representative} <br>
+																영업시간 : ${shopDetInfoDto.operHour} <br>
+																주소 :  ${restaurantDto.addr} <br>
+																전화번호 : ${restaurantDto.phoneNumber} <br>
+																홈페이지 : <a href="${shopDetInfoDto.homepage}">${shopDetInfoDto.homepage}</a> <br>
+																영업 시작일 : ${shopDetInfoDto.operStartDate.substring(0, 10)} <br>
+																최종 수정일 : ${shopDetInfoDto.modifyDate.substring(0, 10)} <br>
 															</p>
 														</div>
 													</div>
@@ -446,61 +504,160 @@
 									<!-- /location tab -->
 									
 									<!-- review tab -->
-									<div id="tab3" class="tab-pane">
+									<div id="tab3" class="tab-pane active">
 										<!-- reivew -->
 										<c:if test="${shopReviewDto.isEmpty()}">
 											등록된 리뷰가 없습니다.
 										</c:if>
 										
 										<c:if test="${!shopReviewDto.isEmpty()}">
-											<c:forEach var="shopReview" items="${shopReviewDto}">
-												<div>
-													<div class="col-md-12">
-														<div class="col-md-4">
-															<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-																<c:forEach var="reviewPhoto" items="${reviewPhotoDto}" varStatus="vs">
-																	<c:if test="${reviewPhoto.reviewId == shopReview.reviewId}">
-																		<li> <!-- item -->
-																			<div class="item-box nomargin-top">
-																				<figure>
-																					<a class="item-hover" href="<c:url value="${reviewPhoto.photoPath}" />"></a>
-																					<c:if test="${vs.first == true}">
-																						<img alt="" class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" />
-																					</c:if>
-																				</figure>
-																			</div>
-																		</li>
-																	</c:if>
-																</c:forEach>
-															</ul>
-														</div>
-														
-														<div class="col-md-8">
-															<div class="row">
+<%-- 											<c:set var="end" value="0" /> --%>
+											
+											<div id="review">
+<%-- 												<c:forEach var="shopReview" items="${shopReviewDto}" begin="0" end="2" varStatus="vs"> --%>
+												<c:forEach var="shopReview" items="${shopReviewDto}" varStatus="vs">
+													<c:set var="firstPhoto" value="true" />
+													
+													<div>
+														<div class="col-md-12">
+															<div class="col-md-4">
+																<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+																	<c:forEach var="reviewPhoto" items="${reviewPhotoDto}">
+																		<c:if test="${reviewPhoto.reviewId == shopReview.reviewId}">
+																			<li> <!-- item -->
+																				<div class="item-box nomargin-top">
+																					<figure>
+																						<a class="item-hover" href="<c:url value="${reviewPhoto.photoPath}" />"></a>
+																						<c:if test="${firstPhoto == true}">
+																							<img alt="" class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" />
+																							<c:remove var="count" />
+																						</c:if>
+																					</figure>
+																				</div>
+																			</li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+															</div>
+															
+															<div class="col-md-7">
+																<div class="row">
+										
 									
-																<div class="toogle">
-								
-																	<div class="toggle active">
-																		<label>${shopReview.title}</label>
-																		<div class="toggle-content">
-																			<p>${shopReview.content}</p>
-																		</div>
-																	</div>
-								
+																	<p>
+																		제목 : ${shopReview.title} <br>
+																		작성일자 : <fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="default" timeStyle="default"/> <br>
+																		내용 : ${shopReview.content} <br>
+																		추천수 : ${shopReview.recommendCnt} <br>
+																		방문 시간대 : ${shopReview.visitTime} <br>
+																		디너/런치 : ${shopReview.dinnerOrLunch} <br>
+																		작성자 : ${shopReview.memberId} <br>
+																	</p>
+									
+										
 																</div>
-									
+															</div>
+															
+															<div class="col-md-1">
+																<button id="recommend" class="btn btn-default" value="${vs.current.reviewId}">추천</button>
 															</div>
 														</div>
 													</div>
-												</div>
-											</c:forEach>
+												</c:forEach>
+											</div>
+											
+											<div id="test"></div>
 											
 											<div>
 												<h4 align="center">
-													<button>더보기..</button>
+													<button id="more" class="btn btn-default">더보기..</button>
 												</h4>
 											</div>
 										</c:if>
+										
+										<div>
+											<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
+					
+											<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<!-- modal header -->
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															<h4 class="modal-title" id="myModalLabel">리뷰 작성</h4>
+														</div>
+														<!-- /modal header -->
+														
+														<form action="reviewWrite.do?restaurantId=${restaurantId}" enctype="multipart/form-data" method="post">
+															
+															<!-- modal body -->
+															<div class="modal-body">
+																<div class="row">
+																	<div class="form-group">
+																		<div class="col-md-12">
+																			<label>제목</label>
+																			<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
+<%-- 																				<form:errors path="shopReviewDto.title"/><br> --%>
+																			
+																			<label>내용</label>
+																			<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
+<%-- 																				<form:errors path="shopReviewDto.content"/><br> --%>
+																			
+																			<label>방문시간대</label>
+																			<select class="form-control pointer" name="visitTime">
+																				<option value="" selected="selected">선택</option>
+																				<option value="0~1시">0~1시</option>
+																				<option value="1~2시">1~2시</option>
+																				<option value="2~3시">2~3시</option>
+																				<option value="3~4시">3~4시</option>
+																				<option value="4~5시">4~5시</option>
+																				<option value="5~6시">5~6시</option>
+																				<option value="6~7시">6~7시</option>
+																				<option value="7~8시">7~8시</option>
+																				<option value="8~9시">8~9시</option>
+																				<option value="9~10시">9~10시</option>
+																				<option value="10~11시">10~11시</option>
+																				<option value="11~12시">11~12시</option>
+																			</select>
+																			
+																			<label>Dinner/Lunch</label>
+																			<select class="form-control pointer" name="dinnerOrLunch">
+																				<option value="" selected="selected">선택</option>
+																				<option value="Dinner">Dinner</option>
+																				<option value="Lunch">Lunch</option>
+																			</select>
+																			
+																			
+																			<label>사진</label>
+																			
+																			<div id="reviewPhotoFileGroup">
+																				<input type="file" class="form-control" style="height:50px;" name="upload">
+																			</div>
+																			<div align="right">
+																				<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
+																			</div>
+																			
+																			<input type="hidden" name="memberId" value="">
+																				
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+															<!-- /modal body -->
+						
+															<!-- modal footer -->
+															<div class="modal-footer">
+																<button class="btn btn-primary">Submit</button>
+																<button class="btn btn-default" data-dismiss="modal">Close</button> 
+															</div>
+															<!-- /modal footer -->
+					
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
 											
 <!-- 											<div class="col-md-12"> -->
 <!-- 												<div class="col-md-4"> -->
@@ -1337,25 +1494,26 @@
 
 
 		<!-- JAVASCRIPT FILES -->
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery-2.1.3.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery.easing.1.3.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery.cookie.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery.appear.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery.isotope.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/masonry.js" />"></script>
+		<script type="text/javascript" src="design/plugins/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="design/plugins/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="design/plugins/jquery.cookie.js"></script>
+		<script type="text/javascript" src="design/plugins/jquery.appear.js"></script>
+		<script type="text/javascript" src="design/plugins/jquery.isotope.js"></script>
+		<script type="text/javascript" src="design/plugins/masonry.js"></script>
 
-		<script type="text/javascript" src="<c:url value="design/plugins/bootstrap/js/bootstrap.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/magnific-popup/jquery.magnific-popup.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/owl-carousel/owl.carousel.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/stellar/jquery.stellar.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/knob/js/jquery.knob.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/jquery.backstretch.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/superslides/dist/jquery.superslides.min.js" />"></script>
-		<script type="text/javascript" src="<c:url value="design/plugins/styleswitcher/styleswitcher.js" />"></script><!-- STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT -->
-		<script type="text/javascript" src="<c:url value="design/plugins/mediaelement/build/mediaelement-and-player.min.js" />"></script>
+		<script type="text/javascript" src="design/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="design/plugins/magnific-popup/jquery.magnific-popup.js"></script>
+		<script type="text/javascript" src="design/plugins/owl-carousel/owl.carousel.min.js"></script>
+		<script type="text/javascript" src="design/plugins/stellar/jquery.stellar.min.js"></script>
+		<script type="text/javascript" src="design/plugins/knob/js/jquery.knob.js"></script>
+		<script type="text/javascript" src="design/plugins/jquery.backstretch.min.js"></script>
+		<script type="text/javascript" src="design/plugins/superslides/dist/jquery.superslides.min.js"></script>
+		<script type="text/javascript" src="design/plugins/styleswitcher/styleswitcher.js"></script>STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT
+		<script type="text/javascript" src="design/plugins/mediaelement/build/mediaelement-and-player.min.js"></script>
 		
 
-		<script type="text/javascript" src="<c:url value="design/js/scripts.js" />"></script>
+		<script type="text/javascript" src="design/js/scripts.js"></script>
+		<script type="text/javascript" src="View/restaurantDetViewScripts.js"></script>
 <%-- 		<script type="text/javascript" src="<c:url value="design/js/restaurantScripts.js" />"></script> --%>
 
 

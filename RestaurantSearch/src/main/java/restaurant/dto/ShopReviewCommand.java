@@ -1,8 +1,12 @@
 package restaurant.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class ShopReviewDto {
+import org.springframework.web.multipart.MultipartFile;
+
+public class ShopReviewCommand {
 	private int reviewId;
 	private String title;
 	private Date writeDate;
@@ -12,6 +16,9 @@ public class ShopReviewDto {
 	private String dinnerOrLunch;
 	private String memberId;
 	private int restaurantId;
+	private ArrayList<ReviewPhotoDto> reviewPhotoDtoList;
+	private ArrayList<MultipartFile> upload;
+	private ArrayList<String> filename;
 	
 	public int getReviewId() {
 		return reviewId;
@@ -66,5 +73,24 @@ public class ShopReviewDto {
 	}
 	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
+	}
+	
+	public ArrayList<ReviewPhotoDto> getReviewPhotoDtoList() {
+		return reviewPhotoDtoList;
+	}
+	public void setReviewPhotoDtoList(ArrayList<ReviewPhotoDto> reviewPhotoDtoList) {
+		this.reviewPhotoDtoList = reviewPhotoDtoList;
+	}
+	public ArrayList<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(ArrayList<MultipartFile> upload) {
+		this.upload = upload;
+	}
+	public ArrayList<String> getFilename() {
+		return filename;
+	}
+	public void setFilename(ArrayList<String> filename) {
+		this.filename = filename;
 	}
 }
