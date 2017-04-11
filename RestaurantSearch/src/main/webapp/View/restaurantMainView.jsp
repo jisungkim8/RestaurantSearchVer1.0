@@ -82,16 +82,11 @@
 											'thick solid brown');
 								})
 
-						$("#login")
-								.click(
-										function() {
+						$("#login")	.click(function() {
 											var registerCheck, passwd;
 
-											alert("memberId==>"
-													+ $("#memberId").val());
-											alert("password==>"
-													+ $("#password").val());
-											alert("login");
+											alert("memberId==>"+ $("#memberId").val());
+											alert("password==>"+ $("#password").val());
 
 											//document.memInfo.submit()
 
@@ -99,16 +94,11 @@
 
 											if ($("#memberId").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+												$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
 												$("#memberId").focus();//커서입력
 												return;
-											} else if (!regEmail.test($(
-													"#memberId").val())) {
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+											} else if (!regEmail.test($("#memberId").val())) {
+												$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
 												$("#memberId").focus();
 												//history.back();
 												return;
@@ -116,20 +106,16 @@
 
 											if ($("#password").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+												$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
 												$("#loginmsg").focus();//커서입력
 												return;
 											}
 
-											$
-													.ajax({
+											$.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
-															id : $("#memberId")
-																	.val()
+															id : $("#memberId").val()
 														},
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
@@ -138,41 +124,28 @@
 															if (args == "register") {
 																alert("회원등록이 되었습니다.")
 																registerCheck = "register"
-																$
-																		.ajax({
+																$.ajax({
 																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 																			data : {
-																				id : $(
-																						"#memberId")
-																						.val(),
-																				passwd : $(
-																						"#password")
-																						.val()
+																				id : $("#memberId").val(),
+																				passwd : $("#password").val()
 																			},
 																			type : "POST",
 																			//3.success:콜백함수명(매개변수)
-																			success : function(
-																					args) {
+																			success : function(args) {
 																				alert(args)
 																				if (args == "agreement") {
-																					alert("로그인 성공하였습니다.")
 																					document.memInfo
 																							.submit()
 																				} else {
-																					alert("패스워드가 일치하지 않습니다.")
-																					$(
-																							"#loginmsg")
-																							.html(
-																									"<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																				}
 																			}
 																		})
 															} else {
-																alert("회원등록이 되지 않았습니다.")
 																$("#loginmsg")
-																		.html(
-																				"<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+																		.html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
 															}
 														}
 													})
@@ -249,14 +222,12 @@
 							}
 						});
 
-						$('#pwdSearch')
-								.click(
-										function() {
+						$('#pwdSearch').click(
+								function() {
 											alert("패스워드 찾기")
 											//var memInfoForm=document.memInfoForm;
 											//var url="pwdSearch.do";
-											window
-													.open(
+											window.open(
 															'pwdSearchView.do',
 															'memProfile',
 															'width=540,height=260,left=550,top=300,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
@@ -349,14 +320,12 @@
 			<!-- SIGN IN -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.userLoginInfo}">
-					
-					<div class="pull-right nav signin-dd">
 					<div  class="navbar-collapse nav-main-collapse collapse pull-left">
 							<a id="quick_board" href="list.do"	><span class="btn btn-warning">게시판</span></a>	
 					</div>
+					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"> <span>로그인 성공! 이메일 :<c:out
-										value="${sessionScope.userLoginInfo.memberId}" />
+							class="dropdown-toggle" href="#"> <span>로그인 성공! 이메일 :<c:out value="${sessionScope.userLoginInfo.memberId}" />
 							</span>
 						</a>
 							<ul class="dropdown-menu extended logout">

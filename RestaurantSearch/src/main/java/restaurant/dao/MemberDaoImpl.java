@@ -70,4 +70,10 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		return memPasswd;
 	}
 	
+	public int checkNicName(String nicName) {
+		System.out.println("checkNicName");
+		int nicNameCount = getSqlSession().selectOne("checkNicName", nicName);
+		return nicNameCount;
+	}
+	
 }

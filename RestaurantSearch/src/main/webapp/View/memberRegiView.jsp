@@ -80,6 +80,20 @@
 <script src="/RestaurantSearch/lib/jquery-1.11.0.min.js"></script>
 <script>
 
+$(document).ready(function(){
+	var fileTarget = $('.filebox .upload-hidden'); 
+	fileTarget.on('change', function(){ // 값이 변경되면 
+		if(window.FileReader){ // modern browser
+			var filename = $(this)[0].files[0].name; } 
+		else{ // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+		}
+	// 추출한 파일명 삽입 
+			$(this).siblings('.upload-name').val(filename); 
+				});
+	}); 
+
+
 
 
 function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2)
@@ -115,15 +129,40 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
     			}
     		}
     	})//$.ajax
-    	
 }
 
 $(function(){
 	
 	 //2.중복  id를 입력했을때 호출하는 함수   
 	var validationCheck = {emailVali:false, passwdVali:false};
-	  
-	
+	 
+	 $("#nicNameRepCheck").click(function(){
+		   alert("닉네임")
+		   if($("#nicName").val()==""){
+			   //document.getElementById("ducheck")=>$("ducheck")
+			   $("#nicNameTxt").html("<font id='idColor' color='red'>먼저 닉네임을 입력하세요.</font>")
+			   $("#nicName").focus();//커서입력
+			   return;
+		   }
+		   
+			$.ajax({
+	    		url:'/RestaurantSearch/dupliNicnameCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+	    		data:{nicName:$("#nicName").val()},
+	    		type : "POST",
+	    		//3.success:콜백함수명(매개변수)
+	    		success:function(args){
+	    			if(args=="create"){
+	    				alert("닉네임 가능")
+	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
+	     			}else{
+	    				alert("닉네임 불가능")
+	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
+	    				$("#memberId").focus();
+	    			}
+	    		}
+	    	})//$.ajax
+	 })
  	
 	$("#createId").click(function(){
 		
@@ -170,6 +209,13 @@ $(function(){
 		   //   history.back();
 		      return;
 			}
+		
+		if (!($("#nicName").val())) {
+		      alert("닉네임을 입력해 주세요. 필수 입력사항입니다.")
+		      $("#nicName").focus();
+		      //history.back();
+		      return;
+		}
 		
 		if ($("#password").val() != $("#rePassword").val()) {
 			alert("패스워드가 일치하지 않습니다.정확하게 입력하여 주세요.");
@@ -248,6 +294,12 @@ $(function(){
 			}
 		}) // password(blur)
 		
+		$("#nicName").blur(function(){
+			 if (!($("#nicName").val())) {
+					$("#nicNameTxt").html("<font id='idColor' color='red'>닉네임을 입력해주세요.</font>")
+			 }
+		})
+		
 		$("#rePassword").blur(function(){
 			if ($("#password").val() != $("#rePassword").val()) {
 				$("#passwordReCheckMessage").html("<font id='idColor' color='red'>패스워드가 일치하지 않습니다</font>");
@@ -312,570 +364,43 @@ $(function(){
 		})
 		
 })
-		
-					
+
 </script>
+
+<style>
+   #main { height:600px;  background:url("design/images/demo/realestate/딸기.jpg") no-repeat;}
+   .filebox input[type="file"]
+    { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+     overflow: hidden; clip:rect(0,0,0,0); border: 0; }
+     .filebox label { 
+     display: inline-block; padding: 0.5em .75em; 
+     color: blue; font-size: inherit;
+     line-height: normal; vertical-align: -webkit-baseline-middle; background-color: chocolate;
+     cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; 
+     border-radius: .25em; } /* named upload */ 
+     .filebox .upload-name {
+      display: inline-block; padding: .5em 20.5em; /* label의 패딩값과 일치 */
+      font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle;
+      background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
+       border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
+
+</style>
+
 </head>
 <body>
-	<!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="design/images/boxed_background/1.jpg"  -->
-
-	<!-- Top Bar -->
-	<!-- <header id="topHead">
-	<div class="container">
-
-		PHONE/EMAIL
-		<span class="quick-contact pull-left"> <i class="fa fa-phone"></i>
-			1800-555-1234 &bull; <a class="hidden-xs"
-			href="mailto:mail@yourdomain.com">mail@domain.com</a>
-		</span>
-		/PHONE/EMAIL
-
-		LANGUAGE
-		<div class="btn-group pull-right hidden-xs">
-			<button class="dropdown-toggle language" type="button"
-				data-toggle="dropdown">
-				<img src="design/images/flags/us.png" width="16" height="11"
-					alt="EN Language" /> English <span class="caret"></span>
-			</button>
-
-			<ul class="dropdown-menu">
-				<li><a href="#"> <img src="design/images/flags/us.png"
-						width="16" height="11" alt="EN Language" /> [US] English
-				</a></li>
-				<li><a href="#"> <img src="design/images/flags/de.png"
-						width="16" height="11" alt="DE Language" /> [DE] German
-				</a></li>
-				<li><a href="#"> <img src="design/images/flags/fr.png"
-						width="16" height="11" alt="FR Language" /> [FR] French
-				</a></li>
-				<li><a href="#"> <img src="design/images/flags/ru.png"
-						width="16" height="11" alt="RU Language" /> [RU] Russian
-				</a></li>
-			</ul>
-		</div>
-		/LANGUAGE
-
-
-		SIGN IN
-		<div class="pull-right nav signin-dd">
-			<a id="quick_sign_in" href="page-signin.html" data-toggle="dropdown"><i
-				class="fa fa-users"></i><span class="hidden-xs"> Sign In</span></a>
-			<div class="dropdown-menu" role="menu"
-				aria-labelledby="quick_sign_in">
-
-				<h4>Sign In</h4>
-				<form action="page-signin.html" method="post" role="form">
-
-					<div class="form-group">
-						email
-						<input required type="email" class="form-control"
-							placeholder="Username or email">
-					</div>
-
-					<div class="input-group">
-
-						password
-						<input required type="password" class="form-control"
-							placeholder="Password">
-
-						submit button
-						<span class="input-group-btn">
-							<button class="btn btn-primary">Sign In</button>
-						</span>
-
-					</div>
-
-					<div class="checkbox">
-						remmember
-						<label> <input type="checkbox"> Remember me &bull;
-							<a href="page-signin.html">Forgot password?</a>
-						</label>
-					</div>
-
-				</form>
-
-				<hr />
-
-				<a href="#" class="btn-facebook fullwidth radius3"><i
-					class="fa fa-facebook"></i> Connect With Facebook</a> <a href="#"
-					class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i>
-					Connect With Twitter</a>
-				<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>
-
-				<p class="bottom-create-account">
-					<a href="page-signup.html">Manual create account</a>
-				</p>
-			</div>
-		</div>
-		/SIGN IN
-
-		CART MOBILE BUTTON
-		<a class="pull-right" id="btn-mobile-quick-cart" href="shop-cart.html"><i
-			class="fa fa-shopping-cart"></i></a>
-		CART MOBILE BUTTON
-
-		LINKS
-		<div class="pull-right nav hidden-xs">
-			<a href="page-about-us.html"><i class="fa fa-angle-right"></i>
-				About</a> <a href="contact-us.html"><i class="fa fa-angle-right"></i>
-				Contact</a>
-		</div>
-		/LINKS
-	</div>
-	</header> -->
-	<!-- /Top Bar -->
-
-	<!-- TOP NAV -->
-	<!-- <header id="topNav" class="topHead">remove class="topHead" if no topHead used!
-	<div class="container">
-
-		Mobile Menu Button
-		<button class="btn btn-mobile" data-toggle="collapse"
-			data-target=".nav-main-collapse">
-			<i class="fa fa-bars"></i>
-		</button>
-
-		Logo text or image
-		<a class="logo" href="index.html"> <img
-			src="design/images/logo.png" alt="Atropos" />
-		</a>
-
-		Top Nav
-		<div class="navbar-collapse nav-main-collapse collapse pull-right">
-			<nav class="nav-main mega-menu">
-			<ul class="nav nav-pills nav-main scroll-menu" id="topMain">
-				<li class="dropdown"><a class="dropdown-toggle" href="#">
-						Home <i class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li class="dropdown-submenu"><a href="#">Revolution
-								Slider</a>
-							<ul class="dropdown-menu">
-								<li><a href="revolution-half-slider.html">Half Slider</a></li>
-								<li><a href="revolution-full-slider.html">Full Slider</a></li>
-								<li><a href="revolution-video.html">Full Video</a></li>
-								<li><a href="revolution-ken-burns.html">Ken Burns</a></li>
-								<li><a href="revolution-official-1.html">More Examples</a></li>
-							</ul></li>
-						<li class="dropdown-submenu"><a href="#">Superslides
-								Slider</a>
-							<ul class="dropdown-menu">
-								<li><a href="superslides-slider-half.html">Half Slider</a></li>
-								<li><a href="superslides-slider-full.html">Full Slider</a></li>
-								<li><a href="superslides-video.html">Half Video</a></li>
-								<li><a href="superslides-video-full.html">Full Video</a></li>
-							</ul></li>
-						<li class="divider"></li>
-						<li><a href="index-extended.html">Extended</a></li>
-						<li><a href="portfolio-home.html">Portfolio</a></li>
-						<li><a href="shop-home.html">Shop</a></li>
-						<li><a href="realestate-home.html">Real Estate</a></li>
-						<li><a href="church-home.html">Church</a></li>
-						<li><a href="medical-home.html">Medical</a></li>
-						<li><a href="college-home.html">College</a></li>
-						<li><a href="onepage-superslides.html" target="_blank">Onepage
-								- Superslides</a></li>
-						<li><a href="onepage-revolution.html" target="_blank">Onepage
-								- Revolution</a></li>
-						<li><a href="index-more.html">More...</a></li>
-					</ul></li>
-				<li class="dropdown mega-menu-item mega-menu-two-columns active">
-					<a class="dropdown-toggle" href="#"> Pages <i
-						class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li>
-							<div class="mega-menu-content">
-								<div class="row">
-
-									<div class="col-md-6">
-										<ul class="sub-menu">
-											<li>
-												<ul class="sub-menu">
-
-													<li><a href="shortcodes-rows.html"><i
-															class="fa fa-star-o"></i> Shortcodes</a></li>
-													<li><a href="page-about-us.html"><i
-															class="fa fa-check-square-o"></i> About Us</a></li>
-													<li><a href="page-about-me.html"><i
-															class="fa fa-check-square-o"></i> About Me</a></li>
-													<li><a href="page-team.html"><i
-															class="fa fa-check-square-o"></i> Team</a></li>
-													<li><a href="page-services.html"><i
-															class="fa fa-check-square-o"></i> Services</a></li>
-													<li><a href="page-faq.html"><i
-															class="fa fa-check-square-o"></i> FAQ</a></li>
-													<li><a href="page-support.html"><i
-															class="fa fa-check-square-o"></i> Support</a></li>
-													<li><a href="page-privacy-policy.html"><i
-															class="fa fa-check-square-o"></i> Privacy Policy</a></li>
-													<li><a href="page-terms-and-conditions.html"><i
-															class="fa fa-check-square-o"></i> Terms Page</a></li>
-													<li><a href="page-invoice.html"><i
-															class="fa fa-check-square-o"></i> Invoice</a></li>
-													<li class="dropdown-submenu"><a href="#"><i
-															class="fa fa-check-square-o"></i> Contact</a>
-														<ul class="dropdown-menu">
-															<li><a href="contact-us.html">Version 1</a></li>
-															<li><a href="contact-us-2.html">Version 2</a></li>
-															<li><a href="contact-us-3.html">Version 3</a></li>
-															<li><a href="contact-us-4.html">Version 4</a></li>
-														</ul></li>
-													<li><a href="page-sitemap.html"><i
-															class="fa fa-sitemap"></i> Sitemap</a></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-
-									<div class="col-md-6">
-										<ul class="sub-menu">
-											<li>
-												<ul class="sub-menu">
-													<li><a href="page-testimonials.html"><i
-															class="fa fa-check-square-o"></i> Testimonials</a></li>
-													<li><a href="page-pricing.html"><i
-															class="fa fa-check-square-o"></i> Pricing</a></li>
-													<li><a href="page-signin.html"><i
-															class="fa fa-check-square-o"></i> Login</a></li>
-													<li><a href="page-signup.html"><i
-															class="fa fa-check-square-o"></i> Register</a></li>
-													<li><a href="page-404.html"><i
-															class="fa fa-check-square"></i> 404 Error</a></li>
-													<li><a href="page-maintenance.html"><i
-															class="fa fa-check-square"></i> Maintenance</a></li>
-													<li class="dropdown-submenu"><a href="#"><i
-															class="fa fa-check-square"></i> Coming Soon</a>
-														<ul class="dropdown-menu">
-															<li><a href="page-coming-soon-image.html">Coming
-																	Soon - Image</a></li>
-															<li><a href="page-coming-soon-video.html">Coming
-																	Soon - Video</a></li>
-														</ul></li>
-													<li class="dropdown-submenu"><a href="#"><i
-															class="fa fa-check-square"></i> Custom Header</a>
-														<ul class="dropdown-menu">
-															<li><a href="page-header-basic.html">Basic</a></li>
-															<li><a href="page-header-image.html">Image</a></li>
-															<li><a href="page-header-overlay1.html">Overlay
-																	1</a></li>
-															<li><a href="page-header-overlay2.html">Overlay
-																	2</a></li>
-															<li><a href="page-header-overlay3.html">Overlay
-																	3</a></li>
-															<li><a href="page-header-delayed-parallax.html">Delayed
-																	Parallax</a></li>
-															<li><a href="page-header-standard-parallax.html">Standard
-																	Parallax</a></li>
-														</ul></li>
-													<li><a href="page-full-width.html"><i
-															class="fa fa-check-square-o"></i> Full width</a></li>
-													<li><a href="page-left-sidebar.html"><i
-															class="fa fa-check-square-o"></i> Left Sidebar</a></li>
-													<li><a href="page-right-sidebar.html"><i
-															class="fa fa-check-square-o"></i> Right Sidebar</a></li>
-													<li><a href="email-template.html"><i
-															class="fa fa-envelope"></i>Email Template</a></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				<li class="dropdown mega-menu-item mega-menu-fullwidth"><a
-					class="dropdown-toggle" href="#"> Features <i
-						class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li>
-							<div class="mega-menu-content">
-								<div class="row">
-									<div class="col-md-3">
-										<ul class="sub-menu">
-											<li><span class="mega-menu-sub-title">General
-													Features</span>
-												<ul class="sub-menu">
-													<li><a href="feature-grid-system.html">Grid System</a></li>
-													<li><a href="feature-icons.html">Icons</a></li>
-													<li><a href="feature-pricing-tables.html"><em>Pricing
-																Tables</em></a></li>
-													<li><a href="feature-testimonials.html"><em>Testimonials</em></a></li>
-													<li><a href="email-template.html"><em>Email
-																Template</em></a></li>
-													<li><a href="shortcodes-rows.html"><em>Shortcodes</em></a></li>
-													<li><a href="feature-animations.html">Animations</a></li>
-													<li><a href="feature-typograpy.html">Typograpy</a></li>
-												</ul></li>
-										</ul>
-									</div>
-									<div class="col-md-3">
-										<ul class="sub-menu">
-											<li><span class="mega-menu-sub-title">Sliders</span>
-												<ul class="sub-menu">
-													<li><a href="feature-content-carousel.html">Content
-															Carousel</a></li>
-													<li><a href="revolution-official-1.html">(17)
-															Premium Revolution Slider</a></li>
-												</ul></li>
-										</ul>
-									</div>
-									<div class="col-md-3">
-										<ul class="sub-menu">
-											<li><span class="mega-menu-sub-title">Headers</span>
-												<ul class="sub-menu">
-													<li><a href="header-1.html">Header Version 1</a></li>
-													<li><a href="header-2.html">Header Version 2</a></li>
-													<li><a href="header-3.html">Header Version 3</a></li>
-													<li><a href="header-4.html">Header Version 4</a></li>
-												</ul></li>
-										</ul>
-									</div>
-									<div class="col-md-3">
-										<ul class="sub-menu">
-											<li><span class="mega-menu-sub-title">Unique
-													Bonuses</span>
-												<ul class="sub-menu">
-													<li><a href="onepage-superslides.html" target="_blank">Onepage
-															- Superslides</a></li>
-													<li><a href="onepage-revolution.html" target="_blank">Onepage
-															- Revolution</a></li>
-													<li><a href="email-template.html">Email Template</a></li>
-												</ul></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" href="#"> <b>Special</b>
-						<i class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="magazine-home.html">Magazine - Home</a></li>
-						<li><a href="magazine-category.html">Magazine - Category</a></li>
-						<li><a href="magazine-single.html">Magazine - Single</a></li>
-						<li class="divider"></li>
-						<li><a href="realestate-home.html">Real Estate - Home</a></li>
-						<li><a href="realestate-list.html">Real Estate - List</a></li>
-						<li><a href="realestate-single.html">Real Estate - Single</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" href="#">
-						Shop <i class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="shop-home.html">Shop - Home</a></li>
-						<li class="divider"></li>
-						<li><a href="shop-full-width.html">Shop Full Width</a></li>
-						<li><a href="shop-product-full-width.html">Shop Product
-								Full Width</a></li>
-						<li class="divider"></li>
-						<li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-						<li><a href="shop-product-sidebar.html">Shop Product
-								Sidebar</a></li>
-						<li class="divider"></li>
-						<li><a href="shop-cart.html">Shop Cart</a></li>
-						<li><a href="shop-cc-pay.html">Shop Credit Card</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" href="#">
-						Blog <i class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="blog-full-width.html">Blog Without Sidebar</a></li>
-						<li><a href="blog-left-sidebar.html">Blog With Sidebar
-								Left</a></li>
-						<li><a href="blog-right-sidebar.html">Blog With Sidebar
-								Right</a></li>
-						<li><a href="blog-timeline.html">Blog Timeline</a></li>
-						<li><a href="blog-masonry.html">Blog Masonry</a></li>
-						<li><a href="blog-masonry-full-width.html">Blog Masonry -
-								Full Width</a></li>
-						<li><a href="blog-masonry-sidebar.html">Blog Masonry -
-								Sidebar</a></li>
-						<li class="divider"></li>
-						<li><a href="blog-post.html">Single Post</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" href="#">
-						Portfolio <i class="fa fa-angle-down"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="portfolio-2-columns.html">2 Columns</a></li>
-						<li><a href="portfolio-3-columns.html">3 Columns</a></li>
-						<li><a href="portfolio-4-columns.html">4 Columns</a></li>
-						<li><a href="portfolio-lightbox.html">Portfolio - Gallery</a></li>
-						<li><a href="portfolio-full-width.html">Portfolio Full
-								Width</a></li>
-						<li><a href="portfolio-full-center.html">Portfolio Full
-								Center</a></li>
-						<li class="divider"></li>
-						<li><a href="portfolio-single.html">Single - Basic</a></li>
-						<li><a href="portfolio-single-extended.html">Single -
-								Extended</a></li>
-						<li><a href="portfolio-single-full-slider.html">Single -
-								Full Slider</a></li>
-					</ul></li>
-
-				GLOBAL SEARCH
-				<li class="search">
-					search form
-					<form method="get" action="#" class="input-group pull-right">
-						<input type="text" class="form-control" name="k" id="k" value=""
-							placeholder="Search"> <span class="input-group-btn">
-							<button class="btn btn-primary notransition">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-					</form> /search form
-				</li>
-				/GLOBAL SEARCH
-
-				QUICK SHOP CART
-				<li class="quick-cart"><span class="badge pull-right">3</span>
-
-					<div class="quick-cart-content">
-
-						<p>
-							<i class="fa fa-warning"></i> You have 3 products on your cart
-						</p>
-
-						<a class="item" href="shop-product-full-width.html">
-							item 1 <img class="pull-left"
-							src="design/images/demo/shop/thumb/1.jpg" width="40"
-							alt="quick cart" />
-							<div class="inline-block">
-								<span class="title">Man shirt XL</span> <span class="price">2
-									&times; $44.00</span>
-							</div>
-						</a>
-						/item 1
-
-						<a class="item" href="shop-product-full-width.html">
-							item 2 <img class="pull-left"
-							src="design/images/demo/shop/thumb/2.jpg" width="40"
-							alt="quick cart" />
-							<div class="inline-block">
-								<span class="title">Great Black Shoes For Man and Only
-									Man...</span> <span class="price">2 &times; $44.00</span>
-							</div>
-						</a>
-						/item 2
-
-						<a class="item" href="shop-product-full-width.html">
-							item 3 <img class="pull-left"
-							src="design/images/demo/shop/thumb/4.jpg" width="40"
-							alt="quick cart" />
-							<div class="inline-block">
-								<span class="title">Pink Lady Perfect Shoes</span> <span
-									class="price">1 &times; $67.32</span>
-							</div>
-						</a>
-						/item 3
-
-						QUICK CART BUTTONS
-						<div class="row cart-footer">
-							<div class="col-md-6 nopadding-right">
-								<a href="shop-cart.html"
-									class="btn btn-primary btn-xs fullwidth">VIEW CART</a>
-							</div>
-							<div class="col-md-6 nopadding-left">
-								<a href="shop-cc-pay.html" class="btn btn-info btn-xs fullwidth">CHECKOUT</a>
-							</div>
-						</div>
-						/QUICK CART BUTTONS
-
-					</div></li>
-				/QUICK SHOP CART
-
-			</ul>
-			</nav>
-		</div>
-		/Top Nav
-
-	</div>
-	</header> -->
-
-	<span id="header_shadow"></span>
-	<!-- /TOP NAV -->
-
-
-
-	<!-- STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT -->
-	<!-- <div id="switcher">
-			<div class="content-switcher" >        
-				<h4>STYLE OPTIONS</h4>
-
-				<p>10 Predefined Color Schemes</p>
-				<ul>            
-					<li><a href="#" onclick="setActiveStyleSheet('orange'); return false;" title="orange" class="color"><img src="design/images/demo/color_schemes/1.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('red'); return false;" title="red" class="color"><img src="design/images/demo/color_schemes/2.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('pink'); return false;" title="pink" class="color"><img src="design/images/demo/color_schemes/3.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('yellow'); return false;" title="yellow" class="color"><img src="design/images/demo/color_schemes/4.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('darkgreen'); return false;" title="darkgreen" class="color"><img src="design/images/demo/color_schemes/5.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('green'); return false;" title="green" class="color"><img src="design/images/demo/color_schemes/6.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('darkblue'); return false;" title="darkblue" class="color"><img src="design/images/demo/color_schemes/7.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('blue'); return false;" title="blue" class="color"><img src="design/images/demo/color_schemes/8.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('brown'); return false;" title="brown" class="color"><img src="design/images/demo/color_schemes/9.png" alt="" width="30" height="30" /></a></li>
-					<li><a href="#" onclick="setActiveStyleSheet('lightgrey'); return false;" title="lightgrey" class="color"><img src="design/images/demo/color_schemes/10.png" alt="" width="30" height="30" /></a></li>
-				</ul>        
-
-				<p>CHOOSE YOUR COLOR SKIN</p>
-				<label><input class="dark_switch" type="radio" name="color_skin" id="is_light" value="light" checked="checked" /> Light</label>
-				<label><input class="dark_switch" type="radio" name="color_skin" id="is_dark" value="dark" /> Dark</label>
-
-				<hr />
-
-				<p>CHOOSE YOUR LAYOUT STYLE</p>
-				<label><input class="boxed_switch" type="radio" name="layout_style" id="is_wide" value="wide" checked="checked" /> Wide</label>
-				<label><input class="boxed_switch" type="radio" name="layout_style" id="is_boxed" value="boxed" /> Boxed</label>
-
-
-				<p>Patterns for Boxed Version</p>
-				<div>
-					<button onclick="pattern_switch('none');" class="pointer switcher_thumb"><img src="design/images/patterns/none.jpg" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern2');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern2.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern3');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern3.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern4');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern4.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern5');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern5.png" width="27" height="27" alt="" /></button>
-				</div>
-
-				<div>
-					<button onclick="pattern_switch('pattern6');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern6.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern7');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern7.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern8');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern8.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern9');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern9.png" width="27" height="27" alt="" /></button>
-					<button onclick="pattern_switch('pattern10');" class="pointer switcher_thumb"><img src="design/images/patterns/pattern10.png" width="27" height="27" alt="" /></button>
-				</div>
-
-				<p>Images for Boxed Version</p>
-				<button onclick="background_switch('none');" class="pointer switcher_thumb"><img src="design/images/boxed_background/none.jpg" width="27" height="27" alt="" /></button>
-				<button onclick="background_switch('design/images/boxed_background/1.jpg');" class="pointer switcher_thumb"><img src="design/images/boxed_background/1_thumb.jpg" width="27" height="27" alt="" /></button>
-				<button onclick="background_switch('design/images/boxed_background/2.jpg');" class="pointer switcher_thumb"><img src="design/images/boxed_background/2_thumb.jpg" width="27" height="27" alt="" /></button>
-				<button onclick="background_switch('design/images/boxed_background/3.jpg');" class="pointer switcher_thumb"><img src="design/images/boxed_background/3_thumb.jpg" width="27" height="27" alt="" /></button>
-				<button onclick="background_switch('design/images/boxed_background/4.jpg');" class="pointer switcher_thumb"><img src="design/images/boxed_background/4_thumb.jpg" width="27" height="27" alt="" /></button>
-
-				<hr />
-
-				<div class="text-center">
-					<button onclick="resetSwitcher();" class="btn btn-primary btn-xs">Reset Styles</button>
-				</div>
-
-				<div id="hideSwitcher">&times;</div>
-			</div>
-		</div>
-
-		<div id="showSwitcher" class="styleSecondColor"><i class="fa fa-angle-double-right"></i></div>  -->
-	<!-- /STYLESWITCHER -->
-
-
-
 	<!-- WRAPPER -->
-	<div id="wrapper">
-
-		<div id="shop">
-
+	<!-- <div id="wrapper"> -->
+					   <!-- <div class="row">
+							<div class="form-group">
+								<div class="col-md-12">
+								  			<img class="img-responsive" src="design/images/demo/realestate/딸기.jpg" alt="Chania"> 
+								</div>
+							</div>
+						</div> -->
+		   <!--  <div  class="container">
+  					<img class="img-responsive" src="design/images/demo/realestate/딸기.jpg" alt="Chania" width="1100" height="300"> 
+		    </div>
+ -->
 			<!-- PAGE TITLE -->
 			<!-- <header id="page-title">
 			<div class="container">
@@ -887,11 +412,26 @@ $(function(){
 				</ul>
 			</div>
 			</header> -->
-
-
+			<!-- <div	style="background-image: url('design/images/demo/realestate/딸기.jpg');"
+						class="fullscreen-img"></div> -->
+			<!-- <img width="1100" height="300" src="design/images/demo/realestate/라면.jpg"> -->
+		<!-- 	<div class="row"> -->
+		     		 
+		    	<!-- 	 <div class="col-md-4">
+							<div class="container">
+  									<img class="img-responsive" src="design/images/demo/realestate/라면.jpg" alt="Chania" width="460" height="345">
+		    			 </div>
+		     		</div>
+		    		 <div class="col-md-4">
+		    			 <div  class="container">
+  				 				<img class="img-responsive" src="design/images/demo/realestate/빵.jpg" alt="Chania" width="460" height="345"> 
+		     				</div>
+		    		 </div> -->
+		   <!--   </div> -->
+	
 			<section class="container">
 
-			<div class="row">
+			<div  class="row">
 
 				<!-- REGISTER -->
 				<div class="col-md-9">
@@ -940,6 +480,33 @@ $(function(){
 						
 						<div class="row">
 							<div class="form-group">
+								<div class="col-md-4">
+									닉네임<br>
+									<input type="text" id="nicName" name="nickname" class="form-control" placeholder="닉네임을 입력하여 주세요.[필수]">
+									<table><tr><td id="nicNameTxt" ></td></tr></table>
+								</div>
+								<div class="col-md-2">
+									<br>
+									<input type="button" id="nicNameRepCheck" value="중복확인" class="btn btn-success">
+									<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
+								</div>
+								<div class="col-md-6">
+									전화번호<br> <input type="text" id="phoneNum" name="phoneNum"
+										 class="form-control" placeholder="- 없이 전화번호를 입력하여 주세요.[필수]">
+									<tr><td id="phoneCheckMessage" class="check" colspan="3"></td></tr>
+										<table><tr><td id="phoneNumCheckMessage" ></td></tr></table>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group">
+								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group">
 								<div class="col-md-12">
 									<label>생년월일</label> <input type="text" id="birthDate" name="birthDate"
 										 class="form-control" placeholder="생년월일 숫자8자리를 입력하세요. ex) 20010101 [필수]">
@@ -950,12 +517,6 @@ $(function(){
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-md-8">
-									<label>전화번호</label> <input type="text" id="phoneNum" name="phoneNum"
-										 class="form-control" placeholder="- 없이 전화번호를 입력하여 주세요.[필수]">
-									<tr><td id="phoneCheckMessage" class="check" colspan="3"></td></tr>
-										<table><tr><td id="phoneNumCheckMessage" ></td></tr></table>
-								</div>
 								<div class="col-md-4">
 									<label>성별</label> <%-- <input type="text" name="gender"
 										value="${memDetInfoDto.gender}" class="form-control"> --%>
@@ -971,11 +532,18 @@ $(function(){
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
-									<label>대표이미지</label> <input type="text" name="photoPath" 
-																		 class="form-control"  placeholder="대표이미지를 첨부하여 주세요.[선택]">
+									<label>대표이미지</label> <!-- <input type="text" name="photoPath" 
+																		 class="form-control"  placeholder="대표이미지를 첨부하여 주세요.[선택]"> -->
+										 <div class="filebox"> 
+											<input class="upload-name" value="파일선택" disabled="disabled">
+								 			<label for="ex_filename">업로드</label> 
+								 			<input type="file" id="ex_filename" name="photoPath"  class="upload-hidden">
+										</div>
 								</div>
 							</div>
 						</div>
+						
+						
 						
 						<!-- <div class="form-group">
 							<label for="InputSubject1">대표이미지</label>
@@ -1013,15 +581,6 @@ $(function(){
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
-									<label>닉네임</label> <input type="text" name="nickname"
-										 class="form-control" placeholder="닉네임을 입력하여 주세요.[선택]">
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
 									<label>자기소개</label> <%-- <input type="textArea" name="selfIntro"
 										value="${memDetInfoDto.selfIntro}" class="form-control"> --%>
 										<textarea id="selfIntro" name="selfIntro" rows="5" class="form-control" placeholder="자기소개를 입력하여 주세요.[선택]"></textarea>
@@ -1043,7 +602,7 @@ $(function(){
 
 						<div class="row">
 							<div class="col-md-12">
-								<input type="button" id="createId" value="계정만들기" class="btn btn-primary pull-right push-bottom"
+								<input type="button" id="createId" value="계정만들기" class="btn btn-info pull-right push-bottom"
 									data-loading-text="Loading...">
 							</div>
 						</div>
@@ -1094,7 +653,7 @@ $(function(){
 			</section>
 
 		</div>
-	</div>
+	<!-- </div> -->
 	<!-- /WRAPPER -->
 
 

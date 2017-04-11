@@ -97,6 +97,27 @@ public class MemberRegiController {
 		return checkResult;
 	}
 	
+	
+	@RequestMapping("dupliNicnameCheck.do")
+	@ResponseBody
+	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
+		String nicName = request.getParameter("nicName");
+		String checkResult = "";
+
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName);
+
+		// ex) Model 단에서 DB 조회
+
+		int nicNameCount = memberDao.checkNicName(nicName);
+
+		if (nicNameCount >= 1)
+			checkResult = "dupli";
+		else
+			checkResult = "create";
+
+		return checkResult;
+	}
+	
 	@RequestMapping(value = "/memberInfoUpdate.do", method = RequestMethod.GET)
 	public String memInfoUpdateGet() {
 		System.out.println("MemberRegiController RequestMethod.GET 메서드 호출됨!");

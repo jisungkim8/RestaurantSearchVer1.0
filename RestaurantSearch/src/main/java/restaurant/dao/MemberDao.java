@@ -21,4 +21,6 @@ public interface MemberDao {
 	public MemDetInfoDto searchMemDetInfo(MemDetInfoDto memDetInfoDto);
 	
 	public String searchPasswdMem(String memId);
+
+	public int checkNicName(String nicName);
 }

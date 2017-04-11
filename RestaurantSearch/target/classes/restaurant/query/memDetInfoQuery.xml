@@ -15,6 +15,10 @@
 		select count(*) from memDetInfo where memberId=#{id}
  	</select>
  	
+ 	<select id="checkNicName" resultType="int" parameterType="String">
+		select count(*) from memDetInfo where nickname=#{nickname}
+ 	</select>
+ 	
  	<select id="selectMemDetInfo" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">
 		select * from memDetInfo where memberId=#{memberId}
 	</select>
