@@ -1,11 +1,11 @@
 package restaurant.dto;
 
 public class ShopPhotoDto {
-	int photoNum;
-	int photoSepNum;
-	String title;
-	String photoPath;
-	String restaurantId;
+	private int photoNum;
+	private int photoSepNum;
+	private String title;
+	private String photoPath;
+	private String restaurantId;
 	
 	public int getPhotoNum() {
 		return photoNum;

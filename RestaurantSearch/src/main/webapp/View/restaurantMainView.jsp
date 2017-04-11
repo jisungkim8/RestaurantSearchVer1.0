@@ -60,11 +60,16 @@
 	$(document)
 			.ready(
 					function() {
+						$("#videoCnt").click(function(){
+							var vidcnt=0;
+							vidcnt=vidcnt+1;
+						})	
+						
 						$("#searchBox").click(function() {
 							$(".subbox").show();
 
 						})
-
+						
 						$(".popSearButton").click(
 								function() {
 									$(".popSearButton").css('border-bottom',
@@ -176,7 +181,7 @@
 										})
 
 						$('#memLeave').click(function() {
-							if(confirm("정말 탈퇴하시겠습니까?")==true){
+							if (confirm("정말 탈퇴하시겠습니까?") == true) {
 								$.ajax({
 									url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 									//2.data:{매개변수명:값,매개변수명2:값2,,,,}
@@ -189,7 +194,7 @@
 										alert("회원 탈퇴가 성공적으로 되었습니다.")
 									}
 								})
-							}else{
+							} else {
 								return;
 							}
 						})
@@ -350,17 +355,20 @@
 					</div>
 				</c:when>
 				<c:otherwise>
-						<div class="pull-right nav signin-dd">
-							<div  class="navbar-collapse nav-main-collapse collapse pull-left">
-								<a id="quick_board" href="list.do"	><span class="btn btn-warning">게시판</span></a>	
-							</div>
-									<!-- <a class="dropdown-toggle" href="list.do">게시판 <i class="fa fa-angle-down"></i>
-								</a> -->
-							
-								<a id="quick_sign_in" href="page-signin.html" data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
-							
-							
-						<div class="dropdown-menu" role="menu"	aria-labelledby="quick_sign_in">
+
+					<div class="pull-right nav signin-dd">
+						<div class="navbar-collapse nav-main-collapse collapse pull-right">
+							<a id="quick_board" href="list.do"><span
+								class="btn btn-success">게시판</span></a>
+						</div>
+						
+
+						<a id="quick_sign_in" href="page-signin.html"
+							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
+
+
+						<div class="dropdown-menu" role="menu"
+							aria-labelledby="quick_sign_in">
 							<h4>
 								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
 									data-toggle="modal" id="pwdSearch"><font color="red">패스워드
@@ -451,16 +459,12 @@
 					<div class="image-caption">
 						<div class="inner text-center">
 							<!-- text center , text-left or text-right -->
-							<div class="block">
-								<h2>맛집 검색</h2>
-							</div>
-							<div class="block">
-								<h2>원하는 음식을 검색하세요</h2>
-							</div>
+							
+							<div class="mainPhrase">블로그, SNS... 막내야 또 속았구나 하하하</div>
 							<div class="block realestate-caption">
 								<!-- <p>무엇을 찾고 계신가요?</p> -->
-								<span class="price"> 강남역, 혼자, 점심 <span class="price-old">강남역에서
-										점심을 혼자 먹으려고 하는데..</span> <br>
+								<span class="price">더이상 속지마세요! 맛집검색은 여기서 <br>
+								
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
 											name="keyword" /> <input type="hidden" id="pageNum"
@@ -482,18 +486,20 @@
 							<div class="searchListBox">
 								<c:forEach var="relarticle" items="${list}">
 									<a
-										href="restaurantDetView.do?restaurantId=${relarticle.restaurantID}">${relarticle.restaurantName}</a>
+										href="restaurantDetView.do?restaurantId=${relarticle.restaurantID}&moreCount=1">${relarticle.restaurantName}</a>
 									<br>
 
 								</c:forEach>
 							</div>
 
 						</div>
-					</div> <!--<span class="overlay"></span>-->
-					<div
+					</div> <!--<span class="overlay"></span>--> <!-- <div
 						style="background-image: url('design/images/demo/realestate/1.jpg');"
-						class="fullscreen-img"></div>
-
+						class="fullscreen-img"></div> -->
+					<div class="youtubeWrap">
+						<iframe width="560" height="315" src="design/videos/video1.mp4"
+							frameborder="0" allowfullscreen></iframe>
+					</div>
 				</li>
 
 
@@ -523,7 +529,7 @@
 								<div class="item-box">
 									<figure>
 										<a class="item-hover"
-											href="restaurantDetView.do?restaurantId=${article.restaurantID}">
+											href="restaurantDetView.do?moreCount=1&restaurantId=${article.restaurantID}">
 											<span class="overlay color2"></span> <span class="inner">
 												<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 												보기
@@ -570,7 +576,7 @@
 								<div class="item-box">
 									<figure>
 										<a class="item-hover"
-											href="restaurantDetView.do?restaurantId=${newarticle.restaurantID}">
+											href="restaurantDetView.do?restaurantId=${newarticle.restaurantID}&moreCount=1">
 											<span class="overlay color2"></span> <span class="inner">
 												<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 												보기
@@ -605,14 +611,14 @@
 					<!-- No #1 Hot -->
 					<div class="item-box nomargin-top">
 						<figure>
-							<a class="item-hover" href="restaurantDetView.do?restaurantId=2">
+							<a class="item-hover" href="restaurantDetView.do?restaurantId=2&moreCount=1">
 								<span class="overlay color2"></span> <span class="inner">
 									<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 									보기
 							</span>
 							</a>
 							<img alt="" class="img-responsive"
-								src="design/images/demo/realestate/images/thumb/1.jpg" />
+								src="images/small.jpg" />
 						</figure>
 						<div class="item-box-desc">
 							<h4 class="wrap">
@@ -624,10 +630,15 @@
 					<!-- /No #1 Hot -->
 
 					<!-- <!-- video -->
-					<iframe src="http://player.vimeo.com/video/73221098" width="800"
-						height="450"></iframe>
+					<iframe class="videoCnt"
+						src="https://player.vimeo.com/video/190687560?byline=0&portrait=0"
+						width="640" height="360" frameborder="0" webkitallowfullscreen
+						mozallowfullscreen allowfullscreen></iframe>
+					
+						<a href="https://vimeo.com/190687560">주말 맛집 기행 어떠세요?</a>
+					
 					<h5 class="font300 padding10">
-						<small class="text-center block">(최근 3일간 조회수: 242142 )</small>
+						<small class="text-center block">(조회수: $(vidcnt)</small>
 					</h5>
 					<!--  video-->
 
@@ -635,14 +646,14 @@
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
 							<a href="#"> <img alt="" class="img-responsive"
-								src="design/images/demo/realestate/images/thumb/3.jpg" />
+								src="images/small1.jpg" />
 								<h6 class="fsize12 font300 padding6 styleSecondColor">유럽의
 									느낌이 물씬 풍기는 식당</h6>
 							</a>
 						</div>
 						<div class="col-xs-6 col-md-6">
 							<a href="#"> <img alt="" class="img-responsive"
-								src="design/images/demo/realestate/images/thumb/4.jpg" />
+								src="images/small2.jpg" />
 								<h6 class="fsize12 font300 padding6 styleSecondColor">오늘...
 									화장실에서도 맛있게 먹는다</h6>
 							</a>
@@ -656,19 +667,24 @@
 					<h3 class="page-header">
 						<i class="fa fa-twitter"></i> 최신 <strong class="styleColor">트윗</strong>
 					</h3>
+					<a class="twitter-timeline"
+						href="https://twitter.com/hashtag/%EB%A7%9B%EC%A7%91"
+						data-widget-id="851638311319855104">#맛집 관련 트윗</a>
+					<script>
+						!function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+									.test(d.location) ? 'http' : 'https';
+							if (!d.getElementById(id)) {
+								js = d.createElement(s);
+								js.id = id;
+								js.src = p
+										+ "://platform.twitter.com/widgets.js";
+								fjs.parentNode.insertBefore(js, fjs);
+							}
+						}(document, "script", "twitter-wjs");
+					</script>
 
-					<p>
-						<a href="#">공대생</a> 여기서 음식을 검색하고 여자친구가 생겼습니다! <small
-							class="block styleColor">12 시간 전</small>
-					</p>
-					<p>
-						<a href="#">예비군 3년차</a> 정말 신통방통 하군요.. <small
-							class="block styleColor">12 시간 전</small>
-					</p>
-					<p>
-						<a href="#">사대천왕</a> 방송에 내보낼 식당은 다 여기있네요 ㄳㄳ <small
-							class="block styleColor">12 시간 전</small>
-					</p>
+
 
 					<!-- SOCIALS -->
 					<h3 class="page-header">
@@ -735,7 +751,7 @@
 						<i class="lightgray fa fa-globe hidden-xs"></i>
 						<h4>식당 등록</h4>
 						<p>식당이 보이지 않다구요? 간편하게 지금 등록하세요.</p>
-						<a href="page-pricing.html" class="btn btn-primary btn-xs">식당
+						<a href="shoplist.do" class="btn btn-primary btn-xs">식당
 							등록하기</a>
 					</div>
 				</div>

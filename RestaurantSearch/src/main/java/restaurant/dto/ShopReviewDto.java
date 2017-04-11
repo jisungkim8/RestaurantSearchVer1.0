@@ -1,15 +1,17 @@
 package restaurant.dto;
 
+import java.util.Date;
+
 public class ShopReviewDto {
-	int reviewId;
-	String title;
-	String writeDate;
-	String content;
-	int recommendCnt;
-	String visitTime;
-	String dinnerOrLunch;
-	String memberId;
-	int restaurantId;
+	private int reviewId;
+	private String title;
+	private Date writeDate;
+	private String content;
+	private int recommendCnt;
+	private String visitTime;
+	private String dinnerOrLunch;
+	private String memberId;
+	private int restaurantId;
 	
 	public int getReviewId() {
 		return reviewId;
@@ -23,10 +25,10 @@ public class ShopReviewDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriteDate() {
+	public Date getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(String writeDate) {
+	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
 	public String getContent() {
