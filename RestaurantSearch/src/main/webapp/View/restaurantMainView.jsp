@@ -782,7 +782,7 @@
 						<i class="lightgray fa fa-globe hidden-xs"></i>
 						<h4>식당 등록</h4>
 						<p>식당이 보이지 않다구요? 간편하게 지금 등록하세요.</p>
-						<a href="page-pricing.html" class="btn btn-primary btn-xs">식당
+						<a href="shoplist.do" class="btn btn-primary btn-xs">식당
 							등록하기</a>
 					</div>
 				</div>
