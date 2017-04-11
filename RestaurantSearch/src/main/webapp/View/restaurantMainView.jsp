@@ -354,7 +354,11 @@
 			<!-- SIGN IN -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.userLoginInfo}">
+					
 					<div class="pull-right nav signin-dd">
+					<div  class="navbar-collapse nav-main-collapse collapse pull-left">
+							<a id="quick_board" href="list.do"	><span class="btn btn-warning">게시판</span></a>	
+					</div>
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <span>로그인 성공! 이메일 :<c:out
 										value="${sessionScope.userLoginInfo.memberId}" />
@@ -382,13 +386,13 @@
 					</div>
 				</c:when>
 				<c:otherwise>
+
 					<div class="pull-right nav signin-dd">
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="list.do"><span
 								class="btn btn-success">게시판</span></a>
 						</div>
-						<!-- <a class="dropdown-toggle" href="list.do">게시판 <i class="fa fa-angle-down"></i>
-								</a> -->
+						
 
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
