@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 //---------페이징 처리 및 메서드 호출---------------
 import restaurant.dao.BoardDao;
-import restaurant.dto.BoardCommand;//DTO
+import restaurant.dto.BoardCommandDto;//DTO
 import restaurant.util.PagingUtil;
 //---------------------------------------------------
 
@@ -56,7 +56,7 @@ public class ListController {
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 		
-		List<BoardCommand> list = null;
+		List<BoardCommandDto> list = null;
 		if(count > 0){
 			System.out.println("여기는 DAO 호출");
 			list = boardDao.list(map);
@@ -75,26 +75,3 @@ public class ListController {
 		return mav;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,11 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-	<select id="selectList" parameterType="map" resultType="BoardCommand">
-
-		SELECT seq, writer, title, content,pwd,hit,regdate,filename
+	<select id="selectList" parameterType="map" resultType="BoardCommandDto">
+		SELECT boardNum, writer, title, content, pwd, hit, regdate, filename
 		FROM(SELECT
-		a.*,
+		a.*, 
 		rownum rnum
 		FROM (SELECT *
 		FROM freeBoard
@@ -29,7 +28,7 @@
 				content like '%' || #{keyWord} || '%'
 			</if>
 		</where>
-		ORDER BY seq desc)a)
+		ORDER BY boardNum desc)a)
 	<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 	]]>
@@ -58,49 +57,40 @@
 	</select>
 
 	<!-- 최대값구하기 -->
-	<select id="getNewSeq" resultType="int">
-		select max(seq) from
+	<select id="getNewBoardNum" resultType="int">
+		select max(boardNum) from
 		freeBoard
 	</select>
 
-	<insert id="insertBoard" parameterType="BoardCommand">
+	<insert id="insertBoard" parameterType="BoardCommandDto">
 		insert into
-		freeBoard(seq,writer,title,content,pwd,hit,regdate,filename)
-		values(#{seq},#{writer},#{title},#{content},#{pwd},0,sysdate,
+		freeBoard(boardNum,writer,title,content,pwd,hit,regdate,filename)
+		values(#{boardNum},#{writer},#{title},#{content},#{pwd},0,sysdate,
 		#{filename,jdbcType=VARCHAR})
 	</insert>
 
 	<!--조회수 증가 -->
 	<update id="updateHit" parameterType="Integer">
 		update freeBoard set
-		hit=hit+1 where seq=#{seq}
+		hit=hit+1 where boardNum=#{boardNum}
 	</update>
 
 	<!-- 레코드 한개 얻어오기 -->
-	<select id="selectBoard" resultType="BoardCommand"
+	<select id="selectBoard" resultType="BoardCommandDto"
 		parameterType="Integer">
-		select * from freeBoard where seq=#{seq}
+		select * from freeBoard where boardNum=#{boardNum}
 	</select>
 
 	<!-- 글 수정하기, 글 삭제하기 -->
-	<update id="updateBoard" parameterType="BoardCommand">
+	<update id="updateBoard" parameterType="BoardCommandDto">
 		update freeBoard set
 		writer=#{writer}, title=#{title},
 		content=#{content},
-		filename=#{filename:VARCHAR} where seq=#{seq}
+		filename=#{filename:VARCHAR} where boardNum=#{boardNum}
 	</update>
 
 	<delete id="deleteBoard" parameterType="Integer">
 		delete from freeBoard
-		where seq=#{seq}
+		where boardNum=#{boardNum}
 	</delete>
-
-
 </mapper>
-
-
-
-
-
-
-

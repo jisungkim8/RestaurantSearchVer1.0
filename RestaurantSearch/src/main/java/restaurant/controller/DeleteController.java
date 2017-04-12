@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import restaurant.dao.BoardDao;
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 import restaurant.util.FileUtil;
 import restaurant.validator.BoardDeleteValidator;
 
@@ -27,8 +27,8 @@ public class DeleteController {
 
 	// 암호가 틀리면 전에 입력한 암호값을 제거하고 다시 처음부터 값을 입력
 	@ModelAttribute("command")
-	public BoardCommand forbacking() {
-		return new BoardCommand();
+	public BoardCommandDto forbacking() {
+		return new BoardCommandDto();
 	}
 
 	// 형식)@RequstMapping(value="/요청명령어",method=RequestMethod.GET(Get방식)
@@ -39,10 +39,10 @@ public class DeleteController {
 
 	// 암호를 입력하고 삭제버튼 눌렀다면(에러메세지(유효성검사)
 	@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
-	public String submit(@ModelAttribute("command") BoardCommand command, BindingResult result) {
+	public String submit(@ModelAttribute("command") BoardCommandDto command, BindingResult result) {
 		if (log.isDebugEnabled()) {
-			log.debug("BoardCommand=" + command);// toString()
-			log.debug("seq="+command.getSeq());
+			log.debug("BoardCommandDto=" + command);// toString()
+			log.debug("boardNum="+command.getBoardNum());
 		}
 		// 유효성 검사->(비밀번호)에러발생->에레메세지를 불러오게 설정
 		new BoardDeleteValidator().validate(command, result);
@@ -52,14 +52,14 @@ public class DeleteController {
 		}
 
 		// 삭제할 게시물번호에 해당하는 레코드를 구해온다.
-		BoardCommand board = boardDao.selectBoard(command.getSeq());
+		BoardCommandDto board = boardDao.selectBoard(command.getBoardNum());
 		// DB상의 암호!=웹상의 암호
 		if (!board.getPwd().equals(command.getPwd())) {
 			// 에러메세지를 웹상에 출력
 			result.rejectValue("pwd", "invalidPassword");
 			return form();// boardDelete.jsp로 전환(새로 암호를 입력받기)
 		} else {// 비밀번호가 맞으면->삭제->업로드된 파일도 삭제
-			boardDao.delete(command.getSeq());
+			boardDao.delete(command.getBoardNum());
 			// 만약에 삭제한 게시물에 업로드된 파일이 존재한다면 삭제하라
 			if (board.getFilename() != null) {
 				FileUtil.removeFile(board.getFilename());
