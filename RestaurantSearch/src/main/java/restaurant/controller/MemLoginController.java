@@ -168,6 +168,7 @@ public class MemLoginController {
  		
  		memSimInfo=memberDao.loginCheck(memSimInfo);
  		memDetInfo=memberDao.selectMemDetInfo(memDetInfo);
+ 		memDetInfo.setPhotoPath("images/"+memDetInfo.getPhotoPath());
  		
  		if (log.isDebugEnabled()) {
 			log.debug("memSimInfo=" + memSimInfo+"memDetInfo"+memDetInfo); // toString()

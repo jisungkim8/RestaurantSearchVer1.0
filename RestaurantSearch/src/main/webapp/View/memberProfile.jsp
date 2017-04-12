@@ -140,9 +140,6 @@ $(function(){
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		var params=$("#registerMem").serialize();
 		
-		
-	
-		
 		if (!($("#memberId").val())) {
 		      alert("이메일을 입력해 주세요. 필수 입력사항입니다.")
 		      $("#memberId").focus();
@@ -315,7 +312,8 @@ $(function(){
 	
 		
 })
-		
+
+	
 					
 </script>
 </head>
@@ -418,12 +416,27 @@ $(function(){
 				<!-- REGISTER -->
 				<div class="col-md-9" style="background-color: #6799FF">
 
-					<h2>
-					 	My Profile 
-					</h2>
+				<h2>
+					<c:if test="${memDetInfo.photoPath!='images/null'}">
+					<label>&nbsp;My Profile</label>
+						<div class="row">
+						<div class="form-group">
+								<div class="col-md-6">
+									  <img src="${memDetInfo.photoPath}" id="profileImg" class="img-rounded" alt="Cinque Terre" width="200" height="150"> 
+								</div>
+							</div>
+						</div>
+					</c:if>
 
-					<form name="registerMem" id="registerMem" class="white-row" method="post" action="memberInfoUpdate.do">
+					<c:if test="${memDetInfo.photoPath=='images/null'}">
+					 <label>My Profile</label>
+					 	<div class="row">
+  							<img src="images/porfilepic_default.jpg" id="profileImg" class="img-rounded" alt="Cinque Terre" width="200" height="150"> 
+						</div>
+					</c:if>
+				</h2>
 
+				<form name="registerMem" id="registerMem" class="white-row" method="post" action="memberInfoUpdate.do">
 						<!-- alert failed -->
 						<!-- <div class="alert alert-danger">
 							<i class="fa fa-frown-o"></i> <strong>Password</strong> do not
@@ -499,8 +512,14 @@ $(function(){
 						<div class="row" style="background-color: #FFE400">
 							<div class="form-group">
 								<div class="col-md-12">
+								<c:if test="${memDetInfo.photoPath!='images/null'}">
 									<label>대표이미지</label> <input type="text" id="photoPath" name="photoPath" value="${memDetInfo.photoPath}"
 																		 class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly>
+								</c:if>
+								<c:if test="${memDetInfo.photoPath=='images/null'}">
+									<label>대표이미지</label> <input type="text" id="photoPath" name="photoPath" value=""
+									  class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly>
+								</c:if>
 								</div>
 							</div>
 						</div>

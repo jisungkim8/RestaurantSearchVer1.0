@@ -89,9 +89,17 @@ $(document).ready(function(){
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
 		}
 	// 추출한 파일명 삽입 
-			$(this).siblings('.upload-name').val(filename); 
-				});
-	}); 
+			//$(this).siblings('.upload-name').val(filename); 
+		if( $('.upload-name').val() != "" ){
+			var ext = filename.split('.').pop().toLowerCase();
+			      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+				 alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+				 return;
+			      }
+			}
+		$('.upload-name').val(filename); 
+		});
+}); 
 
 
 
@@ -379,7 +387,7 @@ $(function(){
      cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; 
      border-radius: .25em; } /* named upload */ 
      .filebox .upload-name {
-      display: inline-block; padding: .5em 20.5em; /* label의 패딩값과 일치 */
+      display: inline-block; padding: .5em 13.0em; /* label의 패딩값과 일치 */
       font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle;
       background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
        border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
@@ -440,7 +448,7 @@ $(function(){
 					 	계정 <strong>생성</strong>
 					</h2>
 
-					<form name="registerMem" class="white-row" method="post" action="memberRegister.do">
+					<form name="registerMem" class="white-row" enctype="multipart/form-data" method="post" action="memberRegister.do">
 
 						<!-- alert failed -->
 						<!-- <div class="alert alert-danger">
@@ -535,9 +543,9 @@ $(function(){
 									<label>대표이미지</label> <!-- <input type="text" name="photoPath" 
 																		 class="form-control"  placeholder="대표이미지를 첨부하여 주세요.[선택]"> -->
 										 <div class="filebox"> 
-											<input class="upload-name" value="파일선택" disabled="disabled">
+											<input class="upload-name" size="50" value="파일선택" disabled="disabled">
 								 			<label for="ex_filename">업로드</label> 
-								 			<input type="file" id="ex_filename" name="photoPath"  class="upload-hidden">
+								 			<input type="file" id="ex_filename" name="upload"  class="upload-hidden">
 										</div>
 								</div>
 							</div>

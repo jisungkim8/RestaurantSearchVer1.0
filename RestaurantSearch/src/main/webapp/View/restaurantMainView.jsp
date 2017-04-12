@@ -908,14 +908,6 @@
 	<script type="text/javascript"
 		src="design/plugins/mediaelement/build/mediaelement-and-player.min.js"></script>
 
-
 	<script type="text/javascript" src="design/js/scripts.js"></script>
-
-
-
-
-
-
-
 </body>
 </html>
