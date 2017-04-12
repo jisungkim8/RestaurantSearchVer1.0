@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.BoardDao;
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 import restaurant.util.FileUtil;
 import restaurant.validator.BoardValidator;
 
@@ -31,18 +31,18 @@ public class UpdateController {
 
 	// 형식)@RequstMapping(value="/요청명령어",method=RequestMethod.GET(Get방식)
 	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
-	public ModelAndView form(@RequestParam("seq") int seq) {
+	public ModelAndView form(@RequestParam("boardNum") int boardNum) {
 
-		BoardCommand boardCommand = boardDao.selectBoard(seq);
+		BoardCommandDto boardCommand = boardDao.selectBoard(boardNum);
 		// boaardModify.jsp로 이동
 		return new ModelAndView("boardModify", "command", boardCommand);
 	}
 
 	// 수정을 다하고나서 수정버튼 눌렀다면(에러메세지(유효성검사)
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public String submit(@ModelAttribute("command") BoardCommand command, BindingResult result) {
+	public String submit(@ModelAttribute("command") BoardCommandDto command, BindingResult result) {
 		if (log.isDebugEnabled()) {
-			log.debug("BoardCommand=" + command);// toString()
+			log.debug("BoardCommandDto=" + command);// toString()
 		}
 		// 유효성 검사->(비밀번호)에러발생->에레메세지를 불러오게 설정
 		new BoardValidator().validate(command, result);
@@ -52,10 +52,10 @@ public class UpdateController {
 		}
 
 		// 업로드가 안되어 있으면 상관X, 업로드된 파일(기존)->새로운 파일명변경
-		BoardCommand board = null;
+		BoardCommandDto board = null;
 		String oldFileName = "";// 기존의 파일명 저장
 		// 수정하기전의 상태의 레코드를 불러온다.
-		board = boardDao.selectBoard(command.getSeq());
+		board = boardDao.selectBoard(command.getBoardNum());
 		// DB상의 암호!=웹상의 암호
 		if (!board.getPwd().equals(command.getPwd())) {
 			// 에러메세지를 웹상에 출력

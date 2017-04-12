@@ -6,7 +6,7 @@
 
 	<!-- DTO의 별칭부여 -->
 	<typeAliases>
-		<typeAlias alias="BoardCommand" type="restaurant.dto.BoardCommand" />
+		<typeAlias alias="BoardCommandDto" type="restaurant.dto.BoardCommandDto" />
 		<typeAlias alias="MemDetInfoDto" type="restaurant.dto.MemDetInfoDto" />
 		<typeAlias alias="MemSimInfoDto" type="restaurant.dto.MemSimInfoDto" />
 		<typeAlias alias="RestaurantDto" type="restaurant.dto.RestaurantDto" />
@@ -21,7 +21,7 @@
 
 	<!-- 불러올 테이블의 정보(xml파일) -->
 	<mappers>
-		<mapper resource="restaurant/query/BoardMapper.xml" />
+		<mapper resource="restaurant/query/BoardMapperQuery.xml" />
 		<mapper resource="restaurant/query/memDetInfoQuery.xml" />
 		<mapper resource="restaurant/query/memSimInfoQuery.xml" />
 		<mapper resource="restaurant/query/restaurantQuery.xml" />

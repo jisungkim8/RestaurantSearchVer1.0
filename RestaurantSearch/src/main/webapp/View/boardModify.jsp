@@ -17,10 +17,10 @@
 				<strong>Forms</strong> <small class="font300">Shortcodes</small>
 			</h2>
 			<div class="form-group">
-				<label><%-- <spring:message code="write.form.seq" /> --%></label> <input
-					type="hidden" class="form-control" name="seq"
-					value="${command.seq }" />
-				<%-- <form:errors path="command.seq" /> --%>
+				<label><%-- <spring:message code="write.form.boardNum" /> --%></label> <input
+					type="hidden" class="form-control" name="boardNum"
+					value="${command.boardNum }" />
+				<%-- <form:errors path="command.boardNum" /> --%>
 			</div>
 			<div class="form-group">
 				<label><spring:message code="write.form.title" /></label> <input
@@ -71,7 +71,7 @@
 <form:errors path="command" />
 <form action="update.do" enctype="multipart/form-data" method="post">
 
-	<input type="hidden" name="seq" value="${command.seq }">
+	<input type="hidden" name="boardNum" value="${command.boardNum }">
 
 	<spring:message code="write.form.title" />
 	<input type="text" name="title" value="${command.title }">
