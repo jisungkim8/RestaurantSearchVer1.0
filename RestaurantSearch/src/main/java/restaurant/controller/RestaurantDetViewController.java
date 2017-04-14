@@ -95,9 +95,6 @@ public class RestaurantDetViewController {
 		System.out.println("RestaurantDetViewController>>shopReviewDto : " + shopReviewDto);
 		
 		map.put("shopReviewDto", shopReviewDto);
-		System.out.println(shopReviewDto.get(0).getReviewId());
-		System.out.println(shopReviewDto.get(1).getReviewId());
-		System.out.println(shopReviewDto.get(2).getReviewId());
 		
 		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
