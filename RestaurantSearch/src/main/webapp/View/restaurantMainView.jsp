@@ -66,6 +66,8 @@
 						})
 
 						$("#searchBox").click(function() {
+							this.value = '';
+							this.style.color = "#000";
 							$(".subbox").show();
 
 						})
@@ -496,8 +498,8 @@
 
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
-											name="keyword" /> <input type="hidden" id="pageNum"
-											name="pageNum" value="1" />
+											style="color: lightgray" name="keyword" value="검색어로 검색: 혼밥/맛집/속초/데이트" />
+										<input type="hidden" id="pageNum" name="pageNum" value="1" />
 										<!-- view more button -->
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
@@ -669,7 +671,7 @@
 					<a href="https://vimeo.com/190687560">주말 맛집 기행 어떠세요?</a>
 
 					<h5 class="font300 padding10">
-						<small class="text-center block">(조회수: $(vidcnt)</small>
+						<small class="text-center block"></small>
 					</h5>
 					<!--  video-->
 
@@ -785,7 +787,8 @@
 						<i class="lightgray fa fa-map-marker hidden-xs"></i>
 						<h4>지도검색</h4>
 						<p>원하는 식당을 지도에서 바로바로 검색하세요!</p>
-						<a href="page-left-sidebar.html" class="btn btn-primary btn-xs">검색하기</a>
+						<a href="restaurantSearch.do?keyword=서울&pageNum=1"
+							class="btn btn-primary btn-xs">검색하기</a>
 					</div>
 				</div>
 

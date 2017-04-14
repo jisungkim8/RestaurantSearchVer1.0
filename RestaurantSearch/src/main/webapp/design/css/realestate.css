@@ -129,7 +129,7 @@ figure.agent-figure.pull-right {
 	/* font-weight: bold; */
 	font-size: 16px;
 	outline: none;
-	color: black !important;
+	color: #000	 ;
 	padding: 1px 7px 1px 7px;
 }
 
