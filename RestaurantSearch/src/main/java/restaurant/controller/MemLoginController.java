@@ -120,6 +120,7 @@ public class MemLoginController {
     		,HttpSession session) {
     	String registerCheck;
     	MemSimInfoDto memSimInfo=new MemSimInfoDto();
+    	MemDetInfoDto memDetInfo=new MemDetInfoDto();
     	
     	if (log.isDebugEnabled()) {
 			log.debug("memSimInfoDto=" + memSimInfoDto); // toString()
@@ -128,6 +129,8 @@ public class MemLoginController {
      	System.out.println("__memberLogin__method=RequestMethod.POST");
     	System.out.println("memSimInfoDto=" + memSimInfoDto);
     	memSimInfo=memberDao.loginCheck(memSimInfoDto);
+    	memDetInfo.setMemberId(memSimInfoDto.getMemberId());
+    	memDetInfo=memberDao.selectMemDetInfo(memDetInfo); 						
       	System.out.println("loginCheck_after_memSimInfoDto=>" + memSimInfo);
       	
       	if(memSimInfo==null){
@@ -135,9 +138,10 @@ public class MemLoginController {
        	}else{
        		registerCheck="register";
        		session.setAttribute("userLoginInfo", memSimInfo);
+       		session.setAttribute("userLoginDetInfo", memDetInfo);
        	}
     	
-      	 List<MainRestaurantListDto> list=mainRestaurantListDao.selectMainRestaurantList();
+      	List<MainRestaurantListDto> list=mainRestaurantListDao.selectMainRestaurantList();
  		List<MainRestaurantListDto> newlist=mainRestaurantListDao.selectNewRestaurantList();
  		
     	ModelAndView  mav = new ModelAndView();
@@ -146,7 +150,6 @@ public class MemLoginController {
 		mav.addObject("registerCheck", registerCheck );
 		mav.addObject("list", list);
 		mav.addObject("newlist", newlist);
-		
 		return mav;
     }
     

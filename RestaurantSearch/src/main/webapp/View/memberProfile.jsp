@@ -81,6 +81,27 @@
 <script src="/RestaurantSearch/lib/jquery-1.11.0.min.js"></script>
 <script>
 
+$(document).ready(function(){
+	var fileTarget = $('.filebox .upload-hidden'); 
+	fileTarget.on('change', function(){ // 값이 변경되면 
+		if(window.FileReader){ // modern browser
+			var filename = $(this)[0].files[0].name; } 
+		else{ // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+		}
+	// 추출한 파일명 삽입 
+			//$(this).siblings('.upload-name').val(filename); 
+		if( $('.upload-name').val() != "" ){
+			var ext = filename.split('.').pop().toLowerCase();
+			      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+				 alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+				 return;
+			      }
+			}
+		$('.upload-name').val(filename); 
+		});
+});
+
 function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2)
 	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;	
 		
@@ -121,18 +142,65 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
 function trueForm() 
 { 
 	//$("#memberId").attr("disabled",false).attr("readonly",false); 
-	$("#birthDate").attr("disabled",false).attr("readonly",false); 
-	$("#phoneNum").attr("disabled",false).attr("readonly",false); 
-	$("#gender").attr("disabled",false).attr("readonly",false); 
-	$("#photoPath").attr("disabled",false).attr("readonly",false); 
-	$("#interestFood").attr("disabled",false).attr("readonly",false); 
-	$("#nickname").attr("disabled",false).attr("readonly",false); 
-	$("#selfIntro").attr("disabled",false).attr("readonly",false); 
-	$("#emailCheck").attr("disabled",false).attr("onclick",true); 	
-	//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
+	alert(" 수정 => "+$('#profileMod').val() );
+	
+	if($('#profileMod').val()=='수정'){
+		$("#birthDate").attr("disabled",false).attr("readonly",false); 
+		$("#phoneNum").attr("disabled",false).attr("readonly",false); 
+		$("#gender").attr("disabled",false).attr("readonly",false); 
+		$("#photoPath").attr("disabled",false).attr("readonly",false); 
+		$("#interestFood").attr("disabled",false).attr("readonly",false); 
+		$("#nicName").attr("disabled",false).attr("readonly",false); 
+		$("#selfIntro").attr("disabled",false).attr("readonly",false); 
+		$("#emailCheck").attr("disabled",false).attr("onclick",true); 	
+		//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
+		$('#ex_filename').attr('disabled',false);  //업로드 버튼 활성화 
+		$('#profileMod').val('확인')
+	}else{
+		alert("수정 후 확인")
+		$("#birthDate").attr("disabled",true).attr("readonly",true); 
+		$("#phoneNum").attr("disabled",true).attr("readonly",true); 
+		$("#gender").attr("disabled",true).attr("readonly",true); 
+		$("#photoPath").attr("disabled",true).attr("readonly",true); 
+		$("#interestFood").attr("disabled",true).attr("readonly",true); 
+		$("#nicName").attr("disabled",true).attr("readonly",true);
+		$("#selfIntro").attr("disabled",true).attr("readonly",true);
+		$("#emailCheck").attr("disabled",true).attr("onclick",true);
+		//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
+		$('#ex_filename').attr('disabled',true);  //업로드 버튼 활성화 
+		$('#profileMod').val('수정')
+	}
 } 
 
 $(function(){
+	
+	$("#nicNameRepCheck").click(function(){
+		   alert("닉네임")
+		   if($("#nicName").val()==""){
+			   //document.getElementById("ducheck")=>$("ducheck")
+			   $("#nicNameTxt").html("<font id='idColor' color='red'>먼저 닉네임을 입력하세요.</font>")
+			   $("#nicName").focus();//커서입력
+			   return;
+		   }
+		   
+			$.ajax({
+	    		url:'/RestaurantSearch/dupliNicnameCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+	    		data:{nicName:$("#nicName").val()},
+	    		type : "POST",
+	    		//3.success:콜백함수명(매개변수)
+	    		success:function(args){
+	    			if(args=="create"){
+	    				alert("닉네임 가능")
+	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
+	     			}else{
+	    				alert("닉네임 불가능")
+	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
+	    				$("#memberId").focus();
+	    			}
+	    		}
+	    	})//$.ajax
+	 })
 	
 	 //2.중복  id를 입력했을때 호출하는 함수   
 	$("#profileSave").click(function(){
@@ -180,8 +248,6 @@ $(function(){
     		}
     	})
 	})
-	
-	
 	
 	$("#memberId").blur(function(){
 		//이메일 유효성 검사
@@ -312,10 +378,27 @@ $(function(){
 	
 		
 })
-
 	
 					
 </script>
+<style>
+   #main { height:600px;  background:url("design/images/demo/realestate/딸기.jpg") no-repeat;}
+   .filebox input[type="file"]
+    { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+       overflow: hidden; clip:rect(0,0,0,0); border: 0; }
+      .filebox label { 
+      display: inline-block; padding: 0.7em .75em; 
+      color: blue; font-size: inherit;
+      line-height: normal; vertical-align: -webkit-baseline-middle; background-color: chocolate;
+      cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; 
+      border-radius: .25em; } /* named upload */ 
+     .filebox .upload-name {
+      display: inline-block; padding: 0.7em 9.8em; /* label의 패딩값과 일치 */
+      font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle;
+      background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
+      border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
+
+</style>
 </head>
 <body>
 	<!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="design/images/boxed_background/1.jpg"  -->
@@ -420,18 +503,18 @@ $(function(){
 					<c:if test="${memDetInfo.photoPath!='images/null'}">
 					<label>&nbsp;My Profile</label>
 						<div class="row">
-						<div class="form-group">
 								<div class="col-md-6">
 									  <img src="${memDetInfo.photoPath}" id="profileImg" class="img-rounded" alt="Cinque Terre" width="200" height="150"> 
 								</div>
-							</div>
 						</div>
 					</c:if>
 
 					<c:if test="${memDetInfo.photoPath=='images/null'}">
-					 <label>My Profile</label>
+					 <label>&nbsp;My Profile</label>
 					 	<div class="row">
-  							<img src="images/porfilepic_default.jpg" id="profileImg" class="img-rounded" alt="Cinque Terre" width="200" height="150"> 
+								<div class="col-md-6">
+  									<img src="images/porfilepic_default.jpg" id="profileImg" class="img-rounded" alt="Cinque Terre" width="200" height="150"> 
+								</div>
 						</div>
 					</c:if>
 				</h2>
@@ -512,14 +595,18 @@ $(function(){
 						<div class="row" style="background-color: #FFE400">
 							<div class="form-group">
 								<div class="col-md-12">
-								<c:if test="${memDetInfo.photoPath!='images/null'}">
-									<label>대표이미지</label> <input type="text" id="photoPath" name="photoPath" value="${memDetInfo.photoPath}"
-																		 class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly>
-								</c:if>
-								<c:if test="${memDetInfo.photoPath=='images/null'}">
-									<label>대표이미지</label> <input type="text" id="photoPath" name="photoPath" value=""
-									  class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly>
-								</c:if>
+								 		<div class="filebox">
+								 		<c:if test="${memDetInfo.photoPath!='images/null'}">
+											<input class="upload-name" size="50" value="${memDetInfo.photoPath}" disabled="disabled">
+								 		</c:if>
+								 		<c:if test="${memDetInfo.photoPath=='images/null'}">
+								 		    <!-- <input type="text" id="photoPath" name="photoPath" value=""
+									          class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly> -->
+									          <input class="upload-name" size="50" value="" placeholder="대표이미지를 첨부하여 주세요.[선택]" disabled="disabled">
+								 		</c:if>
+								 			<label for="ex_filename">업로드</label> 
+								 			<input type="file" id="ex_filename" name="upload"  class="upload-hidden" disabled>
+										</div>
 								</div>
 							</div>
 						</div>
@@ -560,9 +647,16 @@ $(function(){
 						<div class="row" style="background-color: #86E57F">
 							<div class="form-group">
 								<div class="col-md-12">
-									<label>닉네임</label> <input type="text" id="nickname" name="nickname" value="${memDetInfo.nickname}"
-										 class="form-control" placeholder="닉네임을 입력하여 주세요.[선택]" readonly>
+									<label>닉네임</label> <input type="text" size="10" id="nicName"  class="form-control" name="nickname" value="${memDetInfo.nickname}"
+										  placeholder="닉네임을 입력하여 주세요.[선택]" readonly>
+									<input type="button" id="nicNameRepCheck" value="중복확인" class="btn btn-success"> 
+									<table><tr style="background-color:#86E57F"><td id="nicNameTxt" ></td></tr></table>
 								</div>
+								<!-- <div class="col-md-7">
+									<br>
+									<input type="button" id="nicNameRepCheck" value="중복확인" class="btn btn-success">
+									<button id="repeatCheck" class="btn btn-primary">중복확인</button>
+								</div> -->
 							</div>
 						</div>
 						
