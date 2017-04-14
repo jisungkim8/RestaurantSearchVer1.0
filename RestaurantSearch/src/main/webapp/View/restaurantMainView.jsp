@@ -229,7 +229,7 @@
 
 						$('#pwdSearch').click(
 								function() {
-											alert("패스워드 찾기")
+// 											alert("패스워드 찾기")
 											//var memInfoForm=document.memInfoForm;
 											//var url="pwdSearch.do";
 											window.open(
