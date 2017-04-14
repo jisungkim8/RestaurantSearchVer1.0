@@ -360,9 +360,7 @@
 
 
 	</div>
-<!-- 	href="javascript:get_restaurant_data_by_keyword_and_filter_info('', 1);" -->
-<!-- //check_if_checkbox_checked  -->
-	<aside> <!-- <div id="sidebar"  class="nav-collapse "> -->
+	<aside> 
 	<div id="sidebar" class="nav" style="z-index: 2;">
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu">
@@ -402,17 +400,18 @@
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
 	<script type="text/javascript">
-/* 	$("#to-dokdo").on("click", function(e) {
-	    e.preventDefault();
-
-	    map.fitBounds(dokdo);
-	}); */
-	
 	var previous_location = [];
 	var previous_food = [];
 	var previous_booking = null;
 	var previous_parking = null;
 	var previous_price = null;
+	
+	var min_x_position = 0;
+	var max_x_position = 0;
+	var min_y_position = 0;
+	var max_y_position = 0;
+	
+	var checking_array = [];
 	
 	function init_restaurant_filter_values() {
 		previous_location = [];
@@ -421,41 +420,6 @@
 		previous_parking = '';
 		previous_price = '';
 	}
-	
-	/* function check_if_checkbox_checked() {
-		init_restaurant_filter_values(); 
-		$("input:checkbox[name='location_checkbox']:checked").each(
-				function () {
-					previous_location.push($(this).val());
-				});
-		$("input:checkbox[name='food_checkbox']:checked").each(
-				function () {
-					previous_food.push($(this).val());
-				});
-		
-		$("input:radio[name='booking_radio']:checked").each(
-				function () {
-					previous_booking  = $(this).val(); 
-				});
-		
-		$("input:radio[name='parking_radio']:checked").each(
-				function () {
-					previous_parking = $(this).val(); 
-				});
-		
-		$("input:radio[name='price_radio']:checked").each(
-				function () {
-					previous_price = $(this).val(); 
-				});
-
-		console.log(previous_location);
-		console.log(previous_food);
-		console.log(previous_price);
-		console.log(previous_booking);
-		console.log(previous_parking);
-		
-		$("#filter_info_window").css("display", "none");
-	} */
 	
 	function open_filter_window() {
 		console.log("open_filter_window");
@@ -486,8 +450,15 @@
 		abbr_food_keywords = [];
 		abbr_theme_keywords = [];
 		
+		min_x_position = 0;
+		max_x_position = 0;
+		min_y_position = 0;
+		max_y_position = 0;
+		
 		contentStrings = [];
 		infowindows = [];
+		
+		checking_array = [];
 		
 		if (markers.length != 0) {
 			for (var i = 0; i < markers.length; i++) {
@@ -631,8 +602,8 @@
 			imgDiv.appendChild(imgTag);
 			
 			aTag.setAttribute("id", restaurantId);
-			aTag.setAttribute("href", "restaurantDetView.do?restaurantId=" + restaurantId);
-			aTag.setAttribute("class", "list-group-item-action flex-column");
+			aTag.setAttribute("href", "restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=0&filterName=reviewId");
+			aTag.setAttribute("class", "list-group-item-action flex-column");  
 			 
 			aTag.appendChild(imgDiv);
 			aTag.appendChild(infoDiv);
@@ -649,13 +620,13 @@
 		divTag.setAttribute("style", "background-color: green;  width: 30%;");
 		
 		smallTag = document.createElement("small");
-		smallTag.innerHTML = pagingHtml;
+		smallTag.innerHTML = pagingHtml; 
 		
 		divTag.appendChild(smallTag);
 		
 		liTag.appendChild(divTag);
 		
-		show_markers_and_add_event_listener();  
+		show_markers_and_add_event_listener(); 
 	}
 	
 	function show_markers_and_add_event_listener() {
@@ -679,22 +650,6 @@
 			success: show_restaurant_list_by_paging_data
 		});
 	}
-	
-	/* function get_restaurant_data_by_keyword_and_filter_info
-			(keyword, pageNum) {
-		
-		if (keyword.trim() == '') {
-			keyword = $("#keyword_input").val();	
-		}
-
-		$.ajax({ 
-			type: "POST",			// POST방식 요청
-			data: {"keyword": keyword, "pageNum": pageNum},
-			dataType: "json",		// RETURN 받을 데이터 형(JSON객체)
-			url: "getRestaurants.do",		// 요청 URL.. 
-			success: show_restaurant_list_by_paging_data
-		});
-	} */
 
 	function get_restaurant_data_by_keyword_and_filter_info
 		(keyword, page_num) {
@@ -703,33 +658,12 @@
 			keyword = $("#keyword_input").val();	
 		}
 		
-		// var page_num = 1;
-		
 		if (keyword.trim() == '') {
 			alert("키워드를 입력해주세요.");
 			return;
 		}
 		
 		init_restaurant_filter_values(); 
-		
-		/* var dokdo = new naver.maps.LatLngBounds(
-	              new naver.maps.LatLng(37.4983085, 126.76620435615891),
-	              new naver.maps.LatLng(37.2444436, 131.8786475));
-		var margin = { top: 0, right: 0, bottom: 0, left: 400 }; */
-
-		/* 126.8884274
-		y
-		:
-		37.5083236 */
-		
-		/* n.Point
-		x
-		:
-		127.0252374
-		y
-		:
-		37.4983085 */
-		//map.fitBounds(dokdo, margin); 
 		
 		$("input:checkbox[name='location_checkbox']:checked").each(
 				function () {
@@ -754,12 +688,6 @@
 				function () {
 					previous_price = $(this).val(); 
 				});
-
-		console.log(previous_location);
-		console.log(previous_food);
-		console.log(previous_price);
-		console.log(previous_booking);
-		console.log(previous_parking);
 		
 		var json_search_option_object = {
 			"keyword": keyword,
@@ -844,9 +772,58 @@
 								var item = response.result.items[0], addrType = item.isRoadAddress ? '[도로명 주소]'
 										: '[지번 주소]', point = new naver.maps.Point(
 										item.point.x, item.point.y);
-
+								
+								if (min_x_position == 0) {
+									min_x_position = point.x;
+								} else {
+									if (min_x_position > point.x) {
+										min_x_position = point.x;
+									}
+								}
+								
+								if (max_x_position == 0) {
+									max_x_position = point.x;
+								} else {
+									if (max_x_position < point.x) {
+										max_x_position = point.x;
+									}
+								}
+								
+								if (min_y_position == 0) {
+									min_y_position = point.y; 
+								} else {
+									if (min_y_position > point.y) {
+										min_y_position = point.y;
+									}
+								}
+								
+								if (max_y_position == 0) {
+									max_y_position = point.y;
+								} else {
+									if (max_y_position < point.y) {
+										max_y_position = point.y;
+									}
+								}
+								
 								markers[restaurant_index].setPosition(point);
-								//map.setCenter(point);
+								
+								checking_array.push(point);
+								
+								if (checking_array.length == restaurantList.length) {
+									console.log("final min_x_position"  + min_x_position);
+									console.log("final max_x_position"  + max_x_position);
+									console.log("final min_y_position"  + min_y_position);
+									console.log("final max_y_position"  + max_y_position);
+									
+									var targetLatLng = new naver.maps.LatLngBounds(
+							 				new naver.maps.LatLng(min_y_position, min_x_position),
+								              new naver.maps.LatLng(max_y_position, max_x_position)
+								              ); 
+								              	              
+									var margin = { top: 0, right: 0, bottom: 0, left: 500};
+
+									map.fitBounds(targetLatLng, margin);
+								}
 							});
 		}
 
@@ -876,7 +853,7 @@
 						restaurant_index);
 			}
 		}
-
+		
 		function add_events_to_all_markers() {
 			for (var marker_index = 0; marker_index < markers.length; marker_index++) {
 				add_event_to_marker(marker_index);
@@ -885,17 +862,20 @@
 
 		var restaurant_name_tag = null;
 		var restaurant_addr_tag = null;
+		var restaurant_a_img_tag = null;
 		var restaurant_img_tag = null;
 		var restaurant_div_phone_tag = null;
 		var restaurant_food_string = null;
 		var restaurant_theme_string = null;
 		var restaurant_home_page_string = null;
+		
 
 		var contentString = null;
 
 		function init_info_str() {
 			restaurant_name_tag = '   ';
 			restaurant_addr_tag = '   ';
+			restaurant_a_img_tag = '';
 			restaurant_img_tag = '       ';
 			restaurant_div_phone_tag = '       ';
 			restaurant_food_string = '			';
@@ -922,10 +902,17 @@
 			restaurant_addr_tag += "<br/>";
 			restaurant_addr_tag += restaurant_doro_addr_list[marker_index];
 
+			
+			restaurant_a_img_tag += "<a href=";
+			restaurant_a_img_tag += "restaurantDetView.do?restaurantId=" + restaurantList[marker_index].restaurantId + "&moreCount=0&filterName=reviewId>";
+			
 			restaurant_img_tag += "<img src='";
-		restaurant_img_tag += restaurantList[marker_index].representPhoto +"' ";
-		restaurant_img_tag += "width='140' height='140' alt='' class='thumb' style='float: left; margin: 10px 10px 5px 5px;'/>";
+			restaurant_img_tag += restaurantList[marker_index].representPhoto +"' ";
+			restaurant_img_tag += "width='140' height='140' alt='' class='thumb' style='float: left; margin: 10px 10px 5px 5px;'/>";
 
+			restaurant_a_img_tag += restaurant_img_tag;
+			restaurant_a_img_tag += "</a>";
+				
 			restaurant_div_phone_tag += "<div style='margin:10px 5px 0px 0px;'>"
 			restaurant_div_phone_tag += "전화:"
 					+ restaurantList[marker_index].phoneNumber + "<br/>";
@@ -937,10 +924,11 @@
 					+ abbr_theme_keywords[marker_index] + "<br/>"
 
 			restaurant_home_page_string = '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>';
-
+ 
 			contentString[1] = restaurant_name_tag;
-			contentString[2] = restaurant_addr_tag;
-			contentString[3] = restaurant_img_tag;
+			contentString[2] = restaurant_addr_tag; 
+			//contentString[3] = restaurant_img_tag;
+			contentString[3] = restaurant_a_img_tag;
 			contentString[4] = restaurant_div_phone_tag;
 			contentString[5] = restaurant_food_string;
 			contentString[6] = restaurant_theme_string;
@@ -991,8 +979,6 @@
 
 	<script type="text/javascript"
 		src="design/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- 	<script type="text/javascript"
-		src="design/plugins/magnific-popup/jquery.magnific-popup.min.js"></script> -->
 	<script type="text/javascript"
 		src="design/plugins/owl-carousel/owl.carousel.min.js"></script>
 	<script type="text/javascript"
