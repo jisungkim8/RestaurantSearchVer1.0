@@ -330,10 +330,10 @@
 					</div>
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"> <span>로그인 성공! 이메일 :<c:out value="${sessionScope.userLoginInfo.memberId}" />
+							class="dropdown-toggle" href="#" style="background-color: lightgreen"> <span>로그인 성공! 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
 							</span>
 						</a>
-							<ul class="dropdown-menu extended logout">
+							<ul class="dropdown-menu extended logout" style="width: 251px; background-color: blue">
 								<div class="log-arrow-up"></div>
 								<li class="eborder-top"><a href="#" id="myProfile"><i
 										class="icon_profile"></i> My Profile</a></li>
@@ -792,7 +792,7 @@
 		<!-- copyright , scrollTo Top -->
 		<div class="footer-bar">
 			<div class="container">
-				<span class="copyright">Copyright &copy; git 짜증나요..., LLC .
+				<span class="copyright">Copyright &copy; git LLC .
 					All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO
 					TOP <i class="fa fa-arrow-circle-up"></i>
 				</a>

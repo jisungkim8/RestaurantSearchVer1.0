@@ -8,7 +8,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
@@ -192,12 +191,9 @@
 												<div class="modal-footer"><!-- modal footer -->
 													<button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary">Save changes</button>
 												</div><!-- /modal footer -->
-			
 											</div>
 										</div>
 									</div>
-
-												
 								</c:if>
 								
 								<c:if test="${sessionScope.userLoginInfo != null}">
@@ -608,17 +604,17 @@
 						
 						
 						<!-- white-row by Features -->
-						<div class="white-row">
-							<!-- PROPERTY ID -->
+						<!-- <div class="white-row">
+							PROPERTY ID
 							<h5 class="font400 styleColor">Property ID : RH1001</h5>
 
-							<!-- PROPERTY FEATURES -->
+							PROPERTY FEATURES
 							<h3 class="page-header margin-bottom40">
 								RH1001 <strong class="styleColor">Features</strong>
 							</h3>
 
 							<div class="row">
-								<!-- col 1 -->
+								col 1
 								<div class="col-md-3 col-sm-6 col-xs-6">
 									<ul class="list-icon check-square">
 										<li class="x">Air conditioning</li>
@@ -631,7 +627,7 @@
 										<li>Cot</li>
 									</ul>
 								</div>
-								<!-- col 2 -->
+								col 2
 								<div class="col-md-3 col-sm-6 col-xs-6">
 									<ul class="list-icon check-square">
 										<li>Dishwasher</li>
@@ -644,7 +640,7 @@
 										<li class="x">Hi-fi</li>
 									</ul>
 								</div>
-								<!-- col 3 -->
+								col 3
 								<div class="col-md-3 col-sm-6 col-xs-6">
 									<ul class="list-icon check-square">
 										<li>Internet</li>
@@ -657,7 +653,7 @@
 										<li>Parquet</li>
 									</ul>
 								</div>
-								<!-- col 4 -->
+								col 4
 								<div class="col-md-3 col-sm-6 col-xs-6">
 									<ul class="list-icon check-square">
 										<li>Radio</li>
@@ -672,40 +668,40 @@
 								</div>
 							</div>
 
-							<hr /><!-- divider -->
+							<hr /> --><!-- divider -->
 
-							<p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<!-- <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							<p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, <strong>commodo a sodales sed</strong>, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, <strong>iaculis ac massa</strong>.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et <a href="#">lacus neque</a>. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et <a href="#">lacus neque</a>. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p> -->
 
 
-						</div>
+					<!-- 	</div> -->
 						<!-- /white-row by Features -->
 
 
 						<!-- white-row by Video -->
-						<div class="white-row">
+						<!-- <div class="white-row">
 
-							<!-- PROPERTY VIDEO -->
+							PROPERTY VIDEO
 							<h3 class="page-header margin-bottom40">
 								RH1001 <strong class="styleColor">Video</strong>
 							</h3>
 
 							<iframe src="http://player.vimeo.com/video/73221098" width="800" height="450"></iframe>
-						</div>
+						</div> -->
 						<!-- /white-row by Video -->
 
 
 						<!-- white-row by Google Map -->
-						<div class="white-row">
+					<!-- 	<div class="white-row">
 
-							<!-- PROPERTY MAP -->
+							PROPERTY MAP
 							<h3 class="page-header margin-bottom40">
 								RH1001 <strong class="styleColor">Google Map</strong>
 							</h3>
 
-							<div id="gmap_default"><!-- google map --></div>
+							<div id="gmap_default">google map</div>
 
 							<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true&amp;#038;ver=3.8.1"></script>
 							<script type="text/javascript">
@@ -728,12 +724,12 @@
 								window.onload = initialize_property_map();
 							</script>
 
-						</div>
+						</div> -->
 						<!-- /white-row by Google Map -->
 
 						
 						<!-- white-row by Contact -->
-						<div class="white-row">
+						<%-- <div class="white-row">
 
 							<!-- PROPERTY CONTACT -->
 							<h3 class="page-header margin-bottom40">
@@ -813,13 +809,13 @@
 
 						</div>
 						<!-- /white-row by Contact -->
-
+ --%>
 
 						<hr /><!-- divider -->
 
 
 						<!-- RELATED -->
-						<div class="hidden-xs">
+						<%-- <div class="hidden-xs">
 
 							<h3 class="page-header">
 								<strong class="styleColor">Related</strong> Properties
@@ -901,7 +897,7 @@
 
 							</div>
 
-						</div>
+						</div> --%>
 						<!-- /RELATED -->
 
 					</div>
@@ -909,9 +905,7 @@
 					<!-- side column -->
 					<div class="col-md-3">
 
-
-
-						<form id="re-filter" action="restaurantList.jsp" method="get" class="white-row">
+						<%-- <form id="re-filter" action="restaurantList.jsp" method="get" class="white-row">
 
 							<!-- FILTER / SEARCH -->
 							<h3 class="page-header nomargin-top margin-bottom40">
@@ -1026,18 +1020,16 @@
 											<option value="1000000+">1000000+</option>
 										</select>
 									</div>
-
 									<div class="col-md-12">
 										<label>&nbsp;</label>
 										<button class="btn btn-primary fullwidth">FILTER NOW</button>
 									</div>
 								</div>
 							</div>
-
-						</form>
+						</form> --%>
 
 						<!-- NAME -->
-						<h3 class="page-header">
+						<%-- <h3 class="page-header">
 							Today's <strong class="styleColor">Menu</strong>
 						</h3>
 
@@ -1102,11 +1094,11 @@
 						<iframe src="http://player.vimeo.com/video/73221098" width="800" height="450"></iframe>
 						<h5 class="font300 padding10">
 							<small class="text-center block">(3287 views last 3 days)</small>
-						</h5>
+						</h5> --%>
 						<!-- /video -->
 
 						<!-- small articles -->
-						<div class="row">
+						<%-- <div class="row">
 							<div class="col-xs-6 col-md-6">
 								<a href="#">
 									<img alt="" class="img-responsive" src="<c:url value="design/images/demo/realestate/images/thumb/3.jpg" />" />
@@ -1119,7 +1111,7 @@
 									<h6 class="fsize12 font300 padding6 styleSecondColor">Sochi protesters fight to be heard</h6>
 								</a>							
 							</div>
-						</div>
+						</div> --%>
 						<!-- /small articles -->
 
 
@@ -1163,8 +1155,7 @@
 			</section>
 
 
-			<section class="container">
-
+			<%-- <section class="container">
 				<!-- CALLOUT -->
 				<div class="row bs-callout">
 					<div class="col-md-8 text-center">
@@ -1185,9 +1176,9 @@
 				</div>
 				<!-- /CALLOUT -->
 
-			</section>
+			</section> --%>
 
-			<section class="container">
+<!-- 			<section class="container">
 					
 				<div class="row">
 					<div class="col-md-3 col-sm-6 col-xs-12">
@@ -1228,17 +1219,14 @@
 
 				</div>
 					
-			</section>
+			</section> -->
 
 
 		</div>
 		<!-- /WRAPPER -->
 
-
-
 		<!-- FOOTER -->
 		<footer>
-
 			<!-- copyright , scrollTo Top -->
 			<div class="footer-bar">
 				<div class="container">
@@ -1248,83 +1236,84 @@
 			</div>
 			<!-- copyright , scrollTo Top -->
 
+				<!-- footer content -->
+		<div class="footer-content">
+			<div class="container">
 
-			<!-- footer content -->
-			<div class="footer-content">
-				<div class="container">
-
-					<div class="row">
-
-
-						<!-- FOOTER CONTACT INFO -->
-						<div class="column col-md-4">
-							<h3>CONTACT</h3>
-
-							<p class="contact-desc">
-								Atropos is a very powerful HTML5 template, you will be able to create an awesome website in a very simple way.										
-							</p>
-							<address class="font-opensans">
-								<ul>
-									<li class="footer-sprite address">
-										PO Box 21132<br />
-										Here Weare St, Melbourne<br />
-										Vivas 2355 Australia<br />
-									</li>
-									<li class="footer-sprite phone">
-										Phone: 1-800-565-2390
-									</li>
-									<li class="footer-sprite email">
-										<a href="mailto:support@yourname.com">support@yourname.com</a>
-									</li>
-								</ul>
-							</address>
-
-						</div>
-						<!-- /FOOTER CONTACT INFO -->
+				<div class="row">
 
 
-						<!-- FOOTER LOGO -->
-						<div class="column logo col-md-4 text-center">
-							<div class="logo-content">
-								<img class="animate_fade_in" src="<c:url value="design/images/logo_footer.png" />" width="200" alt="" />
-								<h4>ATROPOS TEMPLATE</h4>
-							</div>											
-						</div>
-						<!-- /FOOTER LOGO -->
+					<!-- FOOTER CONTACT INFO -->
+					<div class="column col-md-4">
+						<h3>CONTACT</h3>
 
-
-						<!-- FOOTER LATEST POSTS -->
-						<div class="column col-md-4 text-right">
-							<h3>RECENT POSTS</h3>
-
-							<div class="post-item">
-								<small>JANUARY 2, 2014 BY ADMIN</small>
-								<h3><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h3>
-							</div>
-							<div class="post-item">
-								<small>JANUARY 2, 2014 BY ADMIN</small>
-								<h3><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h3>
-							</div>
-							<div class="post-item">
-								<small>JANUARY 2, 2014 BY ADMIN</small>
-								<h3><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h3>
-							</div>
-
-							<a href="blog-masonry-sidebar.html" class="view-more pull-right">View Blog <i class="fa fa-arrow-right"></i></a>
-
-						</div>
-						<!-- /FOOTER LATEST POSTS -->
+						<p class="contact-desc">더이상 시간을 낭비하지 마시고 원하는 음식을 바로 찾으세요!</p>
+						<address class="font-opensans">
+							<ul>
+								<li class="footer-sprite address">서울시 강남구 테헤란로<br /> 1길 10
+									세경빌딩<br />
+								</li>
+								<li class="footer-sprite phone">Phone: +82)31-8282-8949</li>
+								<li class="footer-sprite email"><a 	href="mailto:support@yourname.com">FoodSearch@right.now</a></li>
+							</ul>
+						</address>
 
 					</div>
+					<!-- /FOOTER CONTACT INFO -->
+
+
+					<!-- FOOTER LOGO -->
+					<div class="column logo col-md-4 text-center">
+						<div class="logo-content">
+							<img class="animate_fade_in" src="design/images/logo_footer.png"
+								width="200" alt="" />
+							<h4>ATROPOS TEMPLATE</h4>
+						</div>
+					</div>
+					<!-- /FOOTER LOGO -->
+
+
+					<!-- FOOTER LATEST POSTS -->
+					<div class="column col-md-4 text-right">
+						<h3>최신 등록글</h3>
+
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+						<div class="post-item">
+							<small>JANUARY 2, 2014 BY ADMIN</small>
+							<h3>
+								<a href="blog-post.html">Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit</a>
+							</h3>
+						</div>
+
+						<a href="blog-masonry-sidebar.html" class="view-more pull-right">View
+							Blog <i class="fa fa-arrow-right"></i>
+						</a>
+
+					</div>
+					<!-- /FOOTER LATEST POSTS -->
 
 				</div>
-			</div>
-			<!-- footer content -->
 
+			</div>
+		</div>
+		<!-- footer content -->
+		
 		</footer>
 		<!-- /FOOTER -->
-
-
 
 		<!-- JAVASCRIPT FILES -->
 		<script type="text/javascript" src="design/plugins/jquery-2.1.3.min.js"></script>
