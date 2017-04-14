@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -31,6 +32,7 @@ import restaurant.dto.ShopReviewCommand;
 import restaurant.dto.ShopReviewDto;
 import restaurant.util.DuplicateFile;
 import restaurant.util.FileUtil2;
+import restaurant.validator.ShopReviewValidator;
 
 @Controller
 public class RestaurantDetViewController {
@@ -51,8 +53,12 @@ public class RestaurantDetViewController {
 	@Autowired
 	private ReviewPhotoDao reviewPhotoDao; 
 	
+	boolean checkMoreReview = true;
+	
 	@RequestMapping(value="/restaurantDetView.do", method=RequestMethod.GET)
-	public ModelAndView process(@RequestParam(value="restaurantId") int restaurantId, @RequestParam(value="moreCount") Integer moreCount) {
+	public ModelAndView process(@RequestParam(value="restaurantId") int restaurantId, 
+								@RequestParam(value="moreCount") Integer moreCount, 
+								@RequestParam(value="filterName", defaultValue="reviewId") String filterName) {
 		System.out.println("RestaurantDetViewController>>process() is called!!");
 		
 		// 로그
@@ -60,42 +66,41 @@ public class RestaurantDetViewController {
 			System.out.println("RestaurantDetViewController>>log is occured by /restaurantDetView.do");
 			log.debug("restaurantId : " + restaurantId);
 			log.debug("moreCount = " + moreCount);
+			log.debug("filterName = " + filterName);
 		}
 		
-		if (moreCount == null) {
-			moreCount = 1;
-		}
-		
-		Integer totCntOfReviewEnd = shopReviewDao.getTotalShopReviewDetView(restaurantId);
-		Integer totCntOfReviewStart = totCntOfReviewEnd - 2;
-		
-		System.out.println("totCntOfReviewStart = " + totCntOfReviewStart);
-		System.out.println("totCntOfReviewEnd = " + totCntOfReviewEnd);
-		
-		if (totCntOfReviewStart < 0) {
-			totCntOfReviewStart = 0;
-		}
+		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restaurantId", restaurantId);
 		map.put("start", 1);
 		map.put("end", 3);
-		map.put("totCntOfReviewStart", totCntOfReviewStart);
-		map.put("totCntOfReviewEnd", totCntOfReviewEnd);
+		map.put("filterName", filterName);
 		
 		// DTO
 		RestaurantDto restaurantDto = restaurantDao.selectRestaurantDetView(restaurantId);
 		System.out.println("RestaurantDetViewController>>restaurantDto : " + restaurantDto);
+		
 		ShopDetInfoDto shopDetInfoDto = shopDetInfoDao.selectShopDetInfoDetView(restaurantId);
 		System.out.println("RestaurantDetViewController>>shopDetInfoDto : " + shopDetInfoDto);
+		
 		ArrayList<ShopPhotoDto> shopPhotoDtoSepNum1 = (ArrayList<ShopPhotoDto>) shopPhotoDao.selectShopPhotoSepNum1DetView(restaurantId);
 		System.out.println("RestaurantDetViewController>>shopPhotoDtoSepNum1 : " + shopPhotoDtoSepNum1);
+		
 		ArrayList<ShopPhotoDto> shopPhotoDtoSepNum2 = (ArrayList<ShopPhotoDto>) shopPhotoDao.selectShopPhotoSepNum2DetView(restaurantId);
 		System.out.println("RestaurantDetViewController>>shopPhotoDtoSepNum2 : " + shopPhotoDtoSepNum2);
+		
+		System.out.println("map.filterName = " + map.get("filterName"));
 		ArrayList<ShopReviewDto> shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
 		System.out.println("RestaurantDetViewController>>shopReviewDto : " + shopReviewDto);
-		ArrayList<ReviewPhotoDto> reviewPhotoDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoDetView(map);
-		System.out.println("RestaurantDetViewController>>reviewPhotoDto : " + reviewPhotoDto);
+		
+		map.put("shopReviewDto", shopReviewDto);
+		System.out.println(shopReviewDto.get(0).getReviewId());
+		System.out.println(shopReviewDto.get(1).getReviewId());
+		System.out.println(shopReviewDto.get(2).getReviewId());
+		
+		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
 		
 		// keyword 처리
 		ArrayList<String> keyword = new ArrayList<String>();
@@ -120,29 +125,10 @@ public class RestaurantDetViewController {
 		mav.addObject("shopPhotoDtoSepNum1", shopPhotoDtoSepNum1);
 		mav.addObject("shopPhotoDtoSepNum2", shopPhotoDtoSepNum2);
 		mav.addObject("shopReviewDto", shopReviewDto);
-		mav.addObject("reviewPhotoDto", reviewPhotoDto);
+		mav.addObject("reviewPhotoByReviewIdDto", reviewPhotoByReviewIdDto);
+		mav.addObject("totReviewCnt", totReviewCnt);
 		
 		return mav;
-	}
-	
-	@RequestMapping(value="/restaurantDetView.do", method=RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object> getJson(@RequestParam(value="restaurantId") int restaurantId) {
-		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("restaurantId", restaurantId);
-		map.put("start", 1);
-		map.put("end", 3);
-		
-		ArrayList<ShopReviewDto> shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
-		System.out.println("RestaurantDetViewController>>shopReviewDto : " + shopReviewDto);
-		ArrayList<ReviewPhotoDto> reviewPhotoDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoDetView(map);
-		System.out.println("RestaurantDetViewController>>reviewPhotoDto : " + reviewPhotoDto);
-		
-		reviewMap.put("shopReviewDto", shopReviewDto);
-		reviewMap.put("reviewPhotoDto", reviewPhotoDto);
-		
-		return reviewMap;
 	}
 	
 	@ModelAttribute("reviewPhotoDto")
@@ -153,8 +139,13 @@ public class RestaurantDetViewController {
 	}
 	
 	@RequestMapping(value="/reviewWrite.do", method=RequestMethod.POST)
-	public String reviewSubmit(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, @RequestParam(value="restaurantId") int restaurantId, @RequestParam(value="moreCount") int moreCount, BindingResult result) {
+	public String reviewSubmit(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, 
+								@RequestParam(value="restaurantId") int restaurantId, 
+								@RequestParam(value="moreCount") int moreCount, 
+								BindingResult result) {
 		System.out.println("RestaurantDetViewController>>reviewSubmit() is called!!");
+		
+		int count = 0;
 		
 		if (log.isDebugEnabled()) {
 			log.debug("reviewCommand = " + reviewCommand);
@@ -171,7 +162,7 @@ public class RestaurantDetViewController {
 			log.debug("moreCount = " + moreCount);
 		}
 		
-//		new ShopReviewValidator().validate(reviewCommand, result);
+		new ShopReviewValidator().validate(reviewCommand, result);
 		
 		if (result.hasErrors()) {
 			System.out.println("result = " + result.getAllErrors());
@@ -196,7 +187,7 @@ public class RestaurantDetViewController {
 			shopReviewDao.insertShopReviewDetView(reviewCommand);
 			
 			for (MultipartFile uploadImg : reviewCommand.getUpload()) {
-				int count = 0;
+				
 				
 				if (!uploadImg.isEmpty()) {
 					System.out.println("RestaurantDetViewController>>reviewSubmit()>>uploadImg = " + uploadImg.getOriginalFilename());
@@ -241,59 +232,113 @@ public class RestaurantDetViewController {
 	}
 	
 	@RequestMapping(value="/recommend.do", method=RequestMethod.POST)
-	public String increaseRecommend(@RequestParam(value="restaurantId") int restaurantId, @RequestParam(value="moreCount") int moreCount, @RequestParam(value="current") int reviewId) {
+	public String increaseRecommend(@RequestParam(value="restaurantId") int restaurantId, 
+									@RequestParam(value="moreCount") int moreCount, 
+									@RequestParam(value="current") int reviewId) {
 		System.out.println("RestaurantDetViewController>>increaseRecommend() is called!!");
 		
 		shopReviewDao.increaseRecommendCnt(reviewId);
 		
-		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId;
+		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount;
 	}
 	
 	@RequestMapping(value="/moreReview.do", method=RequestMethod.GET)
-	public ModelAndView getMoreReview(@RequestParam(value="restaurantId") int restaurantId, @RequestParam(value="moreCount") int moreCount, @RequestParam(value="start") int start, @RequestParam(value="end") int end) {
+	public ModelAndView getMoreReview(@RequestParam(value="restaurantId") int restaurantId, 
+										@RequestParam(value="moreCount") int moreCount, 
+										@RequestParam(value="start") int start, 
+										@RequestParam(value="end") int end, 
+										@RequestParam(value="filterName") String filterName) {
 		System.out.println("RestaurantDetViewController>>getMoreReview() is called!!");
 		
 		if (log.isDebugEnabled()) {
 			log.debug("moreCount = " + moreCount);
+			log.debug("filterName = " + filterName);
 		}
 		
 		ModelAndView mav = new ModelAndView();
 		ArrayList<ShopReviewDto> shopReviewDto = new ArrayList<ShopReviewDto>();
-		ArrayList<ReviewPhotoDto> reviewPhotoDto = new ArrayList<ReviewPhotoDto>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer totCntOfReviewEnd = shopReviewDao.getTotalShopReviewDetView(restaurantId) - moreCount*3;
-		Integer totCntOfReviewStart = totCntOfReviewEnd - 2;
-		boolean checkMoreReview = true;
+		checkMoreReview = true;
+
+		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		
-		if (totCntOfReviewEnd < 0) {
-			totCntOfReviewEnd = 0;
-		}
-		
-		if (totCntOfReviewStart < 0) {
-			totCntOfReviewStart = 0;
+		if (end >= totReviewCnt) {
+			end = totReviewCnt;
 			checkMoreReview = false;
 		}
-
-		System.out.println("totCntOfReviewStart = " + totCntOfReviewStart);
-		System.out.println("totCntOfReviewEnd = " + totCntOfReviewEnd);
 		
 		map.put("restaurantId", restaurantId);
 		map.put("start", start);
 		map.put("end", end);
-		map.put("totCntOfReviewStart", totCntOfReviewStart);
-		map.put("totCntOfReviewEnd", totCntOfReviewEnd);
+		map.put("filterName", filterName);
 		
 		shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
 		System.out.println("RestaurantDetViewController>>getMoreReview()>>shopReviewDto = " + shopReviewDto);
-		reviewPhotoDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoDetView(map);
-		System.out.println("RestaurantDetViewController>>getMoreReview()>>reviewPhotoDto = " + reviewPhotoDto);
+		
+		map.put("shopReviewDto", shopReviewDto);
+		
+		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
 		
 		mav.setViewName("NewFile");
 		
 		mav.addObject("shopReviewDto", shopReviewDto);
-		mav.addObject("reviewPhotoDto", reviewPhotoDto);
+		mav.addObject("reviewPhotoByReviewIdDto", reviewPhotoByReviewIdDto);
 		mav.addObject("checkMoreReview", checkMoreReview);
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/orderByRecommendCnt.do", method=RequestMethod.GET)
+	public ModelAndView reviewFilterByRecommendCnt(@RequestParam(value="restaurantId") int restaurantId, 
+													@RequestParam(value="moreCount") int moreCount, 
+													@RequestParam(value="start") int start, 
+													@RequestParam(value="end") int end, 
+													@RequestParam(value="filterName") String filterName) {
+		System.out.println("RestaurantDetViewController>>reviewFilterByRecommendCnt() is called!!");
+		
+		if (log.isDebugEnabled()) {
+			log.debug("moreCount = " + moreCount);
+			log.debug("filterName = " + filterName);
+		}
+		
+		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
+		
+		ModelAndView mav = new ModelAndView();
+		ArrayList<ShopReviewDto> shopReviewDto = new ArrayList<ShopReviewDto>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		checkMoreReview = true;
+		
+		System.out.println("end = " + end);
+		System.out.println("totReviewCnt = " + totReviewCnt);
+		if (end >= totReviewCnt) {
+			end = totReviewCnt;
+			checkMoreReview = false;
+		}
+
+		map.put("restaurantId", restaurantId);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("filterName", filterName);
+		
+		shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
+		System.out.println("RestaurantDetViewController>>getMoreReview()>>shopReviewDto = " + shopReviewDto);
+		
+		map.put("shopReviewDto", shopReviewDto);
+		System.out.println(shopReviewDto.get(0).getReviewId());
+		System.out.println(shopReviewDto.get(1).getReviewId());
+		System.out.println(shopReviewDto.get(2).getReviewId());
+		
+		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
+		
+		mav.setViewName("restaurantDetView");
+		
+		mav.addObject("shopReviewDto", shopReviewDto);
+		mav.addObject("reviewPhotoByReviewIdDto", reviewPhotoByReviewIdDto);
+		mav.addObject("checkMoreReview", checkMoreReview);
+		
+		return mav;
+	}
+	
 }

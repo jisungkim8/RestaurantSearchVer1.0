@@ -9,7 +9,7 @@
 			<param name="ConversionPattern" value="[%p:%C{1}.%M()] %m%n" />
 		</layout>
 	</appender>
-
+	
 <!-- 실제로 디버깅모드로 설정할 패키지를 지정하는 곳
 	  category name="최상위패키지명....  -->
 	<category name="restaurant.controller" additivity="false">

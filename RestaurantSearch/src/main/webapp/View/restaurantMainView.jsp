@@ -517,7 +517,7 @@
 							<div class="searchListBox">
 								<c:forEach var="relarticle" items="${list}">
 									<a
-										href="restaurantDetView.do?restaurantId=${relarticle.restaurantID}&moreCount=1">${relarticle.restaurantName}</a>
+										href="restaurantDetView.do?restaurantId=${relarticle.restaurantID}&moreCount=0&filterName=reviewId">${relarticle.restaurantName}</a>
 									<br>
 
 								</c:forEach>
@@ -560,7 +560,7 @@
 								<div class="item-box">
 									<figure>
 										<a class="item-hover"
-											href="restaurantDetView.do?moreCount=1&restaurantId=${article.restaurantID}">
+											href="restaurantDetView.do?restaurantId=${article.restaurantID}&moreCount=0&filterName=reviewId">
 											<span class="overlay color2"></span> <span class="inner">
 												<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 												보기
@@ -607,7 +607,7 @@
 								<div class="item-box">
 									<figure>
 										<a class="item-hover"
-											href="restaurantDetView.do?restaurantId=${newarticle.restaurantID}&moreCount=1">
+											href="restaurantDetView.do?restaurantId=${newarticle.restaurantID}&moreCount=0&filterName=reviewId">
 											<span class="overlay color2"></span> <span class="inner">
 												<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 												보기
@@ -642,7 +642,7 @@
 					<!-- No #1 Hot -->
 					<div class="item-box nomargin-top">
 						<figure>
-							<a class="item-hover" href="restaurantDetView.do?restaurantId=2&moreCount=1">
+							<a class="item-hover" href="restaurantDetView.do?restaurantId=2&moreCount=0&filterName=reviewId">
 								<span class="overlay color2"></span> <span class="inner">
 									<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
 									보기

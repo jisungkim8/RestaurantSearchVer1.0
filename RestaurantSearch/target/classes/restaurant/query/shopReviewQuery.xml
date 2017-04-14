@@ -4,13 +4,13 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ShopReview">
-	<select id="selectShopReviewDetView" parameterType="int" resultType="ShopReviewDto">
+	<select id="selectShopReviewDetView" parameterType="map" resultType="ShopReviewDto">
 		SELECT * 
 		FROM (SELECT a.*, rownum rnum
 			FROM (SELECT * 
 				FROM (SELECT * 
 					FROM SHOPREVIEW
-					ORDER BY reviewId desc))a
+					ORDER BY ${filterName} desc))a
 			WHERE RESTAURANTID=#{restaurantId})
 		<![CDATA[
 		WHERE RNUM >= #{start} AND RNUM <= #{end}

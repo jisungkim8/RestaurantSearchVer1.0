@@ -311,7 +311,7 @@
 										<!-- views, reviews, likes -->
 										<p>
 											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> 55,621 &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> ${shopReviewDto.size()} &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> ${totReviewCnt} &nbsp;&nbsp;&nbsp;
 											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> 51 &nbsp;&nbsp;&nbsp;
 										</p>
 										<!-- /views, reviews, likes -->
@@ -447,67 +447,16 @@
 											등록된 리뷰가 없습니다.
 										</c:if>
 										
+										<div class="col-md-12">
+											<button style="align:'right';" id="filtering" value="reviewId">최신순</button>
+											<button style="align:'right';" id="filtering" value="recommendCnt">추천순</button>
+										</div>
+										
 										<c:if test="${!shopReviewDto.isEmpty()}">
-<%-- 											<c:set var="end" value="0" /> --%>
-											
-											<div id="review">
-<%-- 												<c:forEach var="shopReview" items="${shopReviewDto}" begin="0" end="2" varStatus="vs"> --%>
-												<c:forEach var="shopReview" items="${shopReviewDto}" varStatus="vs">
-													<c:set var="firstPhoto" value="true" />
-													
-													<div>
-														<div class="col-md-12">
-															<div class="col-md-4">
-																<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-																	<c:forEach var="reviewPhoto" items="${reviewPhotoDto}">
-																		<c:if test="${reviewPhoto.reviewId == shopReview.reviewId}">
-																			<li> <!-- item -->
-																				<div class="item-box nomargin-top">
-																					<figure>
-																						<a class="item-hover" href="<c:url value="${reviewPhoto.photoPath}" />"></a>
-																						<c:if test="${firstPhoto == true}">
-																							<img alt="" class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" />
-																							<c:remove var="count" />
-																						</c:if>
-																					</figure>
-																				</div>
-																			</li>
-																		</c:if>
-																	</c:forEach>
-																</ul>
-															</div>
-															
-															<div class="col-md-7">
-																<div class="row">
-										
-									
-																	<p>
-																		제목 : ${shopReview.title} <br>
-																		작성일자 : <fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="default" timeStyle="default"/> <br>
-																		내용 : ${shopReview.content} <br>
-																		추천수 : ${shopReview.recommendCnt} <br>
-																		방문 시간대 : ${shopReview.visitTime} <br>
-																		디너/런치 : ${shopReview.dinnerOrLunch} <br>
-																		작성자 : ${shopReview.memberId} <br>
-																	</p>
-									
-										
-																</div>
-															</div>
-															
-															<div class="col-md-1">
-																<button id="recommend" class="btn btn-default" value="${vs.current.reviewId}">추천</button>
-															</div>
-														</div>
-													</div>
-													<c:set var="count" value="${vs.count}" />
-												</c:forEach>
-											</div>
-											
-											<div id="getMoreReview"></div>
+											<div id="getReview"></div>
 											
 											<div>
-												<h4 align="center">
+												<h4 align="center" id="moreLocation">
 													<button id="more" class="btn btn-default">더보기..</button>
 												</h4>
 											</div>
@@ -535,11 +484,11 @@
 																		<div class="col-md-12">
 																			<label>제목</label>
 																			<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
-<%-- 																				<form:errors path="shopReviewDto.title"/><br> --%>
+																			<form:errors path="reviewCommand.title"/><br>
 																			
 																			<label>내용</label>
 																			<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
-<%-- 																				<form:errors path="shopReviewDto.content"/><br> --%>
+																			<form:errors path="reviewCommand.content"/><br>
 																			
 																			<label>방문시간대</label>
 																			<select class="form-control pointer" name="visitTime">
