@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;//Mybatis~.jar
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 
 public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 
 	// 글목록보기(map)->/board/list.do , /member/list.do
-	public List<BoardCommand> list(Map<String, Object> map) {
+	public List<BoardCommandDto> list(Map<String, Object> map) {
 		// selectList->여러개의 레코드를 얻어올때 사용,selectOne(레코드 한개,객체)
-		List<BoardCommand> list = getSqlSession().selectList("selectList", map);
+		List<BoardCommandDto> list = getSqlSession().selectList("selectList", map);
 		return list;
 	}
 
@@ -21,41 +21,43 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 		return getSqlSession().selectOne("selectCount", map);
 	}
 
-	public int getNewSeq() { // <select id="getNewSeq" ~></select> Integer
+	public int getNewBoardNum() { // <select id="getNewSeq" ~></select> Integer
 		// Object->Integer->int
-		int newseq = (Integer) getSqlSession().selectOne("getNewSeq");
-		return newseq;
+		Integer newBoardNum = (Integer) getSqlSession().selectOne("getNewBoardNum");
+		if(newBoardNum==null){
+			newBoardNum=0;
+		}
+		return newBoardNum;
 	}
 
-	public void insert(BoardCommand board) {
+	public void insert(BoardCommandDto board) {
 		// getSqlSession().insert|update|delete(실행시킬 sql구문id,전달할 매개변수)
 		getSqlSession().insert("insertBoard", board);
 	}
 
-	public BoardCommand selectBoard(Integer seq) {
+	public BoardCommandDto selectBoard(Integer boardNum) {
 		// TODO Auto-generated method stub
-		BoardCommand command = (BoardCommand) getSqlSession().selectOne("selectBoard", seq);
+		BoardCommandDto command = (BoardCommandDto) getSqlSession().selectOne("selectBoard", boardNum);
 		return command;
 	}
 
-	public void updateHit(Integer seq) {
+	public void updateHit(Integer boardNum) {
 		// TODO Auto-generated method stub
-		getSqlSession().update("updateHit", seq);// parameterType="Integer" or
+		getSqlSession().update("updateHit", boardNum);// parameterType="Integer" or
 													// "int"
 	}
 
 	// 수정하기
-	public void update(BoardCommand board) {
+	public void update(BoardCommandDto board) {
 		// TODO Auto-generated method stub
 		getSqlSession().update("updateBoard", board);
 
 	}
 
 	// 삭제하기->수정하기와 비슷(암호체크)
-	public void delete(Integer seq) {
+	public void delete(Integer boardNum) {
 		// TODO Auto-generated method stub
-		getSqlSession().delete("deleteBoard", seq);
+		getSqlSession().delete("deleteBoard", boardNum);
 
 	}
-
 }

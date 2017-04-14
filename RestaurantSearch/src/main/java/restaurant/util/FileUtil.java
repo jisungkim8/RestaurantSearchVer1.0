@@ -6,7 +6,7 @@ import java.io.File;
 
 public class FileUtil {
     //업로드 위치->절대경로(c:\~
-  public static final String UPLOAD_PATH="C:/Users/kitcoop/git/RestaurantSearch/RestaurantSearch/src/main/webapp/upload";
+  public static final String UPLOAD_PATH="C:/Users/kitcoop/git/RestaurantSearchVer1.0/RestaurantSearch/src/main/webapp/upload";
   
   //1.원본파일의 이름을 변경할 메서드
   //ex) test.txt or test.TXT ->lastIndex(.) ,substring()이용

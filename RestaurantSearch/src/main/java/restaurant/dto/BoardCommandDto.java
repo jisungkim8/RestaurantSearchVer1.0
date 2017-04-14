@@ -4,9 +4,8 @@ import java.sql.Date;//DB자료형
 
 import org.springframework.web.multipart.MultipartFile;
 //springboard2테이블->필드와 매핑
-public class BoardCommand {
-
-	private int seq;
+public class BoardCommandDto {
+	private int boardNum;
 	private String writer,title,content,pwd;
 	private int hit;//조회수
 	private Date regdate;//작성날짜
@@ -15,11 +14,11 @@ public class BoardCommand {
 	//-----------------------------------------------------
 	private String filename;//업로드할 파일명
 	
-	public int getSeq() {
-		return seq;
+	public int getBoardNum() {
+		return boardNum;
 	}
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setBoardNum(int boardNum) {
+		this.boardNum = boardNum;
 	}
 	public String getWriter() {
 		return writer;
@@ -71,7 +70,7 @@ public class BoardCommand {
 	}
 	
 	public String toString(){
-		return "BoardCommand[seq="+seq+",writer="+writer+",title="
+		return "BoardCommandDto[boardNum="+boardNum+",writer="+writer+",title="
 				  +title+",content="+content+",pwd="+pwd+",hit="
 				  +hit+",regdate="+regdate+",upload="+upload
 				  +",filename="+filename+"]";
@@ -79,5 +78,3 @@ public class BoardCommand {
 	
 	
 }
-
-

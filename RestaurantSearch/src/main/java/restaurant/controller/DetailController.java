@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.BoardDao;
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 import restaurant.util.FileUtil;
 import restaurant.util.StringUtil;
 
@@ -24,17 +24,17 @@ public class DetailController {
 	private BoardDao boardDao;
 
 	@RequestMapping("/detail.do")
-	// int seq=Integer.parseInt(request.getParameter("seq"));
-	public ModelAndView process(@RequestParam("seq") int seq) {
+	// int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+	public ModelAndView process(@RequestParam("boardNum") int boardNum) {
 
 		if (log.isDebugEnabled()) {// 디버그 모드라면
 			log.debug("boardDao:" + boardDao);
 		}
 		// 1.조회수를 증가
-		boardDao.updateHit(seq);
+		boardDao.updateHit(boardNum);
 
-		// 2.seq값에 해당하는 값만 출력
-		BoardCommand board = boardDao.selectBoard(seq);
+		// 2.boardNum값에 해당하는 값만 출력
+		BoardCommandDto board = boardDao.selectBoard(boardNum);
 		// <pre>dd ddd <br>
 		// ddd</pre>
 		board.setContent(StringUtil.parseBr(board.getContent()));

@@ -109,7 +109,7 @@
 			</button>
 
 			<!-- Logo text or image -->
-			<a class="logo" href="index.html"> <img
+			<a class="logo" href="restaurantMain.do"> <img
 				src="design/images/logo.png" alt="Atropos" />
 			</a>
 
@@ -119,7 +119,7 @@
 				<button type="button" class="btn btn-success">로그인</button> -->
 			<!-- SIGN IN -->
 			<div class="navbar-collapse nav-main-collapse collapse pull-right">
-				<a class="dropdown-toggle" href="boardList.do"> 게시판 <i
+				<a class="dropdown-toggle" href="list.do"> 게시판 <i
 					class="fa fa-angle-down"></i>
 				</a>
 			</div>

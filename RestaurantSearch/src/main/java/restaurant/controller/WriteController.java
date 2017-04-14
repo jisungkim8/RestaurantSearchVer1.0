@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import restaurant.dao.BoardDao;
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 import restaurant.util.FileUtil;
 import restaurant.validator.BoardValidator;
 
@@ -42,16 +42,16 @@ public class WriteController {
 	//형식)@ModelAttribute("웹과 연결시킬(binding) 키워드")
 	
 	@ModelAttribute("command")
-	public BoardCommand formBacking(){
+	public BoardCommandDto formBacking(){
 		System.out.println("formBacking()메서드 호출됨!");
-		return new BoardCommand(); //객체명X
+		return new BoardCommandDto(); //객체명X
 	}
 	
 	//입력을 다하고나서 글쓰기 전송버튼 눌렀다면(에러메세지(유효성검사)
 	@RequestMapping(value="/write.do",method=RequestMethod.POST)
-	public String submit(@ModelAttribute("command") BoardCommand command,BindingResult result){
+	public String submit(@ModelAttribute("command") BoardCommandDto command,BindingResult result){
 		if(log.isDebugEnabled()){
-			log.debug("BoardCommand="+command);//toString()
+			log.debug("BoardCommandDto="+command);//toString()
 		}
 		//유효성 검사->에러발생->에레메세지를 불러오게 설정
 		new BoardValidator().validate(command, result);
@@ -73,8 +73,8 @@ public class WriteController {
 		    	command.setFilename(newName);
 		    }
 		    //최대값+1
-		    int newSeq=boardDao.getNewSeq()+1;
-		    command.setSeq(newSeq);//게시물은 로직으로 저장
+		    int newBoardNum=boardDao.getNewBoardNum()+1;
+		    command.setBoardNum(newBoardNum);//게시물은 로직으로 저장
 		    //DB저장->
 		    boardDao.insert(command);//입력받은값+게시물번호,파일변경
 		    //업로드->업로드된 변경된파일->지정한 업로드위치로 복사해서 이동
@@ -92,7 +92,3 @@ public class WriteController {
 		return "redirect:/list.do"; //ListController->boardList.jsp로 이동
 	}
 }
-
-
-
-

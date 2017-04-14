@@ -51,8 +51,8 @@
 					<c:forEach var="article" items="${list}">
 						<tbody>
 							<tr>
-								<td>${article.seq}</td>
-								<td><a href="detail.do?seq=${article.seq }">${article.title}                         </a>
+								<td>${article.boardNum}</td>
+								<td><a href="detail.do?boardNum=${article.boardNum }">${article.title}                         </a>
 									<c:if test="${article.hit >=20}">
 										<img src="design/images/hot.gif">
 									</c:if></td>
@@ -76,7 +76,7 @@
 			<div class="col-md-1">
 				<select name="keyField" class="form-control">
 					<option value="title">제목</option>
-					<option value="writer">이름</option>
+					<option value="writer">작성자</option>
 					<option value="content">내용</option>
 					<option value="all">전체</option>
 				</select> <span />
@@ -125,8 +125,8 @@
 	<!-- 데이터가 존재한다면  -->
 	<c:forEach var="article" items="${list}">
 		<tr>
-			<td align="center">${article.seq}</td>
-			<td><a href="detail.do?seq=${article.seq }">${article.title}</a></td>
+			<td align="center">${article.boardNum}</td>
+			<td><a href="detail.do?boardNum=${article.boardNum }">${article.title}</a></td>
 			<td>${article.writer}</td>
 			<td>${article.regdate}</td>
 			<td>${article.hit}</td>

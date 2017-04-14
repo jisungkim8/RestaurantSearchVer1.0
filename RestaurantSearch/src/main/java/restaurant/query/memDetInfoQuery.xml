@@ -8,11 +8,15 @@
 	<insert id="insertMember" parameterType="memDetInfoDto">
 		insert into
 		memDetInfo(memberId,birthDate,gender,phoneNum,emailcheck,selfintro,photopath,membertype,interestfood,nickname)
-		values(#{memberId},#{birthDate},#{gender},#{phoneNum},#{emailCheck},#{selfIntro},#{photoPath},#{memberType},#{interestFood},#{nickname})
+		values(#{memberId},#{birthDate},#{gender},#{phoneNum},#{emailCheck},#{selfIntro},#{photoPath,jdbcType=VARCHAR},#{memberType},#{interestFood},#{nickname})
 	</insert>
 
 	<select id="checkIdMember" resultType="int" parameterType="String">
 		select count(*) from memDetInfo where memberId=#{id}
+ 	</select>
+ 	
+ 	<select id="checkNicName" resultType="int" parameterType="String">
+		select count(*) from memDetInfo where nickname=#{nickname}
  	</select>
  	
  	<select id="selectMemDetInfo" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">

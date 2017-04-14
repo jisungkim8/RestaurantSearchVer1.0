@@ -1,5 +1,7 @@
 package restaurant.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import restaurant.dao.MemberDao;
 import restaurant.dto.MemDetInfoDto;
 import restaurant.dto.MemSimInfoDto;
+import restaurant.util.FileUtil2;
 
 //유효성 검사->입력->ok->boardWriter.jsp 화면에 출력
 @Controller
@@ -69,8 +72,31 @@ public class MemberRegiController {
 		System.out.println("MemberRegiController RequestMethod.POST 메서드 호출됨!");
 
 		// 정상적으로 에러가 발생이 되지 않고 입력을 완수 했다면
-		memberDao.insertMember(memDetInfoDto);
-	    memberDao.insertMemSimInfo(memSimInfoDto);
+	    try{
+			String newName="";//변경할 파일이름
+			//업로드된 파일이 존재한다면
+			if(!memDetInfoDto.getUpload().isEmpty()){
+				newName=FileUtil2.rename
+						(memDetInfoDto.getUpload().getOriginalFilename());
+				System.out.println("원본파일명="+
+						memDetInfoDto.getUpload().getOriginalFilename());
+				//DTO의 객체 filename -> 바뀐파일명 --> 실제로 DB상의 filename
+				System.out.println("newName="+newName);
+				memDetInfoDto.setPhotoPath(memDetInfoDto.getUpload().getOriginalFilename());
+			}
+			System.out.println("멤버정보입력전에dto정보"+memDetInfoDto);
+			memberDao.insertMember(memDetInfoDto);
+		    memberDao.insertMemSimInfo(memSimInfoDto);
+			//업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동	
+			if(!memDetInfoDto.getUpload().isEmpty()){
+				File file=new File(FileUtil2.UPLOAD_PATH+"/"+memDetInfoDto.getUpload().getOriginalFilename());
+				memDetInfoDto.getUpload().transferTo(file); // ~transferTo(전송할객체명)			
+			}
+		}catch(IOException e){  //시큐어 코딩 방식
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	    
 		// ModelAndView mav=new ModelAndView("redirect:/list.do")
 		return new ModelAndView("redirect:/restaurantMain.do");
@@ -90,6 +116,27 @@ public class MemberRegiController {
 		int memberCount = memberDao.checkIdMember(id);
 
 		if (memberCount >= 1)
+			checkResult = "dupli";
+		else
+			checkResult = "create";
+
+		return checkResult;
+	}
+	
+	
+	@RequestMapping("dupliNicnameCheck.do")
+	@ResponseBody
+	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
+		String nicName = request.getParameter("nicName");
+		String checkResult = "";
+
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName);
+
+		// ex) Model 단에서 DB 조회
+
+		int nicNameCount = memberDao.checkNicName(nicName);
+
+		if (nicNameCount >= 1)
 			checkResult = "dupli";
 		else
 			checkResult = "create";

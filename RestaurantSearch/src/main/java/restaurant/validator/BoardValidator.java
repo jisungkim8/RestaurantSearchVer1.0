@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import restaurant.dto.BoardCommand;
+import restaurant.dto.BoardCommandDto;
 
 //import dr.mini.domain.MemberCommand;
 
@@ -14,7 +14,7 @@ public class BoardValidator implements Validator {
 	// 1.검사대상의 객체->MemberCommand클래스 또는 하위클래스인지를 검사
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return BoardCommand.class.isAssignableFrom(clazz);
+		return BoardCommandDto.class.isAssignableFrom(clazz);
 	}
 	// 2.유효성 검사를 체크해주는 메서드호출
 	// 1)target객체->입력받은값(검증의 대상)->BoardCommand의 객체
