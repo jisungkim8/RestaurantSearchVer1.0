@@ -56,7 +56,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		//pagingUtil = new PagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 5, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
@@ -144,7 +144,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		//pagingUtil = new PagingUtil(null, keywordList, pageNum, totalCount, 5, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 5, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
@@ -298,7 +298,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		System.out.println("getRestaurantsByFilter >> totalCount = " + totalCount);
 		
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 5, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
