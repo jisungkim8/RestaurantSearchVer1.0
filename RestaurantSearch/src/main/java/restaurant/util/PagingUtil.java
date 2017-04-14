@@ -161,7 +161,7 @@ public class PagingUtil {
 			}else{
 				int targetBlockNum = currentBlockNum - 1;
 				
-				this.pagingHtml.append("<a href=javascript:getRestaurantByKeywordAndPageNum('" + keyword+ "'," + 1*(targetBlockNum * blockSize) +");" + addKey +">");
+				this.pagingHtml.append("<a href=javascript:get_restaurant_data_by_keyword_and_filter_info('" + keyword+ "'," + 1*(targetBlockNum * blockSize) +");" + addKey +">");
 				System.out.println(this.pagingHtml);
 			}
 			this.pagingHtml.append("이전");
@@ -186,7 +186,7 @@ public class PagingUtil {
 				if(keyword==null){//검색 미사용시
 					this.pagingHtml.append("&nbsp;<a href='"+pageUrl+"?pageNum=");
 				}else{
-					this.pagingHtml.append("&nbsp;<a href=javascript:getRestaurantByKeywordAndPageNum('" + keyword + "'," + i +");");
+					this.pagingHtml.append("&nbsp;<a href=javascript:get_restaurant_data_by_keyword_and_filter_info('" + keyword + "'," + i +");");
 					
 				}
 				this.pagingHtml.append(addKey+">");
@@ -205,7 +205,7 @@ public class PagingUtil {
 				//pagingHtml.append("<a href="+pageUrl+"?keyField="+keyField+"&keyWord="+keyWord+"&pageNum="+ (endPage + 1) + addKey +">");
 				int targetBlockNum = currentBlockNum + 1;
 				//pagingHtml.append("<a href="+pageUrl+"?keyword="+keyWord+"&pageNum="+ 1*(targetBlockNum * blockSize - (blockSize - 1)) + addKey + ">");
-				this.pagingHtml.append("<a href=javascript:getRestaurantByKeywordAndPageNum('" + keyword+ "'," + 1*(targetBlockNum * blockSize - (blockSize - 1)) +");" + addKey + ">");
+				this.pagingHtml.append("<a href=javascript:get_restaurant_data_by_keyword_and_filter_info('" + keyword+ "'," + 1*(targetBlockNum * blockSize - (blockSize - 1)) +");" + addKey + ">");
 			}
 			this.pagingHtml.append("다음");
 			this.pagingHtml.append("</a>");
