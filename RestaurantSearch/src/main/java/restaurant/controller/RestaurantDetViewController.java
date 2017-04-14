@@ -139,6 +139,7 @@ public class RestaurantDetViewController {
 	public String reviewSubmit(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, 
 								@RequestParam(value="restaurantId") int restaurantId, 
 								@RequestParam(value="moreCount") int moreCount, 
+								@RequestParam(value="filterName") String filterName,
 								BindingResult result) {
 		System.out.println("RestaurantDetViewController>>reviewSubmit() is called!!");
 		
@@ -164,6 +165,7 @@ public class RestaurantDetViewController {
 		if (result.hasErrors()) {
 			System.out.println("result = " + result.getAllErrors());
 			System.out.println("RestaurantDetViewController>>reviewSubmit()>>Errors are occued!!");
+			this.formBacking();
 		}
 		
 		try {
@@ -225,7 +227,7 @@ public class RestaurantDetViewController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount;
+		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
 	}
 	
 	@RequestMapping(value="/recommend.do", method=RequestMethod.POST)
@@ -277,7 +279,7 @@ public class RestaurantDetViewController {
 		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
 		
-		mav.setViewName("NewFile");
+		mav.setViewName("moreReview");
 		
 		mav.addObject("shopReviewDto", shopReviewDto);
 		mav.addObject("reviewPhotoByReviewIdDto", reviewPhotoByReviewIdDto);
@@ -322,9 +324,6 @@ public class RestaurantDetViewController {
 		System.out.println("RestaurantDetViewController>>getMoreReview()>>shopReviewDto = " + shopReviewDto);
 		
 		map.put("shopReviewDto", shopReviewDto);
-		System.out.println(shopReviewDto.get(0).getReviewId());
-		System.out.println(shopReviewDto.get(1).getReviewId());
-		System.out.println(shopReviewDto.get(2).getReviewId());
 		
 		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);

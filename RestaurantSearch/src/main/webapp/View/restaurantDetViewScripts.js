@@ -41,7 +41,10 @@ $(document).ready(function() {
 	};
 	
 	moreReview();
-
+	
+	$(document).on("click", "#replyWrite", function(e) {
+		alert("asdasdasd");
+	});
 	
 	$(document).on("click", "#filtering", function(e) {
 		filterName = (this).value;

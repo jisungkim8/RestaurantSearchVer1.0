@@ -128,10 +128,10 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
     		//3.success:콜백함수명(매개변수)
     		success:function(args){
     			if(args=="create"){
-    				alert("가능")
+//     				alert("가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 가능한 이메일입니다.</font>")
      			}else{
-    				alert("불가능")
+//     				alert("불가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 불가능한 이메일입니다.</font>")
     				$("#memberId").focus();
     			}
@@ -145,7 +145,7 @@ $(function(){
 	var validationCheck = {emailVali:false, passwdVali:false};
 	 
 	 $("#nicNameRepCheck").click(function(){
-		   alert("닉네임")
+// 		   alert("닉네임")
 		   if($("#nicName").val()==""){
 			   //document.getElementById("ducheck")=>$("ducheck")
 			   $("#nicNameTxt").html("<font id='idColor' color='red'>먼저 닉네임을 입력하세요.</font>")
@@ -161,7 +161,7 @@ $(function(){
 	    		//3.success:콜백함수명(매개변수)
 	    		success:function(args){
 	    			if(args=="create"){
-	    				alert("닉네임 가능")
+// 	    				alert("닉네임 가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
 	     			}else{
 	    				alert("닉네임 불가능")
@@ -305,6 +305,8 @@ $(function(){
 		$("#nicName").blur(function(){
 			 if (!($("#nicName").val())) {
 					$("#nicNameTxt").html("<font id='idColor' color='red'>닉네임을 입력해주세요.</font>")
+			 } else {
+				 $("#nicNameTxt").html("")
 			 }
 		})
 		

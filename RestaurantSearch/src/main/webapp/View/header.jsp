@@ -204,8 +204,7 @@
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원
-										가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원가입</font></a>
 							</p>
 						</div>
 					</div>
@@ -215,7 +214,5 @@
 		</div>
 		<!-- </div>  -->
 	</header>
-
 	<span id="header_shadow"></span>
-	
 	<!-- /TOP NAV -->
