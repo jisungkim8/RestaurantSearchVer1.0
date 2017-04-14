@@ -60,16 +60,16 @@
 	$(document)
 			.ready(
 					function() {
-						$("#videoCnt").click(function(){
-							var vidcnt=0;
-							vidcnt=vidcnt+1;
-						})	
-						
+						$("#videoCnt").click(function() {
+							var vidcnt = 0;
+							vidcnt = vidcnt + 1;
+						})
+
 						$("#searchBox").click(function() {
 							$(".subbox").show();
 
 						})
-						
+
 						$(".popSearButton").click(
 								function() {
 									$(".popSearButton").css('border-bottom',
@@ -87,11 +87,15 @@
 											'thick solid brown');
 								})
 
-						$("#login")	.click(function() {
+						$("#login")
+								.click(
+										function() {
 											var registerCheck, passwd;
 
-											alert("memberId==>"+ $("#memberId").val());
-											alert("password==>"+ $("#password").val());
+											alert("memberId==>"
+													+ $("#memberId").val());
+											alert("password==>"
+													+ $("#password").val());
 
 											//document.memInfo.submit()
 
@@ -99,11 +103,16 @@
 
 											if ($("#memberId").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
 												$("#memberId").focus();//커서입력
 												return;
-											} else if (!regEmail.test($("#memberId").val())) {
-												$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+											} else if (!regEmail.test($(
+													"#memberId").val())) {
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
 												$("#memberId").focus();
 												//history.back();
 												return;
@@ -111,16 +120,20 @@
 
 											if ($("#password").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>패스워드를 입력하세요</font>")
 												$("#loginmsg").focus();//커서입력
 												return;
 											}
 
-											$.ajax({
+											$
+													.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
-															id : $("#memberId").val()
+															id : $("#memberId")
+																	.val()
 														},
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
@@ -129,28 +142,38 @@
 															if (args == "register") {
 																alert("회원등록이 되었습니다.")
 																registerCheck = "register"
-																$.ajax({
+																$
+																		.ajax({
 																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 																			data : {
-																				id : $("#memberId").val(),
-																				passwd : $("#password").val()
+																				id : $(
+																						"#memberId")
+																						.val(),
+																				passwd : $(
+																						"#password")
+																						.val()
 																			},
 																			type : "POST",
 																			//3.success:콜백함수명(매개변수)
-																			success : function(args) {
+																			success : function(
+																					args) {
 																				alert(args)
 																				if (args == "agreement") {
 																					document.memInfo
 																							.submit()
 																				} else {
-																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																					$(
+																							"#loginmsg")
+																							.html(
+																									"<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																				}
 																			}
 																		})
 															} else {
 																$("#loginmsg")
-																		.html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+																		.html(
+																				"<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
 															}
 														}
 													})
@@ -227,12 +250,14 @@
 							}
 						});
 
-						$('#pwdSearch').click(
-								function() {
-// 											alert("패스워드 찾기")
+						$('#pwdSearch')
+								.click(
+										function() {
+											// 											alert("패스워드 찾기")
 											//var memInfoForm=document.memInfoForm;
 											//var url="pwdSearch.do";
-											window.open(
+											window
+													.open(
 															'pwdSearchView.do',
 															'memProfile',
 															'width=540,height=260,left=550,top=300,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
@@ -325,15 +350,19 @@
 			<!-- SIGN IN -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.userLoginInfo}">
-					<div  class="navbar-collapse nav-main-collapse collapse pull-left">
-							<a id="quick_board" href="list.do"	><span class="btn btn-warning">게시판</span></a>	
+					<div class="navbar-collapse nav-main-collapse collapse pull-left">
+						<a id="quick_board" href="list.do"><span
+							class="btn btn-warning">게시판</span></a>
 					</div>
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#" style="background-color: lightgreen"> <span>로그인 성공! 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
+							class="dropdown-toggle" href="#"
+							style="background-color: lightgreen"> <span>로그인 성공!
+									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
 							</span>
 						</a>
-							<ul class="dropdown-menu extended logout" style="width: 251px; background-color: blue">
+							<ul class="dropdown-menu extended logout"
+								style="width: 251px; background-color: blue">
 								<div class="log-arrow-up"></div>
 								<li class="eborder-top"><a href="#" id="myProfile"><i
 										class="icon_profile"></i> My Profile</a></li>
@@ -361,7 +390,7 @@
 							<a id="quick_board" href="list.do"><span
 								class="btn btn-success">게시판</span></a>
 						</div>
-						
+
 
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
@@ -459,12 +488,12 @@
 					<div class="image-caption">
 						<div class="inner text-center">
 							<!-- text center , text-left or text-right -->
-							
+
 							<div class="mainPhrase">블로그, SNS... 막내야 또 속았구나 하하하</div>
 							<div class="block realestate-caption">
 								<!-- <p>무엇을 찾고 계신가요?</p> -->
 								<span class="price">더이상 속지마세요! 맛집검색은 여기서 <br>
-								
+
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
 											name="keyword" /> <input type="hidden" id="pageNum"
@@ -522,7 +551,7 @@
 					</h3>
 
 					<div class="row">
-						<c:forEach var="article" items="${list}">
+						<c:forEach begin="0" end="3" var="article" items="${list}">
 							<div class="col-md-6 col-sm-6 col-xs-12">
 
 								<!-- item -->
@@ -536,14 +565,13 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="images/${article.restaurantID}.jpg" width="409"
-											height="271" />
+											src="${article.representPhoto}" width="409" height="271" />
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
 										<h4>${article.addr}</h4>
 										<h5>${article.phonenumber}</h5>
-										<small>평점</small>
+										<small>평점 ${article.averageScore}</small>
 										<p>
 											<!-- 한줄 설명 -->
 										</p>
@@ -583,18 +611,18 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="images/${newarticle.restaurantID}.jpg" width="409"
-											height="271" />
+											src="${newarticle.representPhoto }" width="409" height="271" />
 									</figure>
 									<div class="item-box-desc">
 										<h4>${newarticle.restaurantName}</h4>
-										<small>평점5</small>
+										<small>평점: ${newarticle.averageScore }</small>
 										<p>${newarticle.addr}</p>
 									</div>
 								</div>
 								<!-- /item -->
 
 							</div>
+
 						</c:forEach>
 					</div>
 
@@ -605,38 +633,41 @@
 
 					<!-- HOT -->
 					<h3 class="page-header nomargin-top margin-bottom40">
-						가장 <strong class="styleColor">뜨는 </strong> 맛집
+						이번 달 <strong class="styleColor">최고의 </strong> 맛집
 					</h3>
-
-					<!-- No #1 Hot -->
-					<div class="item-box nomargin-top">
-						<figure>
-							<a class="item-hover" href="restaurantDetView.do?restaurantId=2&moreCount=0&filterName=reviewId">
-								<span class="overlay color2"></span> <span class="inner">
-									<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
-									보기
-							</span>
-							</a>
-							<img alt="" class="img-responsive"
-								src="images/small.jpg" />
-						</figure>
-						<div class="item-box-desc">
-							<h4 class="wrap">
-								<a class="styleColor" href="#">맛집을 집에서도 쉽게!</a>
-							</h4>
-							<small class="font300 text-center block">단돈 12,000으로 즐기세요</small>
+					<c:forEach var="bestarticle" items="${bestlist}">
+						<!-- No #1 Hot -->
+						<div class="item-box nomargin-top">
+							<figure>
+								<a class="item-hover"
+									href="restaurantDetView.do?restaurantId=${bestarticle.restaurantID}&moreCount=0&filterName=reviewId">
+									<span class="overlay color2"></span> <span class="inner">
+										<span class="block fa fa-plus fsize20"></span> <strong>식당</strong>
+										보기
+								</span>
+								</a>
+								<img alt="" class="img-responsive"
+									src="${bestarticle.representPhoto }" />
+							</figure>
+							<div class="item-box-desc">
+								<h4 class="wrap">
+									<a class="styleColor">평점 ${bestarticle.averageScore}의 어마어마한
+										맛집</a>
+								</h4>
+								<small class="font300 text-center block">최고의 맛집은 바로 여기!</small>
+							</div>
 						</div>
-					</div>
-					<!-- /No #1 Hot -->
+						<!-- /No #1 Hot -->
+					</c:forEach>
 
 					<!-- <!-- video -->
 					<iframe class="videoCnt"
 						src="https://player.vimeo.com/video/190687560?byline=0&portrait=0"
 						width="640" height="360" frameborder="0" webkitallowfullscreen
 						mozallowfullscreen allowfullscreen></iframe>
-					
-						<a href="https://vimeo.com/190687560">주말 맛집 기행 어떠세요?</a>
-					
+
+					<a href="https://vimeo.com/190687560">주말 맛집 기행 어떠세요?</a>
+
 					<h5 class="font300 padding10">
 						<small class="text-center block">(조회수: $(vidcnt)</small>
 					</h5>
@@ -644,20 +675,32 @@
 
 					<!-- small articles -->
 					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<a href="#"> <img alt="" class="img-responsive"
-								src="images/small1.jpg" />
-								<h6 class="fsize12 font300 padding6 styleSecondColor">유럽의
-									느낌이 물씬 풍기는 식당</h6>
-							</a>
-						</div>
-						<div class="col-xs-6 col-md-6">
-							<a href="#"> <img alt="" class="img-responsive"
-								src="images/small2.jpg" />
-								<h6 class="fsize12 font300 padding6 styleSecondColor">오늘...
-									화장실에서도 맛있게 먹는다</h6>
-							</a>
-						</div>
+						<c:forEach begin="4" end="4" var="article" items="${list}">
+
+							<div class="col-xs-6 col-md-6">
+								<a
+									href="restaurantDetView.do?restaurantId=${article.restaurantID}&moreCount=0&filterName=reviewId">
+									<img alt="" class="img-responsive"
+									src="${article.representPhoto}" />
+									<h6 class="fsize12 font300 padding6 styleSecondColor">오늘은
+										뭘 먹어볼까?</h6>
+								</a>
+							</div>
+						</c:forEach>
+
+						<c:forEach begin="5" end="5" var="article" items="${list}">
+
+							<div class="col-xs-6 col-md-6">
+								<a
+									href="restaurantDetView.do?restaurantId=${article.restaurantID}&moreCount=0&filterName=reviewId">
+									<img alt="" class="img-responsive"
+									src="${article.representPhoto}" />
+									<h6 class="fsize12 font300 padding6 styleSecondColor">오붓한
+										데이트 맛집!</h6>
+								</a>
+							</div>
+						</c:forEach>
+
 					</div>
 					<!-- /small articles -->
 
@@ -751,8 +794,7 @@
 						<i class="lightgray fa fa-globe hidden-xs"></i>
 						<h4>식당 등록</h4>
 						<p>식당이 보이지 않다구요? 간편하게 지금 등록하세요.</p>
-						<a href="shoplist.do" class="btn btn-primary btn-xs">식당
-							등록하기</a>
+						<a href="shoplist.do" class="btn btn-primary btn-xs">식당 등록하기</a>
 					</div>
 				</div>
 
@@ -792,9 +834,9 @@
 		<!-- copyright , scrollTo Top -->
 		<div class="footer-bar">
 			<div class="container">
-				<span class="copyright">Copyright &copy; git LLC .
-					All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO
-					TOP <i class="fa fa-arrow-circle-up"></i>
+				<span class="copyright">Copyright &copy; git LLC . All Rights
+					Reserved.</span> <a class="toTop" href="#topNav">BACK TO TOP <i
+					class="fa fa-arrow-circle-up"></i>
 				</a>
 			</div>
 		</div>

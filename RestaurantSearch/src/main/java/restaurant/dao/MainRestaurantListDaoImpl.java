@@ -21,4 +21,8 @@ public class MainRestaurantListDaoImpl extends SqlSessionDaoSupport implements M
 		
 	}
 
+	public List<MainRestaurantListDto> SelectBestRestaurantList() {
+		// TODO Auto-generated method stub
+		return  getSqlSession().selectList("selectBestRestaurantList");
 	}
+}
