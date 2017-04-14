@@ -69,7 +69,7 @@
 		<div class="col-md-12">
 			<div class="col-md-4">
 				<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-					<c:forEach var="reviewPhoto" items="${reviewPhotoDto}">
+					<c:forEach var="reviewPhoto" items="${reviewPhotoByReviewIdDto}">
 						<c:if test="${reviewPhoto.reviewId == shopReview.reviewId}">
 							<li> <!-- item -->
 								<div class="item-box nomargin-top">
