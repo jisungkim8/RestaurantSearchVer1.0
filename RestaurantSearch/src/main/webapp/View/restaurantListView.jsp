@@ -381,17 +381,16 @@
 				<ul id="cuisine_list" style="padding-left: 0px;">
 				</ul>
 			</li>
-
-			<li id="paging_html" class="sub-menu" style="display: inline;">
-			</li>
 		</ul>
 		<!-- sidebar menu end-->
+		<div id="paging_html" class="" style="width: 480px; text-align: center;">
+			 
+		</div>
 	</div>
 	</aside>
 
 	<!--sidebar end-->
-	<div id="map"
-		style="width: 100%; min-height: 1200px; height: 100%; z-index: 1;">
+	<div id="map" style="width: 100%; min-height: 1200px; height: 100%; z-index: 1;">
 	</div>
 
 	<script type="text/javascript" src="design/plugins/jquery-2.1.3.min.js"></script>
@@ -617,7 +616,6 @@
 		liTag.innerHTML = "";
 		
 		divTag = document.createElement("div");
-		divTag.setAttribute("style", "background-color: green;  width: 30%;");
 		
 		smallTag = document.createElement("small");
 		smallTag.innerHTML = pagingHtml; 
@@ -932,7 +930,7 @@
 			contentString[4] = restaurant_div_phone_tag;
 			contentString[5] = restaurant_food_string;
 			contentString[6] = restaurant_theme_string;
-			contentString[7] = restaurant_home_page_string;
+			//contentString[7] = restaurant_home_page_string;
 		}
 
 		infowindow = new naver.maps.InfoWindow({
