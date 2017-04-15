@@ -390,7 +390,7 @@
 	</aside>
 
 	<!--sidebar end-->
-	<div id="map" style="width: 100%; min-height: 1200px; height: 100%; z-index: 1;">
+	<div id="map" style="width: 100%; height: 1200px; z-index: 1;">
 	</div>
 
 	<script type="text/javascript" src="design/plugins/jquery-2.1.3.min.js"></script>
@@ -413,17 +413,23 @@
 	var checking_array = [];
 	
 	
-	var windowHeight = $(window).height(); 
+	var sidebar_height = $(window).height() - 43 - 20 - 117 - 43; 
+	var windowHeight = $(window).height();
 	// 헤더의 높이는 43px... 
 	// 상단 메뉴위의 여백의 높이는 20px... 
 	// 상단 메뉴의 높이는 117px... 
 	// 하단 푸터의 높이는 43px...
+	//  식당 아이템 하나의 높이는 168.8px.. 169px..
 	
 	function resize_sidebar_height() {
 			var new_sidebar_height = windowHeight - 43 - 20 - 117 - 43;
-		   $("#cuisine").css("height", new_sidebar_height);
-		   console.log("cuisine_list" + new_sidebar_height);
-	} 
+			sidebar_height = new_sidebar_height;
+			
+			
+		   $("#cuisine").css("height", sidebar_height);
+		   $("#map").css("height", windowHeight);
+		   console.log("cuisine_list_sidebar_height = " + sidebar_height);
+	}  
 	
 	$(window).resize(function() {
 	    var windowHeightNew = $(window).height(); 
@@ -666,7 +672,7 @@
 	function getRestaurantByKeywordAndPageNum(keyword, pageNum) {
 		$.ajax({ 
 			type: "POST",			// POST방식 요청
-			data: {"keyword": keyword, "pageNum": pageNum},
+			data: {"keyword": keyword, "pageNum": pageNum, "sidebarHeight": sidebar_height},
 			dataType: "json",		// RETURN 받을 데이터 형(JSON객체)
 			url: "getRestaurants.do",		// 요청 URL.. 
 			success: show_restaurant_list_by_paging_data
@@ -718,7 +724,8 @@
 			"food": previous_food,
 			"price": previous_price,
 			"booking": previous_booking,
-			"parking": previous_parking
+			"parking": previous_parking,
+			"sidebarHeight": sidebar_height
 		};
 		
 		$.ajax({
