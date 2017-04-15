@@ -412,6 +412,30 @@
 	
 	var checking_array = [];
 	
+	
+	var windowHeight = $(window).height(); 
+	// 헤더의 높이는 43px... 
+	// 상단 메뉴위의 여백의 높이는 20px... 
+	// 상단 메뉴의 높이는 117px... 
+	// 하단 푸터의 높이는 43px...
+	
+	function resize_sidebar_height() {
+			var new_sidebar_height = windowHeight - 43 - 20 - 117 - 43;
+		   $("#cuisine").css("height", new_sidebar_height);
+		   console.log("cuisine_list" + new_sidebar_height);
+	} 
+	
+	$(window).resize(function() {
+	    var windowHeightNew = $(window).height(); 
+	    if (windowHeight != windowHeightNew) {
+	        // zoom has changed
+	        // adjust your fixed element
+	        windowHeight = windowHeightNew;
+	        resize_sidebar_height();
+	    } 
+	});
+	
+	
 	function init_restaurant_filter_values() {
 		previous_location = [];
 		previous_food = [];
@@ -709,7 +733,10 @@
 		$("#filter_info_window").css("display", "none");
 	}
 
-		$(document).ready(getRestaurantByKeywordAndPageNum('${keyword}', 1));
+		$(document).ready(function () {
+			getRestaurantByKeywordAndPageNum('${keyword}', 1)
+			resize_sidebar_height();
+		});
 
 		function update_restaurants() {
 			var keyword = $("#keyword_input").val();
@@ -718,7 +745,7 @@
 			if (keyword.trim() == "") {
 				alert("검색어를 입력해주십시오.");
 				return;
-			}
+			} 
 
 			get_restaurant_data_by_keyword_and_filter_info(keyword, pageNum);
 		}
