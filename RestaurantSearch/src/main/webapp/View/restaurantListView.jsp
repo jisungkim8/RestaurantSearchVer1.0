@@ -149,7 +149,7 @@
 	<span id="header_shadow" style="z-index: 1;"></span>
 
 	<div id="filter_info_window"
-		style="position: fixed; background-color: gray; width: 450px; height: 90%; top: 40px; z-index: 999; border: solid black 2px; border-radius: 5px; display: none;">
+		style="position: fixed; background-color: gray; width: 450px; height: 90%; top: 40px; left: 15px; z-index: 999; border: solid black 2px; border-radius: 5px; display: none;">
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default"> 
 				<div class="panel-heading">
@@ -202,30 +202,121 @@
 						
 							<div class="panel-body">
 								<div class="tab-content">
-									<div id="home" class="tab-pane active">
-									
-									<div class="btn-row">
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary"> 
-												<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="강남역"> 
-												강남역
-											</label> 
-											<label class="btn btn-primary"> 
-												<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="가로수길">
-												가로수길 
-											</label>
-											<label class="btn btn-primary"> 
-												<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="신사동_압구정">
-												 신사/압구정 
-											</label>
-											<label class="btn btn-primary"> 
-												<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="강동구">
-												 강동구 
-											</label>
+									<div id="gangnam" class="tab-pane active">
+										<div class="btn-row">
+											<div class="btn-group" data-toggle="buttons">
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="강남역"> 
+													강남역
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="가로수길">
+													가로수길 
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="신사/압구정">
+													 신사/압구정 
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="청담동">
+													 청담동
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="신천/잠실"> 
+													신천/잠실
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="여의도">
+													여의도
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="역삼/선릉">
+													 역삼/선릉
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="교대/서초">
+													 교대/서초
+												</label>
+													<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="삼성동"> 
+													삼성동
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="논현동">
+													논현동
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="서래마을">
+													 서래마을
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="동작/사당">
+													 동작/사당
+												</label>
+													<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="방배/반포/잠원"> 
+													방배/반포/잠원
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="관악구">
+													관악구
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="영등포구">
+													 영등포구 
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="송파/가락">
+													 송파/가락
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="대치동"> 
+													대치동
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="강남기타">
+													강남 기타
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="도곡동">
+													 도곡동
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="양재동">
+													 양재동
+												</label>
+													<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="구로구"> 
+													구로구
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="목동">
+													목동/양천
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="방이동">
+													 방이동
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangdong" name="location_checkbox" value="강동구">
+													 강동구
+												</label>
+													<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_gangnam" name="location_checkbox" value="개포/수서/일원"> 
+													개포/수서/일원
+												</label> 
+												<label class="btn btn-primary"> 
+													<input type="checkbox" id="location_checkbox_garosu" name="location_checkbox" value="등촌/강서">
+													등촌/강서
+												</label>
+												<label class="btn btn-primary"> 
+													<input	type="checkbox" id="location_checkbox_sinsa/apgu" name="location_checkbox" value="금천구">
+													 금천구 
+												</label>
+											</div>
 										</div>
-									</div>
 								</div>
-									<div id="about" class="tab-pane">강북</div>
+									<div id="gangbook" class="tab-pane">강북</div>
 									<div id="contact" class="tab-pane">인천</div>
 									<div id="profile" class="tab-pane">경기</div>
 									<div id="profile2" class="tab-pane">부산</div>
@@ -256,6 +347,31 @@
 								<label class="btn btn-primary"> 
 									<input	type="checkbox" id="food_checkbox_chinese" name="food_checkbox" value="일식">
 									 일식 
+								</label>
+								<label class="btn btn-primary"> 
+									<input	type="checkbox" id="food_checkbox_ws_asia" name="food_checkbox" value="서남아시아"> 
+									서남아
+								</label> 
+								<label class="btn btn-primary"> 
+									<input type="checkbox" id="food_checkbox_es_asia" name="food_checkbox" value="동남아시아">
+									동남아
+								</label> 
+								<br/>
+								<label class="btn btn-primary"> 
+									<input	type="checkbox" id="food_checkbox_western" name="food_checkbox" value="양식">
+									 양식
+								</label>
+								<label class="btn btn-primary"> 
+									<input	type="checkbox" id="food_checkbox_ms_america" name="food_checkbox" value="중남미"> 
+									중남미
+								</label> 
+								<label class="btn btn-primary"> 
+									<input type="checkbox" id="food_checkbox_afreeca" name="food_checkbox" value="아프리카">
+									아프리카
+								</label> 
+								<label class="btn btn-primary"> 
+									<input	type="checkbox" id="food_checkbox_others" name="food_checkbox" value="기타">
+									 기타
 								</label>
 							</div>
 						</div>
@@ -381,10 +497,9 @@
 				<ul id="cuisine_list" style="padding-left: 0px;">
 				</ul>
 			</li>
-		</ul>
+		</ul> 
 		<!-- sidebar menu end-->
-		<div id="paging_html" class="" style="width: 480px; text-align: center;">
-			 
+		<div id="paging_html" class="" style="width: 480px; margin-top: 20px; text-align: center;">
 		</div>
 	</div>
 	</aside>
