@@ -118,7 +118,7 @@
 			</div>
 			
 			<div class="col-md-1" align="right">
-				<button id="recommend" class="btn btn-default" value="${vs.current.reviewId}">추천</button>
+				<button id="recommend" class="btn btn-default" value="${shopReviewVs.current.reviewId}">추천</button>
 			</div>
 		</div>
 	</div>
