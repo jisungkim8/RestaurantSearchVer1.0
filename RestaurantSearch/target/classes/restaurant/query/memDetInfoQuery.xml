@@ -45,5 +45,55 @@
 		select * from memDetInfo where memberId=#{memberId} and birthDate=#{birthDate}
 	</select>
 	
+		<select id="memList" parameterType="map" resultType="MemDetInfoDto">
+		SELECT memberid,nickname,gender,membertype
+		FROM(SELECT
+		a.*, 
+		rownum rnum
+		FROM (SELECT *
+		FROM memdetinfo
+		<where>
+			<if test="keyWord!=null and keyField=='memberId'">
+				memberId like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='nickname'">
+				nickname like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='all'">
+				memberId like '%' || #{keyWord} || '%' or
+				nickname like '%' ||
+				#{keyWord} || '%'
+			</if>
+		</where>
+		ORDER BY memberId desc)a)
+	<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
+	</select>
+
+	<select id="memCount" parameterType="map" resultType="Integer">
+		SELECT count(*)
+		FROM memdetinfo
+		<where>
+			<if test="keyWord!=null and keyField=='memberId'">
+				memberId like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='nickname'">
+				nickname like '%' || #{keyWord} || '%'
+			</if>
+			<if test="keyWord!=null and keyField=='all'">
+				memberId like '%' || #{keyWord} || '%' or
+				nickname like '%' ||
+				#{keyWord} || '%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 레코드 한개 얻어오기 -->
+	<select id="selectMember" resultType="MemDetInfoDto"
+		parameterType="Integer">
+		select * from memdetinfo where memberid=#{memberid}
+	</select>
+	
 
 </mapper>
