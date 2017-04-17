@@ -35,4 +35,14 @@ public class RestaurantSearchDaoImpl extends SqlSessionDaoSupport implements Res
 		//return null;
 		return getSqlSession().selectList("selectRestaurantSearchViewByFilter", searchOptionHashMap);
 	}
+
+	public RestaurantDto selectRestaurantSearchById(Integer restaurantId) {
+		// TODO Auto-generated method stub
+		//selectRestaurantSearchById
+		if (restaurantId == null) {
+			restaurantId = 0;
+		}
+		
+		return getSqlSession().selectOne("selectRestaurantSearchById", restaurantId);
+	}
 }

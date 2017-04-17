@@ -13,6 +13,14 @@ public class SearchOptionObject {
 	private String booking = "";
 	private String parking = "";
 	
+	private Integer sidebarHeight = 0;
+	
+	public Integer getSidebarHeight() {
+		return sidebarHeight;
+	}
+	public void setSidebarHeight(Integer sidebarHeight) {
+		this.sidebarHeight = sidebarHeight;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

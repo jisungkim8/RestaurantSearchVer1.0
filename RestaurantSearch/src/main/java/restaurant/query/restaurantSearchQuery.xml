@@ -114,6 +114,14 @@
 		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
 	</select>
 	
+	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto3">
+		SELECT *
+		FROM (SELECT a.*, rownum rnum 
+			FROM (SELECT * 
+				FROM RESTAURANT
+				ORDER BY restaurantId desc) a)
+		WHERE RESTAURANTID=#{restaurantId}
+	</select>
 </mapper>
 
 

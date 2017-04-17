@@ -2,7 +2,7 @@ package restaurant.dto;
 
 public class MainRestaurantListDto {
 	int restaurantID;
-	int averageScore;
+	float averageScore;
 	String restaurantName;
 	String representPhoto;
 	String addr;
@@ -26,10 +26,10 @@ public class MainRestaurantListDto {
 	public void setRestaurantID(int restaurantID) {
 		this.restaurantID = restaurantID;
 	}
-	public int getAverageScore() {
+	public float getAverageScore() {
 		return averageScore;
 	}
-	public void setAverageScore(int averageScore) {
+	public void setAverageScore(float averageScore) {
 		this.averageScore = averageScore;
 	}
 	public String getRestaurantName() {

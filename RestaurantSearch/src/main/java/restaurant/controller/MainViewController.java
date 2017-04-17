@@ -30,8 +30,11 @@ public class MainViewController {
 		
 		List<MainRestaurantListDto> list=mainRestaurantListDao.selectMainRestaurantList();
 		List<MainRestaurantListDto> newlist=mainRestaurantListDao.selectNewRestaurantList();
+		List<MainRestaurantListDto> bestlist=mainRestaurantListDao.SelectBestRestaurantList();
+		
 		ModelAndView mav=new ModelAndView("restaurantMainView");//이동할 페이지명
 		
+		mav.addObject("bestlist", bestlist);
 		mav.addObject("list", list);
 		mav.addObject("newlist", newlist);		
 		

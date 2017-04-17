@@ -11,4 +11,5 @@ public interface RestaurantSearchDao {
 	
 	public int selectRestaurantSearchTotalCountBySearchOptionHashMap(HashMap<String, Object> searchOptionHashMap); 
 	public List<RestaurantDto> selectRestaurantSearchBySearchOptionHashMap(HashMap<String, Object> searchOptionHashMap);
+	public RestaurantDto selectRestaurantSearchById(Integer restaurantId);
 }
