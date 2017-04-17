@@ -567,7 +567,7 @@
 
 								<!-- tabs -->
 								<ul class="nav nav-tabs">
-									<li>
+									<li class="active">
 										<a href="#tab1" data-toggle="tab">
 											<i class="fa fa-heart"></i> 상세정보
 										</a>
@@ -577,7 +577,7 @@
 											<i class="fa fa-cogs"></i> 위치
 										</a>
 									</li>
-									<li class="active">
+									<li>
 										<a href="#tab3" data-toggle="tab">
 											<i class="fa fa-cogs"></i> 리뷰
 										</a>
@@ -588,7 +588,7 @@
 								<div class="tab-content">
 								
 									<!-- detail information tab -->
-									<div id="tab1" class="tab-pane">
+									<div id="tab1" class="tab-pane active">
 										<br>
 										
 										<!-- views, reviews, likes -->
@@ -720,7 +720,7 @@
 									<!-- location tab -->
 									<div id="tab2" class="tab-pane">
 										<!-- 네이버 api 표시를 위한 div 영역... -->
-										<div id="map" style="width: 100%; min-height: 1200px; height: 100%; z-index: 1;"></div>
+										<div id="map" style="width: 100%; min-height: 500px; height: 100%; z-index: 1;"></div>
 									
 										<!-- 네이버 지도 스크립트....-->
 										<script type="text/javascript"
@@ -734,7 +734,7 @@
 									<!-- /location tab -->
 									
 									<!-- review tab -->
-									<div id="tab3" class="tab-pane active">
+									<div id="tab3" class="tab-pane">
 										<!-- reivew -->
 										<c:if test="${shopReviewDto.isEmpty()}">
 											등록된 리뷰가 없습니다.

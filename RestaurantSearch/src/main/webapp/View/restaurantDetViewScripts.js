@@ -57,30 +57,30 @@ $(document).ready(function() {
 		});
 
 	// restaurantid를 이용하여 server에 restaurant의 json 객체 요청... 
-	function get_restaurant_by_id(restaurant_id)	 {
-		alert("asdasdasd");
+	function get_restaurant_by_id(restaurantId)	 {
+//		alert("asdasdasd");
 		$.ajax({
 			type : "POST", // POST방식 요청
-			data : {"restaurantId": restaurant_id},
-			contentType: "application/text; charset=UTF-8",
+			data : {"restaurantId": restaurantId},
 			dataType : "json", // RETURN 받을 데이터 형(JSON객체)
-			url : "getRestaurantsByFilter.do", // 요청 URL.. 
+			url : "getRestaurantByRestaurantId.do", // 요청 URL.. 
 			success : show_marker_on_screen // 응답 성공시 콜백 함수.. 
 		});
 	}
 
 	// 도로명 주소를 이용하여 지도에 마커 표시하기.. 
-	function show_marker_on_screen(resaturant) {
-		var restaurant_doro_addr = // restaurant 객체의 도로명 주소만 잘라서 restaurant_doro_addr변수에 대입하기..
+	function show_marker_on_screen(restaurant) {
+		console.log(restaurant)
+		var restaurant_doro_addr = restaurant.addr; // restaurant 객체의 도로명 주소만 잘라서 restaurant_doro_addr변수에 대입하기..
 		searchAddressToCoordinate(restaurant_doro_addr); // 해당 도로명 주소로 함수 호출..
-		alert("asdasdasd");
+//		alert("asdasdasd");
 	}		
 
 
 	//주소를 파라미터로 받아 좌표로 변환 후,  마커의 위치를 지정하여 지도가 해당 위치의 정 중앙으로 오도록 setting 해주는 함수 
 	// address는 반드시 지번주소가 아닌, 도로명 주소이어야 함.. 
 	function searchAddressToCoordinate(address) {
-		alert("asdasdasd");
+//		alert("asdasdasd");
 		naver.maps.Service	// geocode라는 서비스 함수 요청(ajax요청)
 				.geocode(
 						{

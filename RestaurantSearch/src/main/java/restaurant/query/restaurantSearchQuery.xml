@@ -114,7 +114,7 @@
 		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
 	</select>
 	
-	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto3">
+	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 

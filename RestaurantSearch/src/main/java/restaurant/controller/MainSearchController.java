@@ -382,24 +382,18 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		RestaurantSimInfoDto2 restaurantSimInfoDto = null;
 		
-		String[] splitByPipeKeywords = restaurant.getKeyword().split("\\|");
-		
-		String locationKeywords = splitByPipeKeywords[0];
-		String foodKeywords = splitByPipeKeywords[2]; 
-		String themeKeywords = splitByPipeKeywords[3];
-		
 		restaurantSimInfoDto = new RestaurantSimInfoDto2();
+		
+		int indexOfAddr = restaurant.getAddr().lastIndexOf(", ");
+		String doroAddr = restaurant.getAddr().substring(indexOfAddr + 2);
 		
 		restaurantSimInfoDto.setRestaurantId(restaurant.getRestaurantId());
 		restaurantSimInfoDto.setRestaurantName(restaurant.getRestaurantName());
-		restaurantSimInfoDto.setAddr(restaurant.getAddr());
+		restaurantSimInfoDto.setAddr(doroAddr);
 		restaurantSimInfoDto.setPhoneNumber(restaurant.getPhoneNumber());
 		restaurantSimInfoDto.setReviewAverageScore(restaurant.getAverageScore());
 		restaurantSimInfoDto.setReviewNumber(45);
 		restaurantSimInfoDto.setRepresentPhoto(restaurant.getRepresentPhoto());
-		restaurantSimInfoDto.setLocationKeywords(locationKeywords);
-		restaurantSimInfoDto.setFoodKeywords(foodKeywords);
-		restaurantSimInfoDto.setThemeKeywords(themeKeywords); 
 	
 		return restaurantSimInfoDto;
 	}	
