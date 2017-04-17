@@ -62,46 +62,58 @@
 </head>
 <body>
 
-<c:forEach var="shopReview" items="${shopReviewDto}" varStatus="vs">
-	<c:set var="count" value="0" />
-	
+<c:forEach var="shopReview" items="${shopReviewDto}" varStatus="shopReviewVs">
 	<div>
 		<div class="col-md-12">
-			<div class="col-md-4">
-				<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-					<c:forEach var="reviewPhoto" items="${reviewPhotoByReviewIdDto}">
-						<c:if test="${reviewPhoto.reviewId == shopReview.reviewId}">
-							<li> <!-- item -->
-								<div class="item-box nomargin-top">
-									<figure>
-										<a class="item-hover" href="<c:url value="${reviewPhoto.photoPath}" />"></a>
-										<c:if test="${count == 0}">
-											<img alt="" class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" />
-											<c:remove var="count" />
-										</c:if>
-									</figure>
-								</div>
-							</li>
-						</c:if>
-					</c:forEach>
-				</ul>
-			</div>
 			
-			<div class="col-md-7">
+			<div class="col-md-11">
 				<div class="row">
-
-
-					<p>
-						제목 : ${shopReview.title} <br>
-						작성일자 : <fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="default" timeStyle="default"/> <br>
-						내용 : ${shopReview.content} <br>
-						추천수 : ${shopReview.recommendCnt} <br>
-						방문 시간대 : ${shopReview.visitTime} <br>
-						디너/런치 : ${shopReview.dinnerOrLunch} <br>
-						작성자 : ${shopReview.memberId} <br>
-					</p>
-
-
+					<div class="col-md-12">
+						<div class="col-md-3">
+							${shopReview.memberId} <br>
+							<fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="short" timeStyle="short"/> <br>
+							${shopReview.recommendCnt}
+						</div>
+					
+						<div class="col-md-9">
+							<div class="col-md-12" style="border:1px solid black"> ${shopReview.title} </div>
+							<div class="col-md-12" style="border:1px solid black"> ${shopReview.content} </div>
+							<div class="col-md-12" style="border:1px solid black">
+								<div class="col-md-6" style="align:left"> 방문시간대 </div>
+								<div class="col-md-6"> ${shopReview.visitTime} </div>
+							</div>
+							<div class="col-md-12" style="border:1px solid black">
+								<div class="col-md-6" style="align:left"> Dinner/Lunch </div>
+								<div class="col-md-6"> ${shopReview.dinnerOrLunch} </div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+							<c:forEach var="reviewPhoto" items="${shopReview.reviewPhotoDtoList}" varStatus="reviewPhotoVs">
+									<li class="col-sm-2"> <!-- item -->
+										<div class="item-box">
+											<figure>
+												<a href="<c:url value="${reviewPhoto.photoPath}" />">
+													<c:if test="${reviewPhotoVs.index <= 2 }">
+														<img class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" width="100" height="100" alt="">
+													</c:if>
+													
+													<c:if test="${reviewPhotoVs.index == 2 }">
+														<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
+															<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
+																+ ${shopReview.reviewPhotoDtoList.size()-3}
+															</span>
+														</div>
+													</c:if>
+												</a>
+											</figure>
+										</div>
+									</li>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
 			</div>
 			

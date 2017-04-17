@@ -7,7 +7,7 @@ import restaurant.dto.ShopReviewCommand;
 import restaurant.dto.ShopReviewDto;
 
 public interface ShopReviewDao {
-	public List<ShopReviewDto> selectShopReviewDetView(Map<String, Object> map);
+	public List<ShopReviewCommand> selectShopReviewDetView(Map<String, Object> map);
 	public int getNewShopReviewDetView();
 	public void insertShopReviewDetView(ShopReviewCommand shopReviewCommand);
 	public void increaseRecommendCnt(int reviewId);

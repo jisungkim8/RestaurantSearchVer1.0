@@ -91,13 +91,30 @@ public class RestaurantDetViewController {
 		System.out.println("RestaurantDetViewController>>shopPhotoDtoSepNum2 : " + shopPhotoDtoSepNum2);
 		
 		System.out.println("map.filterName = " + map.get("filterName"));
-		ArrayList<ShopReviewDto> shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
+		ArrayList<ShopReviewCommand> shopReviewDto = (ArrayList<ShopReviewCommand>) shopReviewDao.selectShopReviewDetView(map);
 		System.out.println("RestaurantDetViewController>>shopReviewDto : " + shopReviewDto);
 		
 		map.put("shopReviewDto", shopReviewDto);
 		
-		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		ArrayList<ReviewPhotoDto> reviewPhotoByReviewIdDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
+		
+		if (!shopReviewDto.isEmpty()) {
+			for (int i=0; i<shopReviewDto.size(); i++) {
+				ArrayList<ReviewPhotoDto> list = new ArrayList<ReviewPhotoDto>();
+				
+				for (int j=0; j<reviewPhotoByReviewIdDto.size(); j++) {
+					if (shopReviewDto.get(i).getReviewId() == reviewPhotoByReviewIdDto.get(j).getReviewId()) {
+						System.out.println("asdasd = " + reviewPhotoByReviewIdDto.get(j).getPhotoPath());
+						list.add(reviewPhotoByReviewIdDto.get(j));
+					}
+				}
+				
+				System.out.println("asdasd = " + list.size());
+				
+				shopReviewDto.get(i).setReviewPhotoDtoList(list);
+			}
+		}
 		
 		// keyword 처리
 		ArrayList<String> keyword = new ArrayList<String>();
@@ -263,7 +280,7 @@ public class RestaurantDetViewController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		ArrayList<ShopReviewDto> shopReviewDto = new ArrayList<ShopReviewDto>();
+		ArrayList<ShopReviewCommand> shopReviewDto = new ArrayList<ShopReviewCommand>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		checkMoreReview = true;
 
@@ -279,13 +296,30 @@ public class RestaurantDetViewController {
 		map.put("end", end);
 		map.put("filterName", filterName);
 		
-		shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
+		shopReviewDto = (ArrayList<ShopReviewCommand>) shopReviewDao.selectShopReviewDetView(map);
 		System.out.println("RestaurantDetViewController>>getMoreReview()>>shopReviewDto = " + shopReviewDto);
 		
 		map.put("shopReviewDto", shopReviewDto);
 		
-		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		ArrayList<ReviewPhotoDto> reviewPhotoByReviewIdDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
+		
+		if (!shopReviewDto.isEmpty()) {
+			for (int i=0; i<shopReviewDto.size(); i++) {
+				ArrayList<ReviewPhotoDto> list = new ArrayList<ReviewPhotoDto>();
+				
+				for (int j=0; j<reviewPhotoByReviewIdDto.size(); j++) {
+					if (shopReviewDto.get(i).getReviewId() == reviewPhotoByReviewIdDto.get(j).getReviewId()) {
+						System.out.println("asdasd = " + reviewPhotoByReviewIdDto.get(j).getPhotoPath());
+						list.add(reviewPhotoByReviewIdDto.get(j));
+					}
+				}
+				
+				System.out.println("asdasd = " + list.size());
+				
+				shopReviewDto.get(i).setReviewPhotoDtoList(list);
+			}
+		}
 		
 		mav.setViewName("moreReview");
 		
@@ -312,7 +346,7 @@ public class RestaurantDetViewController {
 		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		
 		ModelAndView mav = new ModelAndView();
-		ArrayList<ShopReviewDto> shopReviewDto = new ArrayList<ShopReviewDto>();
+		ArrayList<ShopReviewCommand> shopReviewDto = new ArrayList<ShopReviewCommand>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		checkMoreReview = true;
 		
@@ -328,13 +362,30 @@ public class RestaurantDetViewController {
 		map.put("end", end);
 		map.put("filterName", filterName);
 		
-		shopReviewDto = (ArrayList<ShopReviewDto>) shopReviewDao.selectShopReviewDetView(map);
+		shopReviewDto = (ArrayList<ShopReviewCommand>) shopReviewDao.selectShopReviewDetView(map);
 		System.out.println("RestaurantDetViewController>>getMoreReview()>>shopReviewDto = " + shopReviewDto);
 		
 		map.put("shopReviewDto", shopReviewDto);
 		
-		List<ReviewPhotoDto> reviewPhotoByReviewIdDto = reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+		ArrayList<ReviewPhotoDto> reviewPhotoByReviewIdDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
+		
+		if (!shopReviewDto.isEmpty()) {
+			for (int i=0; i<shopReviewDto.size(); i++) {
+				ArrayList<ReviewPhotoDto> list = new ArrayList<ReviewPhotoDto>();
+				
+				for (int j=0; j<reviewPhotoByReviewIdDto.size(); j++) {
+					if (shopReviewDto.get(i).getReviewId() == reviewPhotoByReviewIdDto.get(j).getReviewId()) {
+						System.out.println("asdasd = " + reviewPhotoByReviewIdDto.get(j).getPhotoPath());
+						list.add(reviewPhotoByReviewIdDto.get(j));
+					}
+				}
+				
+				System.out.println("asdasd = " + list.size());
+				
+				shopReviewDto.get(i).setReviewPhotoDtoList(list);
+			}
+		}
 		
 		mav.setViewName("restaurantDetView");
 		
