@@ -389,6 +389,10 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
+										<input type="hidden" name="restaurantId" value="0">
+										<input type="hidden" name="moreCount" value="0">
+										<input type="hidden" name="filterName" value="reviewId">
+										<input type="hidden" name="pageName" value="restMainView">
 										<input type="button" id="login" value="로그인"
 										class="btn btn-primary pull-right push-bottom">
 									</span>

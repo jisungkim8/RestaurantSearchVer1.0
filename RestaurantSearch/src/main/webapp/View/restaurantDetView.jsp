@@ -145,8 +145,7 @@
 																					success : function(args) {
 // 																						alert(args)
 																						if (args == "agreement") {
-																							document.memInfo
-																									.submit()
+																							document.memInfo.submit()
 																						} else {
 																							$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																						}
@@ -390,6 +389,10 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
+										<input type="hidden" name="restaurantId" value="${restaurantId}">
+										<input type="hidden" name="moreCount" value="0">
+										<input type="hidden" name="filterName" value="reviewId">
+										<input type="hidden" name="pageName" value="restDetView">
 										<input type="button" id="login" value="로그인"
 										class="btn btn-primary pull-right push-bottom">
 									</span>
