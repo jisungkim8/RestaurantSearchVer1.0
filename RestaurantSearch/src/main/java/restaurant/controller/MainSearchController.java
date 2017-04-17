@@ -211,7 +211,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 	public HashMap<String, Object> getRestaurantsByFilter
 	(@RequestBody String searchOptionString) throws Exception {
 		// TODO Auto-generated method stub 
-		System.out.println("SearchViewController가 처리함! >> getRestaurants.do");
+		System.out.println("SearchViewController가 처리함! >> getRestaurantsByFilter.do");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -372,57 +372,36 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 	}
 	
 	
-	@RequestMapping(value = "/getRestaurantByRestaurantId.do", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	@RequestMapping(value = "/getRestaurantByRestaurantId.do", method = RequestMethod.POST)
 	@ResponseBody
 	public RestaurantSimInfoDto2 getRestaurantByRestaurantId
 	(@RequestParam("restaurantId") int restaurantId) throws Exception {
 		// TODO Auto-generated method stub 
-		System.out.println("SearchViewController가 처리함! >> getRestaurants.do");
+		System.out.println("SearchViewController가 처리함! >> getRestaurantByRestaurantId.do");
 				
-		//int totalCount = restaurantSearchDao.selectRestaurantSearchTotalCountBySearchOptionHashMap(searchOptionHashMap);
+		RestaurantDto3 restaurant = restaurantSearchDao.selectRestaurantSearchById(restaurantId);
 		
-		//List<RestaurantDto3> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
+		RestaurantSimInfoDto2 restaurantSimInfoDto = null;
 		
-		//RestaurantSimInfoDto2 restaurant2 = null;
+		String[] splitByPipeKeywords = restaurant.getKeyword().split("\\|");
 		
+		String locationKeywords = splitByPipeKeywords[0];
+		String foodKeywords = splitByPipeKeywords[2]; 
+		String themeKeywords = splitByPipeKeywords[3];
 		
-		/*for (RestaurantDto3 restaurantInfo : restaurants) {
-			restaurant2 = new RestaurantSimInfoDto2();
-			
-			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
-			
-			String[] splitByPipeKeywords = restaurantInfo.getKeyword().split("\\|");
-			
-			String locationKeywords = splitByPipeKeywords[0];
-			String foodKeywords = splitByPipeKeywords[2]; 
-			String themeKeywords = splitByPipeKeywords[3];
-			
-			for (String string : splitByPipeKeywords) {
-				System.out.println("splitByDollarKeywords >>string = " + string);
-			}
-			
-			restaurant2.setRestaurantId(restaurantInfo.getRestaurantId());
-			restaurant2.setRestaurantName(restaurantInfo.getRestaurantName());
-			restaurant2.setAddr(restaurantInfo.getAddr());
-			restaurant2.setPhoneNumber(restaurantInfo.getPhoneNumber());
-			restaurant2.setReviewAverageScore(restaurantInfo.getAverageScore());
-			restaurant2.setReviewNumber(45);
-			restaurant2.setRepresentPhoto(restaurantInfo.getRepresentPhoto());
-			restaurant2.setLocationKeywords(locationKeywords);
-			restaurant2.setFoodKeywords(foodKeywords);
-			restaurant2.setThemeKeywords(themeKeywords); 
-			
-			restaurants2.add(restaurant2);
-		}
+		restaurantSimInfoDto = new RestaurantSimInfoDto2();
 		
-		HashMap<String, Object> pagingData = new HashMap<String, Object>();
-		pagingData.put("restaurantList", restaurants2);
-		pagingData.put("keyword", keyword);
-		pagingData.put("currentPage", pageNum);
-		pagingData.put("pagingHtml", pagingUtil.getPagingHtml());
-		
-		System.out.println("pagingHtml = " + pagingUtil.getPagingHtml());*/
-		
-		return null;
+		restaurantSimInfoDto.setRestaurantId(restaurant.getRestaurantId());
+		restaurantSimInfoDto.setRestaurantName(restaurant.getRestaurantName());
+		restaurantSimInfoDto.setAddr(restaurant.getAddr());
+		restaurantSimInfoDto.setPhoneNumber(restaurant.getPhoneNumber());
+		restaurantSimInfoDto.setReviewAverageScore(restaurant.getAverageScore());
+		restaurantSimInfoDto.setReviewNumber(45);
+		restaurantSimInfoDto.setRepresentPhoto(restaurant.getRepresentPhoto());
+		restaurantSimInfoDto.setLocationKeywords(locationKeywords);
+		restaurantSimInfoDto.setFoodKeywords(foodKeywords);
+		restaurantSimInfoDto.setThemeKeywords(themeKeywords); 
+	
+		return restaurantSimInfoDto;
 	}	
 }

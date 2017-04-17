@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -8,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>맛집검색 - ${keyword}</title>
-
+ 
 <!-- mobile settings -->
 <meta name="viewport"
 	content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
@@ -52,10 +50,6 @@
 <!-- STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT -->
 <link href="design/plugins/styleswitcher/styleswitcher.css"
 	rel="stylesheet" type="text/css" />
-
-<!-- Morenizr -->
-<script type="text/javascript" src="design/plugins/modernizr.min.js"></script>
-
 <style type="text/css">
 .equal, .equal>div {
 	display: -webkit-box;
@@ -171,7 +165,7 @@
 							<li class="">
 							<!-- <a data-toggle="tab" href="#profile2">. . .</a> -->
 								<div class="btn-group">
-									<button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 52px;">
+									<button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 49px;">
 										...<span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1"> 
@@ -636,12 +630,12 @@
 
 	<!--sidebar end-->
 	<div id="map" style="width: 100%; height: 1200px; z-index: 1;"></div>
-
+	
 	<script type="text/javascript" src="design/plugins/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript"
-		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Smnb3AyBYKR9Jqvcg1nd"></script>
-	<script type="text/javascript"
-		src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
+	<!-- Morenizr -->
+	<script type="text/javascript" src="design/plugins/modernizr.min.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Smnb3AyBYKR9Jqvcg1nd"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
 	<script type="text/javascript">
 	var previous_location = []; 
 	var previous_food = [];
@@ -1244,29 +1238,19 @@
 	<!-- /FOOTER -->
 
 	<!-- JAVASCRIPT FILES -->
-	<script type="text/javascript"
-		src="design/plugins/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="design/plugins/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="design/plugins/jquery.cookie.js"></script>
 	<script type="text/javascript" src="design/plugins/jquery.appear.js"></script>
 	<script type="text/javascript" src="design/plugins/jquery.isotope.js"></script>
 	<script type="text/javascript" src="design/plugins/masonry.js"></script>
-
-	<script src="design/plugins/jquery.scrollTo.min.js"></script>
-
-	<script type="text/javascript"
-		src="design/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="design/plugins/owl-carousel/owl.carousel.min.js"></script>
-	<script type="text/javascript"
-		src="design/plugins/stellar/jquery.stellar.min.js"></script>
-	<script type="text/javascript"
-		src="design/plugins/knob/js/jquery.knob.js"></script>
-	<script type="text/javascript"
-		src="design/plugins/jquery.backstretch.min.js"></script>
-	<script type="text/javascript"
-		src="design/plugins/superslides/dist/jquery.superslides.min.js"></script>
-	<script src="design/plugins/nicescrolls/jquery.nicescroll.js"
-		type="text/javascript"></script>
+	<script type="text/javascript" src="design/plugins/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="design/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="design/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="design/plugins/stellar/jquery.stellar.min.js"></script>
+	<script type="text/javascript" src="design/plugins/knob/js/jquery.knob.js"></script>
+	<script type="text/javascript" src="design/plugins/jquery.backstretch.min.js"></script>
+	<script type="text/javascript" src="design/plugins/superslides/dist/jquery.superslides.min.js"></script>
+	<script type="text/javascript" src="design/plugins/nicescrolls/jquery.nicescroll.js"></script>
 	<script type="text/javascript" src="design/js/scripts2.js"></script>
 </body>
 </html>
