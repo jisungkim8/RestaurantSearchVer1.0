@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.RestaurantSearchDao;
-import restaurant.dto.RestaurantDto2;
-import restaurant.dto.RestaurantDto3;
+import restaurant.dto.RestaurantDto;
 import restaurant.dto.RestaurantSimInfoDto2;
 import restaurant.dto.SearchOptionObject;
 import restaurant.util.PagingUtil;
@@ -53,10 +52,8 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		int totalCount = restaurantSearchDao.selectRestaurantSearchTotalCountByKeyWord(keywordList);
 		
-		
-		//pagingUtil = new PagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 20, 5, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
@@ -68,9 +65,9 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		pagingMap.put("begin", pagingUtil.getStartCount());
 		pagingMap.put("end", pagingUtil.getEndCount());
 				
-		List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		
-		for (RestaurantDto2 restaurantDto2 : restaurants) {
+		for (RestaurantDto restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}
 		
@@ -78,7 +75,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
-		for (RestaurantDto2 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
@@ -112,21 +109,23 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		mav.addObject("restaurantList", restaurants2);
 		mav.addObject("keyword", keyword);
 		mav.addObject("currentPage", pageNum);
-		mav.addObject("pagingHtml", pagingUtil.getPagingHtml());
+		//mav.addObject("pagingHtml", pagingUtil.getPagingHtml());
 		
-		System.out.println("MainSearchController >> pagingHtml = " + pagingUtil.getPagingHtml());
-		return mav;
+		//System.out.println("MainSearchController >> pagingHtml = " + pagingUtil.getPagingHtml());
+		return mav; 
 	}
 	
 	@RequestMapping(value = "/getRestaurants.do", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> getRestaurants
 	(@RequestParam("keyword") String keyword,
-			@RequestParam("pageNum") int pageNum) throws Exception {
+			@RequestParam("pageNum") int pageNum, @RequestParam("sidebarHeight") int sidebarHeight) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("SearchViewController가 처리함! >> getRestaurants.do");
 		
 		System.out.println("keyword = " + keyword);
+		
+		System.out.println("sidebarHeight = " + sidebarHeight);
 		
 		String[] keywordArray = null;
 		if (keyword.contains("ㅗ@ㅠ")) {
@@ -144,7 +143,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		//pagingUtil = new PagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 20, 5, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
@@ -156,9 +155,9 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		pagingMap.put("begin", pagingUtil.getStartCount());
 		pagingMap.put("end", pagingUtil.getEndCount());
 				
-		List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		
-		for (RestaurantDto2 restaurantDto2 : restaurants) {
+		for (RestaurantDto restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}
 		
@@ -166,7 +165,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
-		for (RestaurantDto2 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
@@ -211,7 +210,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 	public HashMap<String, Object> getRestaurantsByFilter
 	(@RequestBody String searchOptionString) throws Exception {
 		// TODO Auto-generated method stub 
-		System.out.println("SearchViewController가 처리함! >> getRestaurants.do");
+		System.out.println("SearchViewController가 처리함! >> getRestaurantsByFilter.do");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -227,6 +226,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		System.out.println("searchOptionObject = " + searchOptionObject);
 		System.out.println("searchOptionObject.keyword = " + searchOptionObject.getKeyword());
 		System.out.println("searchOptionObject = " + searchOptionObject.getPageNum());
+		System.out.println("searchOptionObject.sidebarHeight = " + searchOptionObject.getSidebarHeight()); 
 		
 		for (String location : searchOptionObject.getLocation()) {
 			System.out.println("location = " + location);
@@ -298,7 +298,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		System.out.println("getRestaurantsByFilter >> totalCount = " + totalCount);
 		
 		pagingUtil = new PagingUtil();
-		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 3, 2, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
+		pagingUtil.setPagingUtil(null, keywordList, pageNum, totalCount, 20, 5, "http://localhost:8090/RestaurantSearch/restaurantSearch.do", null);
 		
 		System.out.println("mainSearchController >> pageNum = " + pageNum);
 		System.out.println("mainSearchController >> begin = " + pagingUtil.getStartCount());
@@ -315,13 +315,13 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		//List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		//List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
-		List<RestaurantDto3> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
 		
 		/*for (RestaurantDto2 restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}*/
 		
-		for (RestaurantDto3 restaurantDto3 : restaurants) {
+		for (RestaurantDto restaurantDto3 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto3.getRestaurantName());
 		}
 		
@@ -330,7 +330,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
 		
-		for (RestaurantDto3 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
@@ -371,57 +371,30 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 	}
 	
 	
-	@RequestMapping(value = "/getRestaurantByRestaurantId.do", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	@RequestMapping(value = "/getRestaurantByRestaurantId.do", method = RequestMethod.POST)
 	@ResponseBody
 	public RestaurantSimInfoDto2 getRestaurantByRestaurantId
 	(@RequestParam("restaurantId") int restaurantId) throws Exception {
 		// TODO Auto-generated method stub 
-		System.out.println("SearchViewController가 처리함! >> getRestaurants.do");
+		System.out.println("SearchViewController가 처리함! >> getRestaurantByRestaurantId.do");
 				
-		//int totalCount = restaurantSearchDao.selectRestaurantSearchTotalCountBySearchOptionHashMap(searchOptionHashMap);
+		RestaurantDto restaurant = restaurantSearchDao.selectRestaurantSearchById(restaurantId);
 		
-		//List<RestaurantDto3> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
+		RestaurantSimInfoDto2 restaurantSimInfoDto = null;
 		
-		//RestaurantSimInfoDto2 restaurant2 = null;
+		restaurantSimInfoDto = new RestaurantSimInfoDto2();
 		
+		int indexOfAddr = restaurant.getAddr().lastIndexOf(", ");
+		String doroAddr = restaurant.getAddr().substring(indexOfAddr + 2);
 		
-		/*for (RestaurantDto3 restaurantInfo : restaurants) {
-			restaurant2 = new RestaurantSimInfoDto2();
-			
-			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
-			
-			String[] splitByPipeKeywords = restaurantInfo.getKeyword().split("\\|");
-			
-			String locationKeywords = splitByPipeKeywords[0];
-			String foodKeywords = splitByPipeKeywords[2]; 
-			String themeKeywords = splitByPipeKeywords[3];
-			
-			for (String string : splitByPipeKeywords) {
-				System.out.println("splitByDollarKeywords >>string = " + string);
-			}
-			
-			restaurant2.setRestaurantId(restaurantInfo.getRestaurantId());
-			restaurant2.setRestaurantName(restaurantInfo.getRestaurantName());
-			restaurant2.setAddr(restaurantInfo.getAddr());
-			restaurant2.setPhoneNumber(restaurantInfo.getPhoneNumber());
-			restaurant2.setReviewAverageScore(restaurantInfo.getAverageScore());
-			restaurant2.setReviewNumber(45);
-			restaurant2.setRepresentPhoto(restaurantInfo.getRepresentPhoto());
-			restaurant2.setLocationKeywords(locationKeywords);
-			restaurant2.setFoodKeywords(foodKeywords);
-			restaurant2.setThemeKeywords(themeKeywords);
-			
-			restaurants2.add(restaurant2);
-		}
-		
-		HashMap<String, Object> pagingData = new HashMap<String, Object>();
-		pagingData.put("restaurantList", restaurants2);
-		pagingData.put("keyword", keyword);
-		pagingData.put("currentPage", pageNum);
-		pagingData.put("pagingHtml", pagingUtil.getPagingHtml());
-		
-		System.out.println("pagingHtml = " + pagingUtil.getPagingHtml());*/
-		
-		return null;
+		restaurantSimInfoDto.setRestaurantId(restaurant.getRestaurantId());
+		restaurantSimInfoDto.setRestaurantName(restaurant.getRestaurantName());
+		restaurantSimInfoDto.setAddr(doroAddr);
+		restaurantSimInfoDto.setPhoneNumber(restaurant.getPhoneNumber());
+		restaurantSimInfoDto.setReviewAverageScore(restaurant.getAverageScore());
+		restaurantSimInfoDto.setReviewNumber(45);
+		restaurantSimInfoDto.setRepresentPhoto(restaurant.getRepresentPhoto());
+	
+		return restaurantSimInfoDto;
 	}	
 }

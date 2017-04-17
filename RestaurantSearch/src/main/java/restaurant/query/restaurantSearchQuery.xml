@@ -54,7 +54,7 @@
 	</select>
 	
 	
-	<select id="selectRestaurantSearchView" parameterType="hashmap" resultType="RestaurantDto2">
+	<select id="selectRestaurantSearchView" parameterType="hashmap" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 
@@ -71,7 +71,7 @@
 	</select>
 	
 	
-	<select id="selectRestaurantSearchViewByFilter" parameterType="hashmap" resultType="RestaurantDto3">
+	<select id="selectRestaurantSearchViewByFilter" parameterType="hashmap" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 
@@ -112,6 +112,15 @@
 		</where>
 			)
 		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
+	</select>
+	
+	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto">
+		SELECT *
+		FROM (SELECT a.*, rownum rnum 
+			FROM (SELECT * 
+				FROM RESTAURANT
+				ORDER BY restaurantId desc) a)
+		WHERE RESTAURANTID=#{restaurantId}
 	</select>
 </mapper>
 

@@ -165,7 +165,7 @@ public class RestaurantDetViewController {
 		if (result.hasErrors()) {
 			System.out.println("result = " + result.getAllErrors());
 			System.out.println("RestaurantDetViewController>>reviewSubmit()>>Errors are occued!!");
-			this.formBacking();
+			return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
 		}
 		
 		try {

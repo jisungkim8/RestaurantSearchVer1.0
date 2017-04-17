@@ -7,7 +7,9 @@ public class RestaurantDto {
 	private String phoneNumber;
 	private String representPhoto;
 	private String keyword;
-	private int foodId;
+	private int averagePrice;
+	private String filterInfo;
+	private float averageScore;
 	
 	public int getRestaurantId() {
 		return restaurantId;
@@ -45,10 +47,22 @@ public class RestaurantDto {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public int getFoodId() {
-		return foodId;
+	public float getAverageScore() {
+		return averageScore;
 	}
-	public void setFoodId(int foodId) {
-		this.foodId = foodId;
+	public void setAverageScore(float averageScore) {
+		this.averageScore = averageScore;
+	}
+	public int getAveragePrice() {
+		return averagePrice;
+	}
+	public void setAveragePrice(int averagePrice) {
+		this.averagePrice = averagePrice;
+	}
+	public String getFilterInfo() {
+		return filterInfo;
+	}
+	public void setFilterInfo(String filterInfo) {
+		this.filterInfo = filterInfo;
 	}
 }
