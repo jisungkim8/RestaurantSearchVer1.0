@@ -717,7 +717,6 @@ $(function(){
 								<input type="button" id="profileMod" value="수정" class="btn btn-primary"  OnClick="trueForm()">
 								<input type="button" id="profileSave" value="저장" class="btn btn-success" >
 						</div>
-
 					</form>
 				</div>
 				<!-- /REGISTER -->
