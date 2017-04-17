@@ -31,8 +31,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="design/plugins/magnific-popup/magnific-popup.css"
 	rel="stylesheet" type="text/css" />
-<link href="design/css/animate.css" rel="stylesheet" type="text/css" />
-<link href="design/css/superslides.css" rel="stylesheet" type="text/css" />
+<link href="design/css/animate.css"      rel="stylesheet" type="text/css" />
+<link href="design/css/superslides.css"  rel="stylesheet" type="text/css" />
 
 <!-- SHOP CSS -->
 <!-- <link href="design/css/shop.css" rel="stylesheet" type="text/css" /> -->
@@ -130,6 +130,7 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
     			if(args=="create"){
 //     				alert("가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 가능한 이메일입니다.</font>")
+    				$("#emailDupliCheck").val('checked')
      			}else{
 //     				alert("불가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 불가능한 이메일입니다.</font>")
@@ -144,7 +145,7 @@ $(function(){
 	 //2.중복  id를 입력했을때 호출하는 함수   
 	var validationCheck = {emailVali:false, passwdVali:false};
 	 
-	 $("#nicNameRepCheck").click(function(){
+	 $("#nicNameRepCheckBtn").click(function(){
 // 		   alert("닉네임")
 		   if($("#nicName").val()==""){
 			   //document.getElementById("ducheck")=>$("ducheck")
@@ -163,7 +164,8 @@ $(function(){
 	    			if(args=="create"){
 // 	    				alert("닉네임 가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
-	     			}else{
+	    				$("#nicNameDupliCheck").val('checked')
+	    				}else{
 	    				alert("닉네임 불가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
 	    				$("#memberId").focus();
@@ -175,7 +177,31 @@ $(function(){
 	$("#createId").click(function(){
 		
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		alert("클릭되었음");
+		
+		 if($("#emailDupliCheck").val()=='unchecked'){
+				alert("에메일 중복확인 버튼을 클릭하세요.")
+				$("#repeatIdCheckBtn").focus();
+				return;
+		 }
+		 
+		 if($("#nicNameDupliCheck").val()=='unchecked'){
+				alert("닉네임 중복확인 버튼을 클릭하세요.")
+				 $("#nicNameRepCheckBtn").focus();
+				return;
+		 }
+		 
+		 if($("#birthdayCheck").val()=='unchecked'){
+				alert("생년 월일을 확인하여 주세요.")
+				$("#birthDate").focus();
+				return;
+		 }
+		 
+		 if($("#phoneNumCheck").val()=='unchecked'){
+				alert("전화번호를 확인하여 주세요.")
+				$("#phoneNum").focus();
+				return;
+		 }
+		     
 		if (!($("#memberId").val())) {
 		      alert("이메일을 입력해 주세요. 필수 입력사항입니다.")
 		      $("#memberId").focus();
@@ -188,7 +214,6 @@ $(function(){
 		      //history.back();
 		      return;
 		}		
-		
 		
 		if (!($("#password").val())) {
 		      alert("패스워드를 입력하여 주세요. 필수 입력사항입니다.")
@@ -230,6 +255,7 @@ $(function(){
 			$("#password").focus();
 			return;
 		}
+		
 		
 		$.ajax({
     		url:'/RestaurantSearch/dupliMemberCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
@@ -314,14 +340,16 @@ $(function(){
 			if ($("#password").val() != $("#rePassword").val()) {
 				$("#passwordReCheckMessage").html("<font id='idColor' color='red'>패스워드가 일치하지 않습니다</font>");
 				return;
-			}
+			} else {
+				 $("#passwordReCheckMessage").html("")
+			 }
 		})
 		
 		$("#birthDate").blur(function(){
 			//alert("asdf");
 			var birthDateVal = $("#birthDate").val();
 			//alert($("#birthDate").val().substring(0,4)+"월"+$("#birthDate").val().substring(4,6)+"일"+$('#birthDate').val().substring(6,8));
-			var birthDateCheck = {number:false }
+			//var birthDateCheck = {number:false }
 			
 			var birthLength=parseInt(birthDateVal.length);
 			//alert("생일길이=>"+birthLength);
@@ -331,27 +359,31 @@ $(function(){
 			var day=parseInt($("#birthDate").val().substring(6,8))
 			
 			//alert("birthLength"+birthLength+"birthLength="+birthLength+"year"+year+"month"+month+"day"+day);
-			alert("birthDateCheck[number]=>"+birthDateCheck["number"] )
-			
-			 if (!($("#birthDate").val())) {
-				// alert("1")
-					$("#birthCheckMessage").html("<font id='idColor' color='red'>생년월일을 입력해주세요.</font>")
-			 }else if( birthLength!=8 || year<1920 || year>2017 || month>12 || day > 31){
-				 //alert("2")
-					$("#birthCheckMessage").html("<font id='idColor' color='red'>생년월일이 정확하지 않습니다.</font>")
-			 }else{
-				 //alert("3")
-					$("#birthCheckMessage").html("")
-			 }
+			//alert("birthDateCheck[number]=>"+birthDateCheck["number"] )
 			
 			for (i=0; i< birthDateVal.length; i++) {
 				//alert("birthDateVal.charAt(i)==> "+birthDateVal.charAt(i))
 				if (!(birthDateVal.charAt(i)>=0 && birthDateVal.charAt(i)<=9)) {
 					//alert("생년월일에 문자가 들어감")
 					$("#birthCheckMessage").html("<font id='idColor' color='red'>생년월일이 정확하지 않습니다.</font>")
+					return
 				}
 			}
-			 
+			
+			 if (!($("#birthDate").val())) {
+				// alert("1")
+					$("#birthCheckMessage").html("<font id='idColor' color='red'>생년월일을 입력해주세요.</font>")
+					return
+			 }else if( birthLength!=8 || year<1920 || year>2017 || month>12 || day > 31){
+				 //alert("2")
+					$("#birthCheckMessage").html("<font id='idColor' color='red'>생년월일이 정확하지 않습니다.</font>")
+					return
+			 }else{
+				 //alert("3")
+					$("#birthCheckMessage").html("")
+					$("#birthdayCheck").val("checked")
+					return
+			 }
 		}) // passwordCheck(blur)
 		
 		$("#phoneNum").blur(function(){
@@ -360,19 +392,18 @@ $(function(){
 			if (!(phoneNumVal)) {
 					$("#phoneNumCheckMessage").html("<font id='idColor' color='red'>전화번호를 입력해주세요.</font>")
 			}else {
-					$("#phoneNumCheckMessage").html("");
+				
+					for (i=0; i< phoneNumVal.length; i++) {
+						//alert("birthDateVal.charAt(i)==> "+birthDateVal.charAt(i))
+						if (!(phoneNumVal.charAt(i)>=0 && phoneNumVal.charAt(i)<=9)) {
+							$("#phoneNumCheckMessage").html("<font id='idColor' color='red'>전화번호가 정확 하지 않습니다.</font>")
+							return
+						}
+					}
+					$("#phoneNumCheckMessage").html("")
+					$("#phoneNumCheck").val("checked")
 			} 
-			
-			
-			for (i=0; i< phoneNumVal.length; i++) {
-				//alert("birthDateVal.charAt(i)==> "+birthDateVal.charAt(i))
-				if (!(phoneNumVal.charAt(i)>=0 && phoneNumVal.charAt(i)<=9)) {
-					alert("전화번호에 문자가 들어감")
-					$("#phoneNumCheckMessage").html("<font id='idColor' color='red'>전화번호가 정확 하지 않습니다.</font>")
-				}
-			}
 		})
-		
 })
 
 </script>
@@ -437,10 +468,10 @@ $(function(){
   				 				<img class="img-responsive" src="design/images/demo/realestate/빵.jpg" alt="Chania" width="460" height="345"> 
 		     				</div>
 		    		 </div> -->
-		   <!--   </div> -->
+		    <!-- </div>  -->
 	
 			<section class="container">
-
+			
 			<div  class="row">
 
 				<!-- REGISTER -->
@@ -468,7 +499,7 @@ $(function(){
 								</div>
 								<div class="col-md-6">
 									<br>
-									<input type="button" id="repeatCheck" value="중복확인" class="btn btn-primary" onclick="memberReg(this.form.memberId.value)">
+									<input type="button" id="repeatIdCheckBtn" value="중복확인" class="btn btn-primary" onclick="memberReg(this.form.memberId.value)">
 									<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
 								</div>
 							</div>
@@ -497,7 +528,7 @@ $(function(){
 								</div>
 								<div class="col-md-2">
 									<br>
-									<input type="button" id="nicNameRepCheck" value="중복확인" class="btn btn-success">
+									<input type="button" id="nicNameRepCheckBtn" value="중복확인" class="btn btn-success">
 									<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
 								</div>
 								<div class="col-md-6">
@@ -517,16 +548,11 @@ $(function(){
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-md-12">
+								<div class="col-md-8">
 									<label>생년월일</label> <input type="text" id="birthDate" name="birthDate"
 										 class="form-control" placeholder="생년월일 숫자8자리를 입력하세요. ex) 20010101 [필수]">
 									<table><tr><td id="birthCheckMessage" ></td></tr></table>
 								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="form-group">
 								<div class="col-md-4">
 									<label>성별</label> <%-- <input type="text" name="gender"
 										value="${memDetInfoDto.gender}" class="form-control"> --%>
@@ -538,7 +564,7 @@ $(function(){
 								</div>
 							</div>
 						</div>
-												
+						
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
@@ -552,8 +578,6 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						
-						
 						
 						<!-- <div class="form-group">
 							<label for="InputSubject1">대표이미지</label>
@@ -612,6 +636,10 @@ $(function(){
 
 						<div class="row">
 							<div class="col-md-12">
+								<input type="hidden" id="emailDupliCheck" value="unchecked">
+								<input type="hidden" id="nicNameDupliCheck" value="unchecked">
+								<input type="hidden" id="birthdayCheck" value="unchecked">
+								<input type="hidden" id="phoneNumCheck" value="unchecked">
 								<input type="button" id="createId" value="계정만들기" class="btn btn-info pull-right push-bottom"
 									data-loading-text="Loading...">
 							</div>
@@ -674,7 +702,7 @@ $(function(){
 		<!-- copyright , scrollTo Top -->
 		<div class="footer-bar">
 			<div class="container">
-				<span class="copyright">Copyright &copy; git 짜증나요..., LLC .
+				<span class="copyright">Copyright &copy; git, LLC .
 					All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO
 					TOP <i class="fa fa-arrow-circle-up"></i>
 				</a>

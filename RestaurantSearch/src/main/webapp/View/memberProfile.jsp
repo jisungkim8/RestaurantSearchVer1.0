@@ -142,7 +142,6 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
 function trueForm() 
 { 
 	//$("#memberId").attr("disabled",false).attr("readonly",false); 
-	alert(" 수정 => "+$('#profileMod').val() );
 	
 	if($('#profileMod').val()=='수정'){
 		$("#birthDate").attr("disabled",false).attr("readonly",false); 
@@ -152,22 +151,25 @@ function trueForm()
 		$("#interestFood").attr("disabled",false).attr("readonly",false); 
 		$("#nicName").attr("disabled",false).attr("readonly",false); 
 		$("#selfIntro").attr("disabled",false).attr("readonly",false); 
-		$("#emailCheck").attr("disabled",false).attr("onclick",true); 	
+		$("#emailCheck").attr("disabled",false).attr("onclick",false);
+		$("#nicNameRepCheck").attr("disabled",false).attr("onclick",false);
 		//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
-		$('#ex_filename').attr('disabled',false);  //업로드 버튼 활성화 
-		$('#profileMod').val('확인')
+		$('#ex_filenameBtn').attr('disabled',false);  //업로드 버튼 활성화 
+		$('#uploadBtn').show();
+		$('#profileMod').val('수정완료')
 	}else{
-		alert("수정 후 확인")
-		$("#birthDate").attr("disabled",true).attr("readonly",true); 
-		$("#phoneNum").attr("disabled",true).attr("readonly",true); 
-		$("#gender").attr("disabled",true).attr("readonly",true); 
-		$("#photoPath").attr("disabled",true).attr("readonly",true); 
-		$("#interestFood").attr("disabled",true).attr("readonly",true); 
-		$("#nicName").attr("disabled",true).attr("readonly",true);
-		$("#selfIntro").attr("disabled",true).attr("readonly",true);
-		$("#emailCheck").attr("disabled",true).attr("onclick",true);
+		$("#birthDate").attr("disabled",false).attr("readonly",true); 
+		$("#phoneNum").attr("disabled",false).attr("readonly",true); 
+		$("#gender").attr("disabled",false).attr("readonly",true); 
+		$("#photoPath").attr("disabled",false).attr("readonly",true); 
+		$("#interestFood").attr("disabled",false).attr("readonly",true); 
+		$("#nicName").attr("disabled",false).attr("readonly",true);
+		$("#selfIntro").attr("disabled",false).attr("readonly",true);
+		$("#emailCheck").attr("disabled",true).attr("onclick",false);
+		$("#nicNameRepCheck").attr("disabled",true).attr("onclick",false);
 		//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
-		$('#ex_filename').attr('disabled',true);  //업로드 버튼 활성화 
+		$('#ex_filenameBtn').attr('disabled',false).attr("readonly",true);  //업로드 버튼 활성화 
+		$('#uploadBtn').hide();
 		$('#profileMod').val('수정')
 	}
 } 
@@ -207,6 +209,11 @@ $(function(){
 		
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		var params=$("#registerMem").serialize();
+
+		if($('#profileMod').val()=='수정완료'){
+			alert("수정완료 버튼을 클릭 하십시오.");
+			return
+		}
 		
 		if (!($("#memberId").val())) {
 		      alert("이메일을 입력해 주세요. 필수 입력사항입니다.")
@@ -235,18 +242,43 @@ $(function(){
 		      return;
 			}
 		
-		$.ajax({
+		/*  $.ajax({
     		url:'memberInfoUpdate.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
     		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+    		dataType:'json',
     		data:  params, 
     		type : "POST",
+    		async:false,
+    		contentType : false,
     		//3.success:콜백함수명(매개변수)
     		success:function(args){
+    		 	
     				if(args){
     					self.close();
     				}
     		}
-    	})
+    	})  */
+    	
+    	var formData = new FormData($("#registerMem")[0]);
+
+        $.ajax({
+            type : 'post',
+            url : 'memberInfoUpdate.do',
+            data : formData,
+            processData : false,
+            contentType : false,
+            success : function(html) {
+            	self.close();
+            },
+
+            error : function(error) {
+                alert("파일 업로드에 실패하였습니다.");
+                console.log(error);
+                console.log(error.status);
+            }
+        });
+    	
+    	//document.registerMem.submit();
 	})
 	
 	$("#memberId").blur(function(){
@@ -397,7 +429,7 @@ $(function(){
       font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle;
       background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
       border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
-
+	 #uploadBtn { display: none;}
 </style>
 </head>
 <body>
@@ -519,7 +551,7 @@ $(function(){
 					</c:if>
 				</h2>
 
-				<form name="registerMem" id="registerMem" class="white-row" method="post" action="memberInfoUpdate.do">
+				<form name="registerMem" id="registerMem" enctype="multipart/form-data" class="white-row" method="post" action="memberInfoUpdate.do">
 						<!-- alert failed -->
 						<!-- <div class="alert alert-danger">
 							<i class="fa fa-frown-o"></i> <strong>Password</strong> do not
@@ -595,6 +627,7 @@ $(function(){
 						<div class="row" style="background-color: #FFE400">
 							<div class="form-group">
 								<div class="col-md-12">
+										<label>이미지</label> 
 								 		<div class="filebox">
 								 		<c:if test="${memDetInfo.photoPath!='images/null'}">
 											<input class="upload-name" size="50" value="${memDetInfo.photoPath}" disabled="disabled">
@@ -604,8 +637,8 @@ $(function(){
 									          class="form-control" placeholder="대표이미지를 첨부하여 주세요.[선택]" readonly> -->
 									          <input class="upload-name" size="50" value="" placeholder="대표이미지를 첨부하여 주세요.[선택]" disabled="disabled">
 								 		</c:if>
-								 			<label for="ex_filename">업로드</label> 
-								 			<input type="file" id="ex_filename" name="upload"  class="upload-hidden" disabled>
+								 			<label id=uploadBtn for="ex_filenameBtn">업로드</label> 
+								 			<input type="file" id="ex_filenameBtn" name="upload"  class="upload-hidden" disabled="disabled" >
 										</div>
 								</div>
 							</div>
@@ -635,22 +668,15 @@ $(function(){
 									</div>
 								</div> --%>
 
-						<div class="row" style="background-color: #86E57F">
+					<div class="row" style="background-color: #86E57F">
 							<div class="form-group">
-								<div class="col-md-12">
-									<label>관심음식</label> <input type="text" id="interestFood" name="interestFood" value="${memDetInfo.interestFood}"
-										 class="form-control" placeholder="좋아하거나 관심있는 음식을 입력하여 주세요.[선택]" readonly>
-								</div>
-							</div>
-						</div>
-
-						<div class="row" style="background-color: #86E57F">
-							<div class="form-group">
-								<div class="col-md-12">
+								<div class="col-md-2">
 									<label>닉네임</label> <input type="text" size="10" id="nicName"  class="form-control" name="nickname" value="${memDetInfo.nickname}"
 										  placeholder="닉네임을 입력하여 주세요.[선택]" readonly>
-									<input type="button" id="nicNameRepCheck" value="중복확인" class="btn btn-success"> 
 									<table><tr style="background-color:#86E57F"><td id="nicNameTxt" ></td></tr></table>
+								</div>
+								<div class="col-md-10">
+									<input type="button" id="nicNameRepCheck" value="중복확인" style="margin-top: 10px;" class="btn btn-success" disabled="disabled">
 								</div>
 								<!-- <div class="col-md-7">
 									<br>
@@ -660,6 +686,15 @@ $(function(){
 							</div>
 						</div>
 						
+						<div class="row" style="background-color: #86E57F">
+							<div class="form-group">
+								<div class="col-md-12">
+									<label>관심음식</label> <input type="text" id="interestFood" name="interestFood" value="${memDetInfo.interestFood}"
+										 class="form-control" placeholder="좋아하거나 관심있는 음식을 입력하여 주세요.[선택]" readonly>
+								</div>
+							</div>
+						</div>
+
 						<div class="row" style="background-color: #86E57F">
 							<div class="form-group">
 								<div class="col-md-12">
@@ -714,10 +749,9 @@ $(function(){
 						</div>
 
 						<div class="row" style="text-align:right; background-color: #86E57F">   
-								<input type="button" id="profileMod" value="수정" class="btn btn-primary"  OnClick="trueForm()">
-								<input type="button" id="profileSave" value="저장" class="btn btn-success" >
+								<input type="button" id="profileMod" value="수정" style="margin-bottom: 17px; margin-right: 17px;" class="btn btn-primary"  OnClick="trueForm()">
+								<input type="button" id="profileSave" value="저장"  style="margin-bottom: 17px; margin-right: 17px;"  class="btn btn-success" >
 						</div>
-
 					</form>
 				</div>
 				<!-- /REGISTER -->

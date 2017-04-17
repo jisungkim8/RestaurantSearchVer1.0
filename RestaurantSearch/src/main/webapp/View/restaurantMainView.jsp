@@ -89,15 +89,9 @@
 											'thick solid brown');
 								})
 
-						$("#login")
-								.click(
+						$("#login").click(
 										function() {
 											var registerCheck, passwd;
-
-											alert("memberId==>"
-													+ $("#memberId").val());
-											alert("password==>"
-													+ $("#password").val());
 
 											//document.memInfo.submit()
 
@@ -105,16 +99,11 @@
 
 											if ($("#memberId").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+												$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
 												$("#memberId").focus();//커서입력
 												return;
-											} else if (!regEmail.test($(
-													"#memberId").val())) {
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+											} else if (!regEmail.test($("#memberId").val())) {
+												$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
 												$("#memberId").focus();
 												//history.back();
 												return;
@@ -122,71 +111,49 @@
 
 											if ($("#password").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg")
-														.html(
-																"<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+												$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
 												$("#loginmsg").focus();//커서입력
 												return;
 											}
 
-											$
-													.ajax({
+											$.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
-															id : $("#memberId")
-																	.val()
+															id : $("#memberId").val()
 														},
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
 														success : function(args) {
-															alert(args);
 															if (args == "register") {
-																alert("회원등록이 되었습니다.")
 																registerCheck = "register"
-																$
-																		.ajax({
+																$.ajax({
 																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 																			data : {
-																				id : $(
-																						"#memberId")
-																						.val(),
-																				passwd : $(
-																						"#password")
-																						.val()
+																				id : $("#memberId").val(),
+																				passwd : $("#password").val()
 																			},
 																			type : "POST",
 																			//3.success:콜백함수명(매개변수)
-																			success : function(
-																					args) {
-																				alert(args)
+																			success : function(args) {
 																				if (args == "agreement") {
-																					document.memInfo
-																							.submit()
+																					document.memInfo.submit()
 																				} else {
-																					$(
-																							"#loginmsg")
-																							.html(
-																									"<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																				}
 																			}
 																		})
 															} else {
-																$("#loginmsg")
-																		.html(
-																				"<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+																$("#loginmsg").html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
 															}
 														}
 													})
 										})
 
-						$('#myProfile')
-								.click(
-										function() {
+						$('#myProfile').click(function() {
 											alert("id=>" + $('#memberId').val())
-											alert("pwd=>"
-													+ $("#password").val())
+											alert("pwd=>"	+ $("#password").val())
 
 											var memInfoForm = document.memInfoForm;
 											var url = "memProfile.do";
@@ -360,7 +327,7 @@
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
 							style="background-color: lightgreen"> <span>로그인 성공!
-									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
+									아이디 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
 							</span>
 						</a>
 							<ul class="dropdown-menu extended logout"
@@ -390,7 +357,7 @@
 					<div class="pull-right nav signin-dd">
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="list.do"><span
-								class="btn btn-success">게시판</span></a>
+								class="btn btn-primary">게시판</span></a>
 						</div>
 
 
@@ -422,6 +389,10 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
+										<input type="hidden" name="restaurantId" value="0">
+										<input type="hidden" name="moreCount" value="0">
+										<input type="hidden" name="filterName" value="reviewId">
+										<input type="hidden" name="pageName" value="restMainView">
 										<input type="button" id="login" value="로그인"
 										class="btn btn-primary pull-right push-bottom">
 									</span>

@@ -12,16 +12,16 @@
 </head>
 <body class = "bg-primary">
 	<center>
-		<h2> 패스워드찾기</h2>
+		<h2 style="padding-bottom: 10px;"> 패스워드찾기</h2>
 		<form action="pwdSearch.do" method="post">
 		<div style='display:table-cell;vertical-align:middle'>
 			<table width="500" border="4" class="table table-bordered">
 				<tr class='success'>
-					<td align="center" valign="middle" class='text-success'>이메일</td>
+					<td align="center" valign="middle" class='text-success' style="padding-top: 15px;">이메일</td>
 					<td width="500"><input type="text" class="form-control" name="memberId" size="30" placeholder="이메일을 입력하세요."></td>
  				</tr>
  				<tr class='success'>
-					<td align="center" width="170" class='text-success'>생년월일</td>
+					<td align="center" width="170" class='text-success' style="padding-top: 15px;">생년월일</td>
 					<td width="500"><input type="text" class="form-control" name="birthDate" size="50" placeholder="생년월일 숫자8자리를 입력하세요. ex) 20010101"></td>
  				</tr>
 			<!-- 	<tr height="40">
