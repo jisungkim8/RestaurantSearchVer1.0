@@ -338,7 +338,7 @@
 								<!-- <li class="eborder-top">
                                 <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
                             </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
+								<li class="eborder-top"><a href="restDetmemberLogout.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId"><i
 										class="icon_profile"></i> 로그아웃</a></li>
 								<li class="eborder-top"><a href="#" id="memLeave"><i
 										class="icon_profile"></i> 회원탈퇴</a></li>

@@ -116,7 +116,8 @@ public class MemLoginController {
 	@RequestMapping(value = "memberLogin.do", method = RequestMethod.POST)
 	public ModelAndView memberLogin(@ModelAttribute("memSimInfoDto") MemSimInfoDto memSimInfoDto,
 			@RequestParam(value = "restaurantId") int restaurantId, @RequestParam(value = "moreCount") int moreCount,
-			@RequestParam(value = "filterName") String filterName, @RequestParam(value="pageName") String pageName, HttpSession session) {
+			@RequestParam(value = "filterName") String filterName, @RequestParam(value = "pageName") String pageName,
+			HttpSession session) {
 		String registerCheck;
 		MemSimInfoDto memSimInfo = new MemSimInfoDto();
 		MemDetInfoDto memDetInfo = new MemDetInfoDto();
@@ -128,8 +129,9 @@ public class MemLoginController {
 
 		System.out.println("__memberLogin__method=RequestMethod.POST");
 		System.out.println("memSimInfoDto=" + memSimInfoDto);
-		System.out.println("restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName+"pageName=" + pageName);
-		
+		System.out.println("restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+				+ "&filterName=" + filterName + "pageName=" + pageName);
+
 		memSimInfo = memberDao.loginCheck(memSimInfoDto);
 		memDetInfo.setMemberId(memSimInfoDto.getMemberId());
 		memDetInfo = memberDao.selectMemDetInfo(memDetInfo);
@@ -146,28 +148,29 @@ public class MemLoginController {
 		List<MainRestaurantListDto> list = mainRestaurantListDao.selectMainRestaurantList();
 		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
 
-		
-		if(pageName.equals("restMainView")){
+		if (pageName.equals("restMainView")) {
 			System.out.println("=====restMainView.jsp====");
 			mav.setViewName("restaurantMainView");
 			mav.addObject("memSimInfo", memSimInfo);
 			mav.addObject("registerCheck", registerCheck);
 			mav.addObject("list", list);
 			mav.addObject("newlist", newlist);
-			
-		}else if(pageName.equals("restDetView")){
+
+		} else if (pageName.equals("restDetView")) {
 			System.out.println("=====restDetView.jsp====");
-			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName);
-			//mav.addObject("restaurantId", restaurantId);
-			//mav.addObject("moreCount", moreCount);
-			//mav.addObject("filterName", filterName);
-			//return new ModelAndView("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName);
+			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+					+ "&filterName=" + filterName);
+			// mav.addObject("restaurantId", restaurantId);
+			// mav.addObject("moreCount", moreCount);
+			// mav.addObject("filterName", filterName);
+			// return new
+			// ModelAndView("redirect:restaurantDetView.do?restaurantId=" +
+			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
+			// filterName);
 		}
-		
+
 		return mav;
 	}
-	
-	
 
 	@RequestMapping("memProfile.do")
 	public ModelAndView memProfile(@RequestParam("memberId") String memId, @RequestParam("password") String passWd) {
@@ -249,6 +252,24 @@ public class MemLoginController {
 		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
 
 		mav.setViewName("restaurantMainView");
+		mav.addObject("list", list);
+		mav.addObject("newlist", newlist);
+		return mav;
+	}
+
+	@RequestMapping("restDetmemberLogout.do")
+	public ModelAndView restDetMemberLogout(@RequestParam(value = "restaurantId") int restaurantId,
+			@RequestParam(value = "moreCount") int moreCount, @RequestParam(value = "filterName") String filterName,
+			HttpSession session) {
+		System.out.println("memberLogout_로그아웃");
+		session.setAttribute("userLoginInfo", null);
+		ModelAndView mav = new ModelAndView();
+
+		List<MainRestaurantListDto> list = mainRestaurantListDao.selectMainRestaurantList();
+		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
+
+		mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+					+ "&filterName=" + filterName);
 		mav.addObject("list", list);
 		mav.addObject("newlist", newlist);
 		return mav;
