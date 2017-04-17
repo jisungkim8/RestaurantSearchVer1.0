@@ -32,7 +32,8 @@ public class MainViewController {
 		List<MainRestaurantListDto> newlist=mainRestaurantListDao.selectNewRestaurantList();
 		List<MainRestaurantListDto> bestlist=mainRestaurantListDao.SelectBestRestaurantList();
 		
-		ModelAndView mav=new ModelAndView("restaurantMainView");//이동할 페이지명
+		//ModelAndView mav=new ModelAndView("restaurantMainView");//이동할 페이지명
+		ModelAndView mav=new ModelAndView("restaurantMainView2");
 		
 		mav.addObject("bestlist", bestlist);
 		mav.addObject("list", list);
@@ -41,8 +42,4 @@ public class MainViewController {
 		System.out.println("mainRestarantListDto 등록됨!");
 		return mav;
 	}
-	
-	
-	
-	
 }

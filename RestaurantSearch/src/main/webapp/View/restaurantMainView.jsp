@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,12 +8,10 @@
 <title>맛집검색 - 헤헤</title>
 
 <!-- mobile settings -->
-<meta name="viewport"
-	content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+<meta name="viewport"	content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 <!-- WEB FONTS -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800"
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800"
 	rel="stylesheet" type="text/css" />
 
 <!-- CORE CSS -->

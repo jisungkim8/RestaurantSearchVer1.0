@@ -105,8 +105,8 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 			restaurants2.add(restaurant2);
 		}
 		
-		ModelAndView mav = new ModelAndView("restaurantListView");//이동할 페이지명
-		
+		//ModelAndView mav = new ModelAndView("restaurantListView");//이동할 페이지명
+		ModelAndView mav = new ModelAndView("restaurantListView2");
 		mav.addObject("restaurantList", restaurants2);
 		mav.addObject("keyword", keyword);
 		mav.addObject("currentPage", pageNum);
@@ -400,7 +400,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		restaurantSimInfoDto.setRepresentPhoto(restaurant.getRepresentPhoto());
 		restaurantSimInfoDto.setLocationKeywords(locationKeywords);
 		restaurantSimInfoDto.setFoodKeywords(foodKeywords);
-		restaurantSimInfoDto.setThemeKeywords(themeKeywords); 
+		restaurantSimInfoDto.setThemeKeywords(themeKeywords);
 	
 		return restaurantSimInfoDto;
 	}	
