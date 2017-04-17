@@ -650,18 +650,23 @@
 														
 														<c:if test="${!shopPhotoDtoSepNum2.isEmpty()}">
 															<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-																<c:forEach var="shopPhotoSepNum2" items="${shopPhotoDtoSepNum2}">
+																<c:forEach var="shopPhotoSepNum2" items="${shopPhotoDtoSepNum2}" varStatus="vs">
 																	<li class="col-sm-4"><!-- item -->
 																		<div class="item-box">
 																			<figure>
-																				<a class="item-hover" href="<c:url value="${shopPhotoSepNum2.photoPath}" />">
-																					<span class="overlay color2"></span>
-																					<span class="inner">
-																						<span class="block fa fa-eye fsize20"></span>
-																						<strong>VIEW</strong> IMAGE
-																					</span>
+																				<a href="<c:url value="${shopPhotoSepNum2.photoPath}" />">
+																					<c:if test="${vs.index <= 2 }">
+																						<img class="img-responsive" src="<c:url value="${shopPhotoSepNum2.photoPath}" />" width="260" height="260" alt="">
+																					</c:if>
+																					
+																					<c:if test="${vs.index == 2 }">
+																						<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
+																							<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
+																								+ ${shopPhotoDtoSepNum2.size()-3}
+																							</span>
+																						</div>
+																					</c:if>
 																				</a>
-																				<img class="img-responsive" src="<c:url value="${shopPhotoSepNum2.photoPath}" />" width="260" height="260" alt="">
 																			</figure>
 																		</div>
 																	</li>
@@ -743,12 +748,15 @@
 											등록된 리뷰가 없습니다.
 										</c:if>
 										
-										<div class="col-md-12" align="right">
-											<button id="filtering" value="reviewId">최신순</button>
-											<button id="filtering" value="recommendCnt">추천순</button>
-										</div>
-										
 										<c:if test="${!shopReviewDto.isEmpty()}">
+											<div class="col-md-12" align="right">
+												<button class="btn btn-info" id="filtering" value="reviewId">최신순</button>
+												<button class="btn btn-info" id="filtering" value="recommendCnt">추천순</button>
+											</div>
+										
+											<div class="divider"></div>
+
+										
 											<div id="getReview"></div>
 											
 											<div>
@@ -824,9 +832,8 @@
 																			<div align="right">
 																				<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
 																			</div>
-																			
+<%-- 																			<input type="hidden" name="memberId" value="${sessionScope.userLoginDetInfo.nickname}"> --%>
 																			<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
-																				
 																		</div>
 																	</div>
 																</div>
