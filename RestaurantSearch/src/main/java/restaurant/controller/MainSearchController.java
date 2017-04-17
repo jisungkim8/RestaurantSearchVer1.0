@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.RestaurantSearchDao;
-import restaurant.dto.RestaurantDto2;
-import restaurant.dto.RestaurantDto3;
+import restaurant.dto.RestaurantDto;
 import restaurant.dto.RestaurantSimInfoDto2;
 import restaurant.dto.SearchOptionObject;
 import restaurant.util.PagingUtil;
@@ -68,9 +67,9 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		pagingMap.put("begin", pagingUtil.getStartCount());
 		pagingMap.put("end", pagingUtil.getEndCount());
 				
-		List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		
-		for (RestaurantDto2 restaurantDto2 : restaurants) {
+		for (RestaurantDto restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}
 		
@@ -78,7 +77,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
-		for (RestaurantDto2 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
@@ -156,9 +155,9 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		pagingMap.put("begin", pagingUtil.getStartCount());
 		pagingMap.put("end", pagingUtil.getEndCount());
 				
-		List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		
-		for (RestaurantDto2 restaurantDto2 : restaurants) {
+		for (RestaurantDto restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}
 		
@@ -166,7 +165,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
-		for (RestaurantDto2 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());
@@ -315,13 +314,13 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		//List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchByKeyword(pagingMap);
 		//List<RestaurantDto2> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
-		List<RestaurantDto3> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
+		List<RestaurantDto> restaurants = restaurantSearchDao.selectRestaurantSearchBySearchOptionHashMap(searchOptionHashMap);
 		
 		/*for (RestaurantDto2 restaurantDto2 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto2.getRestaurantName());
 		}*/
 		
-		for (RestaurantDto3 restaurantDto3 : restaurants) {
+		for (RestaurantDto restaurantDto3 : restaurants) {
 			System.out.println("식당명 : " + restaurantDto3.getRestaurantName());
 		}
 		
@@ -330,7 +329,7 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		RestaurantSimInfoDto2 restaurant2 = null;
 		
 		
-		for (RestaurantDto3 restaurantInfo : restaurants) {
+		for (RestaurantDto restaurantInfo : restaurants) {
 			restaurant2 = new RestaurantSimInfoDto2();
 			
 			System.out.println("restaurantInfo.getKeyword() = " + restaurantInfo.getKeyword());

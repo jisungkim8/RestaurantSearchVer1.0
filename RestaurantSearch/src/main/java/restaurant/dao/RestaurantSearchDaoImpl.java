@@ -5,11 +5,10 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import restaurant.dto.RestaurantDto2;
-import restaurant.dto.RestaurantDto3;
+import restaurant.dto.RestaurantDto;
 
 public class RestaurantSearchDaoImpl extends SqlSessionDaoSupport implements RestaurantSearchDao {
-	public List<RestaurantDto2> selectRestaurantSearchByKeyword(HashMap<String, Object> pagingMap) {
+	public List<RestaurantDto> selectRestaurantSearchByKeyword(HashMap<String, Object> pagingMap) {
 		// TODO Auto-generated method stub
 		System.out.println("RestaurantSearchDaoImpl>>selectRestaurantSearchByKeyword() is called!!");
 
@@ -30,7 +29,7 @@ public class RestaurantSearchDaoImpl extends SqlSessionDaoSupport implements Res
 		return getSqlSession().selectOne("selectRestaurantSearchViewCountByFilter", searchOptionHashMap);
 	}
 
-	public List<RestaurantDto3> selectRestaurantSearchBySearchOptionHashMap(
+	public List<RestaurantDto> selectRestaurantSearchBySearchOptionHashMap(
 			HashMap<String, Object> searchOptionHashMap) {
 		// TODO Auto-generated method stub
 		//return null;

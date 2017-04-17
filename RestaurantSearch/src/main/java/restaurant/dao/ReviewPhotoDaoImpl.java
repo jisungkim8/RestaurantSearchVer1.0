@@ -1,13 +1,11 @@
 package restaurant.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import restaurant.dto.ReviewPhotoDto;
-import restaurant.dto.ShopReviewDto;
 
 public class ReviewPhotoDaoImpl extends SqlSessionDaoSupport implements ReviewPhotoDao {
 	

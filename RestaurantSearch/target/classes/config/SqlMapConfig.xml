@@ -15,9 +15,7 @@
 		<typeAlias alias="ShopReviewDto" type="restaurant.dto.ShopReviewDto" />
 		<typeAlias alias="ReviewPhotoDto" type="restaurant.dto.ReviewPhotoDto" />
 		<typeAlias alias="MainRestaurantListDto" type="restaurant.dto.MainRestaurantListDto" />
-		<typeAlias alias="RestaurantDto2" type="restaurant.dto.RestaurantDto2" />
 		<typeAlias alias="ShopReviewCommand" type="restaurant.dto.ShopReviewCommand" />
-		<typeAlias alias="RestaurantDto3" type="restaurant.dto.RestaurantDto3" />
 	</typeAliases>
 
 	<!-- 불러올 테이블의 정보(xml파일) -->

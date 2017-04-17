@@ -54,7 +54,7 @@
 	</select>
 	
 	
-	<select id="selectRestaurantSearchView" parameterType="hashmap" resultType="RestaurantDto2">
+	<select id="selectRestaurantSearchView" parameterType="hashmap" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 
@@ -71,7 +71,7 @@
 	</select>
 	
 	
-	<select id="selectRestaurantSearchViewByFilter" parameterType="hashmap" resultType="RestaurantDto3">
+	<select id="selectRestaurantSearchViewByFilter" parameterType="hashmap" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 

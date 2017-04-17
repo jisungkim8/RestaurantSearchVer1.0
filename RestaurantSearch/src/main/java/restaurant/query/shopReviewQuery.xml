@@ -10,7 +10,7 @@
 			FROM (SELECT * 
 				FROM (SELECT * 
 					FROM SHOPREVIEW
-					ORDER BY ${filterName} desc))a
+					ORDER BY ${filterName} desc, reviewId desc))a
 			WHERE RESTAURANTID=#{restaurantId})
 		<![CDATA[
 		WHERE RNUM >= #{start} AND RNUM <= #{end}

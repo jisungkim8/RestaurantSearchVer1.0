@@ -723,7 +723,17 @@
 									
 									<!-- location tab -->
 									<div id="tab2" class="tab-pane">
-										<p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+										<!-- 네이버 api 표시를 위한 div 영역... -->
+										<div id="map" style="width: 100%; min-height: 1200px; height: 100%; z-index: 1;"></div>
+									
+										<!-- 네이버 지도 스크립트....-->
+										<script type="text/javascript"
+											src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Smnb3AyBYKR9Jqvcg1nd"></script>
+										<!-- 네이버 지도 주소 <-> 좌표 변환용 스크립트... -->
+										<script type="text/javascript"
+											src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
+									
+										<!-- 사용자 정의 스크립트... -->
 									</div>
 									<!-- /location tab -->
 									
@@ -750,8 +760,13 @@
 										</c:if>
 										
 										<div>
-											<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
-					
+											<c:if test="${sessionScope.userLoginInfo == null}">
+												<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">리뷰 작성</button>
+											</c:if>
+										
+											<c:if test="${sessionScope.userLoginInfo != null}">
+												<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
+											</c:if>
 											<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-lg">
 													<div class="modal-content">
@@ -811,7 +826,7 @@
 																				<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
 																			</div>
 																			
-																			<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo}">
+																			<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
 																				
 																		</div>
 																	</div>
@@ -1582,6 +1597,7 @@
 
 		<script type="text/javascript" src="design/js/scripts.js"></script>
 		<script type="text/javascript" src="View/restaurantDetViewScripts.js"></script>
+		
 <%-- 		<script type="text/javascript" src="<c:url value="design/js/restaurantScripts.js" />"></script> --%>
 
 
