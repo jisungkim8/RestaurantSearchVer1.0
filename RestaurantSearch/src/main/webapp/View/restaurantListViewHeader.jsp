@@ -40,11 +40,14 @@
 							<ul class="dropdown-menu extended logout"
 								style="width: 251px; background-color: blue">
 								<div class="log-arrow-up"></div>
-								<li class="eborder-top"><a href="#" id="myProfile"><i
-										class="icon_profile"></i> My Profile</a></li>
-								<!-- <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
-                            </li> -->
+								<li class="eborder-top">
+									<a href="#" id="myProfile">
+										<i	class="icon_profile"></i> My Profile
+									</a>
+								</li> 
+								<li class="eborder-top">
+                                	<a href="#" id="favorite_list"><i class="icon_profile"></i>좋아요리스트 </a>
+                            	</li> 
 								<li class="eborder-top"><a href="memberLogout.do"><i
 										class="icon_profile"></i> 로그아웃</a></li>
 								<li class="eborder-top"><a href="#" id="memLeave"><i

@@ -122,6 +122,14 @@
 				ORDER BY restaurantId desc) a)
 		WHERE RESTAURANTID=#{restaurantId}
 	</select>
+	
+	<select id="selectRestaurantSearchByMemberId" parameterType="String" resultType="RestaurantDto3">
+		SELECT restaurant.restaurantId FROM
+        		(SELECT * FROM likeList a, memsimInfo b
+                		WHERE (a.memberId = #{memberId}) and (a.memberId = b.memberId) 
+        		ORDER BY a.listNum DESC) c, restaurant
+		WHERE c.restaurantId = restaurant.restaurantId
+	</select>
 </mapper>
 
 

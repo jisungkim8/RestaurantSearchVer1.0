@@ -33,7 +33,7 @@ public class MainViewController {
 		List<MainRestaurantListDto> bestlist=mainRestaurantListDao.SelectBestRestaurantList();
 		
 		//ModelAndView mav=new ModelAndView("restaurantMainView");//이동할 페이지명
-		ModelAndView mav=new ModelAndView("restaurantMainView2");
+		ModelAndView mav=new ModelAndView("restaurantMainView2"); 
 		
 		mav.addObject("bestlist", bestlist);
 		mav.addObject("list", list);

@@ -46,4 +46,9 @@ public class RestaurantSearchDaoImpl extends SqlSessionDaoSupport implements Res
 		
 		return getSqlSession().selectOne("selectRestaurantSearchById", restaurantId);
 	}
+
+	public List<RestaurantDto3> selectRestaurantSearchByMemberId(String memberId) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("selectRestaurantSearchByMemberId", memberId);
+	}
 }
