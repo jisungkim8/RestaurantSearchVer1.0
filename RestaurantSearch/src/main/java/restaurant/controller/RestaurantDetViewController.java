@@ -104,12 +104,20 @@ public class RestaurantDetViewController {
 		String[] str = null;
 
 		if (restaurantDto.getKeyword() != null) {
+//			str = restaurantDto.getKeyword().split("\\|");
 			str = restaurantDto.getKeyword().split(" ");
 
 			for (int i=0; i<str.length; i++) {
 				keyword.add(str[i]);
 			}
 		}
+		
+		// 번지명 주소, 도로명 주소
+		int indexOfDoroAddr = restaurantDto.getAddr().lastIndexOf(", ");
+		String addr = restaurantDto.getAddr().substring(0, indexOfDoroAddr);
+		String doroAddr = restaurantDto.getAddr().substring(indexOfDoroAddr + 2);
+		
+		restaurantDto.setAddr(addr + " (" + doroAddr + ")");
 		
 		ModelAndView mav = new ModelAndView();
 		
