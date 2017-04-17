@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- 경로 매핑 -->
+	<mvc:resources mapping="design/**" location="/design/" />
+	<mvc:annotation-driven />
+	
+	<!-- @Autowired 및 기타 어노테이션 설정에 관련된 빈즈 클래스 등록 -->
+	<context:annotation-config />
+
+
+	<!-- viewResolver 설정 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/View/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 회원 목록보기 -->
+	<bean class="restaurant.controller.MainViewController" />
+	<bean class="restaurant.controller.MemberRegiController" />
+	<bean class="restaurant.controller.MemLoginController" />
+	<bean class="restaurant.dao.MemberDaoImpl" />
+	<bean class="restaurant.controller.MemberListController" />
+	
+	<!-- 상세페이지 -->
+	<bean class="restaurant.dao.RestaurantDaoImpl" />
+	<bean class="restaurant.dao.ShopDetInfoDaoImpl" />
+	<bean class="restaurant.dao.ShopPhotoDaoImpl" />
+	<bean class="restaurant.dao.ShopReviewDaoImpl" />
+	<bean class="restaurant.dao.ReviewPhotoDaoImpl" />
+	<bean class="restaurant.controller.RestaurantDetViewController" />
+	
+	<!-- 검색페이지 -->
+	<bean class="restaurant.dao.RestaurantSearchDaoImpl" />
+	<bean class="restaurant.controller.MainSearchController"/>
+	
+	<!-- 게시판 -->
+	<bean class="restaurant.controller.ListController" />
+	<bean class="restaurant.dao.BoardDaoImpl" />
+	<bean class="restaurant.controller.WriteController" />
+	<bean class="restaurant.controller.DetailController" />
+	<bean class="restaurant.controller.UpdateController" />
+	<bean class="restaurant.controller.DeleteController" />
+	<bean id="downloadView" class="restaurant.view.DownloadView"/>
+	
+    <bean id="restaurantMainListDaoImpl" class="restaurant.dao.MainRestaurantListDaoImpl"/>
+    
+	<!-- 1.messageSource(리소스번들 파일) 유효성검사 문자열 메세지,자주사용 문구 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages.label</value>
+				<value>messages.validation</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 2.예외처리 페이지 작성 설정 -->
+	<!-- <bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">pageError</prop>
+			</props>
+		</property>
+	</bean> -->
+	<!--1. tiles (ViewResolver)설정(배치디자인 환경설정파일) -->
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tilesdef.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- viewResolver(경로,파일의 확장자를 지정)X->타일즈에서 설정하기때문 -->
+	<bean id="viewResolver2"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+	
+		<!--파일업로드(maxUploadSize)최대업로드 용량크기(byte) ex)50M=51,200kB=52,428,800byte 
+		defaultEncoding->기본 캐릭터설정 -->
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="52428800" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- 다운로드 viewResolver(order->같은 기능을 가진 클래스) -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="0"></bean>
+		
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="jskim8503@gmail.com" />
+        <property name="password" value="kic12345" />
+       
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+       
+    </bean>
+    <bean id="email" class="spring.email.Email">
+    </bean>
+    <bean id="emailSender" class="spring.email.EmailSender">
+    </bean>
+    
+    
+</beans>

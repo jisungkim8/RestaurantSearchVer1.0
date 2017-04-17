@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewPhoto">
+	
+	<select id="selectReviewPhotoByReviewIdDetView" parameterType="map" resultType="ReviewPhotoDto">
+		SELECT * FROM REVIEWPHOTO
+		<if test="shopReviewDto != null">
+			<where>
+				<foreach collection="shopReviewDto" item="shopReview" index="index">
+					<if test="index > 0">OR</if>
+					REVIEWID=#{shopReview.reviewId}
+				</foreach>
+			</where>
+			
+			<if test="shopReviewDto.size() > 1">
+				ORDER BY DECODE(REVIEWID, 
+				<foreach collection="shopReviewDto" item="shopReview" index="index">
+					<if test="index > 0">, </if>
+					#{shopReview.reviewId}
+				</foreach>
+				) DESC, PHOTOID
+			</if>
+			
+		</if>
+	</select>
+	
+	<select id="getNewReviewPhotoDetView" resultType="int">
+		SELECT MAX(photoId) FROM REVIEWPHOTO
+	</select>
+	
+	<insert id="insertReviewPhotoDetView" parameterType="ReviewPhotoDto">
+		INSERT INTO REVIEWPHOTO(photoId, photoPath, reviewId)
+		VALUES(#{photoId}, #{photoPath}, #{reviewId})
+	</insert>
+</mapper>
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="boardList" template="/View/layout.jsp">
+		<put-attribute name="title" value="게시판" />
+		<put-attribute name="css" value="/View/boardDefaultCss.jsp" />
+		<put-attribute name="js" value="/View/boardSearchJs.jsp" />
+		<!-- <put-attribute name="menu" value="/View/menu.jsp" /> -->
+		<put-attribute name="header" value="/View/header.jsp" />
+		<put-attribute name="body" value="/View/boardList.jsp" />
+		<put-attribute name="footer" value="/View/footer.jsp" />
+	</definition>
+
+	<!--글쓰기 extends -->
+	<definition name="boardWrite" extends="boardList">
+		<put-attribute name="title" value="글쓰기 폼" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/boardWrite.jsp" />
+	</definition>
+
+	<!-- error 페이지 처리 -->
+	<definition name="pageError" extends="boardList">
+		<put-attribute name="title" value="에러페이지" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/pageError.jsp" />
+	</definition>
+
+	<!-- 상세 페이지 -->
+	<definition name="boardView" extends="boardList">
+		<put-attribute name="title" value="글 상세폼" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/boardView.jsp" />
+	</definition>
+
+	<!-- 글 삭제 페이지 -->
+	<definition name="boardDelete" extends="boardList">
+		<put-attribute name="title" value="글 삭제폼" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/boardDelete.jsp" />
+	</definition>
+
+	<!-- 글 수정 페이지 -->
+	<definition name="boardModify" extends="boardList">
+		<put-attribute name="title" value="글 수정폼" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/boardModify.jsp" />
+	</definition>
+	
+	<definition name="memberList" template="/View/layout.jsp">
+		<put-attribute name="title" value="회원관리" />
+		<put-attribute name="css" value="/View/boardDefaultCss.jsp" />
+		<put-attribute name="js" value="/View/boardSearchJs.jsp" />
+		<put-attribute name="header" value="/View/header.jsp" />
+		<put-attribute name="body" value="/View/memberList.jsp" />
+		<put-attribute name="footer" value="/View/footer.jsp" />
+	</definition>
+	
+	<definition name="memberView" extends="memberList">
+		<put-attribute name="title" value="회원 상세" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/memberView.jsp" />
+	</definition>
+
+</tiles-definitions>
