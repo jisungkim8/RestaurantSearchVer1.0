@@ -85,12 +85,16 @@
 
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden'); 
+	
 	fileTarget.on('change', function(){ // 값이 변경되면 
 		if(window.FileReader){ // modern browser
 			var filename = $(this)[0].files[0].name; } 
 		else{ // old IE
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
 		}
+	
+	   alert("changeFilename=>"+filename);
+	   
 	// 추출한 파일명 삽입 
 			//$(this).siblings('.upload-name').val(filename); 
 		if( $('.upload-name').val() != "" ){
@@ -161,11 +165,11 @@ function trueForm()
 		$('#profileMod').val('수정완료')
 	}else{
 		
-		 if($("#nicNameDupliCheck").val()=='unchecked'){
+		 /* if($("#nicNameDupliCheck").val()=='unchecked'){
 				alert("닉네임 중복확인 버튼을 클릭하세요.")
 				 $("#nicNameRepCheckBtn").focus();
 				return;
-		 }
+		 } */
 		 
 		$("#birthDate").attr("disabled",false).attr("readonly",true); 
 		$("#phoneNum").attr("disabled",false).attr("readonly",true); 
@@ -642,7 +646,8 @@ $(function(){
 										<label>이미지</label> 
 								 		<div class="filebox">
 								 		<c:if test="${memDetInfo.photoPath!='images/null'}">
-											<input class="upload-name" size="50" value="${memDetInfo.photoPath}" disabled="disabled">
+								 		<c:set var="len" value="${fn:length(memDetInfo.photoPath)}"/>
+											<input class="upload-name" size="50" value="${fn:substring(memDetInfo.photoPath,7,len)}" disabled="disabled">
 								 		</c:if>
 								 		<c:if test="${memDetInfo.photoPath=='images/null'}">
 								 		    <!-- <input type="text" id="photoPath" name="photoPath" value=""
@@ -650,7 +655,7 @@ $(function(){
 									          <input class="upload-name" size="50" value="" placeholder="대표이미지를 첨부하여 주세요.[선택]" disabled="disabled">
 								 		</c:if>
 								 			<label id=uploadBtn for="ex_filenameBtn">업로드</label> 
-								 			<input type="file" id="ex_filenameBtn" name="upload"  class="upload-hidden" disabled="disabled" >
+								 			<input type="file" id="ex_filenameBtn" name="upload"  class="upload-hidden">
 										</div>
 								</div>
 							</div>

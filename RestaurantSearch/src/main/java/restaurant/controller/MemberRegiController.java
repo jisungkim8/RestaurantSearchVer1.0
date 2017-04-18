@@ -194,7 +194,13 @@ public class MemberRegiController {
 		}
 
 		// DB상에 반영하라
-		memberDao.updateMember(memDetInfoDto);
+		if(memDetInfoDto.getUpload().getOriginalFilename().equals("")){
+			System.out.println("사진이 없다면");
+			memberDao.updateMemInfoExceptPhoto(memDetInfoDto);
+		}else{
+			System.out.println("사진이 있다면");
+			memberDao.updateMember(memDetInfoDto);
+		}
 
 		// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 		if (!memDetInfoDto.getUpload().isEmpty()) {

@@ -37,6 +37,18 @@
  		where memberId=#{memberId}
  	</update>
  	
+ 	<update id="updateMemInfoExceptPhoto" parameterType="MemDetInfoDto">
+ 		update memDetInfo 
+ 		set birthDate=#{birthDate},
+ 		      gender=#{gender},
+ 		      phoneNum=#{phoneNum},
+ 		      emailCheck=#{emailCheck},
+ 		      selfIntro=#{selfIntro},
+ 		      interestFood=#{interestFood},
+ 		      nickname=#{nickname}
+ 		where memberId=#{memberId}
+ 	</update>
+ 	
  	<delete id="deleteMemDetInfo" parameterType="MemDetInfoDto">
  		delete from memDetInfo where memberId=#{memberId} 	
  	</delete>
