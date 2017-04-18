@@ -134,7 +134,7 @@
 			<c:if test="${count==0}">
 				<tbody>
 					<tr>
-						<td align="center">등록된 게시물이 없습니다.</td>
+						<td align="center" colspan="5">등록된 게시물이 없습니다.</td>
 					</tr>
 				</tbody>
 			</c:if>
