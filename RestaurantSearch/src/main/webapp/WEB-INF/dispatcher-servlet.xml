@@ -32,6 +32,7 @@
 	<bean class="restaurant.controller.MemberRegiController" />
 	<bean class="restaurant.controller.MemLoginController" />
 	<bean class="restaurant.dao.MemberDaoImpl" />
+	<bean class="restaurant.controller.MemberListController" />
 	
 	<!-- 상세페이지 -->
 	<bean class="restaurant.dao.RestaurantDaoImpl" />

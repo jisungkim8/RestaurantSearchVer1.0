@@ -10,7 +10,7 @@ import restaurant.dto.ShopReviewDto;
 
 public class ShopReviewDaoImpl extends SqlSessionDaoSupport implements ShopReviewDao {
 
-	public List<ShopReviewDto> selectShopReviewDetView(Map<String, Object> map) {
+	public List<ShopReviewCommand> selectShopReviewDetView(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		System.out.println("ShopReviewDaoImpl>>selectShopReviewDetView() is called!!");
 		
