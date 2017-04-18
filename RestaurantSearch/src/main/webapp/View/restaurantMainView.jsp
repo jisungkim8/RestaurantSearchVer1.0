@@ -484,15 +484,16 @@
 
 		</div>
 		<div class="containerSearch">
-			<form action="restaurantSearch.do" method="get">
-				<input type="text" class="input_text" id="topSearchBox"
-					name="keyword" autocomplete="off" /> <input type="hidden"
-					id="pageNum" name="pageNum" value="1" />
-				<!-- view more button -->
-				<input type="submit" value="검색"
-					class="btn btn-default btn-m view-more pull-right"
-					style="margin-top: 10px">
-			</form>
+			<form class="navbar-form navbar-left">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
 			<span class="clearfix"></span>
 		</div>
 
