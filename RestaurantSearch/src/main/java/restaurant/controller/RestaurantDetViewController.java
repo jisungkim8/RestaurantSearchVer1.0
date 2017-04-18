@@ -215,8 +215,8 @@ public class RestaurantDetViewController {
 					count++;
 				} else {
 					if (count == 0) {
+
 						reviewPhotoDto = new ReviewPhotoDto();
-						
 						reviewPhotoDto.setPhotoId(newPhotoId++);
 						reviewPhotoDto.setPhotoPath("design/images/noimg.png");
 						reviewPhotoDto.setReviewId(newReivewId);
