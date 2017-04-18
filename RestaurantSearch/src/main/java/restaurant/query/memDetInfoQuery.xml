@@ -31,7 +31,7 @@
  		      phoneNum=#{phoneNum},
  		      emailCheck=#{emailCheck},
  		      selfIntro=#{selfIntro},
- 		      photoPath=#{photoPath},
+ 		      photoPath=#{photoPath,jdbcType=VARCHAR},
  		      interestFood=#{interestFood},
  		      nickname=#{nickname}
  		where memberId=#{memberId}
@@ -45,7 +45,7 @@
 		select * from memDetInfo where memberId=#{memberId} and birthDate=#{birthDate}
 	</select>
 	
-		<select id="memList" parameterType="map" resultType="MemDetInfoDto">
+	<select id="memList" parameterType="map" resultType="MemDetInfoDto">
 		SELECT memberid,nickname,gender,membertype
 		FROM(SELECT
 		a.*, 

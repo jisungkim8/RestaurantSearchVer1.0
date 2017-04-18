@@ -21,6 +21,12 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		System.out.println("MemberDaoImpl_updateMember");		
 		getSqlSession().update("updateMemInfo",memDetInfoDto);
 	}
+	
+	public void updateMemInfoExceptPhoto(MemDetInfoDto memDetInfoDto) {
+		// TODO Auto-generated method stub
+		System.out.println("MemberDaoImpl_updateMember");		
+		getSqlSession().update("updateMemInfoExceptPhoto",memDetInfoDto);
+	}
 
 	public void deleteMember(String memberId) {
 		// TODO Auto-generated method stub
