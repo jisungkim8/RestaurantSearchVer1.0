@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="restaurantRegi">
+
+	<insert id="insertRestaurant" parameterType="restaurantDto">
+		insert into
+		restaurant (restaurantId, restaurantName, addr, phoneNumber, keyword,
+		averagePrice, filterInfo, averageScore, representPhoto)
+		values(#{restaurantId}, #{restaurantName}, #{addr},
+		#{phoneNumber},
+		#{keyword}, #{averagePrice}, #{filterInfo},
+		#{averageScore},
+		#{representPhoto})
+	</insert>
+
+
+	<select id="countRestaurantId" resultType="int" parameterType="String">
+		select count(*) from restaurant
+	</select>
+
+	<select id="selectRestaurant" parameterType="RestaurantDto"
+		resultType="RestaurantDto">
+		select * from restaurant where restaurantId=#{restaurantId}
+	</select>
+
+	<!-- 글수정하기,글삭제하기 -->
+	<update id="updateRestaurant" parameterType="RestaurantDto">
+		update restaurant
+		set restaurantId=#{restaurantId},
+		restaurantName=#{restaurantName},
+		addr=#{addr},
+		phoneNumber=#{phoneNumber},
+		keyword=#{keyword},
+		averagePrice=#{averagePrice},
+		filterInfo=#{filterInfo},
+		averageScore=#{averageScore}
+		representPhoto=#{representPhoto}
+		where
+		restaurantId=#{restaurantId}
+	</update>
+
+	<delete id="deleteRestaurant" parameterType="RestaurantDto">
+		delete from
+		restaurant where restaurantId=#{restaurantId}
+	</delete>
+
+</mapper>
