@@ -9,8 +9,6 @@ public class ShopDetInfoDto {
 	private String homepage;
 	private String operHour;
 	private String modifyDate;
-	private float averageScore;
-	private int regionId;
 	
 	public int getRestaurantId() {
 		return restaurantId;
@@ -59,17 +57,5 @@ public class ShopDetInfoDto {
 	}
 	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
-	}
-	public float getAverageScore() {
-		return averageScore;
-	}
-	public void setAverageScore(float averageScore) {
-		this.averageScore = averageScore;
-	}
-	public int getRegionId() {
-		return regionId;
-	}
-	public void setRegionId(int regionId) {
-		this.regionId = regionId;
 	}
 }

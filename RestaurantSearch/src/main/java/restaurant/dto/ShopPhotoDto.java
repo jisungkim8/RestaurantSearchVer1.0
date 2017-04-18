@@ -5,7 +5,7 @@ public class ShopPhotoDto {
 	private int photoSepNum;
 	private String title;
 	private String photoPath;
-	private String restaurantId;
+	private int restaurantId;
 	
 	public int getPhotoNum() {
 		return photoNum;
@@ -31,10 +31,10 @@ public class ShopPhotoDto {
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;
 	}
-	public String getRestaurantId() {
+	public int getRestaurantId() {
 		return restaurantId;
 	}
-	public void setRestaurantId(String restaurantId) {
+	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 }

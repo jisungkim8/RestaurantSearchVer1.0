@@ -46,6 +46,14 @@ public class ShopReviewDaoImpl extends SqlSessionDaoSupport implements ShopRevie
 		System.out.println("ShopReviewDaoImpl>>resultByIncrease = " + resultByIncrease);
 	}
 	
+	public void decreaseRecommendCnt(int reviewId) {
+		// TODO Auto-generated method stub
+		System.out.println("ShopReviewDaoImpl>>decreaseRecommendCnt() is called!!");
+		
+		int resultByDecrease = (int) getSqlSession().update("decreaseRecommendCnt", reviewId);
+		System.out.println("ShopReviewDaoImpl>>resultByDecrease = " + resultByDecrease);
+	}
+	
 	public int getTotalShopReviewDetView(int restaurantId) {
 		// TODO Auto-generated method stub
 		System.out.println("ShopReviewDaoImpl>>getTotalShopReviewDetView() is called!!");

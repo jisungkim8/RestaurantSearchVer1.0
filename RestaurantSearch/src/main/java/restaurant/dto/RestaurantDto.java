@@ -10,6 +10,7 @@ public class RestaurantDto {
 	private int averagePrice;
 	private String filterInfo;
 	private float averageScore;
+	private int viewCount;
 	
 	public int getRestaurantId() {
 		return restaurantId;
@@ -64,5 +65,11 @@ public class RestaurantDto {
 	}
 	public void setFilterInfo(String filterInfo) {
 		this.filterInfo = filterInfo;
+	}
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
 }

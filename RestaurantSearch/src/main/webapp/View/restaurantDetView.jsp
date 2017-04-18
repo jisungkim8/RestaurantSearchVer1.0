@@ -39,6 +39,7 @@
 		<link href="<c:url value="design/plugins/magnific-popup/magnific-popup.css" />" rel="stylesheet" type="text/css" />
 		<link href="<c:url value="design/css/animate.css" />" rel="stylesheet" type="text/css" />
 		<link href="<c:url value="design/css/superslides.css" />" rel="stylesheet" type="text/css" />
+		
 
 		<!-- REALESTATE -->
 		<link href="<c:url value="design/css/realestate.css" />" rel="stylesheet" type="text/css" />
@@ -56,9 +57,6 @@
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		
 		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-		
-		
-		
 		
 		<script>
 			$(document)
@@ -298,7 +296,7 @@
 			}
 		</script>
 	</head>
-	<body><!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="<c:url value="design/images/boxed_background/1.jpg" />"  -->
+	<body data-spy="scroll" data-target="#myScrollspy"><!-- Available classes for body: boxed , pattern1...pattern10 . Background Image - example add: data-background="<c:url value="design/images/boxed_background/1.jpg" />"  -->
 		
 		<!-- TOP NAV -->
 		<header id="topHead">
@@ -449,21 +447,33 @@
 
 			<section class="container top-no-header">
 				<div class="row">
+					<!-- scrollSpy -->
+					<div class="col-md-2" id="myScrollspy">
+						<ul class="nav nav-tabs nav-stacked affix" id="myNav">
+							<li class="active"><a href="#top">Top</a></li>
+							<li><a href="#one">한줄 설명</a></li>
+							<li><a href="#two">대표 메뉴</a></li>
+							<li><a href="#three">상세 정보</a></li>
+							<li><a href="#four">키워드</a></li>
+							<li><a href="#five">위치</a></li>
+							<li><a href="#six">리뷰</a></li>
+						</ul>
+					</div>
+					<!-- /scrollSpy -->
 
 					<!-- center column -->
-					<div class="col-md-9">
+					<div class="col-md-8" id="top">
 					
 						<!-- park -->
 						<div class="white-row">
 							<h1 class="page-header margin-bottom40">
 								<strong class="styleColor">${restaurantDto.restaurantName}</strong>
 								<c:if test="${sessionScope.userLoginInfo == null}">
-
-									<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="addLikeSessionNotExists()">
+									<button data-toggle="modal" data-target="#loginFirst">
 										<i class="featured-icon half empty fa fa-heart-o"></i>
 									</button>
 
-									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+									<div id="loginFirst" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-sm">
 											<div class="modal-content">
 			
@@ -487,19 +497,14 @@
 								</c:if>
 								
 								<c:if test="${sessionScope.userLoginInfo != null}">
-									<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="addLikeSessionExists()">
-										<i class="featured-icon half empty fa fa-heart-o"></i>
+									<button data-toggle="modal" data-target="#likeListNonExist" id="likeImageButton">
+										<i class="featured-icon half empty fa fa-heart-o" id="likeImage"></i>
 									</button>
 									
-									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+									<div id="likeListNonExist" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-sm">
 											<div class="modal-content">
-			
-												<div class="modal-header"><!-- modal header -->
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-													<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-												</div><!-- /modal header -->
-			
+											
 												<!-- modal body -->
 												<div class="modal-body">
 													좋아요 리스트에 추가되었습니다.
@@ -507,7 +512,25 @@
 												<!-- /modal body -->
 			
 												<div class="modal-footer"><!-- modal footer -->
-													<button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary">Save changes</button>
+													<button class="btn btn-default" data-dismiss="modal">Close</button>
+												</div><!-- /modal footer -->
+			
+											</div>
+										</div>
+									</div>
+									
+									<div id="likeListExist" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+			
+												<!-- modal body -->
+												<div class="modal-body">
+													좋아요 리스트에서 삭제되었습니다.
+												</div>
+												<!-- /modal body -->
+			
+												<div class="modal-footer"><!-- modal footer -->
+													<button class="btn btn-default" data-dismiss="modal">Close</button>
 												</div><!-- /modal footer -->
 			
 											</div>
@@ -515,7 +538,6 @@
 									</div>
 												
 								</c:if>
-								<i class="featured-icon half fa fa-heart-o"></i>
 							</h1>
 						
 						</div>
@@ -532,11 +554,6 @@
 								<div class="owl-carousel controlls-over" data-plugin-options='{"autoPlay":false, "stopOnHover":false, "items": 1, "singleItem": true, "navigation": true, "pagination": true, "transitionStyle":"fadeUp", "itemsScaleUp":true}'>
 									<c:forEach var="shopPhotoSepNum1" items="design/images/noimg.png">
 										<div>
-											<div class="owl-caption text-left">
-												<p class="hidden-xs"><!-- hide on mobile -->
-													Lorem Ipsum Dolor Sit Amet...
-												</p>
-											</div>
 											<img alt="" class="img-responsive" src="<c:url value="design/images/noimg.png" />" width="600" height="400" />
 										</div>
 									</c:forEach>
@@ -568,25 +585,6 @@
 						<div class="white-row">
 							<div class="tabs nomargin-top">
 
-								<!-- tabs -->
-								<ul class="nav nav-tabs">
-									<li class="active">
-										<a href="#tab1" data-toggle="tab">
-											<i class="fa fa-heart"></i> 상세정보
-										</a>
-									</li>
-									<li>
-										<a href="#tab2" data-toggle="tab">
-											<i class="fa fa-cogs"></i> 위치
-										</a>
-									</li>
-									<li>
-										<a href="#tab3" data-toggle="tab">
-											<i class="fa fa-cogs"></i> 리뷰
-										</a>
-									</li>
-								</ul>
-	
 								<!-- tabs content -->
 								<div class="tab-content">
 								
@@ -608,257 +606,304 @@
 											<div class="toogle">
 											
 												<!-- short information -->
-												<div class="toggle active">
-													<label>한줄 설명</label>
-													<div class="toggle-content">
-														<p>
-															<c:if test="${shopDetInfoDto.shortDesc == null}">
-																등록된 한줄 설명이 없습니다.
-															</c:if>
-															
-															<c:if test="${shopDetInfoDto.shortDesc != null}">
-																${shopDetInfoDto.shortDesc}
-															</c:if>
-														</p>
+												<div id="one">
+													<div class="toggle active">
+														<label>한줄 설명</label>
+														<div class="toggle-content">
+															<p>
+																<c:if test="${shopDetInfoDto.shortDesc == null}">
+																	등록된 한줄 설명이 없습니다.
+																</c:if>
+																
+																<c:if test="${shopDetInfoDto.shortDesc != null}">
+																	${shopDetInfoDto.shortDesc}
+																</c:if>
+															</p>
+														</div>
 													</div>
 												</div>
 												<!-- /short information -->
 			
 												<!-- menu -->
-												<div class="toggle active">
-													<label>대표 메뉴</label>
-													<div class="toggle-content">
-													
-														<c:if test="${shopPhotoDtoSepNum2.isEmpty()}">
-															<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-																<li class="col-sm-4"><!-- item -->
-																	<div class="item-box">
-																		<figure>
-																			<a class="item-hover" href="<c:url value="design/images/noimg.png" />">
-																				<span class="overlay color2"></span>
-																				<span class="inner">
-																					<span class="block fa fa-eye fsize20"></span>
-																					<strong>VIEW</strong> IMAGE
-																				</span>
-																			</a>
-																			<img class="img-responsive" src="<c:url value="design/images/noimg.png" />" width="260" height="260" alt="">
-																		</figure>
-																	</div>
-																</li>
-															</ul>
-														</c:if>
+												<div id="two">
+													<div class="toggle active">
+														<label>대표 메뉴</label>
+														<div class="toggle-content">
 														
-														<c:if test="${!shopPhotoDtoSepNum2.isEmpty()}">
-															<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-																<c:forEach var="shopPhotoSepNum2" items="${shopPhotoDtoSepNum2}" varStatus="vs">
+															<c:if test="${shopPhotoDtoSepNum2.isEmpty()}">
+																<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 																	<li class="col-sm-4"><!-- item -->
 																		<div class="item-box">
 																			<figure>
-																				<a href="<c:url value="${shopPhotoSepNum2.photoPath}" />">
-																					<c:if test="${vs.index <= 2 }">
-																						<img class="img-responsive" src="<c:url value="${shopPhotoSepNum2.photoPath}" />" width="260" height="260" alt="">
-																					</c:if>
-																					
-																					<c:if test="${vs.index == 2 }">
-																						<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
-																							<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
-																								+ ${shopPhotoDtoSepNum2.size()-3}
-																							</span>
-																						</div>
-																					</c:if>
+																				<a class="item-hover" href="<c:url value="design/images/noimg.png" />">
+																					<span class="overlay color2"></span>
+																					<span class="inner">
+																						<span class="block fa fa-eye fsize20"></span>
+																						<strong>VIEW</strong> IMAGE
+																					</span>
 																				</a>
+																				<img class="img-responsive" src="<c:url value="design/images/noimg.png" />" width="260" height="260" alt="">
 																			</figure>
 																		</div>
 																	</li>
-																</c:forEach>
-															</ul>
-														</c:if>
-														
+																</ul>
+															</c:if>
+															
+															<c:if test="${!shopPhotoDtoSepNum2.isEmpty()}">
+																<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+																	<c:forEach var="shopPhotoSepNum2" items="${shopPhotoDtoSepNum2}" varStatus="vs">
+																		<li class="col-sm-4"><!-- item -->
+																			<div class="item-box">
+																				<figure>
+																					<a href="<c:url value="${shopPhotoSepNum2.photoPath}" />">
+																						<c:if test="${vs.index <= 2 }">
+																							<img class="img-responsive" src="<c:url value="${shopPhotoSepNum2.photoPath}" />" width="260" height="260" alt="">
+																						</c:if>
+																						
+																						<c:if test="${vs.index == 2 }">
+																							<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
+																								<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
+																									+ ${shopPhotoDtoSepNum2.size()-3}
+																								</span>
+																							</div>
+																						</c:if>
+																					</a>
+																				</figure>
+																			</div>
+																		</li>
+																	</c:forEach>
+																</ul>
+															</c:if>
+															
+														</div>
 													</div>
 												</div>
 												<!-- /menu -->
 												
 												<!-- detail information -->
-												<div class="toggle active">
-													<label>상세 정보</label>
-													<div class="toggle-content">
-														<div class="col-md-12">
-															<p>
-																상호명 : ${restaurantDto.restaurantName} <br>
-																대표자 : ${shopDetInfoDto.representative} <br>
-																영업시간 : ${shopDetInfoDto.operHour} <br>
-																주소 :  ${restaurantDto.addr} <br>
-																전화번호 : ${restaurantDto.phoneNumber} <br>
-																홈페이지 : <a href="${shopDetInfoDto.homepage}">${shopDetInfoDto.homepage}</a> <br>
-																영업 시작일 : ${shopDetInfoDto.operStartDate.substring(0, 10)} <br>
-																최종 수정일 : ${shopDetInfoDto.modifyDate.substring(0, 10)} <br>
-															</p>
+												<div id="three">
+													<div class="toggle active">
+														<label>상세 정보</label>
+														<div class="toggle-content">
+															<div class="col-md-12">
+																<p>
+																	상호명 : ${restaurantDto.restaurantName} <br>
+																	대표자 : ${shopDetInfoDto.representative} <br>
+																	영업시간 : ${shopDetInfoDto.operHour} <br>
+																	주소 :  ${restaurantDto.addr} <br>
+																	전화번호 : ${restaurantDto.phoneNumber} <br>
+																	홈페이지 : <a href="${shopDetInfoDto.homepage}">${shopDetInfoDto.homepage}</a> <br>
+																	영업 시작일 : ${shopDetInfoDto.operStartDate.substring(0, 10)} <br>
+																	최종 수정일 : ${shopDetInfoDto.modifyDate.substring(0, 10)} <br>
+																</p>
+															</div>
 														</div>
 													</div>
 												</div>
 												<!-- /detail information -->
 												
 												<!-- keyword -->
-												<div class="toggle active">
-													<label>키워드</label>
-													<div class="toggle-content">
-													
-														<c:if test="${keyword.isEmpty()}">
-															<p>키워드가 없습니다.</p>
-														</c:if>
+												<div id="four">
+													<div class="toggle active">
+														<label>키워드</label>
+														<div class="toggle-content">
 														
-														<c:if test="${!keyword.isEmpty()}">
-															<p>
-																<c:forEach var="i" items="${keyword}">
-																	<a href="#">${i}</a>
-																</c:forEach>
-															</p>
-														</c:if>
-														
+															<c:if test="${keyword.isEmpty()}">
+																<p>키워드가 없습니다.</p>
+															</c:if>
+															
+															<c:if test="${!keyword.isEmpty()}">
+																<p>
+																	<c:forEach var="i" items="${keyword}">
+																		<a href="#">${i}</a>
+																	</c:forEach>
+																</p>
+															</c:if>
+															
+														</div>
 													</div>
 												</div>
 												<!-- /keyword -->
-											</div>
-										</div>
-										<!-- /toogle -->
-											
-									</div>
-									<!-- /detail information tab -->
-									
-									<!-- location tab -->
-									<div id="tab2" class="tab-pane">
-										<!-- 네이버 api 표시를 위한 div 영역... -->
-										<div id="map" style="width: 100%; min-height: 500px; height: 100%; z-index: 1;"></div>
-									
-										<!-- 네이버 지도 스크립트....-->
-										<script type="text/javascript"
-											src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Smnb3AyBYKR9Jqvcg1nd"></script>
-										<!-- 네이버 지도 주소 <-> 좌표 변환용 스크립트... -->
-										<script type="text/javascript"
-											src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
-									
-										<!-- 사용자 정의 스크립트... -->
-									</div>
-									<!-- /location tab -->
-									
-									<!-- review tab -->
-									<div id="tab3" class="tab-pane">
-										<!-- reivew -->
-										<c:if test="${shopReviewDto.isEmpty()}">
-											등록된 리뷰가 없습니다.
-										</c:if>
-										
-										<c:if test="${!shopReviewDto.isEmpty()}">
-											<div class="col-md-12" align="right">
-												<button class="btn btn-info" id="filtering" value="reviewId">최신순</button>
-												<button class="btn btn-info" id="filtering" value="recommendCnt">추천순</button>
-											</div>
-										
-											<div class="divider"></div>
-
-										
-											<div id="getReview"></div>
-											
-											<div>
-												<h4 align="center" id="moreLocation">
-													<button id="more" class="btn btn-default">더보기..</button>
-												</h4>
-											</div>
-										</c:if>
-										
-										<div>
-											<c:if test="${sessionScope.userLoginInfo == null}">
-												<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">리뷰 작성</button>
-											</c:if>
-										
-											<c:if test="${sessionScope.userLoginInfo != null}">
-												<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
-											</c:if>
-											<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-												<div class="modal-dialog modal-lg">
-													<div class="modal-content">
-														<!-- modal header -->
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-															<h4 class="modal-title" id="myModalLabel">리뷰 작성</h4>
-														</div>
-														<!-- /modal header -->
-														
-														<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId" enctype="multipart/form-data" method="post">
+												
+												<!-- location -->
+												<div id="five">
+													<div class="toggle active">
+														<label>위치</label>
+														<div class="toggle-content">
+															<!-- 지도 -->
+															<div id="map" style="width: 100%; min-height: 500px; height: 100%; z-index: 1;"></div>
 															
-															<!-- modal body -->
-															<div class="modal-body">
-																<div class="row">
-																	<div class="form-group">
-																		<div class="col-md-12">
-																			<label>제목</label>
-																			<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
-																			<form:errors path="reviewCommand.title"/><br>
-																			
-																			<label>내용</label>
-																			<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
-																			<form:errors path="reviewCommand.content"/><br>
-																			
-																			<label>방문시간대</label>
-																			<select class="form-control pointer" name="visitTime">
-																				<option value="" selected="selected">선택</option>
-																				<option value="0~1시">0~1시</option>
-																				<option value="1~2시">1~2시</option>
-																				<option value="2~3시">2~3시</option>
-																				<option value="3~4시">3~4시</option>
-																				<option value="4~5시">4~5시</option>
-																				<option value="5~6시">5~6시</option>
-																				<option value="6~7시">6~7시</option>
-																				<option value="7~8시">7~8시</option>
-																				<option value="8~9시">8~9시</option>
-																				<option value="9~10시">9~10시</option>
-																				<option value="10~11시">10~11시</option>
-																				<option value="11~12시">11~12시</option>
-																			</select>
-																			
-																			<label>Dinner/Lunch</label>
-																			<select class="form-control pointer" name="dinnerOrLunch">
-																				<option value="" selected="selected">선택</option>
-																				<option value="Dinner">Dinner</option>
-																				<option value="Lunch">Lunch</option>
-																			</select>
-																			
-																			
-																			<label>사진</label>
-																			
-																			<div id="reviewPhotoFileGroup">
-																				<input type="file" class="form-control" style="height:50px;" name="upload">
+															<!-- 네이버 지도 스크립트....-->
+															<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Smnb3AyBYKR9Jqvcg1nd"></script>
+															
+															<!-- 네이버 지도 주소 <-> 좌표 변환용 스크립트... -->
+															<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
+														</div>
+													</div>
+												</div>
+												<!-- /location -->
+												
+												<!-- review -->
+												<div id="six">
+													<div class="toggle active">
+														<label>리뷰</label>
+														<div class="toggle-content">
+															<c:if test="${shopReviewDto.isEmpty()}">
+																등록된 리뷰가 없습니다.
+															</c:if>
+															
+															<c:if test="${!shopReviewDto.isEmpty()}">
+																<div class="col-md-6">
+																	<c:if test="${sessionScope.userLoginInfo == null}">
+																		<button class="btn btn-primary" data-toggle="modal" data-target="#loginFirst">리뷰 작성</button>
+																	</c:if>
+																
+																	<c:if test="${sessionScope.userLoginInfo != null}">
+																		<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
+																	</c:if>
+																	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+																		<div class="modal-dialog modal-lg">
+																			<div class="modal-content">
+																				<!-- modal header -->
+																				<div class="modal-header">
+																					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																					<h4 class="modal-title" id="myModalLabel">리뷰 작성</h4>
+																				</div>
+																				<!-- /modal header -->
+																				
+																				<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId" enctype="multipart/form-data" method="post">
+																					
+																					<!-- modal body -->
+																					<div class="modal-body">
+																						<div class="row">
+																							<div class="form-group">
+																								<div class="col-md-12">
+																									<label>제목</label>
+																									<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
+																									<form:errors path="reviewCommand.title"/><br>
+																									
+																									<label>내용</label>
+																									<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
+																									<form:errors path="reviewCommand.content"/><br>
+																									
+																									<label>방문시간대</label>
+																									<select class="form-control pointer" name="visitTime">
+																										<option value="" selected="selected">선택</option>
+																										<option value="0~1시">0~1시</option>
+																										<option value="1~2시">1~2시</option>
+																										<option value="2~3시">2~3시</option>
+																										<option value="3~4시">3~4시</option>
+																										<option value="4~5시">4~5시</option>
+																										<option value="5~6시">5~6시</option>
+																										<option value="6~7시">6~7시</option>
+																										<option value="7~8시">7~8시</option>
+																										<option value="8~9시">8~9시</option>
+																										<option value="9~10시">9~10시</option>
+																										<option value="10~11시">10~11시</option>
+																										<option value="11~12시">11~12시</option>
+																									</select>
+																									
+																									<label>Dinner/Lunch</label>
+																									<select class="form-control pointer" name="dinnerOrLunch">
+																										<option value="" selected="selected">선택</option>
+																										<option value="Dinner">Dinner</option>
+																										<option value="Lunch">Lunch</option>
+																									</select>
+																									
+																									
+																									<label>사진</label>
+																									
+																									<div id="reviewPhotoFileGroup">
+																										<input type="file" class="form-control" style="height:50px;" name="upload">
+																									</div>
+																									<div align="right">
+																										<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
+																									</div>
+						<%-- 																			<input type="hidden" name="memberId" value="${sessionScope.userLoginDetInfo.nickname}"> --%>
+																									<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
+																								</div>
+																							</div>
+																						</div>
+						
+																					</div>
+																					<!-- /modal body -->
+												
+																					<!-- modal footer -->
+																					<div class="modal-footer">
+																						<button class="btn btn-primary">Submit</button>
+																						<button class="btn btn-default" data-dismiss="modal">Close</button> 
+																					</div>
+																					<!-- /modal footer -->
+											
+																				</form>
 																			</div>
-																			<div align="right">
-																				<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
-																			</div>
-<%-- 																			<input type="hidden" name="memberId" value="${sessionScope.userLoginDetInfo.nickname}"> --%>
-																			<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
 																		</div>
 																	</div>
 																</div>
-
-															</div>
-															<!-- /modal body -->
-						
-															<!-- modal footer -->
-															<div class="modal-footer">
-																<button class="btn btn-primary">Submit</button>
-																<button class="btn btn-default" data-dismiss="modal">Close</button> 
-															</div>
-															<!-- /modal footer -->
-					
-														</form>
+															
+																<div class="col-md-6" align="right">
+																	<button class="btn btn-info" id="filtering" value="reviewId">최신순</button>
+																	<button class="btn btn-info" id="filtering" value="recommendCnt">추천순</button>
+																</div>
+															
+																<div id="getReview">
+																	
+																	<div id="recommendAdd" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+																		<div class="modal-dialog modal-sm">
+																			<div class="modal-content">
+																			
+																				<!-- modal body -->
+																				<div class="modal-body">
+																					추천 되었습니다.
+																				</div>
+																				<!-- /modal body -->
+											
+																				<div class="modal-footer"><!-- modal footer -->
+																					<button class="btn btn-default" data-dismiss="modal">Close</button>
+																				</div><!-- /modal footer -->
+											
+																			</div>
+																		</div>
+																	</div>
+																	
+																	<div id="recommendDelete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+																		<div class="modal-dialog modal-sm">
+																			<div class="modal-content">
+											
+																				<!-- modal body -->
+																				<div class="modal-body">
+																					추천이 취소되었습니다.
+																				</div>
+																				<!-- /modal body -->
+											
+																				<div class="modal-footer"><!-- modal footer -->
+																					<button class="btn btn-default" data-dismiss="modal">Close</button>
+																				</div><!-- /modal footer -->
+											
+																			</div>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div>
+																	<h4 align="center" id="moreLocation">
+																		<br>
+																		<button id="more" class="btn btn-default">더보기..</button>
+																	</h4>
+																</div>
+															</c:if>
+														</div>
 													</div>
 												</div>
+												<!-- /review -->
 											</div>
 										</div>
+										<!-- /toogle -->
 									</div>
-									<!-- /review tab -->
+									<!-- /detail information tab -->
 								</div>
-	
 							</div>
-							
 						</div>
 						<!-- /park -->
 						
@@ -1162,9 +1207,8 @@
 						<!-- /RELATED -->
 
 					</div>
-
 					<!-- side column -->
-					<div class="col-md-3">
+					<div class="col-md-2">
 
 						<%-- <form id="re-filter" action="restaurantList.jsp" method="get" class="white-row">
 
@@ -1378,36 +1422,36 @@
 
 
 						<!-- TWEETS -->
-						<h3 class="page-header">
-							<i class="fa fa-twitter"></i> 
-							Latest <strong class="styleColor">Tweets</strong> 
-						</h3>
+<!-- 						<h3 class="page-header"> -->
+<!-- 							<i class="fa fa-twitter"></i>  -->
+<!-- 							Latest <strong class="styleColor">Tweets</strong>  -->
+<!-- 						</h3> -->
 
-						<p>
-							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-							<small class="block styleColor">12 hours ago</small>
-						</p>
-						<p>
-							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-							<small class="block styleColor">12 hours ago</small>
-						</p>
-						<p>
-							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-							<small class="block styleColor">12 hours ago</small>
-						</p>
+<!-- 						<p> -->
+<!-- 							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. -->
+<!-- 							<small class="block styleColor">12 hours ago</small> -->
+<!-- 						</p> -->
+<!-- 						<p> -->
+<!-- 							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. -->
+<!-- 							<small class="block styleColor">12 hours ago</small> -->
+<!-- 						</p> -->
+<!-- 						<p> -->
+<!-- 							<a href="#">@tweetuser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. -->
+<!-- 							<small class="block styleColor">12 hours ago</small> -->
+<!-- 						</p> -->
 
-						<!-- SOCIALS -->
-						<h3 class="page-header">
-							<i class="fa fa-twitter"></i> 
-							<strong class="styleColor">Follow</strong> Us
-						</h3>
+<!-- 						SOCIALS -->
+<!-- 						<h3 class="page-header"> -->
+<!-- 							<i class="fa fa-twitter"></i>  -->
+<!-- 							<strong class="styleColor">Follow</strong> Us -->
+<!-- 						</h3> -->
 
-						<a href="#" class="social fa fa-facebook"></a>
-						<a href="#" class="social fa fa-twitter"></a>
-						<a href="#" class="social fa fa-google-plus"></a>
-						<a href="#" class="social fa fa-linkedin"></a>
-						<a href="#" class="social fa fa-pinterest"></a>
-						<a href="#" class="social fa fa-flickr"></a>
+<!-- 						<a href="#" class="social fa fa-facebook"></a> -->
+<!-- 						<a href="#" class="social fa fa-twitter"></a> -->
+<!-- 						<a href="#" class="social fa fa-google-plus"></a> -->
+<!-- 						<a href="#" class="social fa fa-linkedin"></a> -->
+<!-- 						<a href="#" class="social fa fa-pinterest"></a> -->
+<!-- 						<a href="#" class="social fa fa-flickr"></a> -->
 
 					</div>
 					<!-- /side column -->

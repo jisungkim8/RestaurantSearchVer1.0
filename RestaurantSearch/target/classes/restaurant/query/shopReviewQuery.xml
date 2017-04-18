@@ -31,6 +31,11 @@
 		WHERE REVIEWID = #{reviewId}
 	</update>
 	
+	<update id="decreaseRecommendCnt" parameterType="int">
+		UPDATE SHOPREVIEW SET recommendCnt = recommendCnt - 1
+		WHERE REVIEWID = #{reviewId}
+	</update>
+	
 	<select id="getTotalShopReviewDetView" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM SHOPREVIEW WHERE RESTAURANTID = #{restaurantId}
 	</select>

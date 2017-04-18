@@ -43,7 +43,7 @@ $(document).ready(function() {
 	// 네이버 지도 사용을 위한 네이버 지도 map 객체... 
 	var map = new naver.maps.Map('map', {
 		center : new naver.maps.LatLng(37.3595704, 127.105399),
-		zoom : 8,
+		zoom : 11,
 		zoomControl : true, //줌 컨트롤의 표시 여부 
 		zoomControlOptions : { //줌 컨트롤의 옵션
 			position : naver.maps.Position.RIGHT_CENTER
@@ -111,6 +111,15 @@ $(document).ready(function() {
 	
 	moreReview();
 	
+	$('#myNav').affix({
+		offset: {
+			top: 125,
+			bottom: function () {
+				return (this.bottom = $('.bs-footer').outerHeight(false))
+			}
+		}
+	});
+	
 	$(document).on("click", "#replyWrite", function(e) {
 		alert("asdasdasd");
 	});
@@ -157,24 +166,51 @@ $(document).ready(function() {
 	});
 	
 	$(document).on("click", "#recommend", function(e) {
-		var current = (this).value;
+		var current = (this);
+		var status = "increase";
 		
 		if ((this).getAttribute("class") == "btn btn-success") {
-			alert("asd");
-			return;
+			status = "decrease";
+		} else {
+			status = "increase"
 		}
 		
-		(this).setAttribute("class", "btn btn-success");
+//		(this).setAttribute("class", "btn btn-success");
 		
 		$.ajax({
 			url : "recommend.do",
 			method : "POST", 
-			data : {restaurantId:restaurantId, current:current, moreCount:moreCount}, 
+			data : {restaurantId:restaurantId, current:current.value, moreCount:moreCount, status:status}, 
 			success : function(args) {
-//				alert("moreCount = " + moreCount);
-//				alert("restaurantId = " + restaurantId);
-				alert("current = " + current);
-//				alert(args);
+				alert("args = " + args);
+				
+				if (args == "increase") {
+					$("#recommend").attr("class", "btn btn-success");
+					$("#recommend").attr("data-target", "#recommendDelete");
+				} else {
+					$("#recommend").attr("class", "btn btn-default");
+					$("#recommend").attr("data-target", "#recommendAdd");
+				}
+			}
+		});
+	});
+	
+	$(document).on("click", "#likeImageButton", function(e) {
+		
+		$.ajax({
+			url : "addLikeList.do",
+			method : "POST", 
+			data : {restaurantId:restaurantId}, 
+			success : function(args) {
+				alert("args = " + args);
+				
+				if (args == "nonexist") {
+					$("#likeImage").attr("class", "featured-icon half fa fa-heart-o");
+					$("#likeImageButton").attr("data-target", "#likeListExist");
+				} else {
+					$("#likeImage").attr("class", "featured-icon half empty fa fa-heart-o");
+					$("#likeImageButton").attr("data-target", "#likeListNonExist");
+				}
 			}
 		});
 	});
@@ -187,8 +223,10 @@ $(document).ready(function() {
 
 
 
-function addLikeSessionExists() {
-	alert("addLikeSessionExists")
+function addLikeSessionExists(sessionId) {
+	alert("addLikeSessionExists = " + sessionId)
+	
+	
 }
 
 function addLikeSessionNotExists() {

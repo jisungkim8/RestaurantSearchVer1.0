@@ -11,5 +11,6 @@ public interface ShopReviewDao {
 	public int getNewShopReviewDetView();
 	public void insertShopReviewDetView(ShopReviewCommand shopReviewCommand);
 	public void increaseRecommendCnt(int reviewId);
+	public void decreaseRecommendCnt(int reviewId);
 	public int getTotalShopReviewDetView(int restaurantId);
 }

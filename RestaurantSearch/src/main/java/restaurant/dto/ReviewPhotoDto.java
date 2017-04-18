@@ -1,9 +1,9 @@
 package restaurant.dto;
 
 public class ReviewPhotoDto {
-	int photoId;
-	String photoPath;
-	int reviewId;
+	private int photoId;
+	private String photoPath;
+	private int reviewId;
 	
 	public int getPhotoId() {
 		return photoId;
