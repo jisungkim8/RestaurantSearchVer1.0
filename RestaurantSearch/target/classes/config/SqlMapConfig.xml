@@ -32,6 +32,7 @@
 		<mapper resource="restaurant/query/mainRestaurantListQuery.xml" />
 		<mapper resource="restaurant/query/restaurantSearchQuery.xml" />
 		<mapper resource="restaurant/query/likeListQuery.xml" />
+		<mapper resource="restaurant/query/restaurantRegiQuery.xml" />
 	</mappers>
 
 </configuration>

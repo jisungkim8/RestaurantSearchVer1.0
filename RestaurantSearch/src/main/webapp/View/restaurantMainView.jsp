@@ -89,7 +89,8 @@
 											'thick solid brown');
 								})
 
-						$("#login").click(
+						$("#login")
+								.click(
 										function() {
 											var registerCheck, passwd;
 
@@ -99,11 +100,16 @@
 
 											if ($("#memberId").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
 												$("#memberId").focus();//커서입력
 												return;
-											} else if (!regEmail.test($("#memberId").val())) {
-												$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+											} else if (!regEmail.test($(
+													"#memberId").val())) {
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
 												$("#memberId").focus();
 												//history.back();
 												return;
@@ -111,49 +117,68 @@
 
 											if ($("#password").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>패스워드를 입력하세요</font>")
 												$("#loginmsg").focus();//커서입력
 												return;
 											}
 
-											$.ajax({
+											$
+													.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
-															id : $("#memberId").val()
+															id : $("#memberId")
+																	.val()
 														},
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
 														success : function(args) {
 															if (args == "register") {
 																registerCheck = "register"
-																$.ajax({
+																$
+																		.ajax({
 																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 																			data : {
-																				id : $("#memberId").val(),
-																				passwd : $("#password").val()
+																				id : $(
+																						"#memberId")
+																						.val(),
+																				passwd : $(
+																						"#password")
+																						.val()
 																			},
 																			type : "POST",
 																			//3.success:콜백함수명(매개변수)
-																			success : function(args) {
+																			success : function(
+																					args) {
 																				if (args == "agreement") {
-																					document.memInfo.submit()
+																					document.memInfo
+																							.submit()
 																				} else {
-																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																					$(
+																							"#loginmsg")
+																							.html(
+																									"<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																				}
 																			}
 																		})
 															} else {
-																$("#loginmsg").html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+																$("#loginmsg")
+																		.html(
+																				"<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
 															}
 														}
 													})
 										})
 
-						$('#myProfile').click(function() {
+						$('#myProfile')
+								.click(
+										function() {
 											alert("id=>" + $('#memberId').val())
-											alert("pwd=>"	+ $("#password").val())
+											alert("pwd=>"
+													+ $("#password").val())
 
 											var memInfoForm = document.memInfoForm;
 											var url = "memProfile.do";
@@ -315,7 +340,8 @@
 				<button type="button" class="btn btn-success">로그인</button> -->
 			<!-- SIGN IN -->
 			<c:choose>
-				<c:when test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
+				<c:when
+					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
 					<div class="navbar-collapse nav-main-collapse collapse pull-left">
 						<a id="quick_board" href="list.do"><span
 							class="btn btn-warning">게시판</span></a>
@@ -348,8 +374,9 @@
 						</form>
 					</div>
 				</c:when>
-				
-				<c:when test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
+
+				<c:when
+					test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
 					<div class="navbar-collapse nav-main-collapse collapse pull-left">
 						<a id="quick_board" href="list.do"><span
 							class="btn btn-warning">게시판</span></a>
@@ -366,7 +393,7 @@
 								<div class="log-arrow-up"></div>
 								<li class="eborder-top"><a href="#" id="myProfile"><i
 										class="icon_profile"></i> My Profile</a></li>
-										<li class="eborder-top"><a href="memList.do"><i
+								<li class="eborder-top"><a href="memList.do"><i
 										class="icon_profile"></i> 회원관리</a></li>
 								<!-- <li class="eborder-top">
                                 <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
@@ -385,15 +412,14 @@
 
 					</div>
 				</c:when>
-				
+
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="list.do"><span
-								class="btn btn-primary">게시판</span></a>
-								<a id="quick_board" href="memList.do"><span
-								class="btn btn-primary">회원관리</span></a>
+								class="btn btn-primary">게시판</span></a> <a id="quick_board"
+								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
 						</div>
 
 
@@ -425,11 +451,12 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
-										<input type="hidden" name="restaurantId" value="0">
-										<input type="hidden" name="moreCount" value="0">
-										<input type="hidden" name="filterName" value="reviewId">
-										<input type="hidden" name="pageName" value="restMainView">
-										<input type="button" id="login" value="로그인" class="btn btn-primary pull-right push-bottom">
+										<input type="hidden" name="restaurantId" value="0"> <input
+										type="hidden" name="moreCount" value="0"> <input
+										type="hidden" name="filterName" value="reviewId"> <input
+										type="hidden" name="pageName" value="restMainView"> <input
+										type="button" id="login" value="로그인"
+										class="btn btn-primary pull-right push-bottom">
 									</span>
 								</div>
 								<div class="checkbox">
@@ -446,7 +473,8 @@
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원 가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원
+										가입</font></a>
 							</p>
 						</div>
 					</div>
@@ -499,8 +527,9 @@
 
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
-											style="color: lightgray" name="keyword" value="검색어로 검색: 혼밥/맛집/속초/데이트" />
-										<input type="hidden" id="pageNum" name="pageNum" value="1" />
+											style="color: lightgray" name="keyword"
+											value="검색어로 검색: 혼밥/맛집/속초/데이트" /> <input type="hidden"
+											id="pageNum" name="pageNum" value="1" />
 										<!-- view more button -->
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
@@ -798,7 +827,135 @@
 						<i class="lightgray fa fa-globe hidden-xs"></i>
 						<h4>식당 등록</h4>
 						<p>식당이 보이지 않다구요? 간편하게 지금 등록하세요.</p>
-						<a href="shoplist.do" class="btn btn-primary btn-xs">식당 등록하기</a>
+						<button type="button" class="btn btn-primary btn-xs"
+							data-toggle="modal" data-target="#myModal">식당 등록하기</button>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Modal Header</h4>
+									</div>
+									<div class="modal-body">
+										<!-- <article class="container">
+
+											<div class="col-md-6 col-md-offset-3"> -->
+										<form name="restaurantRegi" class="white-row"
+											enctype="multipart/form-data" method="post"
+											action="restaurantRegi.do">
+											<div class="page-header">
+												<h1>
+													식당 등록 <small>Restaurant Registration</small>
+												</h1>
+											</div>
+											<div class="form-group">
+												<label for="InputID">식당 ID</label> <input type="text"
+													class="form-control" id="restaurantId" name="restaurantId"
+													placeholder="식당 ">
+											</div>
+											<div class="form-group">
+												<label for="InputName">상호명</label> <input type="text"
+													class="form-control" id="restaurantName"
+													name="restaurantName" placeholder="식당 이름">
+											</div>
+											<div class="form-group">
+												<label for="tel">전화번호</label> <input type="tel"
+													class="form-control" id="phoneNumber" name="phoneNumber"
+													placeholder="전화번호">
+											</div>
+											<div class="form-group">
+												<label for="keyword">키워드</label> <input type="text"
+													class="form-control" id="keyword" name="keyword"
+													placeholder="식당 키워드">
+											</div>
+											<div class="form-group">
+												<label for="addr">주소</label> <input type="text"
+													class="form-control" id="addr" name="addr"
+													placeholder="식당 주소">
+											</div>
+											<div class="form-group">
+												<label for="avgPrice">가격대</label> <input type="text"
+													class="form-control" id="averagePrice" name="averagePrice"
+													placeholder="평균 음식 가격">
+											</div>
+
+											<div class="form-group">
+												<label for="filterInfo">필터 정보</label> <input type="text"
+													class="form-control" id="filterInfo" name="filterInfo"
+													placeholder="예약:가능,주차:가능">
+											</div>
+
+											<span id="fileselector"> <label
+												class="btn btn-default" for="upload-file-selector">
+													<input id="upload-file-selector" type="file"> <i
+													class="fa_icon icon-upload-alt margin-correction"></i>upload
+													file
+											</label>
+											</span>
+
+											<hr>
+											<!-- <div class="page-header">
+												<h1>
+													추가 정보 <small>Extra Information</small>
+												</h1>
+											</div>
+
+											<div class="form-group">
+												<label for="shortDesc">한 줄 설명</label> <input type="text"
+													class="form-control" id="shortDesc" name="shortDesc"
+													placeholder="식당을 맛있게 한줄로 표현해 주세요">
+											</div>
+											<div class="form-group">
+												<label for="openDate">개업일</label> <input type="text"
+													class="form-control" id="openStartDate"
+													name="openStartDate" placeholder="식당의 개업일">
+											</div>
+											<div class="form-group">
+												<label for="inputMenu">대표 메뉴</label> <input type="text"
+													class="form-control" id="representMenu"
+													name="representMenu" placeholder="대표 음식">
+											</div>
+											<div class="form-group">
+												<label for="inputName">대표자</label> <input type="text"
+													class="form-control" id="representative" name="representative"
+													placeholder="대표 이름">
+											</div>
+											<div class="form-group">
+												<label for="inputHomepage">홈페이지</label> <input type="text"
+													class="form-control" id="homepage" name="homepage" placeholder="홈페이지 주소">
+											</div>
+											<div class="form-group">
+												<label for="openHour">영업 시간</label> <input type="text"
+													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
+											</div> -->
+
+											<div class="form-group">
+												<div class="col-sm-12 text-center">
+													<button class="btn btn-default" type="submit">
+														등록하기<i class="fa fa-check spaceLeft"></i>
+													</button>
+													<button class="btn btn-default" data-dismiss="modal">
+														등록취소<i class="fa fa-times spaceLeft"></i>
+													</button>
+												</div>
+												<br>
+											</div>
+										</form>
+										<!-- </div>
+
+										</article> -->
+									</div>
+									<!-- <div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div> -->
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 

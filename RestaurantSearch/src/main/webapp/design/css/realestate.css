@@ -238,6 +238,22 @@ figure.agent-figure.pull-right {
 	
 }
 
+.modal-body {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    text-align: left;
+}
+
+#fileselector {
+    margin: 10px; 
+}
+#upload-file-selector {
+    display:none;   
+}
+.margin-correction {
+    margin-right: 10px;   
+}
+
 /** Responsive
  **************************************************************** **/
 @media only screen and (max-width: 768px) {
