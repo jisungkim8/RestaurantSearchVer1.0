@@ -309,9 +309,6 @@
 				src="design/images/logo.png" alt="Atropos" />
 			</a>
 
-
-
-
 			<!-- Top Nav -->
 			<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
 				<button type="button" class="btn btn-danger">회원가입</button>
@@ -349,7 +346,6 @@
 								type="hidden" id="password" name="password"
 								value="${sessionScope.userLoginInfo.password}" />
 						</form>
-
 					</div>
 				</c:when>
 				
@@ -429,10 +425,12 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
-										<input type="button" id="login" value="로그인"
-										class="btn btn-primary pull-right push-bottom">
+										<input type="hidden" name="restaurantId" value="0">
+										<input type="hidden" name="moreCount" value="0">
+										<input type="hidden" name="filterName" value="reviewId">
+										<input type="hidden" name="pageName" value="restMainView">
+										<input type="button" id="login" value="로그인" class="btn btn-primary pull-right push-bottom">
 									</span>
-
 								</div>
 								<div class="checkbox">
 									<!-- remmember -->
@@ -440,18 +438,15 @@
 										<h3 id=loginmsg></h3> <!-- <table><tr><td id="loginmsg" ></td></tr></table> -->
 									</label>
 								</div>
-
 							</form>
-
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
-						<a href="#" class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i> Connect With Twitter</a> -->
+   						    <a href="#" class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i> Connect With Twitter</a> -->
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원
-										가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원 가입</font></a>
 							</p>
 						</div>
 					</div>
