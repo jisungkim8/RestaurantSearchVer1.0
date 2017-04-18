@@ -1,5 +1,8 @@
 package restaurant.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import restaurant.dto.MemDetInfoDto;
@@ -75,5 +78,24 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		int nicNameCount = getSqlSession().selectOne("checkNicName", nicName);
 		return nicNameCount;
 	}
+	
+	public List<MemDetInfoDto> list(Map<String, Object> map) {
+		// selectList->여러개의 레코드를 얻어올때 사용,selectOne(레코드 한개,객체)
+		List<MemDetInfoDto> list = getSqlSession().selectList("memList", map);
+		return list;
+	}
+
+	// select count(*) from springboard2
+	public int getRowCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("memCount", map);
+	}
+	
+	public MemDetInfoDto selectMember(String memberId) {
+		// TODO Auto-generated method stub
+		MemDetInfoDto selectMember = (MemDetInfoDto) getSqlSession().selectOne("selectMember", memberId);
+		return selectMember;
+	}
+	
 	
 }

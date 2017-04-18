@@ -12,7 +12,7 @@
 <body>
 	<table border="0" cellpadding="0" cellspacing="1" bgcolor="#a0a0a0"
 		width="100%">
-		<tr height="100" valign="middle" bgcolor="#ffffff">
+		<tr valign="middle" bgcolor="#ffffff">
 			<td colspan="2"><tiles:insertAttribute name="header" /></td>
 		</tr>
 		<tr height="600" bgcolor="#ffffff">

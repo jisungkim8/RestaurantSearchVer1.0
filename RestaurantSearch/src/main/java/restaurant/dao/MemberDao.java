@@ -1,5 +1,8 @@
 package restaurant.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import restaurant.dto.MemDetInfoDto;
 import restaurant.dto.MemSimInfoDto;
 
@@ -23,4 +26,10 @@ public interface MemberDao {
 	public String searchPasswdMem(String memId);
 
 	public int checkNicName(String nicName);
+	
+	public List<MemDetInfoDto> list(Map<String, Object> map);
+	
+	public int getRowCount(Map<String, Object> map);// 총레코드수 구하기
+	
+	public MemDetInfoDto selectMember(String memberId);// 상세보기
 }

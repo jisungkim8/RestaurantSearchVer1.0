@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import restaurant.dao.BoardDao;
 import restaurant.dto.BoardCommandDto;
@@ -68,4 +69,36 @@ public class DeleteController {
 
 		return "redirect:/list.do"; // ListController->boardList.jsp로 이동
 	}
+	
+	
+	// 암호를 입력하고 삭제버튼 눌렀다면(에러메세지(유효성검사)
+		@RequestMapping(value = "/adminBoardDelete.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String adminBoardDelete(@ModelAttribute("command") BoardCommandDto command) {
+			if (log.isDebugEnabled()) {
+				log.debug("BoardCommandDto=" + command);// toString()
+				log.debug("admindelete_boardNum="+command.getBoardNum());
+			}
+			
+		/*	// 유효성 검사->(비밀번호)에러발생->에레메세지를 불러오게 설정
+			new BoardDeleteValidator().validate(command, result);
+			// 만약에 에러가 발생이 되었다면
+			if (result.hasErrors()) {
+				return form();// form()호출->boardDelete.jsp로 전환
+			}*/
+
+			// 삭제할 게시물번호에 해당하는 레코드를 구해온다.
+			BoardCommandDto board = boardDao.selectBoard(command.getBoardNum());
+			System.out.println("board.toString()=>"+board.toString());
+			
+			boardDao.delete(command.getBoardNum());
+			// 만약에 삭제한 게시물에 업로드된 파일이 존재한다면 삭제하라
+			if (board.getFilename() != null) {
+				FileUtil.removeFile(board.getFilename());
+			}
+			
+			return "redirect:/list.do"; // ListController->boardList.jsp로 이동
+		}
+	
+	
 }

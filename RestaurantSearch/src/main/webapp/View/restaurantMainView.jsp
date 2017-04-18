@@ -309,16 +309,13 @@
 				src="design/images/logo.png" alt="Atropos" />
 			</a>
 
-
-
-
 			<!-- Top Nav -->
 			<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
 				<button type="button" class="btn btn-danger">회원가입</button>
 				<button type="button" class="btn btn-success">로그인</button> -->
 			<!-- SIGN IN -->
 			<c:choose>
-				<c:when test="${not empty sessionScope.userLoginInfo}">
+				<c:when test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
 					<div class="navbar-collapse nav-main-collapse collapse pull-left">
 						<a id="quick_board" href="list.do"><span
 							class="btn btn-warning">게시판</span></a>
@@ -327,7 +324,7 @@
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
 							style="background-color: lightgreen"> <span>로그인 성공!
-									아이디 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
+									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
 							</span>
 						</a>
 							<ul class="dropdown-menu extended logout"
@@ -349,15 +346,54 @@
 								type="hidden" id="password" name="password"
 								value="${sessionScope.userLoginInfo.password}" />
 						</form>
+					</div>
+				</c:when>
+				
+				<c:when test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
+					<div class="navbar-collapse nav-main-collapse collapse pull-left">
+						<a id="quick_board" href="list.do"><span
+							class="btn btn-warning">게시판</span></a>
+					</div>
+					<div class="pull-right nav signin-dd">
+						<li class="dropdown"><a data-toggle="dropdown"
+							class="dropdown-toggle" href="#"
+							style="background-color: lightgreen"> <span>로그인 성공!
+									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
+							</span>
+						</a>
+							<ul class="dropdown-menu extended logout"
+								style="width: 251px; background-color: blue">
+								<div class="log-arrow-up"></div>
+								<li class="eborder-top"><a href="#" id="myProfile"><i
+										class="icon_profile"></i> My Profile</a></li>
+										<li class="eborder-top"><a href="memList.do"><i
+										class="icon_profile"></i> 회원관리</a></li>
+								<!-- <li class="eborder-top">
+                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
+                            </li> -->
+								<li class="eborder-top"><a href="memberLogout.do"><i
+										class="icon_profile"></i> 로그아웃</a></li>
+								<li class="eborder-top"><a href="#" id="memLeave"><i
+										class="icon_profile"></i> 회원탈퇴</a></li>
+							</ul></li>
+						<form name="memInfoForm">
+							<input type="hidden" id="memberId" name="memberId"
+								value="${sessionScope.userLoginInfo.memberId}" /> <input
+								type="hidden" id="password" name="password"
+								value="${sessionScope.userLoginInfo.password}" />
+						</form>
 
 					</div>
 				</c:when>
+				
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="list.do"><span
 								class="btn btn-primary">게시판</span></a>
+								<a id="quick_board" href="memList.do"><span
+								class="btn btn-primary">회원관리</span></a>
 						</div>
 
 
@@ -393,30 +429,24 @@
 										<input type="hidden" name="moreCount" value="0">
 										<input type="hidden" name="filterName" value="reviewId">
 										<input type="hidden" name="pageName" value="restMainView">
-										<input type="button" id="login" value="로그인"
-										class="btn btn-primary pull-right push-bottom">
+										<input type="button" id="login" value="로그인" class="btn btn-primary pull-right push-bottom">
 									</span>
-
 								</div>
-
 								<div class="checkbox">
 									<!-- remmember -->
 									<label> <!-- <input type="checkbox"> Remember me &bull; -->
 										<h3 id=loginmsg></h3> <!-- <table><tr><td id="loginmsg" ></td></tr></table> -->
 									</label>
 								</div>
-
 							</form>
-
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
-						<a href="#" class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i> Connect With Twitter</a> -->
+   						    <a href="#" class="btn-twitter fullwidth radius3"><i class="fa fa-twitter"></i> Connect With Twitter</a> -->
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원
-										가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원 가입</font></a>
 							</p>
 						</div>
 					</div>

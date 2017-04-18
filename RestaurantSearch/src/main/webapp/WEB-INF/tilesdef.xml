@@ -49,5 +49,21 @@
 		<put-attribute name="js" value="" />
 		<put-attribute name="body" value="/View/boardModify.jsp" />
 	</definition>
+	
+	<definition name="memberList" template="/View/layout.jsp">
+		<put-attribute name="title" value="회원관리" />
+		<put-attribute name="css" value="/View/boardDefaultCss.jsp" />
+		<put-attribute name="js" value="/View/boardSearchJs.jsp" />
+		<put-attribute name="header" value="/View/header.jsp" />
+		<put-attribute name="body" value="/View/memberList.jsp" />
+		<put-attribute name="footer" value="/View/footer.jsp" />
+	</definition>
+	
+	<!-- 상세 페이지 -->
+	<definition name="memberView" extends="memberList">
+		<put-attribute name="title" value="글 상세폼" />
+		<put-attribute name="js" value="" />
+		<put-attribute name="body" value="/View/memberView.jsp" />
+	</definition>
 
 </tiles-definitions>
