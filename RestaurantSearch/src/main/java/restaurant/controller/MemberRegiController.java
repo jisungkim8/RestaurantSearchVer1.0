@@ -159,14 +159,9 @@ public class MemberRegiController {
 
 		memDetInfoDto.setMemberType("초급");
 		System.out.println("memDetInfoDto.getEmailCheck()==>" + memDetInfoDto.getEmailCheck());
-
-		
+	
 		//MultipartFile file = multi.getFile("upload");
-
-
 		//System.out.println("MultipartFile file =>"+file.getOriginalFilename());
-
-
 		/*
 		 * if (memDetInfoDto.getEmailCheck()=="수신") {
 		 * System.out.println("memDetInfoDto.getEmailCheck() == null");
@@ -182,6 +177,8 @@ public class MemberRegiController {
 		System.out.println("memDetInfoDto=" + memDetInfoDto);
 		System.out.println("MemberRegiController memInfoUpdate.POST 메서드 호출됨!");
 		oldFileName = memDetInfoDto.getPhotoPath();
+		System.out.println("oldFileName"+oldFileName);
+		System.out.println("memDetInfoDto.getUpload().getOr=>"+memDetInfoDto.getUpload().getOriginalFilename());
 
 		// 업로드된 파일이 존재한다면
 		if (!memDetInfoDto.getUpload().isEmpty()) {

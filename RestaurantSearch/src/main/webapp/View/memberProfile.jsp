@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -158,6 +160,13 @@ function trueForm()
 		$('#uploadBtn').show();
 		$('#profileMod').val('수정완료')
 	}else{
+		
+		 if($("#nicNameDupliCheck").val()=='unchecked'){
+				alert("닉네임 중복확인 버튼을 클릭하세요.")
+				 $("#nicNameRepCheckBtn").focus();
+				return;
+		 }
+		 
 		$("#birthDate").attr("disabled",false).attr("readonly",true); 
 		$("#phoneNum").attr("disabled",false).attr("readonly",true); 
 		$("#gender").attr("disabled",false).attr("readonly",true); 
@@ -193,10 +202,9 @@ $(function(){
 	    		//3.success:콜백함수명(매개변수)
 	    		success:function(args){
 	    			if(args=="create"){
-	    				alert("닉네임 가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
-	     			}else{
-	    				alert("닉네임 불가능")
+	     				$("#nicNameDupliCheck").val('checked')
+	    			}else{
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
 	    				$("#memberId").focus();
 	    			}
@@ -209,6 +217,9 @@ $(function(){
 		
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		var params=$("#registerMem").serialize();
+		
+		
+		
 
 		if($('#profileMod').val()=='수정완료'){
 			alert("수정완료 버튼을 클릭 하십시오.");
@@ -272,9 +283,10 @@ $(function(){
             },
 
             error : function(error) {
-                alert("파일 업로드에 실패하였습니다.");
+               /*  alert("파일 업로드에 실패하였습니다.");
                 console.log(error);
-                console.log(error.status);
+                console.log(error.status); */
+            	self.close();
             }
         });
     	
@@ -748,7 +760,8 @@ $(function(){
 							</div>
 						</div>
 
-						<div class="row" style="text-align:right; background-color: #86E57F">   
+						<div class="row" style="text-align:right; background-color: #86E57F">
+						        <input type="hidden" id="nicNameDupliCheck" value="unchecked">
 								<input type="button" id="profileMod" value="수정" style="margin-bottom: 17px; margin-right: 17px;" class="btn btn-primary"  OnClick="trueForm()">
 								<input type="button" id="profileSave" value="저장"  style="margin-bottom: 17px; margin-right: 17px;"  class="btn btn-success" >
 						</div>
