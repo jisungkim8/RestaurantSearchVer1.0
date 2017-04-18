@@ -342,10 +342,7 @@
 			<c:choose>
 				<c:when
 					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
-					<div class="navbar-collapse nav-main-collapse collapse pull-left">
-						<a id="quick_board" href="list.do"><span
-							class="btn btn-warning">게시판</span></a>
-					</div>
+					
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -377,10 +374,7 @@
 
 				<c:when
 					test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
-					<div class="navbar-collapse nav-main-collapse collapse pull-left">
-						<a id="quick_board" href="list.do"><span
-							class="btn btn-warning">게시판</span></a>
-					</div>
+					
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -417,8 +411,7 @@
 
 					<div class="pull-right nav signin-dd">
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
-							<a id="quick_board" href="list.do"><span
-								class="btn btn-primary">게시판</span></a> <a id="quick_board"
+							<a id="quick_board"
 								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
 						</div>
 
@@ -484,16 +477,15 @@
 
 		</div>
 		<div class="containerSearch">
-			<form class="navbar-form navbar-left">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
+			<form action="restaurantSearch.do" method="get">
+				<input type="text" class="input_text" id="topSearchBox"
+					name="keyword" autocomplete="off" /> <input type="hidden"
+					id="pageNum" name="pageNum" value="1" />
+				<!-- view more button -->
+				<input type="submit" value="검색"
+					class="btn btn-default btn-m view-more pull-right"
+					style="margin-top: 10px">
+			</form>
 			<span class="clearfix"></span>
 		</div>
 
@@ -963,9 +955,9 @@
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="featured-box noradius line-left">
 						<i class="lightgray fa fa-road hidden-xs"></i>
-						<h4>FAQ</h4>
-						<p>질문은 언제나 환영입니다! FAQ 게시판과 이메일, 전화로 연락주세요.</p>
-						<a href="page-right-sidebar.html" class="btn btn-primary btn-xs">질문하기</a>
+						<h4>자유 게시판</h4>
+						<p>질문이나 공지사항을 게시판에서 확인하세요!</p>
+						<a href="list.do" class="btn btn-primary btn-xs">질문하기</a>
 					</div>
 				</div>
 
