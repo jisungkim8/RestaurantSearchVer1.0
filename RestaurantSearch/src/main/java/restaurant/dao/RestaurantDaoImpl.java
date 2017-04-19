@@ -12,5 +12,12 @@ public class RestaurantDaoImpl extends SqlSessionDaoSupport implements Restauran
 		
 		return getSqlSession().selectOne("selectRestaurantDetView", restaurantId);
 	}
-
+	
+	public void increaseViewCountRestaurantDetView(int restaurantId) {
+		// TODO Auto-generated method stub
+		System.out.println("RestaurantDaoImpl>>increaseViewCountRestaurantDetView() is called!!");
+		
+		int resultByUpdate = getSqlSession().update("increaseViewCountRestaurantDetView", restaurantId);
+		System.out.println("resultByUpdate = " + resultByUpdate);
+	}
 }

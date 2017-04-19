@@ -15,6 +15,16 @@ public class LikeListDaoImpl extends SqlSessionDaoSupport implements LikeListDao
 		return getSqlSession().selectOne("selectLikeList", map);
 	}
 	
+	public int getTotListCountByRestaurantId(int restaurantId) {
+		// TODO Auto-generated method stub
+		System.out.println("LikeListDaoImpl>>getTotList() is called!!");
+		
+		int listCount = getSqlSession().selectOne("getTotListCountByRestaurantId", restaurantId);
+		System.out.println("LikeListDaoImpl>>listCount = " + listCount);
+		
+		return listCount;
+	}
+	
 	public int getNewListNum() {
 		// TODO Auto-generated method stub
 		System.out.println("LikeListDaoImpl>>getNewListNum() is called!!");

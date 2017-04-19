@@ -4,6 +4,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import restaurant.dto.RestaurantDto;
 import restaurant.dto.ShopDetInfoDto;
+import restaurant.dto.ShopPhotoDto;
 
 public class RestaurantRegiDaoImpl extends SqlSessionDaoSupport implements RestaurantRegiDao {
 
@@ -43,7 +44,13 @@ public class RestaurantRegiDaoImpl extends SqlSessionDaoSupport implements Resta
 		int restaurantCount = getSqlSession().selectOne("countRestaurantId");
 		return restaurantCount;
 	}
-		
+
+	public void insertRestaurantPhoto(ShopPhotoDto shopPhotoDto) {
+
+		getSqlSession().insert("insertRestaurantPhoto", shopPhotoDto);
+		System.out.println("RestaruantRegiDaoImpl_insertRestaurantPhoto");
+	}
+	// TODO Auto-generated method stub
 
 	/*
 	 * public MemDetInfoDto selectMemDetInfo(MemDetInfoDto memDetInfoDto) { //

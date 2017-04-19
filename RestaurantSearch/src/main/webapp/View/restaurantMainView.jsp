@@ -80,6 +80,27 @@
 											'thick solid grey');
 
 								})
+						var fileTarget = $('.filebox .upload-hidden');
+						fileTarget.on('change', function() { // 값이 변경되면 
+							if (window.FileReader) { // modern browser
+								var filename = $(this)[0].files[0].name;
+							} else { // old IE
+								var filename = $(this).val().split('/').pop()
+										.split('\\').pop(); // 파일명만 추출 
+							}
+							// 추출한 파일명 삽입 
+							//$(this).siblings('.upload-name').val(filename); 
+							if ($('.upload-name').val() != "") {
+								var ext = filename.split('.').pop()
+										.toLowerCase();
+								if ($.inArray(ext, [ 'gif', 'png', 'jpg',
+										'jpeg' ]) == -1) {
+									alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+									return;
+								}
+							}
+							$('.upload-name').val(filename);
+						});
 
 						$(".relSearButton").click(
 								function() {
@@ -338,7 +359,7 @@
 			<c:choose>
 				<c:when
 					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'kicRestAdmin@rest.com'}">
-					
+
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -368,8 +389,9 @@
 					</div>
 				</c:when>
 
-				<c:when test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
-					
+				<c:when
+					test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
+
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -405,21 +427,19 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-<<<<<<< HEAD
+						<<<<<<< HEAD
 						<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board"
 								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
 						</div> -->
-=======
+						=======
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="memList.do"><span
 								class="btn btn-primary">회원관리</span></a>
 						</div>
->>>>>>> refs/remotes/origin/master
-
-
-						<a id="quick_sign_in" href="page-signin.html"
-							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
+						>>>>>>> refs/remotes/origin/master <a id="quick_sign_in"
+							href="page-signin.html" data-toggle="dropdown"><span
+							class="btn btn-success">로그인</span></a>
 
 
 						<div class="dropdown-menu" role="menu"
@@ -857,12 +877,12 @@
 													class="form-control" id="restaurantId" name="restaurantId"
 													placeholder="식당 ">
 											</div> -->
-											<div class="form-group" style="display:none">
+											<div class="form-group" style="display: none">
 												<label for="InputId">식당 Id</label> <input type="text"
-													class="form-control" id="restaurantId"
-													name="restaurantId" placeholder="식당 Id" value="${restaurantCount+1}">
+													class="form-control" id="restaurantId" name="restaurantId"
+													placeholder="식당 Id" value="${restaurantCount+1}">
 											</div>
-											
+
 											<div class="form-group">
 												<label for="InputName">상호명</label> <input type="text"
 													class="form-control" id="restaurantName"
@@ -888,8 +908,8 @@
 													class="form-control" id="averagePrice" name="averagePrice"
 													placeholder="평균 음식 가격">
 											</div>
-											
-											<div class="form-group" style="display:none">
+
+											<div class="form-group" style="display: none">
 												<label for="avgScore">평점</label> <input type="text"
 													class="form-control" id="averageScore" name="averageScore"
 													placeholder="평점은 0부터 시작합니다." value="0" readonly>
@@ -900,23 +920,20 @@
 													class="form-control" id="filterInfo" name="filterInfo"
 													placeholder="예약:가능,주차:가능">
 											</div>
-											
-											<div class="form-group">
-												<label for="mainPhoto">대표 메뉴</label> <input type="text"
-													class="form-control" id="representPhoto" name="representPhoto"
-													placeholder="사진을 넣어주세요">
+
+											<div class="filebox">
+												<label for="mainPhoto">대표 사진</label>
+												<div class="filebox">
+
+													<input type="file" id="ex_filename" name="upload"
+														class="upload-hidden">
+												</div>
 											</div>
 
-											<span id="fileselector"> <label
-												class="btn btn-default" for="upload-file-selector">
-													<input id="upload-file-selector" type="file"> <i
-													class="fa_icon icon-upload-alt margin-correction"></i>upload
-													file
-											</label>
-											</span>
+
 
 											<hr>
-											<!-- <div class="page-header">
+											<div class="page-header">
 												<h1>
 													추가 정보 <small>Extra Information</small>
 												</h1>
@@ -949,7 +966,7 @@
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
 													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
-											</div> -->
+											</div>
 
 											<div class="form-group">
 												<div class="col-sm-12 text-center">

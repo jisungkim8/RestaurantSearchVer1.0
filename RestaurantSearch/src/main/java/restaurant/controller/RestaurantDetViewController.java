@@ -76,6 +76,8 @@ public class RestaurantDetViewController {
 			log.debug("filterName = " + filterName);
 		}
 		
+		restaurantDao.increaseViewCountRestaurantDetView(restaurantId);
+		
 		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		
 //		Map<String, Object> map = new HashMap<String, Object>();
@@ -125,7 +127,6 @@ public class RestaurantDetViewController {
 
 		if (restaurantDto.getKeyword() != null) {
 			str = restaurantDto.getKeyword().split("\\|");
-//			str = restaurantDto.getKeyword().split(" ");
 
 			for (int i=0; i<str.length; i++) {
 				keyword.add(str[i]);
@@ -133,17 +134,13 @@ public class RestaurantDetViewController {
 		}
 		
 		// 번지명 주소, 도로명 주소
-		int indexOfDoroAddr = 0;
-		String addr = null;
-		String doroAddr = null;
+		String[] addr = null;
 		
 		if (restaurantDto != null) {
-			indexOfDoroAddr = restaurantDto.getAddr().lastIndexOf(", ");
-			addr = restaurantDto.getAddr().substring(0, indexOfDoroAddr);
-			doroAddr = restaurantDto.getAddr().substring(indexOfDoroAddr + 2);
+			addr = restaurantDto.getAddr().split(",");
 		}
 		
-		restaurantDto.setAddr(addr + " (" + doroAddr + ")");
+		restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -544,16 +541,27 @@ public class RestaurantDetViewController {
 	
 	@RequestMapping(value="/styleModify.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String styleModify(@RequestParam(value="restaurantId") int restaurantId, HttpSession session) {
+	public Map<String, Object> styleModify(@RequestParam(value="restaurantId") int restaurantId, HttpSession session) {
 		System.out.println("RestaurantDetViewController>>styleModify() is called!!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> mapObject = new HashMap<String, Object>();
 		
 		MemSimInfoDto memSimInfoDto = (MemSimInfoDto) session.getAttribute("userLoginInfo");
 		String memberId = null;
 		
+		String checkLikeList = null;
+		
+		int likeCount = likeListDao.getTotListCountByRestaurantId(restaurantId);
+		
+		mapObject.put("likeCount", likeCount);
+		
 		if (memSimInfoDto != null) {
 			memberId = memSimInfoDto.getMemberId();
 		} else {
-			return "nonexist";
+			mapObject.put("checkLikeList", "nonexist");
+			
+			return mapObject;
 		}
 		
 		if (log.isDebugEnabled()) {
@@ -561,11 +569,10 @@ public class RestaurantDetViewController {
 			log.debug("restaurantId = " + restaurantId);
 		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
 		
 		LikeListDto likeListDtoList = new LikeListDto();
 		
-		String checkLikeList = "exist";
+		checkLikeList = "exist";
 		
 		map.put("restaurantId", restaurantId);
 		map.put("memberId", memberId);
@@ -582,7 +589,9 @@ public class RestaurantDetViewController {
 			checkLikeList = "nonexist";
 		}
 		
-		return checkLikeList;
+		mapObject.put("checkLikeList", checkLikeList);
+		
+		return mapObject;
 	}
 	
 	@RequestMapping(value="/addLikeList.do", method=RequestMethod.POST)
