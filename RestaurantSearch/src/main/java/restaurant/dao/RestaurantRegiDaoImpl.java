@@ -32,11 +32,11 @@ public class RestaurantRegiDaoImpl extends SqlSessionDaoSupport implements Resta
 		getSqlSession().delete("deleteShopDetInfo", restaurantId);
 	}
 
-	public void insertRestaurantDetInfo(ShopDetInfoDto shopDetInfoDto) {
+	/*public void insertRestaurantDetInfo(ShopDetInfoDto shopDetInfoDto) {
 		// TODO Auto-generated method stub
 		getSqlSession().insert("insertShopDetInfo", shopDetInfoDto);
 		System.out.println("RestaurantRegiDaoImpl_shopDetInfoDto");
-	}
+	}*/
 
 	public int countRestaurantId() {
 		// TODO Auto-generated method stub
@@ -45,11 +45,7 @@ public class RestaurantRegiDaoImpl extends SqlSessionDaoSupport implements Resta
 		return restaurantCount;
 	}
 
-	public void insertRestaurantPhoto(ShopPhotoDto shopPhotoDto) {
-
-		getSqlSession().insert("insertRestaurantPhoto", shopPhotoDto);
-		System.out.println("RestaruantRegiDaoImpl_insertRestaurantPhoto");
-	}
+	
 	// TODO Auto-generated method stub
 
 	/*

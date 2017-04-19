@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.RestaurantRegiDao;
+import restaurant.dao.ShopDetInfoDao;
 import restaurant.dto.RestaurantDto;
 import restaurant.dto.ShopDetInfoDto;
 import restaurant.util.FileUtil2;
@@ -26,6 +27,9 @@ public class RestaurantRegiController {
 
 	@Autowired
 	RestaurantRegiDao restaurantRegiDao;
+	
+	@Autowired
+	ShopDetInfoDao shopDetInfoDao;
 
 	private Logger log = Logger.getLogger(this.getClass());// 클래스 이름 불러오기
 
@@ -70,7 +74,7 @@ public class RestaurantRegiController {
 
 			System.out.println("멤버정보입력전에dto정보" + restaurantDto);
 			restaurantRegiDao.insertRestaurant(restaurantDto);
-			restaurantRegiDao.insertRestaurantDetInfo(shopDetInfoDto);
+			shopDetInfoDao.insertShopDetInfo(shopDetInfoDto);
 			// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 
 			File file = new File(FileUtil3.UPLOAD_PATH + "/" + restaurantDto.getUpload().getOriginalFilename());
@@ -119,7 +123,7 @@ public class RestaurantRegiController {
 
 		// DB상에 반영하라
 		restaurantRegiDao.updateRestaurant(restaurantDto);
-
+		
 		// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 		if (!restaurantDto.getUpload().isEmpty()) {
 			try {

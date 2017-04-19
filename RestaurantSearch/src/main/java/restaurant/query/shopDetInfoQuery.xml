@@ -13,6 +13,13 @@
 		WHERE RESTAURANTID=#{restaurantId}
 	</select>
 	
+	<insert id="insertShopDetInfo" parameterType="ShopDetInfoDto">
+		insert into
+		shopDetInfo (restaurantId, shortDesc, representMenu, operStartDate, representative, homepage, operHour, modifyDate)
+		values(#{restaurantId}, #{shortDesc}, #{representMenu}, #{operStartDate},
+		#{representative}, #{homepage}, #{operHour}, TO_DATE(SYSDATE, 'yy/mm/dd hh24:mi:ss'))
+	</insert>
+	
 </mapper>
 
 

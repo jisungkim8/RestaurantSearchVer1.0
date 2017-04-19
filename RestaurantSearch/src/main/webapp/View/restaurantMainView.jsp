@@ -612,7 +612,7 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="${article.representPhoto}" width="409" height="271" />
+											src="${article.representPhoto}" height="271" width="409" />
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
@@ -946,8 +946,8 @@
 											</div>
 											<div class="form-group">
 												<label for="openDate">개업일</label> <input type="text"
-													class="form-control" id="openStartDate"
-													name="openStartDate" placeholder="식당의 개업일">
+													class="form-control" id="operStartDate"
+													name="operStartDate" placeholder="예: 20170402">
 											</div>
 											<div class="form-group">
 												<label for="inputMenu">대표 메뉴</label> <input type="text"
@@ -965,7 +965,7 @@
 											</div>
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
-													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
+													class="form-control" id="operHour" name="operHour" placeholder="영업 시간">
 											</div>
 
 											<div class="form-group">
