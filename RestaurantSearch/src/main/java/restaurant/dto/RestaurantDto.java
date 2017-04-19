@@ -1,5 +1,7 @@
 package restaurant.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class RestaurantDto {
 	private int restaurantId;
 	private String restaurantName;
@@ -11,7 +13,14 @@ public class RestaurantDto {
 	private String filterInfo;
 	private float averageScore;
 	private int viewCount;
+	private MultipartFile upload;
 	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public int getRestaurantId() {
 		return restaurantId;
 	}

@@ -16,7 +16,7 @@
  	</select>
  	
  	<select id="checkNicName" resultType="int" parameterType="String">
-		select count(*) from memDetInfo where nickname=#{nickname}
+		select count(*) from (select * from memDetInfo where memberId!=#{memberId} ) where nickname=#{nickname}
  	</select>
  	
  	<select id="selectMemDetInfo" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">
@@ -31,7 +31,19 @@
  		      phoneNum=#{phoneNum},
  		      emailCheck=#{emailCheck},
  		      selfIntro=#{selfIntro},
- 		      photoPath=#{photoPath},
+ 		      photoPath=#{photoPath,jdbcType=VARCHAR},
+ 		      interestFood=#{interestFood},
+ 		      nickname=#{nickname}
+ 		where memberId=#{memberId}
+ 	</update>
+ 	
+ 	<update id="updateMemInfoExceptPhoto" parameterType="MemDetInfoDto">
+ 		update memDetInfo 
+ 		set birthDate=#{birthDate},
+ 		      gender=#{gender},
+ 		      phoneNum=#{phoneNum},
+ 		      emailCheck=#{emailCheck},
+ 		      selfIntro=#{selfIntro},
  		      interestFood=#{interestFood},
  		      nickname=#{nickname}
  		where memberId=#{memberId}
@@ -45,7 +57,7 @@
 		select * from memDetInfo where memberId=#{memberId} and birthDate=#{birthDate}
 	</select>
 	
-		<select id="memList" parameterType="map" resultType="MemDetInfoDto">
+	<select id="memList" parameterType="map" resultType="MemDetInfoDto">
 		SELECT memberid,nickname,gender,membertype
 		FROM(SELECT
 		a.*, 

@@ -216,7 +216,7 @@ figure.agent-figure.pull-right {
 .youtubeWrap {
 	position: relative;
 	width: 100%;
-	padding-bottom: 56.25%;
+	padding-bottom: 40%;
 }
 
 .youtubeWrap iframe {
@@ -236,6 +236,22 @@ figure.agent-figure.pull-right {
 #shop{
 	background-img:
 	
+}
+
+.modal-body {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    text-align: left;
+}
+
+#fileselector {
+    margin: 10px; 
+}
+#upload-file-selector {
+    display:none;   
+}
+.margin-correction {
+    margin-right: 10px;   
 }
 
 /** Responsive

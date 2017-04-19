@@ -11,6 +11,8 @@ public interface MemberDao {
 	
 	public void updateMember(MemDetInfoDto memDetInfoDto);
 	
+	public void updateMemInfoExceptPhoto(MemDetInfoDto memDetInfoDto);
+	
 	public int checkIdMember(String id);
 	
 	public void deleteMember(String memberId);
@@ -25,7 +27,7 @@ public interface MemberDao {
 	
 	public String searchPasswdMem(String memId);
 
-	public int checkNicName(String nicName);
+	public int checkNicName(MemDetInfoDto memDetInfo);
 	
 	public List<MemDetInfoDto> list(Map<String, Object> map);
 	
