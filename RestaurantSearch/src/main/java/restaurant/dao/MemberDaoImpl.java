@@ -39,7 +39,6 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		System.out.println("checkIdMember");
 		int memberCount = getSqlSession().selectOne("checkIdMember", id);
 		return memberCount;
-
 	}
 
 	public void insertMemSimInfo(MemSimInfoDto memSimInfoDto) {
@@ -79,9 +78,15 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		return memPasswd;
 	}
 	
-	public int checkNicName(MemDetInfoDto MemDetInfoDto) {
+	public int checkNicName(String id) {
 		System.out.println("checkNicName");
-		int nicNameCount = getSqlSession().selectOne("checkNicName", MemDetInfoDto);
+		int nicNameCount = getSqlSession().selectOne("checkNicName", id);
+		return nicNameCount;
+	}
+	
+	public int checkNicNameMyProfile(MemDetInfoDto MemDetInfoDto) {
+		System.out.println("checkNicName");
+		int nicNameCount = getSqlSession().selectOne("checkNicNameMyProfile", MemDetInfoDto);
 		return nicNameCount;
 	}
 	
@@ -102,6 +107,8 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		MemDetInfoDto selectMember = (MemDetInfoDto) getSqlSession().selectOne("selectMember", memberId);
 		return selectMember;
 	}
+
+
 	
 	
 }

@@ -594,9 +594,9 @@
 										
 										<!-- views, reviews, likes -->
 										<p>
-											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> 55,621 &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> ${totReviewCnt} &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> 51 &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> <span> ${restaurantDto.viewCount} </span> &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> <span> ${totReviewCnt} </span> &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> <span id="likeCount"></span> &nbsp;&nbsp;&nbsp;
 										</p>
 										<!-- /views, reviews, likes -->
 										
@@ -748,151 +748,152 @@
 													<div class="toggle active">
 														<label>리뷰</label>
 														<div class="toggle-content">
-															<c:if test="${shopReviewDto.isEmpty()}">
-																등록된 리뷰가 없습니다.
-															</c:if>
+															<div class="col-md-6">
+																<c:if test="${sessionScope.userLoginInfo == null}">
+																	<button class="btn btn-primary" data-toggle="modal" data-target="#loginFirst">리뷰 작성</button>
+																</c:if>
 															
-															<c:if test="${!shopReviewDto.isEmpty()}">
-																<div class="col-md-6">
-																	<c:if test="${sessionScope.userLoginInfo == null}">
-																		<button class="btn btn-primary" data-toggle="modal" data-target="#loginFirst">리뷰 작성</button>
-																	</c:if>
-																
-																	<c:if test="${sessionScope.userLoginInfo != null}">
-																		<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">리뷰 작성</button>
-																	</c:if>
-																	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-																		<div class="modal-dialog modal-lg">
-																			<div class="modal-content">
-																				<!-- modal header -->
-																				<div class="modal-header">
-																					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-																					<h4 class="modal-title" id="myModalLabel">리뷰 작성</h4>
-																				</div>
-																				<!-- /modal header -->
+																<c:if test="${sessionScope.userLoginInfo != null}">
+																	<button class="btn btn-primary" data-toggle="modal" data-target="#reviewWriteModal">리뷰 작성</button>
+																</c:if>
+																<div id="reviewWriteModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-lg">
+																		<div class="modal-content">
+																			<!-- modal header -->
+																			<div class="modal-header">
+																				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																				<h4 class="modal-title" id="myModalLabel">리뷰 작성</h4>
+																			</div>
+																			<!-- /modal header -->
+																			
+<%-- 																				<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId" enctype="multipart/form-data" method="post"> --%>
+																			<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId" enctype="multipart/form-data" method="post" id="reviewWriteForm">
 																				
-																				<form action="reviewWrite.do?restaurantId=${restaurantId}&moreCount=0&filterName=reviewId" enctype="multipart/form-data" method="post">
-																					
-																					<!-- modal body -->
-																					<div class="modal-body">
-																						<div class="row">
-																							<div class="form-group">
-																								<div class="col-md-12">
-																									<label>제목</label>
-																									<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
-																									<form:errors path="reviewCommand.title"/><br>
-																									
-																									<label>내용</label>
-																									<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
-																									<form:errors path="reviewCommand.content"/><br>
-																									
-																									<label>방문시간대</label>
-																									<select class="form-control pointer" name="visitTime">
-																										<option value="" selected="selected">선택</option>
-																										<option value="0~1시">0~1시</option>
-																										<option value="1~2시">1~2시</option>
-																										<option value="2~3시">2~3시</option>
-																										<option value="3~4시">3~4시</option>
-																										<option value="4~5시">4~5시</option>
-																										<option value="5~6시">5~6시</option>
-																										<option value="6~7시">6~7시</option>
-																										<option value="7~8시">7~8시</option>
-																										<option value="8~9시">8~9시</option>
-																										<option value="9~10시">9~10시</option>
-																										<option value="10~11시">10~11시</option>
-																										<option value="11~12시">11~12시</option>
-																									</select>
-																									
-																									<label>Dinner/Lunch</label>
-																									<select class="form-control pointer" name="dinnerOrLunch">
-																										<option value="" selected="selected">선택</option>
-																										<option value="Dinner">Dinner</option>
-																										<option value="Lunch">Lunch</option>
-																									</select>
-																									
-																									
-																									<label>사진</label>
-																									
-																									<div id="reviewPhotoFileGroup">
-																										<input type="file" class="form-control" style="height:50px;" name="upload">
-																									</div>
-																									<div align="right">
-																										<button id="moreReviewPhotoFile" class="btn btn-default">사진 추가</button>
-																									</div>
-						<%-- 																			<input type="hidden" name="memberId" value="${sessionScope.userLoginDetInfo.nickname}"> --%>
-																									<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
+																				<!-- modal body -->
+																				<div class="modal-body">
+																					<div class="row">
+																						<div class="form-group">
+																							<div class="col-md-12">
+																								<label>제목</label>
+																								<input type="text" class="form-control" name="title" placeholder="리뷰 제목을 작성해주세요.">
+																								<div id="reviewTitleMsg"></div>
+																								
+																								<label>내용</label>
+																								<textarea rows="10" class="form-control" name="content" placeholder="리뷰 내용을 작성해주세요."></textarea>
+																								<div id="reviewContentMsg"></div>
+																								
+																								<label>방문시간대</label>
+																								<select class="form-control pointer" name="visitTime">
+																									<option value="" selected="selected">선택</option>
+																									<option value="0~1시">0~1시</option>
+																									<option value="1~2시">1~2시</option>
+																									<option value="2~3시">2~3시</option>
+																									<option value="3~4시">3~4시</option>
+																									<option value="4~5시">4~5시</option>
+																									<option value="5~6시">5~6시</option>
+																									<option value="6~7시">6~7시</option>
+																									<option value="7~8시">7~8시</option>
+																									<option value="8~9시">8~9시</option>
+																									<option value="9~10시">9~10시</option>
+																									<option value="10~11시">10~11시</option>
+																									<option value="11~12시">11~12시</option>
+																								</select>
+																								
+																								<label>Dinner/Lunch</label>
+																								<select class="form-control pointer" name="dinnerOrLunch">
+																									<option value="" selected="selected">선택</option>
+																									<option value="Dinner">Dinner</option>
+																									<option value="Lunch">Lunch</option>
+																								</select>
+																								
+																								
+																								<label>사진</label>
+																								
+																								<div id="reviewPhotoFileGroup">
+																									<input type="file" class="form-control" style="height:50px;" name="upload">
 																								</div>
+																								<div align="right">
+																									<button id="addReviewPhotoFile" class="btn btn-default">사진 추가</button>
+																									<button id="deleteReviewPhotoFile" class="btn btn-default">사진 삭제</button>
+																								</div>
+																								
+																								<input type="hidden" name="memberId" value="${sessionScope.userLoginInfo.memberId}">
 																							</div>
 																						</div>
-						
 																					</div>
-																					<!-- /modal body -->
-												
-																					<!-- modal footer -->
-																					<div class="modal-footer">
-																						<button class="btn btn-primary">Submit</button>
-																						<button class="btn btn-default" data-dismiss="modal">Close</button> 
-																					</div>
-																					<!-- /modal footer -->
-											
-																				</form>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															
-																<div class="col-md-6" align="right">
-																	<button class="btn btn-info" id="filtering" value="reviewId">최신순</button>
-																	<button class="btn btn-info" id="filtering" value="recommendCnt">추천순</button>
-																</div>
-															
-																<div id="getReview">
-																	
-																	<div id="recommendAdd" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-																		<div class="modal-dialog modal-sm">
-																			<div class="modal-content">
-																			
-																				<!-- modal body -->
-																				<div class="modal-body">
-																					추천 되었습니다.
+					
 																				</div>
 																				<!-- /modal body -->
 											
-																				<div class="modal-footer"><!-- modal footer -->
-																					<button class="btn btn-default" data-dismiss="modal">Close</button>
-																				</div><!-- /modal footer -->
-											
-																			</div>
-																		</div>
-																	</div>
-																	
-																	<div id="recommendDelete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-																		<div class="modal-dialog modal-sm">
-																			<div class="modal-content">
-											
-																				<!-- modal body -->
-																				<div class="modal-body">
-																					추천이 취소되었습니다.
+																				<!-- modal footer -->
+																				<div class="modal-footer">
+																					<button class="btn btn-primary">Submit</button>
+																					<button class="btn btn-default" data-dismiss="modal">Close</button> 
 																				</div>
-																				<!-- /modal body -->
-											
-																				<div class="modal-footer"><!-- modal footer -->
-																					<button class="btn btn-default" data-dismiss="modal">Close</button>
-																				</div><!-- /modal footer -->
-											
-																			</div>
+																				<!-- /modal footer -->
+										
+																			</form>
 																		</div>
 																	</div>
-																	
 																</div>
 																
-																<div>
-																	<h4 align="center" id="moreLocation">
-																		<br>
-																		<button id="more" class="btn btn-default">더보기..</button>
-																	</h4>
+																
+																
+																
+							
+															</div>
+														
+															<div class="col-md-6" align="right">
+																<button class="btn btn-info" id="filtering" value="reviewId">최신순</button>
+																<button class="btn btn-info" id="filtering" value="recommendCnt">추천순</button>
+															</div>
+														
+															<div id="getReview">
+																
+																<div id="recommendAdd" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-sm">
+																		<div class="modal-content">
+																		
+																			<!-- modal body -->
+																			<div class="modal-body">
+																				추천 되었습니다.
+																			</div>
+																			<!-- /modal body -->
+										
+																			<div class="modal-footer"><!-- modal footer -->
+																				<button class="btn btn-default" data-dismiss="modal">Close</button>
+																			</div><!-- /modal footer -->
+										
+																		</div>
+																	</div>
 																</div>
-															</c:if>
+																
+																<div id="recommendDelete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-sm">
+																		<div class="modal-content">
+										
+																			<!-- modal body -->
+																			<div class="modal-body">
+																				추천이 취소되었습니다.
+																			</div>
+																			<!-- /modal body -->
+										
+																			<div class="modal-footer"><!-- modal footer -->
+																				<button class="btn btn-default" data-dismiss="modal">Close</button>
+																			</div><!-- /modal footer -->
+										
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
+															
+															<div>
+																<h4 align="center" id="moreLocation">
+																	<br>
+																	<button id="more" class="btn btn-default">더보기..</button>
+																</h4>
+															</div>
 														</div>
 													</div>
 												</div>

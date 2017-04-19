@@ -174,7 +174,7 @@ function trueForm()
 		 var nicNameChk="ccc";
 		 
 		 $.ajax({
-	    		url:'/RestaurantSearch/dupliNicnameCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		url:'/RestaurantSearch/dupliNicnameCheckMyProfile.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 	    		data:{nicName:$("#nicName").val(), memberId: $("#memberId").val()},
 	    		type : "POST",
@@ -233,7 +233,7 @@ $(function(){
 		   }
 		   
 			$.ajax({
-	    		url:'/RestaurantSearch/dupliNicnameCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		url:'/RestaurantSearch/dupliNicnameCheckMyProfile.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 	    		data:{nicName:$("#nicName").val(), memberId: $("#memberId").val()},
 	    		type : "POST",
