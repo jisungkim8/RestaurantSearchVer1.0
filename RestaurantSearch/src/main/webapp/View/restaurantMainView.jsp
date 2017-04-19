@@ -889,10 +889,10 @@
 													placeholder="평균 음식 가격">
 											</div>
 											
-											<div class="form-group">
+											<div class="form-group" style="display:none">
 												<label for="avgScore">평점</label> <input type="text"
 													class="form-control" id="averageScore" name="averageScore"
-													placeholder="평균 점수">
+													placeholder="평점은 0부터 시작합니다." value="0" readonly>
 											</div>
 
 											<div class="form-group">

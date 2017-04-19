@@ -35,7 +35,23 @@ public class ShopReviewDaoImpl extends SqlSessionDaoSupport implements ShopRevie
 		System.out.println("ShopReviewDaoImpl>>insertShopReviewDetView() is called!!");
 		
 		int resultByInsert = (int) getSqlSession().insert("insertShopReviewDetView", shopReviewCommand);
-		System.out.println("ShopReviewDaoImpl>>insertResult = " + resultByInsert);
+		System.out.println("ShopReviewDaoImpl>>resultByInsert = " + resultByInsert);
+	}
+	
+	public void updateShopReviewDetView(ShopReviewCommand shopReviewCommand) {
+		// TODO Auto-generated method stub
+		System.out.println("ShopReviewDaoImpl>>updateShopReviewDetView() is called!!");
+		
+		int resultByUpdate = (int) getSqlSession().update("updateShopReviewDetView", shopReviewCommand);
+		System.out.println("ShopReviewDaoImpl>>resultByUpdate = " + resultByUpdate);
+	}
+	
+	public void deleteShopReviewDetView(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		System.out.println("ShopReviewDaoImpl>>deleteShopReviewDetView() is called!!");
+		
+		int resultByDelete = (int) getSqlSession().update("deleteShopReviewDetView", map);
+		System.out.println("ShopReviewDaoImpl>>resultByDelete = " + resultByDelete);
 	}
 	
 	public void increaseRecommendCnt(int reviewId) {

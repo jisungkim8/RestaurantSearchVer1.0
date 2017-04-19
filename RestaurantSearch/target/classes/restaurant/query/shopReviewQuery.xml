@@ -26,6 +26,17 @@
 		VALUES(#{reviewId}, #{title}, sysdate, #{content}, 0, #{visitTime}, #{dinnerOrLunch}, #{memberId}, #{restaurantId})
 	</insert>
 	
+	<update id="updateShopReviewDetView" parameterType="ShopReviewCommand">
+		UPDATE SHOPREVIEW 
+		SET title=#{title}, content=#{content}, visitTime=#{visitTime}, dinnerOrLunch=#{dinnerOrLunch}
+		WHERE reviewId=#{reviewId}
+	</update>
+	
+	<delete id="deleteShopReviewDetView" parameterType="map">
+		DELETE FROM SHOPREVIEW
+		WHERE reviewId=#{reviewId} AND restaurantId=#{restaurantId}
+	</delete>
+	
 	<update id="increaseRecommendCnt" parameterType="int">
 		UPDATE SHOPREVIEW SET recommendCnt = recommendCnt + 1
 		WHERE REVIEWID = #{reviewId}

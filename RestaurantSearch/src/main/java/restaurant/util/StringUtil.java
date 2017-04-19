@@ -10,4 +10,9 @@ public class StringUtil {
 		return msg.replace("\r\n", "<br>")
                   .replace("\n", "<br>");
 	}
+	public static String reparseBr(String msg){
+		
+		if(msg == null) return null;
+		return msg.replace("<br>", "\r\n");
+	}
 }

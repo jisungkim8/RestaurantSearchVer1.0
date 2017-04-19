@@ -1,6 +1,75 @@
 	/* Init */
 	jQuery(window).ready(function () {
 		Atropos();
+		
+		var moreCount = urlParam("moreCount");
+		var restaurantId = urlParam("restaurantId");
+		var filterName = urlParam("filterName");
+		
+		$("#addReviewPhotoFileAtModify").on("click", function(e) {
+			alert("addReviewPhotoFileAtModify");
+			
+			var content = "";
+			var number = $("#reviewPhotoFileGroupAtModify input").length + 1;
+			
+			
+			content = "<input type='file' " +
+					"class='form-control' " +
+					"style='height:50px;' " +
+					"name='upload' " +
+					"id='reviewPhotoFileAtModify" + number + "'>";
+			
+			$(content).appendTo("#reviewPhotoFileGroupAtModify");
+			
+			return false;
+		});
+		
+		$("#deleteReviewPhotoFileAtModify").on("click", function(e) {
+			var number = $("#reviewPhotoFileGroupAtModify input").length;
+			var imgFileId = "reviewPhotoFileAtModify" + number;
+			
+			alert("deleteReviewPhotoFileAtModify");
+			
+			$("#" + imgFileId).remove();
+			
+			return false;
+		});
+		
+		$(document).on("submit", "#reviewUpdateForm", function(e) {
+			
+			alert("reviewUpdateForm")
+			
+			if (this.title.value == "") {
+				alert("title");
+				$("#reviewTitleMsgAtModify").html("<font style='color:red'> 제목을 입력해주세요 </font>");
+			}
+			
+			if (this.content.value == "") {
+				alert("content");
+				$("#reviewContentMsgAtModify").html("<font style='color:red'> 본문을 입력해주세요 </font>");
+			}
+			
+			if (this.title.value != "" && this.content.value != "") {
+				return true;
+			}
+			
+			return false;
+		});
+		
+		$(document).on("click", "#reviewDeleteButton", function(e) {
+			var current = (this)
+			alert("current = " + current)
+			
+			location.href="reviewDelete.do?restaurantId=" + restaurantId + "&current=" + current.value + "&moreCount=0&filterName=reviewId"
+//			$.ajax({
+//				url : "reviewDelete.do",
+//				method : "POST", 
+//				data : {restaurantId:restaurantId, current:current.value, moreCount:moreCount, filterName:filterName}, 
+//				success : function(args) {
+//					location.href=""
+//				}
+//			});
+		})
 	});
 
 
