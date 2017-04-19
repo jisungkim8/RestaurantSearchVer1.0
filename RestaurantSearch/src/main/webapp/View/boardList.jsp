@@ -135,8 +135,10 @@
 			<c:forEach var="article" items="${list}">
 				<tbody>
 					<tr>
+						<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 						<td width="5" style="text-align: center;" class="center"><input type="checkbox" name="checkRow"
 							value="${article.boardNum}" /></td>
+						</c:if>
 						<%-- <td>${article.boardNum}</td> --%>
 						<td width="250" style="text-align: center;"><a href="detail.do?boardNum=${article.boardNum }">${article.title}</a>
 							<c:if test="${article.hit >=20}">

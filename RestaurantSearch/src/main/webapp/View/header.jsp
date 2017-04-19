@@ -71,8 +71,13 @@
 
 <!-- Morenizr -->
 <script type="text/javascript" src="design/plugins/modernizr.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -90,8 +95,101 @@
 			$(".popSearButton").css('border-bottom', 'thick solid grey');
 			$(".relSearButton").css('border-bottom', 'thick solid brown');
 		})
+		
+		
+			$("#login").click(function() {
+						var registerCheck, passwd;
+						//document.memInfo.submit()
+						var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
+    					if ($("#memberId").val() == "") {
+							//document.getElementById("ducheck")=>$("ducheck")
+								$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+								$("#memberId").focus();//커서입력
+								return;
+						} else if (!regEmail.test($("#memberId").val())) {
+								$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+								$("#memberId").focus();
+												//history.back();
+								return;
+						}if ($("#password").val() == "") {
+								//document.getElementById("ducheck")=>$("ducheck")
+								$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+								$("#loginmsg").focus();//커서입력
+								return;
+						}
+						
+						$.ajax({
+								url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+								//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+								data : {	id : $("#memberId").val()	},
+								type : "POST",
+								//3.success:콜백함수명(매개변수)
+								success : function(args) {
+										if (args == "register") {
+												registerCheck = "register"
+												$.ajax({
+																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+																			data : {	id : $("#memberId").val(),passwd : $("#password").val()	},
+																			type : "POST",
+																			//3.success:콜백함수명(매개변수)
+																			success : function(args) {
+																				if (args == "agreement") {
+																					document.memInfo.submit()
+																				} else {
+																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																				}
+																			}
+																		})
+															} else {
+																$("#loginmsg").html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+															}
+														}
+													})
+										})
+										
+											$('#myProfile')
+								.click(
+										function() {
+											var memInfoForm = document.memInfoForm;
+											var url = "memProfile.do";
+											window
+													.open(
+															'',
+															'memProfile',
+															'width=800,height=600,left=300,top=50,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
+											memInfoForm.action = url;
+											memInfoForm.method = "post";
+											memInfoForm.target = "memProfile";
+											memInfoForm.submit();
+											function myProfile() {
+												alert("__myProfile")
+												//window.open('popup.html','popup','width=300,height=200,left=0,top=0,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
+											}
+										})
+
+						$('#memLeave').click(function() {
+							if (confirm("정말 탈퇴하시겠습니까?") == true) {
+								$.ajax({
+									url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+									//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+									data : {
+										id : $("#memberId").val()
+									},
+									type : "POST",
+									//3.success:콜백함수명(매개변수)
+									success : function(args) {
+										alert("회원 탈퇴가 성공적으로 되었습니다.")
+									}
+								})
+							} else {
+								return;
+							}
+						})
+		
 	});
+	
 </script>
 
 </head>
@@ -153,10 +251,10 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-						<div class="navbar-collapse nav-main-collapse collapse pull-right">
+						<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="list.do"><span
 								class="btn btn-success">게시판</span></a>
-						</div>
+						</div> -->
 						
 
 						<a id="quick_sign_in" href="page-signin.html"
@@ -187,6 +285,10 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
+										<input type="hidden" name="restaurantId" value="0">
+										<input type="hidden" name="moreCount" value="0"> 
+										<input type="hidden" name="filterName" value="reviewId">
+										<input type="hidden" name="pageName" value="boardView">
 										<input type="button" id="login" value="로그인"
 										class="btn btn-primary pull-right push-bottom">
 									</span>
@@ -206,6 +308,7 @@
 							<p class="bottom-create-account">
 								<a href="memberRegister.do"><font color="#86E57F">회원가입</font></a>
 							</p>
+							
 						</div>
 					</div>
 					<!-- /SIGN IN -->

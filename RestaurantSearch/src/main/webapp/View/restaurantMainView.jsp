@@ -540,12 +540,9 @@
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
 									</form> <span class="clearfix"></span> <!-- /view more button -->
-
 								</span>
-
-
-
 							</div>
+							
 						</div>
 						<div class="subbox">
 							<button class="popSearButton">인기 검색어</button>
