@@ -337,8 +337,8 @@
 			<!-- SIGN IN -->
 			<c:choose>
 				<c:when
-					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
-
+					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'kicRestAdmin@rest.com'}">
+					
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -368,9 +368,8 @@
 					</div>
 				</c:when>
 
-				<c:when
-					test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
-
+				<c:when test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
+					
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"
@@ -406,10 +405,17 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
+<<<<<<< HEAD
+						<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
+							<a id="quick_board"
+								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
+						</div> -->
+=======
 						<div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board" href="memList.do"><span
 								class="btn btn-primary">회원관리</span></a>
 						</div>
+>>>>>>> refs/remotes/origin/master
 
 
 						<a id="quick_sign_in" href="page-signin.html"
