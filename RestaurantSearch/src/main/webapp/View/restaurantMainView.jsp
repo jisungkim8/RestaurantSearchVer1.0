@@ -966,7 +966,7 @@
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
 													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
-											</div> -->
+											</div>
 
 											<div class="form-group">
 												<div class="col-sm-12 text-center">
