@@ -43,6 +43,8 @@ public class RestaurantRegiController {
 			log.debug("restaurantDto=" + restaurantDto); // toString()
 	
 		}
+		
+		int restaurantCount;
 
 	/*@RequestMapping(value = "/restaurantRegi.do", method = RequestMethod.POST)
 	public ModelAndView submit(@ModelAttribute("restaurantDto") RestaurantDto restaurantDto,
@@ -54,8 +56,8 @@ public class RestaurantRegiController {
 		}*/
 
 		System.out.println("MemberRegiController RequestMethod.POST 메서드 호출됨!");
+
 		restaurantRegiDao.insertRestaurant(restaurantDto);
-		
 		
 		/*restaurantRegiDao.insertRestaurantDetInfo(shopDetInfoDto);*/
 		// 정상적으로 에러가 발생이 되지 않고 입력을 완수 했다면
