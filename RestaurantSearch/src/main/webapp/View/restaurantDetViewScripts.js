@@ -18,21 +18,21 @@ $(document).ready(function() {
 	var filterName = urlParam("filterName");
 	
 	var styleModify = function() {
-		
+
 		$.ajax({
 			url : "styleModify.do", 
 			method : "POST", 
 			data : {restaurantId:restaurantId}, 
 			success : function(args) {
-//				alert("ready for args = " + args);
-				
-				if (args == "nonexist") {
+				if (args.checkLikeList == "nonexist") {
 					$("#likeImage").attr("class", "featured-icon half empty fa fa-heart-o");
 					$("#likeImageButton").attr("data-target", "#likeListNonExist");
 				} else {
 					$("#likeImage").attr("class", "featured-icon half fa fa-heart-o");
 					$("#likeImageButton").attr("data-target", "#likeListExist");
 				}
+				
+				$("#likeCount").html(args.likeCount);
 			}
 		});
 	};

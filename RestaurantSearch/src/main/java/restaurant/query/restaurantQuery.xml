@@ -13,6 +13,11 @@
 		WHERE RESTAURANTID=#{restaurantId}
 	</select>
 	
+	<update id="increaseViewCountRestaurantDetView" parameterType="int">
+		UPDATE RESTAURANT SET viewCount=viewCount+1 
+		WHERE RESTAURANTID=#{restaurantId}
+	</update>
+	
 </mapper>
 
 

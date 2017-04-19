@@ -8,12 +8,12 @@
 	<insert id="insertRestaurant" parameterType="restaurantDto">
 		insert into
 		restaurant (restaurantId, restaurantName, addr, phoneNumber, keyword,
-		averagePrice, filterInfo, averageScore, representPhoto)
+		averagePrice, filterInfo, averageScore, representPhoto, viewCount)
 		values(#{restaurantId}, #{restaurantName}, #{addr},
 		#{phoneNumber},
 		#{keyword}, #{averagePrice}, #{filterInfo},
 		#{averageScore},
-		#{representPhoto})
+		#{representPhoto}, 0)
 	</insert>
 
 

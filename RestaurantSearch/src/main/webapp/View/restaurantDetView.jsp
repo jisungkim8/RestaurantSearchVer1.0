@@ -594,9 +594,9 @@
 										
 										<!-- views, reviews, likes -->
 										<p>
-											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> 55,621 &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> ${totReviewCnt} &nbsp;&nbsp;&nbsp;
-											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> 51 &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/view-ico.ico" />" alt="Atropos" /> <span> ${restaurantDto.viewCount} </span> &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/write-ico.ico" />" alt="Atropos" /> <span> ${totReviewCnt} </span> &nbsp;&nbsp;&nbsp;
+											<img src="<c:url value="design/images/icon/realestate/small/star-ico.ico" />" alt="Atropos" /> <span id="likeCount"></span> &nbsp;&nbsp;&nbsp;
 										</p>
 										<!-- /views, reviews, likes -->
 										

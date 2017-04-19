@@ -384,8 +384,13 @@ private Logger log = Logger.getLogger(this.getClass());//클래스 이름 불러
 		
 		restaurantSimInfoDto = new RestaurantSimInfoDto2();
 		
-		int indexOfAddr = restaurant.getAddr().lastIndexOf(", ");
-		String doroAddr = restaurant.getAddr().substring(indexOfAddr + 2);
+		String[] addr = null;
+		
+		if (restaurant != null) {
+			addr = restaurant.getAddr().split(",");
+		}
+		
+		String doroAddr = addr[1].trim();
 		
 		restaurantSimInfoDto.setRestaurantId(restaurant.getRestaurantId());
 		restaurantSimInfoDto.setRestaurantName(restaurant.getRestaurantName());
