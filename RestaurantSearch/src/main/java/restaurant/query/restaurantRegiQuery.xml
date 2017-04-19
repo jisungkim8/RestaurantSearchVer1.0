@@ -13,9 +13,16 @@
 		#{phoneNumber},
 		#{keyword}, #{averagePrice}, #{filterInfo},
 		#{averageScore},
-		#{representPhoto})
+		#{representPhoto,jdbcType=VARCHAR})
 	</insert>
+	
 
+	<insert id="insertRestaurantPhoto" parameterType="shopPhotoDto">
+		insert into
+		shopPhoto (photoNum, photoSepNum, title, photoPath, restaurantId)
+		values(#{photoNum}, #{photoSepNum}, #{title},
+		#{photoPath,jdbcType=VARCHAR}, #{restaurantId})
+	</insert>
 
 	<select id="countRestaurantId" resultType="int" parameterType="String">
 		select count(*) from restaurant
