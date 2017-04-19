@@ -176,10 +176,6 @@
 						$('#myProfile')
 								.click(
 										function() {
-											alert("id=>" + $('#memberId').val())
-											alert("pwd=>"
-													+ $("#password").val())
-
 											var memInfoForm = document.memInfoForm;
 											var url = "memProfile.do";
 											window

@@ -127,17 +127,22 @@ public class MemberRegiController {
 	@ResponseBody
 	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
 		String nicName = request.getParameter("nicName");
+		String memberId = request.getParameter("memberId");
 		String checkResult = "";
+		MemDetInfoDto memDetInfo = new MemDetInfoDto();
 
-		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName);
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName+"memberId=>"+memberId);
+		memDetInfo.setMemberId(memberId);
+		memDetInfo.setNickname(nicName);
 
 		// ex) Model 단에서 DB 조회
-
-		int nicNameCount = memberDao.checkNicName(nicName);
-
+		int nicNameCount = memberDao.checkNicName(memDetInfo);
+		
+		System.out.println("nicNameCount=>"+nicNameCount);
+		
 		if (nicNameCount >= 1)
 			checkResult = "dupli";
-		else
+		else if (nicNameCount == 0)
 			checkResult = "create";
 
 		return checkResult;
@@ -194,7 +199,13 @@ public class MemberRegiController {
 		}
 
 		// DB상에 반영하라
-		memberDao.updateMember(memDetInfoDto);
+		if(memDetInfoDto.getUpload().getOriginalFilename().equals("")){
+			System.out.println("사진이 없다면");
+			memberDao.updateMemInfoExceptPhoto(memDetInfoDto);
+		}else{
+			System.out.println("사진이 있다면");
+			memberDao.updateMember(memDetInfoDto);
+		}
 
 		// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 		if (!memDetInfoDto.getUpload().isEmpty()) {
