@@ -127,17 +127,22 @@ public class MemberRegiController {
 	@ResponseBody
 	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
 		String nicName = request.getParameter("nicName");
+		String memberId = request.getParameter("memberId");
 		String checkResult = "";
+		MemDetInfoDto memDetInfo = new MemDetInfoDto();
 
-		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName);
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName+"memberId=>"+memberId);
+		memDetInfo.setMemberId(memberId);
+		memDetInfo.setNickname(nicName);
 
 		// ex) Model 단에서 DB 조회
-
-		int nicNameCount = memberDao.checkNicName(nicName);
-
+		int nicNameCount = memberDao.checkNicName(memDetInfo);
+		
+		System.out.println("nicNameCount=>"+nicNameCount);
+		
 		if (nicNameCount >= 1)
 			checkResult = "dupli";
-		else
+		else if (nicNameCount == 0)
 			checkResult = "create";
 
 		return checkResult;

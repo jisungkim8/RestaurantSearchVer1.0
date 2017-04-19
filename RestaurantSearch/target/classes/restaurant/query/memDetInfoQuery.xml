@@ -16,7 +16,7 @@
  	</select>
  	
  	<select id="checkNicName" resultType="int" parameterType="String">
-		select count(*) from memDetInfo where nickname=#{nickname}
+		select count(*) from (select * from memDetInfo where memberId!=#{memberId} ) where nickname=#{nickname}
  	</select>
  	
  	<select id="selectMemDetInfo" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">
