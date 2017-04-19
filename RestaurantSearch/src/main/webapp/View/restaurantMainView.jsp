@@ -612,7 +612,7 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="${article.representPhoto}" width="409" height="271" />
+											src="${article.representPhoto}" height="271" width="409" />
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
