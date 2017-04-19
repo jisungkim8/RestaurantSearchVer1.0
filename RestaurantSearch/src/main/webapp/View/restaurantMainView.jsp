@@ -427,17 +427,8 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-						<<<<<<< HEAD
-						<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
-							<a id="quick_board"
-								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
-						</div> -->
-						=======
-						<div class="navbar-collapse nav-main-collapse collapse pull-right">
-							<a id="quick_board" href="memList.do"><span
-								class="btn btn-primary">회원관리</span></a>
-						</div>
-						>>>>>>> refs/remotes/origin/master <a id="quick_sign_in"
+						
+						<a id="quick_sign_in"
 							href="page-signin.html" data-toggle="dropdown"><span
 							class="btn btn-success">로그인</span></a>
 
