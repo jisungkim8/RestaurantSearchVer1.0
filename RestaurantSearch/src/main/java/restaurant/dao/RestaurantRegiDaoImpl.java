@@ -43,6 +43,7 @@ public class RestaurantRegiDaoImpl extends SqlSessionDaoSupport implements Resta
 		int restaurantCount = getSqlSession().selectOne("countRestaurantId");
 		return restaurantCount;
 	}
+		
 
 	/*
 	 * public MemDetInfoDto selectMemDetInfo(MemDetInfoDto memDetInfoDto) { //

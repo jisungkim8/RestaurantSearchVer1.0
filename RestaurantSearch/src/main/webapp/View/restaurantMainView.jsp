@@ -405,10 +405,17 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
+<<<<<<< HEAD
 						<!-- <div class="navbar-collapse nav-main-collapse collapse pull-right">
 							<a id="quick_board"
 								href="memList.do"><span class="btn btn-primary">회원관리</span></a>
 						</div> -->
+=======
+						<div class="navbar-collapse nav-main-collapse collapse pull-right">
+							<a id="quick_board" href="memList.do"><span
+								class="btn btn-primary">회원관리</span></a>
+						</div>
+>>>>>>> refs/remotes/origin/master
 
 
 						<a id="quick_sign_in" href="page-signin.html"
@@ -589,19 +596,25 @@
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
-										<h4>${article.addr}</h4>
-										<h5>${article.phonenumber}</h5>
-										<small>평점 ${article.averageScore}</small>
-										<p>
-											<!-- 한줄 설명 -->
-										</p>
+										<h4>${article.phonenumber}</h4>
+										<h5>${article.addr}</h5>
+										<h2 style="color: #F07057;">평점 ${article.averageScore}</h2>
 
-										<p>
-											<span class="fsize12 pull-right"> <i class="bed-ico"
-												title="beds"></i> 3 , <i class="garage-ico" title="garage"></i>
-												1 , <i class="furnished-ico" title="furnished"></i>
-											</span> <i class="home-ico"></i> 300m<sup>2</sup>
-										</p>
+										<c:choose>
+											<c:when test="${article.averagePrice <= 7000}">
+												<h4 title="~7000원">$</h4>
+											</c:when>
+											<c:when test="${article.averagePrice <= 15000}">
+												<h4 title="7000~15000원">$$</h4>
+											</c:when>
+											<c:when test="${article.averagePrice <= 30000}">
+												<h4 title="15000~30000원">$$$</h4>
+											</c:when>
+											<c:otherwise>
+												<h4 title="30000원 이상">$$$$</h4>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 								</div>
 								<!-- /item -->
@@ -839,11 +852,17 @@
 													식당 등록 <small>Restaurant Registration</small>
 												</h1>
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label for="InputID">식당 ID</label> <input type="text"
 													class="form-control" id="restaurantId" name="restaurantId"
 													placeholder="식당 ">
+											</div> -->
+											<div class="form-group" style="display:none">
+												<label for="InputId">식당 Id</label> <input type="text"
+													class="form-control" id="restaurantId"
+													name="restaurantId" placeholder="식당 Id" value="${restaurantCount+1}">
 											</div>
+											
 											<div class="form-group">
 												<label for="InputName">상호명</label> <input type="text"
 													class="form-control" id="restaurantName"
@@ -869,11 +888,23 @@
 													class="form-control" id="averagePrice" name="averagePrice"
 													placeholder="평균 음식 가격">
 											</div>
+											
+											<div class="form-group">
+												<label for="avgScore">평점</label> <input type="text"
+													class="form-control" id="averageScore" name="averageScore"
+													placeholder="평균 점수">
+											</div>
 
 											<div class="form-group">
 												<label for="filterInfo">필터 정보</label> <input type="text"
 													class="form-control" id="filterInfo" name="filterInfo"
 													placeholder="예약:가능,주차:가능">
+											</div>
+											
+											<div class="form-group">
+												<label for="mainPhoto">대표 메뉴</label> <input type="text"
+													class="form-control" id="representPhoto" name="representPhoto"
+													placeholder="사진을 넣어주세요">
 											</div>
 
 											<span id="fileselector"> <label
@@ -922,7 +953,8 @@
 
 											<div class="form-group">
 												<div class="col-sm-12 text-center">
-													<button class="btn btn-default" type="submit">
+													<button id="registerRestaurant" class="btn btn-default"
+														type="submit">
 														등록하기<i class="fa fa-check spaceLeft"></i>
 													</button>
 													<button class="btn btn-default" data-dismiss="modal">
