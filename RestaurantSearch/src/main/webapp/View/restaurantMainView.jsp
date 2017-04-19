@@ -342,7 +342,7 @@
 
 			<!-- Mobile Menu Button -->
 			<button class="btn btn-mobile" data-toggle="collapse"
-				data-target=".nav-main-collapse">
+				data-target=".nav-main-collapse" style="display:none">
 				<i class="fa fa-bars"></i>
 			</button>
 
@@ -427,19 +427,14 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-						
-						<a id="quick_sign_in"
-							href="page-signin.html" data-toggle="dropdown"><span
-							class="btn btn-success">로그인</span></a>
+
+						<a id="quick_sign_in" href="page-signin.html"
+							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
 
 
 						<div class="dropdown-menu" role="menu"
 							aria-labelledby="quick_sign_in">
-							<h4>
-								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
-									data-toggle="modal" id="pwdSearch"><font color="red">패스워드
-										찾기</font></a>
-							</h4>
+							<h4>Sign In</h4>
 							<form name="memInfo" role="form" method="post"
 								action="memberLogin.do">
 
@@ -465,13 +460,17 @@
 										class="btn btn-primary pull-right push-bottom">
 									</span>
 								</div>
-								<div class="checkbox">
-									<!-- remmember -->
-									<label> <!-- <input type="checkbox"> Remember me &bull; -->
-										<h3 id=loginmsg></h3> <!-- <table><tr><td id="loginmsg" ></td></tr></table> -->
+								<!-- <div class="checkbox">
+									remmember
+									<label> <input type="checkbox"> Remember me &bull;
+										<h3 id=loginmsg></h3> <table><tr><td id="loginmsg" ></td></tr></table>
 									</label>
-								</div>
+								</div> -->
 							</form>
+							<hr />
+							<h4>
+								<a href="#" data-toggle="modal" id="pwdSearch" style="color:white">암호를 잊어버리셨나요?</a>
+							</h4>
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
@@ -944,16 +943,18 @@
 											</div>
 											<div class="form-group">
 												<label for="inputName">대표자</label> <input type="text"
-													class="form-control" id="representative" name="representative"
-													placeholder="대표 이름">
+													class="form-control" id="representative"
+													name="representative" placeholder="대표 이름">
 											</div>
 											<div class="form-group">
 												<label for="inputHomepage">홈페이지</label> <input type="text"
-													class="form-control" id="homepage" name="homepage" placeholder="홈페이지 주소">
+													class="form-control" id="homepage" name="homepage"
+													placeholder="홈페이지 주소">
 											</div>
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
-													class="form-control" id="operHour" name="operHour" placeholder="영업 시간">
+													class="form-control" id="operHour" name="operHour"
+													placeholder="영업 시간">
 											</div>
 
 											<div class="form-group">

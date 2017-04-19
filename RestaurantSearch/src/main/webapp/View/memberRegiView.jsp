@@ -31,8 +31,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="design/plugins/magnific-popup/magnific-popup.css"
 	rel="stylesheet" type="text/css" />
-<link href="design/css/animate.css"      rel="stylesheet" type="text/css" />
-<link href="design/css/superslides.css"  rel="stylesheet" type="text/css" />
+<link href="design/css/animate.css" rel="stylesheet" type="text/css" />
+<link href="design/css/superslides.css" rel="stylesheet" type="text/css" />
 
 <!-- SHOP CSS -->
 <!-- <link href="design/css/shop.css" rel="stylesheet" type="text/css" /> -->
@@ -44,39 +44,7 @@
 	type="text/css" />
 <link href="design/css/color_scheme/orange.css" rel="stylesheet"
 	type="text/css" />
-<!-- orange: default style -->
-<!--<link id="css_dark_skin" href="design/css/layout-dark.css" rel="stylesheet" type="text/css" />-->
-<!-- DARK SKIN -->
 
-<!-- styleswitcher - demo only -->
-<!-- <link href="design/css/color_scheme/orange.css"
-	rel="alternate stylesheet" type="text/css" title="orange" />
-<link href="design/css/color_scheme/red.css" rel="alternate stylesheet"
-	type="text/css" title="red" />
-<link href="design/css/color_scheme/pink.css" rel="alternate stylesheet"
-	type="text/css" title="pink" />
-<link href="design/css/color_scheme/yellow.css"
-	rel="alternate stylesheet" type="text/css" title="yellow" />
-<link href="design/css/color_scheme/darkgreen.css"
-	rel="alternate stylesheet" type="text/css" title="darkgreen" />
-<link href="design/css/color_scheme/green.css"
-	rel="alternate stylesheet" type="text/css" title="green" />
-<link href="design/css/color_scheme/darkblue.css"
-	rel="alternate stylesheet" type="text/css" title="darkblue" />
-<link href="design/css/color_scheme/blue.css" rel="alternate stylesheet"
-	type="text/css" title="blue" />
-<link href="design/css/color_scheme/brown.css"
-	rel="alternate stylesheet" type="text/css" title="brown" />
-<link href="design/css/color_scheme/lightgrey.css"
-	rel="alternate stylesheet" type="text/css" title="lightgrey" /> -->
-<!-- /styleswitcher - demo only -->
-
-<!-- STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT -->
-<!-- <link href="design/plugins/styleswitcher/styleswitcher.css"
-	rel="stylesheet" type="text/css" /> -->
-
-<!-- Morenizr -->
-<!-- <script type="text/javascript" src="design/plugins/modernizr.min.js"></script> -->
 <script src="/RestaurantSearch/lib/jquery-1.11.0.min.js"></script>
 <script>
 
@@ -409,177 +377,198 @@ $(function(){
 </script>
 
 <style>
-   #main { height:600px;  background:url("design/images/demo/realestate/딸기.jpg") no-repeat;}
-   .filebox input[type="file"]
-    { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-     overflow: hidden; clip:rect(0,0,0,0); border: 0; }
-     .filebox label { 
-     display: inline-block; padding: 0.5em .75em; 
-     color: blue; font-size: inherit;
-     line-height: normal; vertical-align: -webkit-baseline-middle; background-color: chocolate;
-     cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; 
-     border-radius: .25em; } /* named upload */ 
-     .filebox .upload-name {
-      display: inline-block; padding: .5em 13.0em; /* label의 패딩값과 일치 */
-      font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle;
-      background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
-       border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
+#main {
+	height: 600px;
+	background: url("design/images/demo/realestate/딸기.jpg") no-repeat;
+}
 
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 0.5em .75em;
+	color: blue;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: -webkit-baseline-middle;
+	background-color: chocolate;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+} /* named upload */
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em 13.0em; /* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
 </style>
 
 </head>
 <body>
-	<!-- WRAPPER -->
-	<!-- <div id="wrapper"> -->
-					   <!-- <div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
-								  			<img class="img-responsive" src="design/images/demo/realestate/딸기.jpg" alt="Chania"> 
-								</div>
-							</div>
-						</div> -->
-		   <!--  <div  class="container">
-  					<img class="img-responsive" src="design/images/demo/realestate/딸기.jpg" alt="Chania" width="1100" height="300"> 
-		    </div>
- -->
-			<!-- PAGE TITLE -->
-			<!-- <header id="page-title">
-			<div class="container">
-				<h1>Sign UP</h1>
 
-				<ul class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li class="active">Sign UP</li>
-				</ul>
-			</div>
-			</header> -->
-			<!-- <div	style="background-image: url('design/images/demo/realestate/딸기.jpg');"
-						class="fullscreen-img"></div> -->
-			<!-- <img width="1100" height="300" src="design/images/demo/realestate/라면.jpg"> -->
-		<!-- 	<div class="row"> -->
-		     		 
-		    	<!-- 	 <div class="col-md-4">
-							<div class="container">
-  									<img class="img-responsive" src="design/images/demo/realestate/라면.jpg" alt="Chania" width="460" height="345">
-		    			 </div>
-		     		</div>
-		    		 <div class="col-md-4">
-		    			 <div  class="container">
-  				 				<img class="img-responsive" src="design/images/demo/realestate/빵.jpg" alt="Chania" width="460" height="345"> 
-		     				</div>
-		    		 </div> -->
-		    <!-- </div>  -->
-	
-			<section class="container">
-			
-			<div  class="row">
 
-				<!-- REGISTER -->
-				<div class="col-md-9">
+	<section class="container">
 
-					<h2>
-					 	계정 <strong>생성</strong>
-					</h2>
+	<div class="row">
 
-					<form name="registerMem" class="white-row" enctype="multipart/form-data" method="post" action="memberRegister.do">
+		<!-- REGISTER -->
+		<div class="col-md-9">
+			<br>
+			<h2>
+				계정 <strong>생성</strong>
+			</h2>
 
-						<!-- alert failed -->
-						<!-- <div class="alert alert-danger">
+			<form name="registerMem" class="white-row"
+				enctype="multipart/form-data" method="post"
+				action="memberRegister.do">
+
+				<!-- alert failed -->
+				<!-- <div class="alert alert-danger">
 							<i class="fa fa-frown-o"></i> <strong>Password</strong> do not
 							match!
 						</div> -->
 
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-6">
-									이메일<br>
-									<input type="text" id="memberId" name="memberId"
-										class="form-control" placeholder="이메일을 입력하세요.[필수]">
-										<table><tr><td id="memberIdTxt" ></td></tr></table>
-								</div>
-								<div class="col-md-6">
-									<br>
-									<input type="button" id="repeatIdCheckBtn" value="중복확인" class="btn btn-primary" onclick="memberReg(this.form.memberId.value)">
-									<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
-								</div>
-							</div>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-6">
+							이메일<br> <input type="text" id="memberId" name="memberId"
+								class="form-control" placeholder="이메일을 입력하세요.[필수]">
+							<table>
+								<tr>
+									<td id="memberIdTxt"></td>
+								</tr>
+							</table>
 						</div>
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-6">
-									<label>패스워드</label> <input type="password" id="password" name="password"
-										class="form-control" placeholder="6자리 이상의 숫자,문자,특수기호를 포함하세요.[필수]">
-										<table><tr><td id="passwordCheckMessage" ></td></tr></table>
-								</div>
-								<div class="col-md-6">
-									<label>패스워드 확인</label> <input type="password" id="rePassword" name="rePassword"
-										class="form-control" placeholder="확인 패스워드를 입력하세요.[필수]">
-										<table><tr><td id="passwordReCheckMessage" ></td></tr></table>
-								</div>
-							</div>
+						<div class="col-md-6">
+							<br> <input type="button" id="repeatIdCheckBtn" value="중복확인"
+								class="btn btn-primary"
+								onclick="memberReg(this.form.memberId.value)">
+							<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
 						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-4">
-									닉네임<br>
-									<input type="text" id="nicName" name="nickname" class="form-control" placeholder="닉네임을 입력하여 주세요.[필수]">
-									<table><tr><td id="nicNameTxt" ></td></tr></table>
-								</div>
-								<div class="col-md-2">
-									<br>
-									<input type="button" id="nicNameRepCheckBtn" value="중복확인" class="btn btn-success">
-									<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
-								</div>
-								<div class="col-md-6">
-									전화번호<br> <input type="text" id="phoneNum" name="phoneNum"
-										 class="form-control" placeholder="- 없이 전화번호를 입력하여 주세요.[필수]">
-									<tr><td id="phoneCheckMessage" class="check" colspan="3"></td></tr>
-										<table><tr><td id="phoneNumCheckMessage" ></td></tr></table>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-6">
+							<label>패스워드</label> <input type="password" id="password"
+								name="password" class="form-control"
+								placeholder="6자리 이상의 숫자,문자,특수기호를 포함하세요.[필수]">
+							<table>
+								<tr>
+									<td id="passwordCheckMessage"></td>
+								</tr>
+							</table>
 						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								
-							</div>
+						<div class="col-md-6">
+							<label>패스워드 확인</label> <input type="password" id="rePassword"
+								name="rePassword" class="form-control"
+								placeholder="확인 패스워드를 입력하세요.[필수]">
+							<table>
+								<tr>
+									<td id="passwordReCheckMessage"></td>
+								</tr>
+							</table>
 						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-8">
-									<label>생년월일</label> <input type="text" id="birthDate" name="birthDate"
-										 class="form-control" placeholder="생년월일 숫자8자리를 입력하세요. ex) 20010101 [필수]">
-									<table><tr><td id="birthCheckMessage" ></td></tr></table>
-								</div>
-								<div class="col-md-4">
-									<label>성별</label> <%-- <input type="text" name="gender"
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-4">
+							닉네임<br> <input type="text" id="nicName" name="nickname"
+								class="form-control" placeholder="닉네임을 입력하여 주세요.[필수]">
+							<table>
+								<tr>
+									<td id="nicNameTxt"></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-2">
+							<br> <input type="button" id="nicNameRepCheckBtn"
+								value="중복확인" class="btn btn-success">
+							<!-- <button id="repeatCheck" class="btn btn-primary">중복확인</button> -->
+						</div>
+						<div class="col-md-6">
+							전화번호<br> <input type="text" id="phoneNum" name="phoneNum"
+								class="form-control" placeholder="- 없이 전화번호를 입력하여 주세요.[필수]">
+							<tr>
+								<td id="phoneCheckMessage" class="check" colspan="3"></td>
+							</tr>
+							<table>
+								<tr>
+									<td id="phoneNumCheckMessage"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group"></div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-8">
+							<label>생년월일</label> <input type="text" id="birthDate"
+								name="birthDate" class="form-control"
+								placeholder="생년월일 숫자8자리를 입력하세요. ex) 20010101 [필수]">
+							<table>
+								<tr>
+									<td id="birthCheckMessage"></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-4">
+							<label>성별</label>
+							<%-- <input type="text" name="gender"
 										value="${memDetInfoDto.gender}" class="form-control"> --%>
-									<select class="form-control" id="gender" name="gender">
-										<option>선택</option>
-										<option>남자</option>
-										<option>여자</option>
-									</select>
-								</div>
-							</div>
+							<select class="form-control" id="gender" name="gender">
+								<option>선택</option>
+								<option>남자</option>
+								<option>여자</option>
+							</select>
 						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
-									<label>대표이미지</label> <!-- <input type="text" name="photoPath" 
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-12">
+							<label>대표이미지</label>
+							<!-- <input type="text" name="photoPath" 
 																		 class="form-control"  placeholder="대표이미지를 첨부하여 주세요.[선택]"> -->
-										 <div class="filebox"> 
-											<input class="upload-name" size="50" value="파일선택" disabled="disabled">
-								 			<label for="ex_filename">업로드</label> 
-								 			<input type="file" id="ex_filename" name="upload"  class="upload-hidden">
-										</div>
-								</div>
+							<div class="filebox">
+								<input class="upload-name" size="50" value="파일선택"
+									disabled="disabled"> <label for="ex_filename">업로드</label>
+								<input type="file" id="ex_filename" name="upload"
+									class="upload-hidden">
 							</div>
 						</div>
-						
-						<!-- <div class="form-group">
+					</div>
+				</div>
+
+				<!-- <div class="form-group">
 							<label for="InputSubject1">대표이미지</label>
 							<input id="fileInput" filestyle="" type="file" data-class-button="btn btn-default" data-class-input="form-control" 
 							data-button-text="" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" 
@@ -593,8 +582,8 @@ $(function(){
 							</span>
 							</div>
 						</div> -->
-						
-						<%-- <div class="row">
+
+				<%-- <div class="row">
 									<div class="form-group">
 										<div class="col-md-12">
 											<label>회원종류</label>
@@ -603,192 +592,194 @@ $(function(){
 									</div>
 								</div> --%>
 
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
-									<label>관심음식</label> <input type="text" name="interestFood"
-										 class="form-control" placeholder="좋아하거나 관심있는 음식을 입력하여 주세요.[선택]">
-								</div>
-							</div>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-12">
+							<label>관심음식</label> <input type="text" name="interestFood"
+								class="form-control" placeholder="좋아하거나 관심있는 음식을 입력하여 주세요.[선택]">
 						</div>
+					</div>
+				</div>
 
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
-									<label>자기소개</label> <%-- <input type="textArea" name="selfIntro"
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-12">
+							<label>자기소개</label>
+							<%-- <input type="textArea" name="selfIntro"
 										value="${memDetInfoDto.selfIntro}" class="form-control"> --%>
-										<textarea id="selfIntro" name="selfIntro" rows="5" class="form-control" placeholder="자기소개를 입력하여 주세요.[선택]"></textarea>
-								</div>
-							</div>
+							<textarea id="selfIntro" name="selfIntro" rows="5"
+								class="form-control" placeholder="자기소개를 입력하여 주세요.[선택]"></textarea>
 						</div>
-						
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-12">
-									<!-- <label>이메일 수신여부</label> -->
-										<div class="checkbox">
-  											<label><input type="checkbox" name="emailCheck" value="수신" class="form-control">이메일 수신여부</label>
-										</div>
-									<%-- <input type="text" name="emailCheck"  value="${memDetInfoDto.emailCheck}" class="form-control"> --%>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<input type="hidden" id="emailDupliCheck" value="unchecked">
-								<input type="hidden" id="nicNameDupliCheck" value="unchecked">
-								<input type="hidden" id="birthdayCheck" value="unchecked">
-								<input type="hidden" id="phoneNumCheck" value="unchecked">
-								<input type="button" id="createId" value="계정만들기" class="btn btn-info pull-right push-bottom"
-									data-loading-text="Loading...">
-							</div>
-						</div>
-					</form>
-				</div>
-				<!-- /REGISTER -->
-
-				<!-- WHY? -->
-				<div class="col-md-3">
-
-					<h2>Why to register?</h2>
-
-					<div class="white-row">
-
-						<h4>Registration is fast, easy, and free.</h4>
-
-						<p>Once you're registered, you can:</p>
-						<ul class="list-icon check">
-							<li>Buy, sell, and interact with other members.</li>
-							<li>Save your favorite searches and get notified.</li>
-							<li>Watch the status of up to 200 items.</li>
-							<li>View your Atropos information from any computer in the
-								world.</li>
-							<li>Connect with the Atropos community.</li>
-						</ul>
-
-						<hr class="half-margins" />
-
-						<p>
-							Already have an account? <a href="page-signin.html">Click to
-								Sign In</a>
-						</p>
 					</div>
-
-					<div class="white-row">
-						<h4>Contact Customer Support</h4>
-						<p>
-							If you're looking for more help or have a question to ask, please
-							<a href="contact-us.html">contact us</a>.
-						</p>
-					</div>
-
 				</div>
-				<!-- /WHY? -->
 
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-12">
+							<!-- <label>이메일 수신여부</label> -->
+							<div class="checkbox">
+								<label><input type="checkbox" name="emailCheck"
+									value="수신" class="form-control">이메일 수신여부</label>
+							</div>
+							<%-- <input type="text" name="emailCheck"  value="${memDetInfoDto.emailCheck}" class="form-control"> --%>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<input type="hidden" id="emailDupliCheck" value="unchecked">
+						<input type="hidden" id="nicNameDupliCheck" value="unchecked">
+						<input type="hidden" id="birthdayCheck" value="unchecked">
+						<input type="hidden" id="phoneNumCheck" value="unchecked">
+						<input type="button" id="createId" value="계정만들기"
+							class="btn btn-info pull-right push-bottom"
+							data-loading-text="Loading...">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- /REGISTER -->
+
+		<!-- WHY? -->
+		<div class="col-md-3">
+			<br>
+			<h2>
+				회원 가입 <strong>혜택</strong>
+			</h2>
+
+			<div class="white-row">
+
+				<h4>
+					회원 가입은 쉽고, 빠르며 무엇보다 <strong>무료</strong>입니다!
+				</h4>
+
+				<p>지금 회원 가입을 하시면:</p>
+				<ul class="list-icon check">
+					<li>좋아요, 위시리스트, 댓글 기능 무제한 사용 가능.</li>
+					<li>검색어 순위권 식당을 손쉽고 빠르게 검색 가능.</li>
+					<li>현재 광고 없이 무제한 검색 이벤트 중입니다.</li>
+					<li>개인 식당 리스트 저장 기능.</li>
+					<li>트위터를 포함한 SNS 로 유저들과 자유로운 소통.</li>
+				</ul>
+
+				<hr class="half-margins" />
+
+				<p>
+					이미 계정이 있으신가요? <br> <a href="restaurantMain.do">메인 페이지에서 <u>로그인</u>
+						하세요!
+					</a>
+				</p>
 			</div>
 
-			</section>
+			<div class="white-row">
+				<h4>궁금한 점이 있으신가요?</h4>
+				<p>
+					저희는 열정페이 따위는 없습니다. <br> 4월 23일 까지만 운영합니다.<a
+						href="list.do"><br>
+						더 늦기 전에 <u>질문하러 가기</u></a>
+				</p>
+			</div>
 
 		</div>
+		<!-- /WHY? -->
+
+	</div>
+
+	</section>
+
+	</div>
 	<!-- </div> -->
 	<!-- /WRAPPER -->
 
 
 
-<!-- FOOTER -->
-	<footer>
-
-		<!-- copyright , scrollTo Top -->
-		<div class="footer-bar">
-			<div class="container">
-				<span class="copyright">Copyright &copy; git, LLC .
-					All Rights Reserved.</span> <a class="toTop" href="#topNav">BACK TO
-					TOP <i class="fa fa-arrow-circle-up"></i>
-				</a>
-			</div>
+	<!-- FOOTER -->
+	<footer> <!-- copyright , scrollTo Top -->
+	<div class="footer-bar">
+		<div class="container">
+			<span class="copyright">Copyright &copy; git, LLC . All Rights
+				Reserved.</span> <a class="toTop" href="#topNav">BACK TO TOP <i
+				class="fa fa-arrow-circle-up"></i>
+			</a>
 		</div>
-		<!-- copyright , scrollTo Top -->
+	</div>
+	<!-- copyright , scrollTo Top --> <!-- footer content -->
+	<div class="footer-content">
+		<div class="container">
+
+			<div class="row">
 
 
-		<!-- footer content -->
-		<div class="footer-content">
-			<div class="container">
+				<!-- FOOTER CONTACT INFO -->
+				<div class="column col-md-4">
+					<h3>CONTACT</h3>
 
-				<div class="row">
-
-
-					<!-- FOOTER CONTACT INFO -->
-					<div class="column col-md-4">
-						<h3>CONTACT</h3>
-
-						<p class="contact-desc">더이상 시간을 낭비하지 마시고 원하는 음식을 바로 찾으세요!</p>
-						<address class="font-opensans">
-							<ul>
-								<li class="footer-sprite address">서울시 강남구 테헤란로<br /> 1길 10
-									세경빌딩<br />
-								</li>
-								<li class="footer-sprite phone">Phone: +82)31-8282-8949</li>
-								<li class="footer-sprite email"><a
-									href="mailto:support@yourname.com">FoodSearch@right.now</a></li>
-							</ul>
-						</address>
-
-					</div>
-					<!-- /FOOTER CONTACT INFO -->
-
-
-					<!-- FOOTER LOGO -->
-					<div class="column logo col-md-4 text-center">
-						<div class="logo-content">
-							<img class="animate_fade_in" src="design/images/logo_footer.png"
-								width="200" alt="" />
-							<h4>ATROPOS TEMPLATE</h4>
-						</div>
-					</div>
-					<!-- /FOOTER LOGO -->
-
-
-					<!-- FOOTER LATEST POSTS -->
-					<div class="column col-md-4 text-right">
-						<h3>최신 등록글</h3>
-
-						<div class="post-item">
-							<small>JANUARY 2, 2014 BY ADMIN</small>
-							<h3>
-								<a href="blog-post.html">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit</a>
-							</h3>
-						</div>
-						<div class="post-item">
-							<small>JANUARY 2, 2014 BY ADMIN</small>
-							<h3>
-								<a href="blog-post.html">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit</a>
-							</h3>
-						</div>
-						<div class="post-item">
-							<small>JANUARY 2, 2014 BY ADMIN</small>
-							<h3>
-								<a href="blog-post.html">Lorem ipsum dolor sit amet,
-									consectetur adipiscing elit</a>
-							</h3>
-						</div>
-
-						<a href="blog-masonry-sidebar.html" class="view-more pull-right">View
-							Blog <i class="fa fa-arrow-right"></i>
-						</a>
-
-					</div>
-					<!-- /FOOTER LATEST POSTS -->
+					<p class="contact-desc">더이상 시간을 낭비하지 마시고 원하는 음식을 바로 찾으세요!</p>
+					<address class="font-opensans">
+						<ul>
+							<li class="footer-sprite address">서울시 강남구 테헤란로<br /> 1길 10
+								세경빌딩<br />
+							</li>
+							<li class="footer-sprite phone">Phone: +82)31-8282-8949</li>
+							<li class="footer-sprite email"><a
+								href="mailto:support@yourname.com">FoodSearch@right.now</a></li>
+						</ul>
+					</address>
 
 				</div>
+				<!-- /FOOTER CONTACT INFO -->
+
+
+				<!-- FOOTER LOGO -->
+				<div class="column logo col-md-4 text-center">
+					<div class="logo-content">
+						<img class="animate_fade_in" src="design/images/logo_footer.png"
+							width="200" alt="" />
+						<h4>ATROPOS TEMPLATE</h4>
+					</div>
+				</div>
+				<!-- /FOOTER LOGO -->
+
+
+				<!-- FOOTER LATEST POSTS -->
+				<div class="column col-md-4 text-right">
+					<h3>최신 등록글</h3>
+
+					<div class="post-item">
+						<small>JANUARY 2, 2014 BY ADMIN</small>
+						<h3>
+							<a href="blog-post.html">Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit</a>
+						</h3>
+					</div>
+					<div class="post-item">
+						<small>JANUARY 2, 2014 BY ADMIN</small>
+						<h3>
+							<a href="blog-post.html">Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit</a>
+						</h3>
+					</div>
+					<div class="post-item">
+						<small>JANUARY 2, 2014 BY ADMIN</small>
+						<h3>
+							<a href="blog-post.html">Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit</a>
+						</h3>
+					</div>
+
+					<a href="blog-masonry-sidebar.html" class="view-more pull-right">View
+						Blog <i class="fa fa-arrow-right"></i>
+					</a>
+
+				</div>
+				<!-- /FOOTER LATEST POSTS -->
 
 			</div>
-		</div>
-		<!-- footer content -->
 
-	</footer>
+		</div>
+	</div>
+	<!-- footer content --> </footer>
 	<!-- /FOOTER -->
 
 
