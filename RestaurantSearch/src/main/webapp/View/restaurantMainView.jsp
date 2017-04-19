@@ -946,8 +946,8 @@
 											</div>
 											<div class="form-group">
 												<label for="openDate">개업일</label> <input type="text"
-													class="form-control" id="openStartDate"
-													name="openStartDate" placeholder="식당의 개업일">
+													class="form-control" id="operStartDate"
+													name="operStartDate" placeholder="예: 20170402">
 											</div>
 											<div class="form-group">
 												<label for="inputMenu">대표 메뉴</label> <input type="text"
@@ -965,7 +965,7 @@
 											</div>
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
-													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
+													class="form-control" id="operHour" name="operHour" placeholder="영업 시간">
 											</div>
 
 											<div class="form-group">
