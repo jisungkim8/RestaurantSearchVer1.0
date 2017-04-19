@@ -15,6 +15,8 @@ public interface MemberDao {
 	
 	public int checkIdMember(String id);
 	
+	public int checkNicNameMyProfile(MemDetInfoDto MemDetInfoDto);
+	
 	public void deleteMember(String memberId);
 	
 	public void insertMemSimInfo(MemSimInfoDto memSimInfoDto);
@@ -27,11 +29,11 @@ public interface MemberDao {
 	
 	public String searchPasswdMem(String memId);
 
-	public int checkNicName(MemDetInfoDto memDetInfo);
-	
 	public List<MemDetInfoDto> list(Map<String, Object> map);
 	
 	public int getRowCount(Map<String, Object> map);// 총레코드수 구하기
 	
 	public MemDetInfoDto selectMember(String memberId);// 상세보기
+
+	public int checkNicName(String nicName);
 }

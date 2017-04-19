@@ -123,9 +123,9 @@ public class MemberRegiController {
 		return checkResult;
 	}
 
-	@RequestMapping("dupliNicnameCheck.do")
+	@RequestMapping("dupliNicnameCheckMyProfile.do")
 	@ResponseBody
-	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
+	public String dupliNicnameCheckMyProfile(HttpServletRequest request, HttpServletResponse response) {
 		String nicName = request.getParameter("nicName");
 		String memberId = request.getParameter("memberId");
 		String checkResult = "";
@@ -136,7 +136,7 @@ public class MemberRegiController {
 		memDetInfo.setNickname(nicName);
 
 		// ex) Model 단에서 DB 조회
-		int nicNameCount = memberDao.checkNicName(memDetInfo);
+		int nicNameCount = memberDao.checkNicNameMyProfile(memDetInfo);
 		
 		System.out.println("nicNameCount=>"+nicNameCount);
 		
@@ -147,6 +147,28 @@ public class MemberRegiController {
 
 		return checkResult;
 	}
+	
+	
+	@RequestMapping("dupliNicnameCheck.do")
+	@ResponseBody
+	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
+		String nicName = request.getParameter("nicName");
+		String checkResult = "";
+
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName);
+
+		// ex) Model 단에서 DB 조회
+
+		int nicNameCount = memberDao.checkNicName(nicName);
+
+		if (nicNameCount >= 1)
+			checkResult = "dupli";
+		else
+			checkResult = "create";
+
+		return checkResult;
+	}
+	
 
 	@RequestMapping(value = "/memberInfoUpdate.do", method = RequestMethod.GET)
 	public String memInfoUpdateGet() {
