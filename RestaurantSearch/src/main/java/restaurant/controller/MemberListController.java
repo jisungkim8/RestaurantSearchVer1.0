@@ -77,6 +77,7 @@ public class MemberListController {
 		
 		return mav;
 	}
+	
 	@RequestMapping("/memDetail.do")
 	// int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 	public ModelAndView process(@RequestParam("memberId") String memberId) {

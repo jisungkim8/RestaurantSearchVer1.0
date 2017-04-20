@@ -65,5 +65,23 @@
 		<put-attribute name="js" value="" />
 		<put-attribute name="body" value="/View/memberView.jsp" />
 	</definition>
+	
+	<!-- 맛집 검색 페이지 -->
+	<definition name="restaurantListView2" template="/View/restaurantListViewLayout.jsp">
+		<put-attribute name="restaurantListViewCSS" value="/View/restaurantListViewCSS.jsp" />
+		<!-- <put-attribute name="menu" value="/View/menu.jsp" /> -->
+		<put-attribute name="restaurantListViewHeader" value="/View/restaurantListViewHeader.jsp" />
+		<put-attribute name="restaurantListViewMainContents" value="/View/restaurantListViewMainContents.jsp" />
+		<put-attribute name="restaurantListViewJS" value="/View/restaurantListViewJS.jsp" />
+	</definition>
+	
+	<!-- 좋아요 리스트 페이지 -->
+	<definition name="restaurantListViewLikeList" template="/View/restaurantListViewLikeListLayout.jsp">
+		<put-attribute name="restaurantListViewCSS" value="/View/restaurantListViewCSS.jsp" />
+		<!-- <put-attribute name="menu" value="/View/menu.jsp" /> -->
+		<put-attribute name="restaurantListViewHeader" value="/View/restaurantListViewHeader.jsp" />
+		<put-attribute name="restaurantListViewMainContents" value="/View/restaurantListViewMainContents.jsp" />
+		<put-attribute name="restaurantListViewLikeListJS" value="/View/restaurantListViewLikeListJS.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -379,6 +379,12 @@
 									</a>
 								</li>
 								
+								 <li class="eborder-top">
+                                	<a href="restaurantSearchByLikeList.do">
+                                		<i class="icon_profile"></i>좋아요리스트
+                                	</a>
+                            	</li> 
+								
 								<li class="eborder-top">
 									<a href="list.do" id="quick_board">
 										<i class="icon_profile"></i> 게시판
