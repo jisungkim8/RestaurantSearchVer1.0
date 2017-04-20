@@ -249,7 +249,7 @@
 								</li>
 								
 								<li class="eborder-top">
-									<a href="memberLogout.do">
+									<a href="memBoardLogout.do">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>

@@ -738,12 +738,14 @@
 																							<img class="img-responsive" src="<c:url value="${shopPhotoSepNum2.photoPath}" />" width="260" height="260" alt="">
 																						</c:if>
 																						
-																						<c:if test="${vs.index == 2 }">
-																							<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
-																								<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
-																									+ ${shopPhotoDtoSepNum2.size()-3}
-																								</span>
-																							</div>
+																						<c:if test="${shopPhotoDtoSepNum2.size()-3 > 0}">
+																							<c:if test="${vs.index == 2 }">
+																								<div style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.6)">
+																									<span class="inner" style="position:absolute; top:44%; right:40%; color:white; font-size:3rem">
+																										+ ${shopPhotoDtoSepNum2.size()-3}
+																									</span>
+																								</div>
+																							</c:if>
 																						</c:if>
 																					</a>
 																				</figure>
