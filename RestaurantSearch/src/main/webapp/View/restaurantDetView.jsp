@@ -644,7 +644,7 @@
 										<div>
 											<div class="owl-caption text-left">
 												<p class="hidden-xs"><!-- hide on mobile -->
-													Lorem Ipsum Dolor Sit Amet...
+<!-- 													Lorem Ipsum Dolor Sit Amet... -->
 												</p>
 											</div>
 											<img alt="" class="img-responsive" src="<c:url value="${shopPhotoSepNum1.photoPath}" />" width="710" height="470" />
