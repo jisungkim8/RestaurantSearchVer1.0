@@ -174,7 +174,13 @@
 																	<label>사진</label>
 																	
 																	<div id="reviewPhotoFileGroupAtModify">
-																		<input type="file" class="form-control" style="height:50px;" name="upload"> asdasd
+																		<div class="col-md-1">
+																			<input type="checkbox" id="chkPhotoFileAtModify1">
+																		</div>
+																		
+																		<div class="col-md-11">
+																			<input type="file" class="form-control" style="height:50px;" name="upload" id="reviewPhotoFileAtModify1">
+																		</div>
 																	</div>
 																	<div align="right">
 																		<button id="addReviewPhotoFileAtModify" class="btn btn-default">사진 추가</button>
