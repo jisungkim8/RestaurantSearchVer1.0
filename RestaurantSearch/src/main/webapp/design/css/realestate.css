@@ -207,10 +207,10 @@ figure.agent-figure.pull-right {
 .containerSearch {
 	position: relative;
 	display: none;
-	left: 30%;
+	/* left: 30%; */
 	min-width: 200px;
-	width: 35%;
-	top: -50px;
+	width: 80%;
+	/* top: -50px; */
 }
 
 .youtubeWrap {
