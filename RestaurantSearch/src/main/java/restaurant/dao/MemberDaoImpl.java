@@ -24,6 +24,8 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 
 	public void deleteMember(String memberId) {
 		// TODO Auto-generated method stub
+		System.out.println("MemberDaoImple >> delteMember >> memberId = " + memberId);
+		memberId = memberId.trim();
 		getSqlSession().delete("deleteMemSimInfo" , memberId);
 		getSqlSession().delete("deleteMemDetInfo" , memberId);
 	}

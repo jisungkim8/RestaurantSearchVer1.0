@@ -295,6 +295,7 @@
 	
 	function open_filter_window() {
 		console.log("open_filter_window");
+		$("#filter_search_button").attr("href", "javascript:get_restaurant_data_by_member_id_and_filter_info('${memberId}',1);");
 		$("#filter_info_window").css("display", "block");	 
 	} 
 	
@@ -525,6 +526,8 @@
 	function get_restaurant_data_by_member_id_and_filter_info
 		(member_id, page_num) {
 		
+		console.log('get_restaurant_data_by_member_id_and_filter_info');
+		
 		if (member_id == '${memberId}') {  
 			console.log('correctId!!');
 			
@@ -641,7 +644,6 @@
 
 		$(document).ready(function () {
 			//getRestaurantByKeywordAndPageNum('${keyword}', 1)
-			$("#filter_apply_button").css("href", "javascript:get_restaurant_data_by_member_id_and_filter_info('', 1);"); 
 			get_restaurant_data_by_member_id_and_filter_info('${memberId}', 1);
 			resize_sidebar_height();
 		});

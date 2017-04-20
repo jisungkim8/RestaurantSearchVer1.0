@@ -654,7 +654,7 @@
 								</label> <label class="btn btn-default active" style="width: 80px;">
 									<input type="radio" name="price_radio"
 									id="price_radio_over_40k" value="가격:무관" checked="checked">
-										무관 
+										무관  
 								</label>
 							</div>
 						</div>

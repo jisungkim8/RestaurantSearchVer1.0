@@ -117,7 +117,6 @@ public class MemLoginController {
 	public ModelAndView memberLogin(@ModelAttribute("memSimInfoDto") MemSimInfoDto memSimInfoDto,
 			@RequestParam(value = "restaurantId") int restaurantId, @RequestParam(value = "moreCount") int moreCount,
 			@RequestParam(value = "filterName") String filterName, @RequestParam(value = "pageName") String pageName,
-			@RequestParam("keyword") String keyword, @RequestParam("pageNum") int pageNum,
 			HttpSession session) {
 		String registerCheck;
 		MemSimInfoDto memSimInfo = new MemSimInfoDto();
@@ -167,17 +166,6 @@ public class MemLoginController {
 			System.out.println("=====restDetView.jsp====");
 			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
 					+ "&filterName=" + filterName);
-			// mav.addObject("restaurantId", restaurantId);
-			// mav.addObject("moreCount", moreCount);
-			// mav.addObject("filterName", filterName);
-			// return new
-			// ModelAndView("redirect:restaurantDetView.do?restaurantId=" +
-			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
-			// filterName);
-		} else if (pageName.equals("restListView")) {
-			System.out.println("=====restListView.jsp====");
-			//System.out.println("restListView >> keyword = " + keyword + ", pageNum = " + pageNum);
-			mav.setViewName("redirect:restaurantSearch.do?keyword=" + "" + "&pageNum=" + 1);
 			// mav.addObject("restaurantId", restaurantId);
 			// mav.addObject("moreCount", moreCount);
 			// mav.addObject("filterName", filterName);

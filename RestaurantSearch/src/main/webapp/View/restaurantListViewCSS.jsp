@@ -38,29 +38,5 @@
 <!-- STYLESWITCHER - REMOVE ON PRODUCTION/DEVELOPMENT -->
 <link href="design/plugins/styleswitcher/styleswitcher.css"
 	rel="stylesheet" type="text/css" />
-<style type="text/css">
-.equal, .equal>div {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	flex: 1 0 auto;
-}
-
-.panel .panel-heading {
-	line-height: 20px;
-	min-height: 20px;
-	border-radius: 2px;
-}
-
-.panel-default>.panel-heading {
-	padding: 3px 12px;
-}
-
-.panel-body {
-	padding: 11px;
-}
-</style>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />

@@ -295,6 +295,7 @@
 	
 	function open_filter_window() {
 		console.log("open_filter_window");
+		$("#filter_search_button").attr("href", "javascript:get_restaurant_data_by_keyword_and_filter_info('',1);");
 		$("#filter_info_window").css("display", "block");	 
 	} 
 	

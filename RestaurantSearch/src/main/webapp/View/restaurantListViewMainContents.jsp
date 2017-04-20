@@ -381,18 +381,18 @@
 					<div class="panel-body" style="text-align: center;">
 						<div class="btn-row">
 							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-default" style="width: 80px;"> <input
+								<label class="btn btn-success" style="width: 80px;"> <input
 									type="radio" name="price_radio" id="price_radio_under_10k"
 									style="margin: 0 auto;" value="10000--"> 만원미만 </label> <label
-									class="btn btn-default" style="width: 80px;"> <input
+									class="btn btn-success" style="width: 80px;"> <input
 									type="radio" name="price_radio" id="price_radio_over_10k"
-									value="10000++"> 만원대 </label> <label class="btn btn-default"
+									value="10000++"> 만원대 </label> <label class="btn btn-success"
 									style="width: 80px;"> <input type="radio"
 									name="price_radio" id="price_radio_over_20k" value="20000++">
-										2만원대 </label> <label class="btn btn-default" style="width: 80px;">
+										2만원대 </label> <label class="btn btn-success" style="width: 80px;">
 									<input type="radio" name="price_radio"
 									id="price_radio_over_30k" value="30000++"> 3만원++ 
-								</label> <label class="btn btn-default active" style="width: 80px;">
+								</label> <label class="btn btn-success active" style="width: 80px;">
 									<input type="radio" name="price_radio"
 									id="price_radio_over_40k" value="가격:무관" checked="checked">
 										무관 
@@ -452,10 +452,10 @@
 		<div style="margin-bottom: 20px; text-align: center;">
 			<a class="btn btn-default btn-lg" style="width: 128px;"
 				href="javascript:close_filter_window();"
-				title="Bootstrap 3 themes generator">닫기</a> <a
+				title="Bootstrap 3 themes generator">닫기</a> <a id="filter_search_button" 
 				class="btn btn-info btn-lg" style="width: 128px;"
-				href="javascript:get_restaurant_data_by_keyword_and_filter_info('',1);"
-				title="Bootstrap 3 themes generator">적용</a>
+				href="#"
+				title="Bootstrap 3 themes generator">검색</a>
 		</div>
 
 	</div>
