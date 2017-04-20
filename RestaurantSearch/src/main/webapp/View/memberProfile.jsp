@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -83,12 +85,16 @@
 
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden'); 
+	
 	fileTarget.on('change', function(){ // 값이 변경되면 
 		if(window.FileReader){ // modern browser
 			var filename = $(this)[0].files[0].name; } 
 		else{ // old IE
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
 		}
+	
+	   alert("changeFilename=>"+filename);
+	   
 	// 추출한 파일명 삽입 
 			//$(this).siblings('.upload-name').val(filename); 
 		if( $('.upload-name').val() != "" ){
@@ -144,7 +150,7 @@ function trueForm()
 	//$("#memberId").attr("disabled",false).attr("readonly",false); 
 	
 	if($('#profileMod').val()=='수정'){
-		$("#birthDate").attr("disabled",false).attr("readonly",false); 
+		$("#birthDate").attr("disabled",false).attr("readonly",false);
 		$("#phoneNum").attr("disabled",false).attr("readonly",false); 
 		$("#gender").attr("disabled",false).attr("readonly",false); 
 		$("#photoPath").attr("disabled",false).attr("readonly",false); 
@@ -158,26 +164,67 @@ function trueForm()
 		$('#uploadBtn').show();
 		$('#profileMod').val('수정완료')
 	}else{
-		$("#birthDate").attr("disabled",false).attr("readonly",true); 
-		$("#phoneNum").attr("disabled",false).attr("readonly",true); 
-		$("#gender").attr("disabled",false).attr("readonly",true); 
-		$("#photoPath").attr("disabled",false).attr("readonly",true); 
-		$("#interestFood").attr("disabled",false).attr("readonly",true); 
-		$("#nicName").attr("disabled",false).attr("readonly",true);
-		$("#selfIntro").attr("disabled",false).attr("readonly",true);
-		$("#emailCheck").attr("disabled",true).attr("onclick",false);
-		$("#nicNameRepCheck").attr("disabled",true).attr("onclick",false);
-		//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
-		$('#ex_filenameBtn').attr('disabled',false).attr("readonly",true);  //업로드 버튼 활성화 
-		$('#uploadBtn').hide();
-		$('#profileMod').val('수정')
+		
+		 /* if($("#nicNameDupliCheck").val()=='unchecked'){
+				alert("닉네임 중복확인 버튼을 클릭하세요.")
+				 $("#nicNameRepCheckBtn").focus();
+				return;
+		 } */
+		 
+		 var nicNameChk="ccc";
+		 
+		 $.ajax({
+	    		url:'/RestaurantSearch/dupliNicnameCheckMyProfile.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+	    		data:{nicName:$("#nicName").val(), memberId: $("#memberId").val()},
+	    		type : "POST",
+	    		//3.success:콜백함수명(매개변수)
+	    		success:function(args){
+	    			if(args=="create"){
+	    				$("#nicNameTxt").html("")
+	     				//$("#nicNameDupliCheck").val('checked')
+	     				modifyCom()
+	    			}else{
+	    			   $("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
+	    			   $("#nicNameRepCheck").focus();
+	    			   nicNameChk="false";
+	    			  // alert("before_$(#nicNameDupliCheck).val=>"+$("#nicNameDupliCheck").val() );
+	    			   $("#nicNameDupliCheck").val('unchecked')
+	    			  // alert("after_$(#nicNameDupliCheck).val=>"+$("#nicNameDupliCheck").val() );
+	    			   alert("중복확인 버튼을 클릭하십시오!");
+	    			}
+	    		}
+	    	})
+		 
+	 /*    if($("#nicNameDupliCheck").val()=="unchecked"){
+	    	alert("<===닉네임중복===>")
+	    	modifyCom();
+	    	return;
+	    } */
+		 
+		
 	}
 } 
+
+function modifyCom(){
+	$("#birthDate").attr("disabled",false).attr("readonly",true); 
+	$("#phoneNum").attr("disabled",false).attr("readonly",true); 
+	$("#gender").attr("disabled",false).attr("readonly",true); 
+	$("#photoPath").attr("disabled",false).attr("readonly",true); 
+	$("#interestFood").attr("disabled",false).attr("readonly",true); 
+	$("#nicName").attr("disabled",false).attr("readonly",true);
+	$("#selfIntro").attr("disabled",false).attr("readonly",true);
+	$("#emailCheck").attr("disabled",true).attr("onclick",false);
+	$("#nicNameRepCheck").attr("disabled",true).attr("onclick",false);
+	//$("#emailCheck").attr("disabled",false).attr("readonly",false); 
+	$('#ex_filenameBtn').attr('disabled',false).attr("readonly",true);  //업로드 버튼 활성화 
+	$('#uploadBtn').hide();
+	$('#profileMod').val('수정')
+}
 
 $(function(){
 	
 	$("#nicNameRepCheck").click(function(){
-		   alert("닉네임")
 		   if($("#nicName").val()==""){
 			   //document.getElementById("ducheck")=>$("ducheck")
 			   $("#nicNameTxt").html("<font id='idColor' color='red'>먼저 닉네임을 입력하세요.</font>")
@@ -186,17 +233,15 @@ $(function(){
 		   }
 		   
 			$.ajax({
-	    		url:'/RestaurantSearch/dupliNicnameCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+	    		url:'/RestaurantSearch/dupliNicnameCheckMyProfile.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 	    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}
-	    		data:{nicName:$("#nicName").val()},
+	    		data:{nicName:$("#nicName").val(), memberId: $("#memberId").val()},
 	    		type : "POST",
 	    		//3.success:콜백함수명(매개변수)
 	    		success:function(args){
 	    			if(args=="create"){
-	    				alert("닉네임 가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
-	     			}else{
-	    				alert("닉네임 불가능")
+	    			}else{
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
 	    				$("#memberId").focus();
 	    			}
@@ -209,6 +254,9 @@ $(function(){
 		
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		var params=$("#registerMem").serialize();
+		
+		
+		
 
 		if($('#profileMod').val()=='수정완료'){
 			alert("수정완료 버튼을 클릭 하십시오.");
@@ -272,9 +320,10 @@ $(function(){
             },
 
             error : function(error) {
-                alert("파일 업로드에 실패하였습니다.");
+               /*  alert("파일 업로드에 실패하였습니다.");
                 console.log(error);
-                console.log(error.status);
+                console.log(error.status); */
+            	self.close();
             }
         });
     	
@@ -630,7 +679,8 @@ $(function(){
 										<label>이미지</label> 
 								 		<div class="filebox">
 								 		<c:if test="${memDetInfo.photoPath!='images/null'}">
-											<input class="upload-name" size="50" value="${memDetInfo.photoPath}" disabled="disabled">
+								 		<c:set var="len" value="${fn:length(memDetInfo.photoPath)}"/>
+											<input class="upload-name" size="50" value="${fn:substring(memDetInfo.photoPath,7,len)}" disabled="disabled">
 								 		</c:if>
 								 		<c:if test="${memDetInfo.photoPath=='images/null'}">
 								 		    <!-- <input type="text" id="photoPath" name="photoPath" value=""
@@ -638,7 +688,7 @@ $(function(){
 									          <input class="upload-name" size="50" value="" placeholder="대표이미지를 첨부하여 주세요.[선택]" disabled="disabled">
 								 		</c:if>
 								 			<label id=uploadBtn for="ex_filenameBtn">업로드</label> 
-								 			<input type="file" id="ex_filenameBtn" name="upload"  class="upload-hidden" disabled="disabled" >
+								 			<input type="file" id="ex_filenameBtn" name="upload"  class="upload-hidden">
 										</div>
 								</div>
 							</div>
@@ -748,7 +798,8 @@ $(function(){
 							</div>
 						</div>
 
-						<div class="row" style="text-align:right; background-color: #86E57F">   
+						<div class="row" style="text-align:right; background-color: #86E57F">
+						        <input type="hidden" id="nicNameDupliCheck" value="checked">
 								<input type="button" id="profileMod" value="수정" style="margin-bottom: 17px; margin-right: 17px;" class="btn btn-primary"  OnClick="trueForm()">
 								<input type="button" id="profileSave" value="저장"  style="margin-bottom: 17px; margin-right: 17px;"  class="btn btn-success" >
 						</div>

@@ -7,7 +7,15 @@ public class MainRestaurantListDto {
 	String representPhoto;
 	String addr;
 	String phonenumber;
+	String averagePrice;
 	
+	
+	public String getAveragePrice() {
+		return averagePrice;
+	}
+	public void setAveragePrice(String averagePrice) {
+		this.averagePrice = averagePrice;
+	}
 	public String getPhonenumber() {
 		return phonenumber;
 	}

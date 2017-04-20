@@ -210,6 +210,11 @@ public class MemLoginController {
 			System.out.println("=====restListView.jsp====");
 			mav.setViewName("redirect:restaurantSearch.do?keyword=" + keyword + "&pageNum=" + pageNum);
 		}
+		
+		 /* }else if(pageName.equals("boardView")) {
+			System.out.println("=====boardList.jsp====");
+			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+		}*/
 		return mav;
 	}
 

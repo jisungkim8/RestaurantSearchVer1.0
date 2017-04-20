@@ -123,6 +123,32 @@ public class MemberRegiController {
 		return checkResult;
 	}
 
+	@RequestMapping("dupliNicnameCheckMyProfile.do")
+	@ResponseBody
+	public String dupliNicnameCheckMyProfile(HttpServletRequest request, HttpServletResponse response) {
+		String nicName = request.getParameter("nicName");
+		String memberId = request.getParameter("memberId");
+		String checkResult = "";
+		MemDetInfoDto memDetInfo = new MemDetInfoDto();
+
+		System.out.println(" dupliIdCheck dupliIdCheck id=>" + nicName+"memberId=>"+memberId);
+		memDetInfo.setMemberId(memberId);
+		memDetInfo.setNickname(nicName);
+
+		// ex) Model 단에서 DB 조회
+		int nicNameCount = memberDao.checkNicNameMyProfile(memDetInfo);
+		
+		System.out.println("nicNameCount=>"+nicNameCount);
+		
+		if (nicNameCount >= 1)
+			checkResult = "dupli";
+		else if (nicNameCount == 0)
+			checkResult = "create";
+
+		return checkResult;
+	}
+	
+	
 	@RequestMapping("dupliNicnameCheck.do")
 	@ResponseBody
 	public String dupliNicnameCheck(HttpServletRequest request, HttpServletResponse response) {
@@ -142,6 +168,7 @@ public class MemberRegiController {
 
 		return checkResult;
 	}
+	
 
 	@RequestMapping(value = "/memberInfoUpdate.do", method = RequestMethod.GET)
 	public String memInfoUpdateGet() {
@@ -159,14 +186,9 @@ public class MemberRegiController {
 
 		memDetInfoDto.setMemberType("초급");
 		System.out.println("memDetInfoDto.getEmailCheck()==>" + memDetInfoDto.getEmailCheck());
-
-		
+	
 		//MultipartFile file = multi.getFile("upload");
-
-
 		//System.out.println("MultipartFile file =>"+file.getOriginalFilename());
-
-
 		/*
 		 * if (memDetInfoDto.getEmailCheck()=="수신") {
 		 * System.out.println("memDetInfoDto.getEmailCheck() == null");
@@ -182,6 +204,8 @@ public class MemberRegiController {
 		System.out.println("memDetInfoDto=" + memDetInfoDto);
 		System.out.println("MemberRegiController memInfoUpdate.POST 메서드 호출됨!");
 		oldFileName = memDetInfoDto.getPhotoPath();
+		System.out.println("oldFileName"+oldFileName);
+		System.out.println("memDetInfoDto.getUpload().getOr=>"+memDetInfoDto.getUpload().getOriginalFilename());
 
 		// 업로드된 파일이 존재한다면
 		if (!memDetInfoDto.getUpload().isEmpty()) {
@@ -197,7 +221,13 @@ public class MemberRegiController {
 		}
 
 		// DB상에 반영하라
-		memberDao.updateMember(memDetInfoDto);
+		if(memDetInfoDto.getUpload().getOriginalFilename().equals("")){
+			System.out.println("사진이 없다면");
+			memberDao.updateMemInfoExceptPhoto(memDetInfoDto);
+		}else{
+			System.out.println("사진이 있다면");
+			memberDao.updateMember(memDetInfoDto);
+		}
 
 		// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 		if (!memDetInfoDto.getUpload().isEmpty()) {

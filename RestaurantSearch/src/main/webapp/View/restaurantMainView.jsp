@@ -6,7 +6,7 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>맛집검색 - 헤헤</title>
+<title>맛집검색 - 더이상 속지 마세요!</title>
 
 <!-- mobile settings -->
 <meta name="viewport"
@@ -80,6 +80,27 @@
 											'thick solid grey');
 
 								})
+						var fileTarget = $('.filebox .upload-hidden');
+						fileTarget.on('change', function() { // 값이 변경되면 
+							if (window.FileReader) { // modern browser
+								var filename = $(this)[0].files[0].name;
+							} else { // old IE
+								var filename = $(this).val().split('/').pop()
+										.split('\\').pop(); // 파일명만 추출 
+							}
+							// 추출한 파일명 삽입 
+							//$(this).siblings('.upload-name').val(filename); 
+							if ($('.upload-name').val() != "") {
+								var ext = filename.split('.').pop()
+										.toLowerCase();
+								if ($.inArray(ext, [ 'gif', 'png', 'jpg',
+										'jpeg' ]) == -1) {
+									alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+									return;
+								}
+							}
+							$('.upload-name').val(filename);
+						});
 
 						$(".relSearButton").click(
 								function() {
@@ -89,7 +110,8 @@
 											'thick solid brown');
 								})
 
-						$("#login").click(
+						$("#login")
+								.click(
 										function() {
 											var registerCheck, passwd;
 
@@ -99,11 +121,16 @@
 
 											if ($("#memberId").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>먼저 이메일를 입력하세요</font>")
 												$("#memberId").focus();//커서입력
 												return;
-											} else if (!regEmail.test($("#memberId").val())) {
-												$("#loginmsg").html("<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
+											} else if (!regEmail.test($(
+													"#memberId").val())) {
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>이메일 주소가 유효하지 않습니다.</font>")
 												$("#memberId").focus();
 												//history.back();
 												return;
@@ -111,50 +138,65 @@
 
 											if ($("#password").val() == "") {
 												//document.getElementById("ducheck")=>$("ducheck")
-												$("#loginmsg").html("<font id='idColor' color='red'>패스워드를 입력하세요</font>")
+												$("#loginmsg")
+														.html(
+																"<font id='idColor' color='red'>패스워드를 입력하세요</font>")
 												$("#loginmsg").focus();//커서입력
 												return;
 											}
 
-											$.ajax({
+											$
+													.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
-															id : $("#memberId").val()
+															id : $("#memberId")
+																	.val()
 														},
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
 														success : function(args) {
 															if (args == "register") {
 																registerCheck = "register"
-																$.ajax({
+																$
+																		.ajax({
 																			url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 																			//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 																			data : {
-																				id : $("#memberId").val(),
-																				passwd : $("#password").val()
+																				id : $(
+																						"#memberId")
+																						.val(),
+																				passwd : $(
+																						"#password")
+																						.val()
 																			},
 																			type : "POST",
 																			//3.success:콜백함수명(매개변수)
-																			success : function(args) {
+																			success : function(
+																					args) {
 																				if (args == "agreement") {
-																					document.memInfo.submit()
+																					document.memInfo
+																							.submit()
 																				} else {
-																					$("#loginmsg").html("<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
+																					$(
+																							"#loginmsg")
+																							.html(
+																									"<font id='idColor' color='red'>패스워드가 정확하지 않습니다.</font>")
 																				}
 																			}
 																		})
 															} else {
-																$("#loginmsg").html("<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
+																$("#loginmsg")
+																		.html(
+																				"<font id='idColor' color='red'>이메일이 정확하지 않습니다.</font>")
 															}
 														}
 													})
 										})
 
-						$('#myProfile').click(function() {
-											alert("id=>" + $('#memberId').val())
-											alert("pwd=>"	+ $("#password").val())
-
+						$('#myProfile')
+								.click(
+										function() {
 											var memInfoForm = document.memInfoForm;
 											var url = "memProfile.do";
 											window
@@ -300,7 +342,7 @@
 
 			<!-- Mobile Menu Button -->
 			<button class="btn btn-mobile" data-toggle="collapse"
-				data-target=".nav-main-collapse">
+				data-target=".nav-main-collapse" style="display:none">
 				<i class="fa fa-bars"></i>
 			</button>
 
@@ -315,67 +357,93 @@
 				<button type="button" class="btn btn-success">로그인</button> -->
 			<!-- SIGN IN -->
 			<c:choose>
-				<c:when test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'rest@rest.com'}">
-					<div class="navbar-collapse nav-main-collapse collapse pull-left">
-						<a id="quick_board" href="list.do"><span
-							class="btn btn-warning">게시판</span></a>
-					</div>
-					<div class="pull-right nav signin-dd">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"
-							style="background-color: lightgreen"> <span>로그인 성공!
-									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
-							</span>
-						</a>
-							<ul class="dropdown-menu extended logout"
-								style="width: 251px; background-color: blue">
+				<c:when test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'kicRestAdmin@rest.com'}">
+					<div class="navbar-collapse nav-main-collapse collapse pull-right nav signin-dd" style="top: -30px;left: 30%;">
+<!-- 					<div class="pull-right nav signin-dd" style="top: -30px;left: 30%;"> -->
+<!-- 						<li class="dropdown"> -->
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
+									<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50">
+								</c:if>
+								
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
+									<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+								
+<%-- 								<span> 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" /> </span> --%>
+							</a>
+							
+							<ul class="dropdown-menu extended logout" style="width: 251px;left: -205px;top: 78%;">
 								<div class="log-arrow-up"></div>
-								<li class="eborder-top"><a href="#" id="myProfile"><i
-										class="icon_profile"></i> My Profile</a></li>
-								<!-- <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
-                            </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
-										class="icon_profile"></i> 로그아웃</a></li>
-								<li class="eborder-top"><a href="#" id="memLeave"><i
-										class="icon_profile"></i> 회원탈퇴</a></li>
-							</ul></li>
+								<li class="eborder-top">
+									<a href="#" id="myProfile">
+										<i class="icon_profile"></i> My Profile
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memberLogout.do">
+										<i class="icon_profile"></i> 로그아웃
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="#" id="memLeave">
+										<i class="icon_profile"></i> 회원탈퇴
+									</a>
+								</li>
+							</ul>
+<!-- 						</li> -->
 						<form name="memInfoForm">
-							<input type="hidden" id="memberId" name="memberId"
-								value="${sessionScope.userLoginInfo.memberId}" /> <input
-								type="hidden" id="password" name="password"
-								value="${sessionScope.userLoginInfo.password}" />
+							<input type="hidden" id="memberId" name="memberId" value="${sessionScope.userLoginInfo.memberId}" /> 
+							<input type="hidden" id="password" name="password" value="${sessionScope.userLoginInfo.password}" />
 						</form>
 					</div>
 				</c:when>
-				
-				<c:when test="${sessionScope.userLoginInfo.memberId eq 'rest@rest.com'}">
-					<div class="navbar-collapse nav-main-collapse collapse pull-left">
-						<a id="quick_board" href="list.do"><span
-							class="btn btn-warning">게시판</span></a>
-					</div>
-					<div class="pull-right nav signin-dd">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"
-							style="background-color: lightgreen"> <span>로그인 성공!
-									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
-							</span>
-						</a>
-							<ul class="dropdown-menu extended logout"
-								style="width: 251px; background-color: blue">
+
+				<c:when test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
+					<div class="navbar-collapse nav-main-collapse collapse pull-right nav signin-dd" style="top: -30px;left: 30%;">
+<!-- 					<div class="pull-right nav signin-dd"> -->
+<!-- 						<li class="dropdown"> -->
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
+									<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+								
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
+									<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+							
+<%-- 							<span> 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" /> </span> --%>
+							</a>
+							
+							<ul class="dropdown-menu extended logout" style="width: 251px;left: -205px;top: 78%;">
 								<div class="log-arrow-up"></div>
-								<li class="eborder-top"><a href="#" id="myProfile"><i
-										class="icon_profile"></i> My Profile</a></li>
-										<li class="eborder-top"><a href="memList.do"><i
-										class="icon_profile"></i> 회원관리</a></li>
-								<!-- <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
-                            </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
-										class="icon_profile"></i> 로그아웃</a></li>
-								<li class="eborder-top"><a href="#" id="memLeave"><i
-										class="icon_profile"></i> 회원탈퇴</a></li>
-							</ul></li>
+								<li class="eborder-top">
+									<a href="#" id="myProfile">
+										<i class="icon_profile"></i> My Profile
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memList.do">
+										<i class="icon_profile"></i> 회원관리
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memberLogout.do">
+										<i class="icon_profile"></i> 로그아웃
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="#" id="memLeave">
+										<i class="icon_profile"></i> 회원탈퇴
+									</a>
+								</li>
+							</ul>
+<!-- 						</li> -->
 						<form name="memInfoForm">
 							<input type="hidden" id="memberId" name="memberId"
 								value="${sessionScope.userLoginInfo.memberId}" /> <input
@@ -385,29 +453,22 @@
 
 					</div>
 				</c:when>
-				
+
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-						<div class="navbar-collapse nav-main-collapse collapse pull-right">
-							<a id="quick_board" href="list.do"><span
-								class="btn btn-primary">게시판</span></a>
-								<a id="quick_board" href="memList.do"><span
-								class="btn btn-primary">회원관리</span></a>
-						</div>
+<<<<<<< HEAD
+					
+=======
 
-
+>>>>>>> refs/remotes/origin/master
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
 
 
 						<div class="dropdown-menu" role="menu"
 							aria-labelledby="quick_sign_in">
-							<h4>
-								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
-									data-toggle="modal" id="pwdSearch"><font color="red">패스워드
-										찾기</font></a>
-							</h4>
+							<h4>Sign In</h4>
 							<form name="memInfo" role="form" method="post"
 								action="memberLogin.do">
 
@@ -425,20 +486,26 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
-										<input type="hidden" name="restaurantId" value="0">
-										<input type="hidden" name="moreCount" value="0">
-										<input type="hidden" name="filterName" value="reviewId">
-										<input type="hidden" name="pageName" value="restMainView">
-										<input type="button" id="login" value="로그인" class="btn btn-primary pull-right push-bottom">
+										<input type="hidden" name="restaurantId" value="0"> <input
+										type="hidden" name="moreCount" value="0"> <input
+										type="hidden" name="filterName" value="reviewId"> <input
+										type="hidden" name="pageName" value="restMainView"> <input
+										type="button" id="login" value="로그인"
+										class="btn btn-primary pull-right push-bottom">
 									</span>
 								</div>
-								<div class="checkbox">
-									<!-- remmember -->
-									<label> <!-- <input type="checkbox"> Remember me &bull; -->
-										<h3 id=loginmsg></h3> <!-- <table><tr><td id="loginmsg" ></td></tr></table> -->
+								<!-- <div class="checkbox">
+									remmember
+									<label> <input type="checkbox"> Remember me &bull;
+										<h3 id=loginmsg></h3> <table><tr><td id="loginmsg" ></td></tr></table>
 									</label>
-								</div>
+								</div> -->
 							</form>
+							<hr />
+							<h4>
+								<a href="#" data-toggle="modal" id="pwdSearch" style="color:white">암호를 잊어버리셨나요?</a>
+							</h4>
+							<h5 id="loginmsg">	</h5>
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
@@ -446,7 +513,8 @@
 							<!--<a href="#" class="btn-google-plus fullwidth radius3"><i class="fa fa-google-plus"></i> Connect With Google</a>-->
 
 							<p class="bottom-create-account">
-								<a href="memberRegister.do"><font color="#86E57F">회원 가입</font></a>
+								<a href="memberRegister.do"><font color="#86E57F">회원
+										가입</font></a>
 							</p>
 						</div>
 					</div>
@@ -499,18 +567,16 @@
 
 									<form action="restaurantSearch.do" method="get">
 										<input type="text" class="input_text" id="searchBox"
-											style="color: lightgray" name="keyword" value="검색어로 검색: 혼밥/맛집/속초/데이트" />
-										<input type="hidden" id="pageNum" name="pageNum" value="1" />
+											style="color: lightgray" name="keyword"
+											value="검색어로 검색: 혼밥/맛집/속초/데이트" /> <input type="hidden"
+											id="pageNum" name="pageNum" value="1" />
 										<!-- view more button -->
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
 									</form> <span class="clearfix"></span> <!-- /view more button -->
-
 								</span>
-
-
-
 							</div>
+							
 						</div>
 						<div class="subbox">
 							<button class="popSearButton">인기 검색어</button>
@@ -568,23 +634,29 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="${article.representPhoto}" width="409" height="271" />
+											src="${article.representPhoto}" height="271" width="409" />
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
-										<h4>${article.addr}</h4>
-										<h5>${article.phonenumber}</h5>
-										<small>평점 ${article.averageScore}</small>
-										<p>
-											<!-- 한줄 설명 -->
-										</p>
+										<h4>${article.phonenumber}</h4>
+										<h5>${article.addr}</h5>
+										<h2 style="color: #F07057;">평점 ${article.averageScore}</h2>
 
-										<p>
-											<span class="fsize12 pull-right"> <i class="bed-ico"
-												title="beds"></i> 3 , <i class="garage-ico" title="garage"></i>
-												1 , <i class="furnished-ico" title="furnished"></i>
-											</span> <i class="home-ico"></i> 300m<sup>2</sup>
-										</p>
+										<c:choose>
+											<c:when test="${article.averagePrice <= 7000}">
+												<h4 title="~7000원">$</h4>
+											</c:when>
+											<c:when test="${article.averagePrice <= 15000}">
+												<h4 title="7000~15000원">$$</h4>
+											</c:when>
+											<c:when test="${article.averagePrice <= 30000}">
+												<h4 title="15000~30000원">$$$</h4>
+											</c:when>
+											<c:otherwise>
+												<h4 title="30000원 이상">$$$$</h4>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 								</div>
 								<!-- /item -->
@@ -798,16 +870,162 @@
 						<i class="lightgray fa fa-globe hidden-xs"></i>
 						<h4>식당 등록</h4>
 						<p>식당이 보이지 않다구요? 간편하게 지금 등록하세요.</p>
-						<a href="shoplist.do" class="btn btn-primary btn-xs">식당 등록하기</a>
+						<button type="button" class="btn btn-primary btn-xs"
+							data-toggle="modal" data-target="#myModal">식당 등록하기</button>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Modal Header</h4>
+									</div>
+									<div class="modal-body">
+										<!-- <article class="container">
+
+											<div class="col-md-6 col-md-offset-3"> -->
+										<form name="restaurantRegi" class="white-row"
+											enctype="multipart/form-data" method="post"
+											action="restaurantRegi.do">
+											<div class="page-header">
+												<h1>
+													식당 등록 <small>Restaurant Registration</small>
+												</h1>
+											</div>
+											<!-- <div class="form-group">
+												<label for="InputID">식당 ID</label> <input type="text"
+													class="form-control" id="restaurantId" name="restaurantId"
+													placeholder="식당 ">
+											</div> -->
+											<div class="form-group" style="display: none">
+												<label for="InputId">식당 Id</label> <input type="text"
+													class="form-control" id="restaurantId" name="restaurantId"
+													placeholder="식당 Id" value="${restaurantCount+1}">
+											</div>
+
+											<div class="form-group">
+												<label for="InputName">상호명</label> <input type="text"
+													class="form-control" id="restaurantName"
+													name="restaurantName" placeholder="식당 이름">
+											</div>
+											<div class="form-group">
+												<label for="tel">전화번호</label> <input type="tel"
+													class="form-control" id="phoneNumber" name="phoneNumber"
+													placeholder="전화번호">
+											</div>
+											<div class="form-group">
+												<label for="keyword">키워드</label> <input type="text"
+													class="form-control" id="keyword" name="keyword"
+													placeholder="식당 키워드">
+											</div>
+											<div class="form-group">
+												<label for="addr">주소</label> <input type="text"
+													class="form-control" id="addr" name="addr"
+													placeholder="식당 주소">
+											</div>
+											<div class="form-group">
+												<label for="avgPrice">가격대</label> <input type="text"
+													class="form-control" id="averagePrice" name="averagePrice"
+													placeholder="평균 음식 가격">
+											</div>
+
+											<div class="form-group" style="display: none">
+												<label for="avgScore">평점</label> <input type="text"
+													class="form-control" id="averageScore" name="averageScore"
+													placeholder="평점은 0부터 시작합니다." value="0" readonly>
+											</div>
+
+											<div class="form-group">
+												<label for="filterInfo">필터 정보</label> <input type="text"
+													class="form-control" id="filterInfo" name="filterInfo"
+													placeholder="예약:가능,주차:가능">
+											</div>
+
+											<div class="filebox">
+												<label for="mainPhoto">대표 사진</label>
+												<div class="filebox">
+
+													<input type="file" id="ex_filename" name="upload"
+														class="upload-hidden">
+												</div>
+											</div>
+
+
+
+											<hr>
+											<div class="page-header">
+												<h1>
+													추가 정보 <small>Extra Information</small>
+												</h1>
+											</div>
+
+											<div class="form-group">
+												<label for="shortDesc">한 줄 설명</label> <input type="text"
+													class="form-control" id="shortDesc" name="shortDesc"
+													placeholder="식당을 맛있게 한줄로 표현해 주세요">
+											</div>
+											<div class="form-group">
+												<label for="openDate">개업일</label> <input type="text"
+													class="form-control" id="operStartDate"
+													name="operStartDate" placeholder="예: 20170402">
+											</div>
+											<div class="form-group">
+												<label for="inputMenu">대표 메뉴</label> <input type="text"
+													class="form-control" id="representMenu"
+													name="representMenu" placeholder="대표 음식">
+											</div>
+											<div class="form-group">
+												<label for="inputName">대표자</label> <input type="text"
+													class="form-control" id="representative"
+													name="representative" placeholder="대표 이름">
+											</div>
+											<div class="form-group">
+												<label for="inputHomepage">홈페이지</label> <input type="text"
+													class="form-control" id="homepage" name="homepage"
+													placeholder="홈페이지 주소">
+											</div>
+											<div class="form-group">
+												<label for="openHour">영업 시간</label> <input type="text"
+													class="form-control" id="operHour" name="operHour"
+													placeholder="영업 시간">
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-12 text-center">
+													<button id="registerRestaurant" class="btn btn-default"
+														type="submit">
+														등록하기<i class="fa fa-check spaceLeft"></i>
+													</button>
+													<button class="btn btn-default" data-dismiss="modal">
+														등록취소<i class="fa fa-times spaceLeft"></i>
+													</button>
+												</div>
+												<br>
+											</div>
+										</form>
+										<!-- </div>
+
+										</article> -->
+									</div>
+									<!-- <div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div> -->
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="featured-box noradius line-left">
 						<i class="lightgray fa fa-road hidden-xs"></i>
-						<h4>FAQ</h4>
-						<p>질문은 언제나 환영입니다! FAQ 게시판과 이메일, 전화로 연락주세요.</p>
-						<a href="page-right-sidebar.html" class="btn btn-primary btn-xs">질문하기</a>
+						<h4>자유 게시판</h4>
+						<p>질문이나 공지사항을 게시판에서 확인하세요!</p>
+						<a href="list.do" class="btn btn-primary btn-xs">질문하기</a>
 					</div>
 				</div>
 

@@ -9,4 +9,5 @@ public interface ReviewPhotoDao {
 	public List<ReviewPhotoDto> selectReviewPhotoByReviewIdDetView(Map<String, Object> shopReviewDto);
 	public int getNewReviewPhotoDetView();
 	public void insertReviewPhotoDetView(ReviewPhotoDto reviewPhotoDto);
+	public void deleteReviewPhotoDetView(int reviewId);
 }

@@ -35,6 +35,10 @@
 	<bean class="restaurant.controller.MemberListController" />
 	<bean class="restaurant.controller.MemberDeleteController" />
 	
+		<!-- 식당 등록 -->
+	<bean class="restaurant.controller.RestaurantRegiController"/>
+	<bean class="restaurant.dao.RestaurantRegiDaoImpl" />
+	
 	<!-- 상세페이지 -->
 	<bean class="restaurant.dao.RestaurantDaoImpl" />
 	<bean class="restaurant.dao.ShopDetInfoDaoImpl" />

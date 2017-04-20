@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +35,7 @@ import restaurant.dto.ShopPhotoDto;
 import restaurant.dto.ShopReviewCommand;
 import restaurant.util.DuplicateFile;
 import restaurant.util.FileUtil2;
+import restaurant.util.StringUtil;
 import restaurant.validator.ShopReviewValidator;
 
 @Controller
@@ -77,6 +75,8 @@ public class RestaurantDetViewController {
 			log.debug("moreCount = " + moreCount);
 			log.debug("filterName = " + filterName);
 		}
+		
+		restaurantDao.increaseViewCountRestaurantDetView(restaurantId);
 		
 		Integer totReviewCnt = shopReviewDao.getTotalShopReviewDetView(restaurantId);
 		
@@ -127,7 +127,6 @@ public class RestaurantDetViewController {
 
 		if (restaurantDto.getKeyword() != null) {
 			str = restaurantDto.getKeyword().split("\\|");
-//			str = restaurantDto.getKeyword().split(" ");
 
 			for (int i=0; i<str.length; i++) {
 				keyword.add(str[i]);
@@ -135,17 +134,13 @@ public class RestaurantDetViewController {
 		}
 		
 		// 번지명 주소, 도로명 주소
-		int indexOfDoroAddr = 0;
-		String addr = null;
-		String doroAddr = null;
+		String[] addr = null;
 		
 		if (restaurantDto != null) {
-			indexOfDoroAddr = restaurantDto.getAddr().lastIndexOf(", ");
-			addr = restaurantDto.getAddr().substring(0, indexOfDoroAddr);
-			doroAddr = restaurantDto.getAddr().substring(indexOfDoroAddr + 2);
+			addr = restaurantDto.getAddr().split(",");
 		}
 		
-		restaurantDto.setAddr(addr + " (" + doroAddr + ")");
+		restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -172,12 +167,12 @@ public class RestaurantDetViewController {
 	}
 	
 	@RequestMapping(value="/reviewWrite.do", method=RequestMethod.POST)
-	public String reviewSubmit(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, 
+	public String reviewWrite(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, 
 								@RequestParam(value="restaurantId") int restaurantId, 
 								@RequestParam(value="moreCount") int moreCount, 
 								@RequestParam(value="filterName") String filterName,
 								BindingResult result) {
-		System.out.println("RestaurantDetViewController>>reviewSubmit() is called!!");
+		System.out.println("RestaurantDetViewController>>reviewWrite() is called!!");
 		
 		int count = 0;
 		
@@ -225,15 +220,16 @@ public class RestaurantDetViewController {
 				
 				
 				if (!uploadImg.isEmpty()) {
+					reviewPhotoDto = new ReviewPhotoDto();
+					
 					System.out.println("RestaurantDetViewController>>reviewSubmit()>>uploadImg = " + uploadImg.getOriginalFilename());
 					
 					File serverFile = DuplicateFile.getFile(FileUtil2.UPLOAD_PATH, uploadImg);
-					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")+1));
 					
-					reviewPhotoDto = new ReviewPhotoDto();
 					
 					reviewPhotoDto.setPhotoId(newPhotoId++);
-					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					reviewPhotoDto.setPhotoPath(serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
 					reviewPhotoDto.setReviewId(newReivewId);
 					
 					reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
@@ -263,6 +259,126 @@ public class RestaurantDetViewController {
 			e.printStackTrace();
 		}
 		
+		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
+	}
+	
+	@RequestMapping(value="/reviewUpdate.do", method=RequestMethod.POST)
+	public String reviewUpdate(@ModelAttribute("reviewCommand") ShopReviewCommand reviewCommand, 
+								@RequestParam(value="restaurantId") int restaurantId, 
+								@RequestParam(value="moreCount") int moreCount, 
+								@RequestParam(value="filterName") String filterName,
+								BindingResult result) {
+		System.out.println("RestaurantDetViewController>>reviewUpdate() is called!!");
+		
+		int count = 0;
+		
+		if (log.isDebugEnabled()) {
+			log.debug("reviewCommand = " + reviewCommand);
+			log.debug("reviewCommand.getReviewId() = " + reviewCommand.getReviewId());
+			log.debug("reviewCommand.getTitle() = " + reviewCommand.getTitle());
+			log.debug("reviewCommand.getWriteDate() = " + reviewCommand.getWriteDate());
+			log.debug("reviewCommand.getContent() = " + reviewCommand.getContent());
+			log.debug("reviewCommand.getRecommendCnt() = " + reviewCommand.getRecommendCnt());
+			log.debug("reviewCommand.getVisitTime() = " + reviewCommand.getVisitTime());
+			log.debug("reviewCommand.getDinnerOrLunch() = " + reviewCommand.getDinnerOrLunch());
+			log.debug("reviewCommand.getMemberId() = " + reviewCommand.getMemberId());
+			log.debug("reviewCommand.getRestaurantId() = " + reviewCommand.getRestaurantId());
+			log.debug("reviewCommand.getUpload() = " + reviewCommand.getUpload());
+			log.debug("moreCount = " + moreCount);
+		}
+		
+		new ShopReviewValidator().validate(reviewCommand, result);
+		
+		if (result.hasErrors()) {
+			System.out.println("result = " + result.getAllErrors());
+			System.out.println("RestaurantDetViewController>>reviewUpdate()>>Errors are occued!!");
+			return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
+		}
+		
+		try {
+			reviewPhotoDao.deleteReviewPhotoDetView(reviewCommand.getReviewId());
+			
+			int newPhotoId = reviewPhotoDao.getNewReviewPhotoDetView() + 1;
+			ReviewPhotoDto reviewPhotoDto = null;
+			
+			System.out.println("reviewCommand.reviewId = " + reviewCommand.getReviewId());
+			System.out.println("reviewCommand.title = " + reviewCommand.getTitle());
+			System.out.println("reviewCommand.content = " + reviewCommand.getContent());
+			System.out.println("reviewCommand.visitTime = " + reviewCommand.getVisitTime());
+			System.out.println("reviewCommand.dinnerOrLunch = " + reviewCommand.getDinnerOrLunch());
+			System.out.println("reviewCommand.restaurantId = " + reviewCommand.getRestaurantId());
+			System.out.println("reviewCommand.memberId = " + reviewCommand.getMemberId());
+			System.out.println("reviewCommand.upload = " + reviewCommand.getUpload());
+			shopReviewDao.updateShopReviewDetView(reviewCommand);
+			
+			for (MultipartFile uploadImg : reviewCommand.getUpload()) {
+				
+				if (!uploadImg.isEmpty()) {
+					System.out.println("RestaurantDetViewController>>reviewSubmit()>>uploadImg = " + uploadImg.getOriginalFilename());
+					
+					File serverFile = DuplicateFile.getFile(FileUtil2.UPLOAD_PATH, uploadImg);
+					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
+					
+					reviewPhotoDto = new ReviewPhotoDto();
+					
+					reviewPhotoDto.setPhotoId(newPhotoId++);
+					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
+					reviewPhotoDto.setReviewId(reviewCommand.getReviewId());
+					
+					reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
+					
+					uploadImg.transferTo(serverFile);
+					
+					count++;
+				} else {
+					if (count == 0) {
+
+						reviewPhotoDto = new ReviewPhotoDto();
+						reviewPhotoDto.setPhotoId(newPhotoId++);
+						reviewPhotoDto.setPhotoPath("design/images/noimg.png");
+						reviewPhotoDto.setReviewId(reviewCommand.getReviewId());
+						
+						reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
+					} else {
+						continue;
+					}
+				}
+				
+			}
+				
+		} catch(IOException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
+	}
+	
+	@RequestMapping(value="/reviewDelete.do", method=RequestMethod.GET)
+	public String reviewDelete(@RequestParam(value="restaurantId") int restaurantId, 
+								@RequestParam(value="current") int reviewId, 
+								@RequestParam(value="moreCount") int moreCount, 
+								@RequestParam(value="filterName") String filterName,
+								HttpSession session) {
+		System.out.println("RestaurantDetViewController>>reviewDelete() is called!!");
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (log.isDebugEnabled()) {
+			log.debug("restaurantId = " + restaurantId);
+			log.debug("reviewId = " + reviewId);
+			log.debug("reviewId = " + moreCount);
+			log.debug("reviewId = " + filterName);
+		}
+		
+		map.put("restaurantId", restaurantId);
+		map.put("reviewId", reviewId);
+		
+		reviewPhotoDao.deleteReviewPhotoDetView(reviewId);
+		shopReviewDao.deleteShopReviewDetView(map);
+				
 		return "redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount + "&filterName=" + filterName;
 	}
 	
@@ -314,7 +430,7 @@ public class RestaurantDetViewController {
 						list.add(reviewPhotoByReviewIdDto.get(j));
 					}
 				}
-				
+				shopReviewDto.get(i).setContent(StringUtil.parseBr(shopReviewDto.get(i).getContent()));
 				shopReviewDto.get(i).setReviewPhotoDtoList(list);
 			}
 		}
@@ -422,6 +538,61 @@ public class RestaurantDetViewController {
 		}
 		
 		return status;
+	}
+	
+	@RequestMapping(value="/styleModify.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> styleModify(@RequestParam(value="restaurantId") int restaurantId, HttpSession session) {
+		System.out.println("RestaurantDetViewController>>styleModify() is called!!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> mapObject = new HashMap<String, Object>();
+		
+		MemSimInfoDto memSimInfoDto = (MemSimInfoDto) session.getAttribute("userLoginInfo");
+		String memberId = null;
+		
+		String checkLikeList = null;
+		
+		int likeCount = likeListDao.getTotListCountByRestaurantId(restaurantId);
+		
+		mapObject.put("likeCount", likeCount);
+		
+		if (memSimInfoDto != null) {
+			memberId = memSimInfoDto.getMemberId();
+		} else {
+			mapObject.put("checkLikeList", "nonexist");
+			
+			return mapObject;
+		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug("memberId = " + memberId);
+			log.debug("restaurantId = " + restaurantId);
+		}
+		
+		
+		LikeListDto likeListDtoList = new LikeListDto();
+		
+		checkLikeList = "exist";
+		
+		map.put("restaurantId", restaurantId);
+		map.put("memberId", memberId);
+		
+		likeListDtoList = likeListDao.selectLikeList(map);
+		
+		if (likeListDtoList != null) {
+			if (likeListDtoList.getRestaurantId() == restaurantId) {
+				checkLikeList = "exist";
+			} else{
+				checkLikeList = "nonexist";
+			}
+		} else {
+			checkLikeList = "nonexist";
+		}
+		
+		mapObject.put("checkLikeList", checkLikeList);
+		
+		return mapObject;
 	}
 	
 	@RequestMapping(value="/addLikeList.do", method=RequestMethod.POST)

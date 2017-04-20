@@ -46,29 +46,20 @@
 
 <!-- <div class="row">
 	<div class="col-lg-12">
-		
 		<div class="col-md-2">
 			<span />
 		</div>
-		
 		<div class="col-md-8">
 			<h2>
 				<strong>게시판</strong> <small class="font300">게시판</small>
 			</h2>
 		</div>
-		
 		<div class="col-md-2">
 			<span />
 		</div>
-		
-		
-		
-	
-		
 		<div class="col-md-4">
 			<span />
 		</div> -->
-
 
 <!-- <form action="list.do" name="search" method="get"
 			onsubmit="return searchCheck()">
@@ -122,8 +113,10 @@
 		<table border="1px" class="table table-striped table-advance table-hover">
 			<thead>
 				<tr style="background-color:#1DDB16">
+				<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 					<th width="5" style="text-align: center;"><input type="checkbox" name="checkAll" id="th_checkAll"
 						onclick="checkAll();" /></th>
+				</c:if>
 					<!-- <th>번호</th> -->
 					<th width="250" style="text-align: center; ">제목</th>
 					<th width="50" style="text-align: center; ">작성자</th>
@@ -134,7 +127,7 @@
 			<c:if test="${count==0}">
 				<tbody>
 					<tr>
-						<td align="center">등록된 게시물이 없습니다.</td>
+						<td align="center" colspan="5">등록된 게시물이 없습니다.</td>
 					</tr>
 				</tbody>
 			</c:if>
@@ -142,8 +135,10 @@
 			<c:forEach var="article" items="${list}">
 				<tbody>
 					<tr>
+						<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 						<td width="5" style="text-align: center;" class="center"><input type="checkbox" name="checkRow"
 							value="${article.boardNum}" /></td>
+						</c:if>
 						<%-- <td>${article.boardNum}</td> --%>
 						<td width="250" style="text-align: center;"><a href="detail.do?boardNum=${article.boardNum }">${article.title}</a>
 							<c:if test="${article.hit >=20}">
@@ -183,7 +178,9 @@
 			<div class="col-md-5">
 				<input type="submit" value="찾기" class="btn btn-default">
 				<input type="button" class="btn btn-primary" value="글쓰기" onclick="location.href='write.do'">
+				<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 				<input type="button" class="btn btn-primary" value="글삭제"	onclick="deleteAction()">
+				</c:if>
 			</div>
 		</div>
 	</form>

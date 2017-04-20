@@ -12,10 +12,30 @@ var urlParam = function(name){
 }
 
 $(document).ready(function() {
-
+	
 	var moreCount = urlParam("moreCount");
 	var restaurantId = urlParam("restaurantId");
 	var filterName = urlParam("filterName");
+	
+	var styleModify = function() {
+
+		$.ajax({
+			url : "styleModify.do", 
+			method : "POST", 
+			data : {restaurantId:restaurantId}, 
+			success : function(args) {
+				if (args.checkLikeList == "nonexist") {
+					$("#likeImage").attr("class", "featured-icon half empty fa fa-heart-o");
+					$("#likeImageButton").attr("data-target", "#likeListNonExist");
+				} else {
+					$("#likeImage").attr("class", "featured-icon half fa fa-heart-o");
+					$("#likeImageButton").attr("data-target", "#likeListExist");
+				}
+				
+				$("#likeCount").html(args.likeCount);
+			}
+		});
+	};
 	
 	var moreReview = function() {
 		var start = moreCount*3 + 1;
@@ -107,6 +127,8 @@ $(document).ready(function() {
 						});
 	}
 	
+	styleModify();
+	
 	get_restaurant_by_id(restaurantId);
 	
 	moreReview();
@@ -150,9 +172,12 @@ $(document).ready(function() {
 		});
 	});
 	
-	$("#moreReviewPhotoFile").on("click", function(e) {
+	$("#addReviewPhotoFile").on("click", function(e) {
+		alert("addReviewPhotoFile");
+		
 		var content = "";
 		var number = $("#reviewPhotoFileGroup input").length + 1;
+		
 		
 		content = "<input type='file' " +
 				"class='form-control' " +
@@ -161,6 +186,17 @@ $(document).ready(function() {
 				"id='reviewPhotoFile" + number + "'>";
 		
 		$(content).appendTo("#reviewPhotoFileGroup");
+		
+		return false;
+	});
+	
+	$("#deleteReviewPhotoFile").on("click", function(e) {
+		var number = $("#reviewPhotoFileGroup input").length;
+		var imgFileId = "reviewPhotoFile" + number;
+		
+		alert("deleteReviewPhotoFile");
+		
+		$("#" + imgFileId).remove();
 		
 		return false;
 	});
@@ -174,8 +210,6 @@ $(document).ready(function() {
 		} else {
 			status = "increase"
 		}
-		
-//		(this).setAttribute("class", "btn btn-success");
 		
 		$.ajax({
 			url : "recommend.do",
@@ -215,22 +249,31 @@ $(document).ready(function() {
 		});
 	});
 	
-	
 	$(document).on("click", "#more", function(e) {
 		moreReview();
 	});
+	
+	$(document).on("submit", "#reviewWriteForm", function(e) {
+		
+		alert("reviewWriteForm")
+		
+		if (this.title.value == "") {
+			alert("title");
+			$("#reviewTitleMsg").html("<font style='color:red'> 제목을 입력해주세요 </font>");
+		}
+		
+		if (this.content.value == "") {
+			alert("content");
+			$("#reviewContentMsg").html("<font style='color:red'> 본문을 입력해주세요 </font>");
+		}
+		
+		if (this.title.value != "" && this.content.value != "") {
+			return true;
+		}
+		
+		return false;
+	});
+	
+	
 })
 
-
-
-function addLikeSessionExists(sessionId) {
-	alert("addLikeSessionExists = " + sessionId)
-	
-	
-}
-
-function addLikeSessionNotExists() {
-	alert("addLikeSessionNotExists")
-	$("#login").attr('class', 'pull-right nav signin-dd open');
-	$("#quick_sign_in").attr('aria-expanded', true);
-}

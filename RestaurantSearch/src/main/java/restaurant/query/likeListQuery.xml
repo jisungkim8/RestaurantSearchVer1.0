@@ -10,6 +10,11 @@
 		WHERE memberId=#{memberId} AND restaurantId=#{restaurantId}
 	</select>
 	
+	<select id="getTotListCountByRestaurantId" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM LIKELIST
+		WHERE restaurantId=#{restaurantId}
+	</select>
+	
 	<select id="getNewListNum" resultType="int">
 		SELECT MAX(listNum) FROM LIKELIST
 	</select>

@@ -35,6 +35,11 @@
 		INSERT INTO REVIEWPHOTO(photoId, photoPath, reviewId)
 		VALUES(#{photoId}, #{photoPath}, #{reviewId})
 	</insert>
+	
+	<insert id="deleteReviewPhotoDetView" parameterType="int">
+		DELETE FROM REVIEWPHOTO
+		WHERE reviewId=#{reviewId}
+	</insert>
 </mapper>
 
 
