@@ -110,9 +110,9 @@
 	<div class="col-md-1"></div>
 
 	<div class="col-md-10">
-		<table border="1px" class="table table-striped table-advance table-hover">
+		<table  class="table table-striped table-advance table-hover">
 			<thead>
-				<tr style="background-color:#1DDB16">
+				<tr>
 				<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 					<th width="5" style="text-align: center;"><input type="checkbox" name="checkAll" id="th_checkAll"
 						onclick="checkAll();" /></th>

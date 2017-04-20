@@ -6,7 +6,7 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>맛집검색 - 헤헤</title>
+<title>맛집검색</title>
 
 <!-- mobile settings -->
 <meta name="viewport"
@@ -110,8 +110,7 @@
 											'thick solid brown');
 								})
 
-						$("#login")
-								.click(
+						$("#login").click(
 										function() {
 											var registerCheck, passwd;
 
@@ -145,8 +144,7 @@
 												return;
 											}
 
-											$
-													.ajax({
+											$.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {

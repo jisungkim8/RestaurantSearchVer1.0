@@ -219,9 +219,9 @@
 			
 			<c:choose>
 				<c:when test="${not empty sessionScope.userLoginInfo}">
-					<div  class="navbar-collapse nav-main-collapse collapse pull-left">
+				<!-- 	<div  class="navbar-collapse nav-main-collapse collapse pull-left">
 							<a id="quick_board" href="list.do"	><span class="btn btn-warning">게시판</span></a>	
-					</div>
+					</div> -->
 					<div class="pull-right nav signin-dd">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <span>로그인 성공! 이메일 :<c:out value="${sessionScope.userLoginInfo.memberId}" />
@@ -234,7 +234,7 @@
 								<!-- <li class="eborder-top">
                                 <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
                             </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
+								<li class="eborder-top"><a href="memBoardLogout.do"><i
 										class="icon_profile"></i> 로그아웃</a></li>
 								<li class="eborder-top"><a href="#" id="memLeave"><i
 										class="icon_profile"></i> 회원탈퇴</a></li>
