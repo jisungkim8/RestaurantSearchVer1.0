@@ -45,4 +45,16 @@ public class RestaurantSearchDaoImpl extends SqlSessionDaoSupport implements Res
 		
 		return getSqlSession().selectOne("selectRestaurantSearchById", restaurantId);
 	}
+
+	public int selectRestaurantSearchTotalCountBySearchOptionHashMapForLikeList(
+			HashMap<String, Object> searchOptionHashMap) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("selectRestaurantSearchTotalCountBySearchOptionHashMapForLikeList", searchOptionHashMap);
+	}
+
+	public List<RestaurantDto> selectRestaurantSearchBySearchOptionHashMapForLikeList(
+			HashMap<String, Object> searchOptionHashMap) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("selectRestaurantSearchBySearchOptionHashMapForLikeList", searchOptionHashMap);
+	}
 }

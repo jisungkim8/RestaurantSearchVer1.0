@@ -212,6 +212,90 @@ public class PagingUtil {
 		}
 	}
 	
+	public void setPagingUtilForLikeList(String keyField, String memberId, int pageNum, int totalCount, int pageSize,
+			int blockSize,String pageUrl, String addKey) {
+		
+		if(addKey == null) addKey = ""; //부가키가 null 일때 ""처리
+		
+		// 전체 페이지 수
+		int totalPageNum = (int) Math.ceil((double) totalCount / pageSize);
+		if (totalPageNum == 0) {
+			totalPageNum = 1;
+		}
+		// 현재 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
+		if (pageNum > totalPageNum) {
+			pageNum = totalPageNum;
+		}
+		
+		int totalBlockNum = (int) Math.ceil((double) totalPageNum / blockSize);
+		int currentBlockNum = (int) Math.ceil((double) pageNum / blockSize);
+		
+		// 현재 페이지의 처음과 마지막 글의 번호 가져오기.
+		this.startCount = (pageNum - 1) * pageSize + 1;
+		this.endCount = pageNum * pageSize;
+		// 시작 페이지와 마지막 페이지 값 구하기.
+		//int startPage = (int) ((pageNum - 1) / blockSize) * blockSize + 1;
+		
+		int startPage = (currentBlockNum - 1) * blockSize + 1;
+		if (startPage < 1) {
+			startPage = 1;
+		}
+		int endPage = startPage + blockSize - 1;
+		// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
+		if (endPage > totalPageNum) {
+			endPage = totalPageNum;
+		}
+		
+		System.out.println("startPage = " + startPage);
+		System.out.println("endPage = " + endPage);
+		System.out.println(memberId);
+		
+		// 이전 block 페이지
+		this.pagingHtml = new StringBuffer();
+		if (currentBlockNum > 1) {
+			int targetBlockNum = currentBlockNum - 1;
+			
+			this.pagingHtml.append("<a href=javascript:get_restaurant_data_by_member_id_and_filter_info('" + memberId + "'," + 1*(targetBlockNum * blockSize) +");" + addKey +">");
+			System.out.println(this.pagingHtml);
+			
+			this.pagingHtml.append("이전");
+			this.pagingHtml.append("</a>");
+		}
+		this.pagingHtml.append("&nbsp;|&nbsp;");
+		//페이지 번호.현재 페이지는 빨간색으로 강조하고 링크를 제거.
+		
+		System.out.println("pagingUtil >> pageNum = " + pageNum);
+		
+		for (int i = startPage; i <= endPage; i++) {
+			if (i > totalPageNum) {
+				break;
+			}
+			
+			System.out.println("pagingUtil >> i = " + i);
+			
+			if (i == pageNum) {
+				this.pagingHtml.append("&nbsp;<b> <font color='red'>");
+				this.pagingHtml.append(i);
+				this.pagingHtml.append("</font></b>");
+			} else {
+				this.pagingHtml.append("&nbsp;<a href=javascript:get_restaurant_data_by_member_id_and_filter_info('" + memberId + "'," + i +");");
+				this.pagingHtml.append(addKey+">");
+				this.pagingHtml.append(i);
+				this.pagingHtml.append("</a>");
+			}
+			this.pagingHtml.append("&nbsp;");
+		}
+		
+		this.pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
+		// 다음 block 페이지
+		if (currentBlockNum < totalBlockNum) {
+			int targetBlockNum = currentBlockNum + 1;
+			this.pagingHtml.append("<a href=javascript:get_restaurant_data_by_member_id_and_filter_info('" + memberId+ "'," + 1*(targetBlockNum * blockSize - (blockSize - 1)) +");" + addKey + ">");
+			this.pagingHtml.append("다음");
+			this.pagingHtml.append("</a>");
+		}
+	}
+	
 	public StringBuffer getPagingHtml() {
 		return pagingHtml;
 	}

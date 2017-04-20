@@ -162,10 +162,8 @@
 
 </section>
 <div style="margin-left: 200px;">
-	<form action="list.do" name="search" method="get"
-		onsubmit="return searchCheck()">
-		<div class="row"
-			sytle="border:1px blue solid;margin:0 auto;width:750px;height:100px; text-align:left;">
+	<form action="list.do" name="search" method="get" onsubmit="return searchCheck()">
+		<div class="row" sytle="border:1px blue solid;margin:0 auto;width:750px;height:100px; text-align:left;">
 			<div class="col-md-3">
 				<select name="keyField" class="form-control">
 					<option value="title">제목</option>
@@ -197,7 +195,7 @@
 
 
 <tr>
-	<td align="center">${pagingHtml }</td>
+	<td align="center">${pagingHtml}</td>
 </tr>
 
 <%-- <table width="100%" border="0" cellspacing="0" cellpadding="2">

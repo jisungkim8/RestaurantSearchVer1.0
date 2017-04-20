@@ -58,6 +58,5 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao {
 	public void delete(Integer boardNum) {
 		// TODO Auto-generated method stub
 		getSqlSession().delete("deleteBoard", boardNum);
-
 	}
 }

@@ -126,7 +126,14 @@ public class MemLoginController {
 		if (log.isDebugEnabled()) {
 			log.debug("memSimInfoDto=" + memSimInfoDto); // toString()
 		}
-
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		System.out.println("memberLogin.do >>>>>");
+		
 		System.out.println("__memberLogin__method=RequestMethod.POST");
 		System.out.println("memSimInfoDto=" + memSimInfoDto);
 		System.out.println("restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
@@ -136,7 +143,7 @@ public class MemLoginController {
 		memDetInfo.setMemberId(memSimInfoDto.getMemberId());
 		memDetInfo = memberDao.selectMemDetInfo(memDetInfo);
 		System.out.println("loginCheck_after_memSimInfoDto=>" + memSimInfo);
-
+		
 		if (memSimInfo == null) {
 			registerCheck = "unregister";
 		} else {
@@ -144,10 +151,9 @@ public class MemLoginController {
 			session.setAttribute("userLoginInfo", memSimInfo);
 			session.setAttribute("userLoginDetInfo", memDetInfo);
 		}
-
 		List<MainRestaurantListDto> list = mainRestaurantListDao.selectMainRestaurantList();
 		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
-
+		
 		if (pageName.equals("restMainView")) {
 			System.out.println("=====restMainView.jsp====");
 			mav.setViewName("restaurantMainView");
@@ -168,9 +174,53 @@ public class MemLoginController {
 			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
 			// filterName);
 		} else if(pageName.equals("boardView")) {
+			// filterName);
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "memberLoginForList.do", method = RequestMethod.POST)
+	public ModelAndView memberLoginForList(@ModelAttribute("memSimInfoDto") MemSimInfoDto memSimInfoDto,
+			@RequestParam("keyword") String keyword, @RequestParam("pageNum") int pageNum,
+			@RequestParam("pageName") String pageName, HttpSession session) {
+		String registerCheck;
+		MemSimInfoDto memSimInfo = new MemSimInfoDto();
+		MemDetInfoDto memDetInfo = new MemDetInfoDto();
+		ModelAndView mav = new ModelAndView();
+
+		if (log.isDebugEnabled()) {
+			log.debug("memSimInfoDto=" + memSimInfoDto); // toString()
+		}
+		System.out.println("memberLoginForList >>>>>");
+		System.out.println("memSimInfoDto=" + memSimInfoDto);
+
+		memSimInfo = memberDao.loginCheck(memSimInfoDto);
+		memDetInfo.setMemberId(memSimInfoDto.getMemberId());
+		memDetInfo = memberDao.selectMemDetInfo(memDetInfo);
+		System.out.println("loginCheck_after_memSimInfoDto=>" + memSimInfo);
+		
+		if (memSimInfo == null) {
+			registerCheck = "unregister";
+		} else {
+			registerCheck = "register";
+			session.setAttribute("userLoginInfo", memSimInfo);
+			session.setAttribute("userLoginDetInfo", memDetInfo);
+		}
+		
+		if (pageName.equals("restListView")) {
+			System.out.println("=====restListView.jsp====");
+			mav.setViewName("redirect:restaurantSearch.do?keyword=" + keyword + "&pageNum=" + pageNum);
+		}
+		
+		 /* }else if(pageName.equals("boardView")) {
+>>>>>>> refs/heads/SJY
 			System.out.println("=====boardList.jsp====");
+<<<<<<< HEAD
 			mav.setViewName("redirect:list.do?pageNum=1&moreCount=0&keyWord=0");
 		}
+=======
+			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+		}*/
 		return mav;
 	}
 
@@ -291,5 +341,16 @@ public class MemLoginController {
 		mav.addObject("newlist", newlist);
 		return mav;
 	}
+	
+	@RequestMapping("restListmemberLogout.do")
+	public ModelAndView restListmemberLogout(@RequestParam("keyword") String keyword,
+			@RequestParam("pageNum") int pageNum, HttpSession session) {
+		System.out.println("memberLogout_로그아웃");
+		session.setAttribute("userLoginInfo", null);
+		ModelAndView mav = new ModelAndView();
 
+		mav.setViewName("redirect:restaurantListView.do?keyword=" 
+				+ keyword + "&pageNum=" + pageNum);
+		return mav;
+	}
 }

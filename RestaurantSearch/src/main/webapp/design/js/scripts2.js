@@ -53,14 +53,14 @@
 
 	    //custom scrollbar
 	        //for html
-	    jQuery("html").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '6', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '', zindex: '1000'});
+	    jQuery("html").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '10', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '', zindex: '1000'});
 	        //for sidebar
 	    //jQuery("#sidebar").niceScroll({styler:"fb",cursorcolor:"#2FA13D", cursorwidth: '4', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
 	        // for scroll panel
 	    
-	    jQuery("#cuisine").niceScroll({styler:"fb",cursorcolor:"#2FA13D", cursorwidth: '4', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
+	    jQuery("#cuisine").niceScroll({styler:"fb",cursorcolor:"#2FA13D", cursorwidth: '8', cursorborderradius: '8px', background: '#F7F7F7', cursorborder: ''});
 	    
-	    jQuery(".scroll-panel").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
+	    jQuery(".scroll-panel").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '6', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
 	    
 	    //sidebar dropdown menu
 	    jQuery('#sidebar .sub-menu > a').click(function () {
