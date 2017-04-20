@@ -176,14 +176,20 @@ $(document).ready(function() {
 //		alert("addReviewPhotoFile");
 		
 		var content = "";
-		var number = $("#reviewPhotoFileGroup input").length + 1;
+		var number = $("#reviewPhotoFileGroup input[type=file]").length + 1;
 		
+//		alert("number = " + number);
 		
-		content = "<input type='file' " +
+		content = "<div class='col-md-1' align='right'>" +
+				"<input type='checkbox' id='chkPhotoFile" + number +"'>" + 
+				"</div>" +
+				"<div class='col-md-11'>" +
+				"<input type='file' " +
 				"class='form-control' " +
 				"style='height:50px;' " +
 				"name='upload' " +
-				"id='reviewPhotoFile" + number + "'>";
+				"id='reviewPhotoFile" + number + "'>" +
+				"</div>";
 		
 		$(content).appendTo("#reviewPhotoFileGroup");
 		
@@ -191,12 +197,18 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteReviewPhotoFile").on("click", function(e) {
-		var number = $("#reviewPhotoFileGroup input").length;
-		var imgFileId = "reviewPhotoFile" + number;
+		var number = $("#reviewPhotoFileGroup input[type=file]").length;
 		
 //		alert("deleteReviewPhotoFile");
 		
-		$("#" + imgFileId).remove();
+		for (var i=1; i<=number; i++) {
+			var imgFileId = "reviewPhotoFile" + i;
+			var chkId = "chkPhotoFile" + i
+			if ($("#" + chkId).is(":checked")) {
+				$("#" + imgFileId).remove();
+				$("#" + chkId).remove();
+			}
+		}
 		
 		return false;
 	});

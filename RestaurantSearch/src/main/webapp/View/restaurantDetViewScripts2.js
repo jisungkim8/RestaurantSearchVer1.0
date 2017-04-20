@@ -12,12 +12,16 @@
 			var content = "";
 			var number = $("#reviewPhotoFileGroupAtModify input").length + 1;
 			
-			
-			content = "<input type='file' " +
+			content = "<div class='col-md-1'>" +
+					"<input type='checkbox' id='chkPhotoFileAtModify" + number +"'>" + 
+					"</div>" +
+					"<div class='col-md-11'>" +
+					"<input type='file' " +
 					"class='form-control' " +
 					"style='height:50px;' " +
 					"name='upload' " +
-					"id='reviewPhotoFileAtModify" + number + "'>";
+					"id='reviewPhotoFileAtModify" + number + "'>" +
+					"</div>";
 			
 			$(content).appendTo("#reviewPhotoFileGroupAtModify");
 			
@@ -25,12 +29,18 @@
 		});
 		
 		$("#deleteReviewPhotoFileAtModify").on("click", function(e) {
-			var number = $("#reviewPhotoFileGroupAtModify input").length;
-			var imgFileId = "reviewPhotoFileAtModify" + number;
+			var number = $("#reviewPhotoFileGroupAtModify input[type=file]").length;
 			
 //			alert("deleteReviewPhotoFileAtModify");
 			
-			$("#" + imgFileId).remove();
+			for (var i=1; i<=number; i++) {
+				var imgFileId = "reviewPhotoFileAtModify" + i;
+				var chkId = "chkPhotoFileAtModify" + i
+				if ($("#" + chkId).is(":checked")) {
+					$("#" + imgFileId).remove();
+					$("#" + chkId).remove();
+				}
+			}
 			
 			return false;
 		});
