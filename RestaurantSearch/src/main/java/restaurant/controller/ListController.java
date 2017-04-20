@@ -57,6 +57,7 @@ public class ListController {
 		map.put("end", page.getEndCount());
 		
 		List<BoardCommandDto> list = null;
+		
 		if(count > 0){
 			System.out.println("여기는 DAO 호출");
 			list = boardDao.list(map);

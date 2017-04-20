@@ -167,8 +167,10 @@ public class MemLoginController {
 			// ModelAndView("redirect:restaurantDetView.do?restaurantId=" +
 			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
 			// filterName);
-		}
-
+		} /*else if(pageName.equals("boardView")) {
+			System.out.println("=====boardList.jsp====");
+			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
+		}*/
 		return mav;
 	}
 
