@@ -121,8 +121,8 @@
 				<span /><input type="text" class="form-control" name="keyWord">
 			</div>
 			<div class="col-md-1">
-				<span /><input type="submit" value="찾기" class="btn btn-default">
-				<input type="button" class="btn btn-primary" value="글삭제"	onclick="deleteAction()">
+				<input type="submit" value="찾기" class="btn btn-default" style="float: left; display:in-line;">
+				<input type="button" class="btn btn-primary" value="회원삭제"	onclick="deleteAction()">
 			</div>
 		</form>
 		<div class="col-md-4">

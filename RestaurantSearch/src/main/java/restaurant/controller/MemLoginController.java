@@ -174,7 +174,6 @@ public class MemLoginController {
 			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
 			// filterName);
 		}
-
 		return mav;
 	}
 	

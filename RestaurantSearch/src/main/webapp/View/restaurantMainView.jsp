@@ -381,6 +381,12 @@
 									</a>
 								</li>
 								
+								 <li class="eborder-top">
+                                	<a href="restaurantSearchByLikeList.do">
+                                		<i class="icon_profile"></i>좋아요리스트
+                                	</a>
+                            	</li> 
+								
 								<li class="eborder-top">
 									<a href="memberLogout.do">
 										<i class="icon_profile"></i> 로그아웃
@@ -457,11 +463,7 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
-<<<<<<< HEAD
-					
-=======
 
->>>>>>> refs/remotes/origin/master
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
 
