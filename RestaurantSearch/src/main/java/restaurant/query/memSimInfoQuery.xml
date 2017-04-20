@@ -14,7 +14,7 @@
 		select * from memSimInfo where memberId=#{memberId} and password=#{password}
 	</select>
 	
-	<delete id="deleteMemSimInfo" parameterType="MemSimInfoDto">
+	<delete id="deleteMemSimInfo" parameterType="String">
  		delete from memSimInfo where memberId=#{memberId}
  	</delete>
  	

@@ -114,6 +114,79 @@
 		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
 	</select>
 	
+	<select id="selectRestaurantSearchTotalCountBySearchOptionHashMapForLikeList" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM 
+			(SELECT * FROM likeList a, memsimInfo b
+				WHERE a.memberId = #{memberId} AND a.memberId = b.memberId ORDER BY a.listNum DESC) C,
+				restaurant D
+		<where>
+			C.restaurantId = D.restaurantId
+			<if test="location != null and location.size() > 0">
+				AND (
+				<foreach collection="location" index="index" item="location">
+					<if test="index > 0"> OR </if>
+					keyword like '%'||#{location}||'%'
+				</foreach>
+				)
+			</if>
+			<if test="food != null and food.size() > 0">
+				AND (
+				<foreach collection="food" index="index" item="food">
+					<if test="index > 0"> OR </if>
+					keyword like '%'||#{food}||'%'
+				</foreach>
+				)
+			</if>
+			<if test="parking != null and parking != '주차:무관' ">
+				AND (filterinfo like '%'||#{parking}||'%')
+			</if>
+			<if test="booking != null and booking != '예약:무관' ">
+				AND (filterinfo like '%'||#{booking}||'%')
+			</if>
+			<if test="minPrice != null and maxPrice != null ">
+				AND (averagePrice <![CDATA[>=]]> #{minPrice} AND averagePrice <![CDATA[<=]]> #{maxPrice})
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="selectRestaurantSearchBySearchOptionHashMapForLikeList" parameterType="hashmap" resultType="RestaurantDto">
+		SELECT D.* FROM
+			(SELECT * FROM  likeList a, memSimInfo b
+				WHERE a.memberId = #{memberId} AND a.memberId = b.memberId ORDER BY a.listNum DESC) C,
+				restaurant D
+			<where>
+			C.restaurantId = D.restaurantId
+			<if test="location != null and location.size() > 0">
+				AND (
+				<foreach collection="location" index="index" item="location">
+					<if test="index > 0"> OR </if>
+					keyword like '%'||#{location}||'%'
+				</foreach>
+				)
+			</if>
+			<if test="food != null and food.size() > 0">
+				AND (
+				<foreach collection="food" index="index" item="food">
+					<if test="index > 0"> OR </if>
+					keyword like '%'||#{food}||'%'
+				</foreach>
+				)
+			</if>
+			<if test="parking != null and parking != '주차:무관' ">
+				AND (filterinfo like '%'||#{parking}||'%')
+			</if>
+			<if test="booking != null and booking != '예약:무관' ">
+				AND (filterinfo like '%'||#{booking}||'%')
+			</if>
+			<if test="minPrice != null and maxPrice != null ">
+				AND (averagePrice <![CDATA[>=]]> #{minPrice} AND averagePrice <![CDATA[<=]]> #{maxPrice})
+			</if>
+			AND ROWNUM <![CDATA[>=]]>#{begin} AND	ROWNUM<![CDATA[ <=]]>#{end}
+		</where>
+		<!-- WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end} -->
+	</select>
+	
 	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum 

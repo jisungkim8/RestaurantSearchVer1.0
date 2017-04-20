@@ -3,6 +3,7 @@ package restaurant.dto;
 import java.util.ArrayList;
 
 public class SearchOptionObject {
+	private String memberId = "";
 	private String keyword = "";
 	private Integer pageNum = 0;
 	
@@ -62,5 +63,11 @@ public class SearchOptionObject {
 	}
 	public void setParking(String parking) {
 		this.parking = parking;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 }
