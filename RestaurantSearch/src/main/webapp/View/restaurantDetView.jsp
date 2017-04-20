@@ -345,7 +345,13 @@
 								</li>
 								
 								<li class="eborder-top">
-									<a href="memberLogout.do">
+									<a href="list.do" id="quick_board">
+										<i class="icon_profile"></i> 게시판
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="restDetmemberLogout.do?restaurantId=${restaurantDto.restaurantId}&moreCount=0&filterName=reviewId">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>
@@ -395,7 +401,13 @@
 								</li>
 								
 								<li class="eborder-top">
-									<a href="memberLogout.do">
+									<a href="list.do" id="quick_board">
+										<i class="icon_profile"></i> 게시판
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="restDetmemberLogout.do?restaurantId=${restaurantDto.restaurantId}&moreCount=0&filterName=reviewId">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>
@@ -541,21 +553,21 @@
 
 									<div id="loginFirst" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-sm">
-											<div class="modal-content">
+											<div class="modal-content" style="width: 500px;">
 			
 												<div class="modal-header"><!-- modal header -->
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-													<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+													<h5 class="modal-title" id="myModalLabel"style=" color: white;">로그인을 먼저 하세요.</h5>
 												</div><!-- /modal header -->
 			
 												<!-- modal body -->
-												<div class="modal-body">
-													로그인을 먼저 하세요.
-												</div>
+<!-- 												<div class="modal-body"> -->
+<!-- 													로그인을 먼저 하세요. -->
+<!-- 												</div> -->
 												<!-- /modal body -->
 			
 												<div class="modal-footer"><!-- modal footer -->
-													<button class="btn btn-default" data-dismiss="modal">Close</button> <button class="btn btn-primary">Save changes</button>
+													<button class="btn btn-default" data-dismiss="modal">Close</button>
 												</div><!-- /modal footer -->
 											</div>
 										</div>

@@ -31,7 +31,16 @@
 					<br>
 					<br>
 					<div class="col-md-12">
-						<div class="col-md-4" style="align:left"> ${shopReview.memberId} </div>
+						<div class="col-md-4" style="align:left">
+							<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
+								<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50">
+							</c:if>
+							
+							<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
+								<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
+							</c:if> 
+							${shopReview.memberId} 
+						</div>
 						<div class="col-md-8" style="text-align:left">
 							<div align="right">
 	
