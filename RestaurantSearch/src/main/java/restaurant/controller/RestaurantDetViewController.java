@@ -130,11 +130,13 @@ public class RestaurantDetViewController {
 		ArrayList<String> keyword = new ArrayList<String>();
 		String[] str = null;
 
-		if (restaurantDto.getKeyword() != null) {
-			str = restaurantDto.getKeyword().split("\\|");
-
-			for (int i=0; i<str.length; i++) {
-				keyword.add(str[i]);
+		if (restaurantDto != null) {
+			if (restaurantDto.getKeyword() != null) {
+				str = restaurantDto.getKeyword().split("\\|");
+	
+				for (int i=0; i<str.length; i++) {
+					keyword.add(str[i]);
+				}
 			}
 		}
 		
@@ -143,9 +145,9 @@ public class RestaurantDetViewController {
 		
 		if (restaurantDto != null) {
 			addr = restaurantDto.getAddr().split(",");
+			restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		}
 		
-		restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		
 		ModelAndView mav = new ModelAndView();
 		

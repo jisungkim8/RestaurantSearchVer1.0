@@ -135,7 +135,7 @@ $(document).ready(function() {
 	
 	$('#myNav').affix({
 		offset: {
-			top: 125,
+			top: 50,
 			bottom: function () {
 				return (this.bottom = $('.bs-footer').outerHeight(false))
 			}
