@@ -7,7 +7,7 @@
 		var filterName = urlParam("filterName");
 		
 		$("#addReviewPhotoFileAtModify").on("click", function(e) {
-			alert("addReviewPhotoFileAtModify");
+//			alert("addReviewPhotoFileAtModify");
 			
 			var content = "";
 			var number = $("#reviewPhotoFileGroupAtModify input").length + 1;
@@ -28,7 +28,7 @@
 			var number = $("#reviewPhotoFileGroupAtModify input").length;
 			var imgFileId = "reviewPhotoFileAtModify" + number;
 			
-			alert("deleteReviewPhotoFileAtModify");
+//			alert("deleteReviewPhotoFileAtModify");
 			
 			$("#" + imgFileId).remove();
 			
@@ -37,15 +37,15 @@
 		
 		$(document).on("submit", "#reviewUpdateForm", function(e) {
 			
-			alert("reviewUpdateForm")
+//			alert("reviewUpdateForm")
 			
 			if (this.title.value == "") {
-				alert("title");
+//				alert("title");
 				$("#reviewTitleMsgAtModify").html("<font style='color:red'> 제목을 입력해주세요 </font>");
 			}
 			
 			if (this.content.value == "") {
-				alert("content");
+//				alert("content");
 				$("#reviewContentMsgAtModify").html("<font style='color:red'> 본문을 입력해주세요 </font>");
 			}
 			
@@ -58,7 +58,7 @@
 		
 		$(document).on("click", "#reviewDeleteButton", function(e) {
 			var current = (this)
-			alert("current = " + current)
+//			alert("current = " + current)
 			
 			location.href="reviewDelete.do?restaurantId=" + restaurantId + "&current=" + current.value + "&moreCount=0&filterName=reviewId"
 //			$.ajax({

@@ -110,8 +110,7 @@
 											'thick solid brown');
 								})
 
-						$("#login")
-								.click(
+						$("#login").click(
 										function() {
 											var registerCheck, passwd;
 
@@ -145,8 +144,7 @@
 												return;
 											}
 
-											$
-													.ajax({
+											$.ajax({
 														url : 'memberRegiCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 														//2.data:{매개변수명:값,매개변수명2:값2,,,,}
 														data : {
@@ -382,6 +380,12 @@
 								</li>
 								
 								<li class="eborder-top">
+									<a href="list.do" id="quick_board">
+										<i class="icon_profile"></i> 게시판
+									</a>
+								</li>
+								
+								<li class="eborder-top">
 									<a href="memberLogout.do">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
@@ -428,6 +432,12 @@
 								<li class="eborder-top">
 									<a href="memList.do">
 										<i class="icon_profile"></i> 회원관리
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="list.do" id="quick_board">
+										<i class="icon_profile"></i> 게시판
 									</a>
 								</li>
 								

@@ -143,7 +143,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).on("click", "#replyWrite", function(e) {
-		alert("asdasdasd");
+//		alert("asdasdasd");
 	});
 	
 	$(document).on("click", "#filtering", function(e) {
@@ -173,7 +173,7 @@ $(document).ready(function() {
 	});
 	
 	$("#addReviewPhotoFile").on("click", function(e) {
-		alert("addReviewPhotoFile");
+//		alert("addReviewPhotoFile");
 		
 		var content = "";
 		var number = $("#reviewPhotoFileGroup input").length + 1;
@@ -194,7 +194,7 @@ $(document).ready(function() {
 		var number = $("#reviewPhotoFileGroup input").length;
 		var imgFileId = "reviewPhotoFile" + number;
 		
-		alert("deleteReviewPhotoFile");
+//		alert("deleteReviewPhotoFile");
 		
 		$("#" + imgFileId).remove();
 		
@@ -216,7 +216,7 @@ $(document).ready(function() {
 			method : "POST", 
 			data : {restaurantId:restaurantId, current:current.value, moreCount:moreCount, status:status}, 
 			success : function(args) {
-				alert("args = " + args);
+//				alert("args = " + args);
 				
 				if (args == "increase") {
 					$("#recommend").attr("class", "btn btn-success");
@@ -236,7 +236,7 @@ $(document).ready(function() {
 			method : "POST", 
 			data : {restaurantId:restaurantId}, 
 			success : function(args) {
-				alert("args = " + args);
+//				alert("args = " + args);
 				
 				if (args == "nonexist") {
 					$("#likeImage").attr("class", "featured-icon half fa fa-heart-o");
@@ -255,15 +255,15 @@ $(document).ready(function() {
 	
 	$(document).on("submit", "#reviewWriteForm", function(e) {
 		
-		alert("reviewWriteForm")
+//		alert("reviewWriteForm")
 		
 		if (this.title.value == "") {
-			alert("title");
+//			alert("title");
 			$("#reviewTitleMsg").html("<font style='color:red'> 제목을 입력해주세요 </font>");
 		}
 		
 		if (this.content.value == "") {
-			alert("content");
+//			alert("content");
 			$("#reviewContentMsg").html("<font style='color:red'> 본문을 입력해주세요 </font>");
 		}
 		

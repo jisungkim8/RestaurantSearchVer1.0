@@ -167,10 +167,10 @@ public class MemLoginController {
 			// ModelAndView("redirect:restaurantDetView.do?restaurantId=" +
 			// restaurantId + "&moreCount=" + moreCount + "&filterName=" +
 			// filterName);
-		} /*else if(pageName.equals("boardView")) {
+		} else if(pageName.equals("boardView")) {
 			System.out.println("=====boardList.jsp====");
-			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
-		}*/
+			mav.setViewName("redirect:list.do?pageNum=1&moreCount=0&keyWord=0");
+		}
 		return mav;
 	}
 
@@ -254,6 +254,21 @@ public class MemLoginController {
 		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
 
 		mav.setViewName("restaurantMainView");
+		mav.addObject("list", list);
+		mav.addObject("newlist", newlist);
+		return mav;
+	}
+	
+	@RequestMapping("memBoardLogout.do")
+	public ModelAndView memBoardLogout(HttpSession session) {
+		System.out.println("memBoardLogout_로그아웃");
+		session.setAttribute("userLoginInfo", null);
+		ModelAndView mav = new ModelAndView();
+
+		List<MainRestaurantListDto> list = mainRestaurantListDao.selectMainRestaurantList();
+		List<MainRestaurantListDto> newlist = mainRestaurantListDao.selectNewRestaurantList();
+
+		mav.setViewName("redirect:list.do?pageNum=1&moreCount=0&keyWord=0");
 		mav.addObject("list", list);
 		mav.addObject("newlist", newlist);
 		return mav;

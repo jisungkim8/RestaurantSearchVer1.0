@@ -5,9 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><tiles:getAsString name="title" /></title>
-<tiles:insertAttribute name="css" />
-<tiles:insertAttribute name="js" />
 </head>
 <body>
 	<table border="0" cellpadding="0" cellspacing="1" bgcolor="#a0a0a0"
