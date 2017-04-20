@@ -40,3 +40,56 @@
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+	<style type="text/css">
+.btn-custized {
+    color: #fff;
+    background-color: #2e6da4;
+}
+
+/* .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
+    color: #fff;
+    background-color: #000000;
+    border-color: #2e6da4;
+} */
+
+.btn-custized:hover, .btn-custized:focus {
+    color: #fff;
+    background-color: #000000;
+    border-color: #2e6da4;
+} 
+
+.btn-custized:active, .btn-custized.active {
+    color: #fff;
+    background-color: #f07057;
+    border-color: #2e6da4;
+}
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px;
+    overflow: visible;
+}
+
+.dropdown-menu { 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 40px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+</style>

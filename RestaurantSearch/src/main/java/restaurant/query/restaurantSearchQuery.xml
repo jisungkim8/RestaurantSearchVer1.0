@@ -59,13 +59,14 @@
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 
 				FROM RESTAURANT
-				ORDER BY restaurantId desc) a	
+				ORDER BY averageScore DESC) a	
 			<where>
 				<foreach collection="keyword" index="index" item="keyword">
 					<if test="index > 0">AND</if>
 					keyword like '%'||#{keyword}||'%'
 				</foreach>
 			</where>
+			ORDER BY averageScore DESC
 			)
 		WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end}
 	</select>
@@ -76,7 +77,7 @@
 		FROM (SELECT a.*, rownum rnum 
 			FROM (SELECT * 
 				FROM RESTAURANT
-				ORDER BY restaurantId desc) a	
+				ORDER BY averageScore DESC) a	
 			<where>
 			(
 			<foreach collection="keywordList" index="index" item="keyword">
@@ -151,7 +152,8 @@
 	
 	
 	<select id="selectRestaurantSearchBySearchOptionHashMapForLikeList" parameterType="hashmap" resultType="RestaurantDto">
-		SELECT D.* FROM
+		SELECT * FROM
+		(SELECT D.*, ROWNUM RNUM FROM
 			(SELECT * FROM  likeList a, memSimInfo b
 				WHERE a.memberId = #{memberId} AND a.memberId = b.memberId ORDER BY a.listNum DESC) C,
 				restaurant D
@@ -163,7 +165,7 @@
 					<if test="index > 0"> OR </if>
 					keyword like '%'||#{location}||'%'
 				</foreach>
-				)
+				) 
 			</if>
 			<if test="food != null and food.size() > 0">
 				AND (
@@ -182,9 +184,11 @@
 			<if test="minPrice != null and maxPrice != null ">
 				AND (averagePrice <![CDATA[>=]]> #{minPrice} AND averagePrice <![CDATA[<=]]> #{maxPrice})
 			</if>
-			AND ROWNUM <![CDATA[>=]]>#{begin} AND	ROWNUM<![CDATA[ <=]]>#{end}
+			<!-- AND ROWNUM <![CDATA[>=]]>#{begin} AND	ROWNUM<![CDATA[ <=]]>#{end} -->
+			ORDER BY averageScore DESC
 		</where>
-		<!-- WHERE  RNUM <![CDATA[>=]]>#{begin} AND	RNUM<![CDATA[ <=]]>#{end} -->
+		) E
+		<![CDATA[WHERE  RNUM >= #{begin} AND	RNUM <= #{end}]]>
 	</select>
 	
 	<select id="selectRestaurantSearchById" parameterType="int" resultType="RestaurantDto">
