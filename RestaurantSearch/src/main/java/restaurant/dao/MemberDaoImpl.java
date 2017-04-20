@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import restaurant.dto.MemDetInfoDto;
 import restaurant.dto.MemSimInfoDto;
+import restaurant.dto.ShopReviewCommand;
 
 public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 
@@ -110,7 +111,11 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 		return selectMember;
 	}
 
-
+	public List<MemDetInfoDto> selectMemberForReview(Map<String, Object> shopReviewCommand) {
+		// TODO Auto-generated method stub
+		
+		return getSqlSession().selectList("selectMemberForReview", shopReviewCommand);
+	}
 	
 	
 }

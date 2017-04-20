@@ -21,12 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import restaurant.dao.LikeListDao;
+import restaurant.dao.MemberDao;
 import restaurant.dao.RestaurantDao;
 import restaurant.dao.ReviewPhotoDao;
 import restaurant.dao.ShopDetInfoDao;
 import restaurant.dao.ShopPhotoDao;
 import restaurant.dao.ShopReviewDao;
 import restaurant.dto.LikeListDto;
+import restaurant.dto.MemDetInfoDto;
 import restaurant.dto.MemSimInfoDto;
 import restaurant.dto.RestaurantDto;
 import restaurant.dto.ReviewPhotoDto;
@@ -59,6 +61,9 @@ public class RestaurantDetViewController {
 	
 	@Autowired
 	private LikeListDao likeListDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	boolean checkMoreReview = true;
 	
@@ -125,11 +130,13 @@ public class RestaurantDetViewController {
 		ArrayList<String> keyword = new ArrayList<String>();
 		String[] str = null;
 
-		if (restaurantDto.getKeyword() != null) {
-			str = restaurantDto.getKeyword().split("\\|");
-
-			for (int i=0; i<str.length; i++) {
-				keyword.add(str[i]);
+		if (restaurantDto != null) {
+			if (restaurantDto.getKeyword() != null) {
+				str = restaurantDto.getKeyword().split("\\|");
+	
+				for (int i=0; i<str.length; i++) {
+					keyword.add(str[i]);
+				}
 			}
 		}
 		
@@ -138,9 +145,9 @@ public class RestaurantDetViewController {
 		
 		if (restaurantDto != null) {
 			addr = restaurantDto.getAddr().split(",");
+			restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		}
 		
-		restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -296,6 +303,25 @@ public class RestaurantDetViewController {
 		}
 		
 		try {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("reviewId", reviewCommand.getReviewId());
+			
+			ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+			
+			
+			for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
+				System.out.println("upload Path = " + FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
+				File existFile = new File(FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
+				
+				if (existFile.exists()) {
+					System.out.println("File is deleted!!");
+					existFile.delete();
+				} else {
+					System.out.println("File is not exist!!");
+				}
+			}
+			
 			reviewPhotoDao.deleteReviewPhotoDetView(reviewCommand.getReviewId());
 			
 			int newPhotoId = reviewPhotoDao.getNewReviewPhotoDetView() + 1;
@@ -376,6 +402,25 @@ public class RestaurantDetViewController {
 		map.put("restaurantId", restaurantId);
 		map.put("reviewId", reviewId);
 		
+		Map<String, Object> mapForDelete = new HashMap<String, Object>();
+		
+		map.put("reviewId", reviewId);
+		
+		ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(mapForDelete);
+		
+		
+		for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
+			System.out.println("upload Path = " + FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
+			File existFile = new File(FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
+			
+			if (existFile.exists()) {
+				System.out.println("File is deleted!!");
+				existFile.delete();
+			} else {
+				System.out.println("File is not exist!!");
+			}
+		}
+		
 		reviewPhotoDao.deleteReviewPhotoDetView(reviewId);
 		shopReviewDao.deleteShopReviewDetView(map);
 				
@@ -398,6 +443,7 @@ public class RestaurantDetViewController {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<ShopReviewCommand> shopReviewDto = new ArrayList<ShopReviewCommand>();
 		ArrayList<ReviewPhotoDto> reviewPhotoByReviewIdDto = new ArrayList<ReviewPhotoDto>();
+		ArrayList<MemDetInfoDto> memberForReview = new ArrayList<MemDetInfoDto>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		checkMoreReview = true;
 
@@ -421,6 +467,9 @@ public class RestaurantDetViewController {
 		reviewPhotoByReviewIdDto = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
 		System.out.println("RestaurantDetViewController>>reviewPhotoByReviewIdDto : " + reviewPhotoByReviewIdDto);
 		
+		memberForReview = (ArrayList<MemDetInfoDto>) memberDao.selectMemberForReview(map);
+		System.out.println("RestaurantDetViewController>>memberIdForReview : " + memberForReview);
+		
 		if (!shopReviewDto.isEmpty()) {
 			for (int i=0; i<shopReviewDto.size(); i++) {
 				ArrayList<ReviewPhotoDto> list = new ArrayList<ReviewPhotoDto>();
@@ -438,6 +487,7 @@ public class RestaurantDetViewController {
 		mav.setViewName("moreReview");
 		
 		mav.addObject("shopReviewDto", shopReviewDto);
+		mav.addObject("memberForReview", memberForReview);
 		mav.addObject("checkMoreReview", checkMoreReview);
 		
 		return mav;

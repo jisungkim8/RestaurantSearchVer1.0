@@ -177,7 +177,7 @@ public class MemberRegiController {
 	}
 
 	@RequestMapping(value = "/memberInfoUpdate.do", method = RequestMethod.POST)
-	public ModelAndView memInfoUpdate(@ModelAttribute("memDetInfoDto") MemDetInfoDto memDetInfoDto) {
+	public ModelAndView memInfoUpdate(@ModelAttribute("memDetInfoDto") MemDetInfoDto memDetInfoDto, HttpSession session) {
 		if (log.isDebugEnabled()) {
 			log.debug("memDetInfoDto=" + memDetInfoDto); // toString()
 		}
@@ -247,6 +247,8 @@ public class MemberRegiController {
 
 		} // else
 		System.out.println("멤버정보입력전에dto정보" + memDetInfoDto);
+		
+		session.setAttribute("userLoginDetInfo", memDetInfoDto);
 
 		// 정상적으로 에러가 발생이 되지 않고 입력을 완수 했다면
 		// ModelAndView mav=new ModelAndView("redirect:/list.do")
