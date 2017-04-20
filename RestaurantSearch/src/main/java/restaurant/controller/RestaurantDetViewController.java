@@ -220,15 +220,16 @@ public class RestaurantDetViewController {
 				
 				
 				if (!uploadImg.isEmpty()) {
+					reviewPhotoDto = new ReviewPhotoDto();
+					
 					System.out.println("RestaurantDetViewController>>reviewSubmit()>>uploadImg = " + uploadImg.getOriginalFilename());
 					
 					File serverFile = DuplicateFile.getFile(FileUtil2.UPLOAD_PATH, uploadImg);
-					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")+1));
 					
-					reviewPhotoDto = new ReviewPhotoDto();
 					
 					reviewPhotoDto.setPhotoId(newPhotoId++);
-					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					reviewPhotoDto.setPhotoPath(serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
 					reviewPhotoDto.setReviewId(newReivewId);
 					
 					reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
@@ -316,12 +317,12 @@ public class RestaurantDetViewController {
 					System.out.println("RestaurantDetViewController>>reviewSubmit()>>uploadImg = " + uploadImg.getOriginalFilename());
 					
 					File serverFile = DuplicateFile.getFile(FileUtil2.UPLOAD_PATH, uploadImg);
-					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					System.out.println("RestaurantDetViewController>>reviewSubmit()>>serverFile = " + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
 					
 					reviewPhotoDto = new ReviewPhotoDto();
 					
 					reviewPhotoDto.setPhotoId(newPhotoId++);
-					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\")));
+					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
 					reviewPhotoDto.setReviewId(reviewCommand.getReviewId());
 					
 					reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);

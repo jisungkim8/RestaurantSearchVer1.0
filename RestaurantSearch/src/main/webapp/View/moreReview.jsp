@@ -85,7 +85,7 @@
 											<figure>
 												<a href="<c:url value="${reviewPhoto.photoPath}" />">
 													<c:if test="${reviewPhotoVs.index <= 2 }">
-														<img class="img-responsive" src="<c:url value="${reviewPhoto.photoPath}" />" width="100" height="100" alt="">
+														<img class="img-responsive" src="images/${reviewPhoto.photoPath}" width="100" height="100" alt="">
 													</c:if>
 													
 													<c:if test="${shopReview.reviewPhotoDtoList.size()-3 > 0}">
@@ -165,7 +165,7 @@
 																	<label>사진</label>
 																	
 																	<div id="reviewPhotoFileGroupAtModify">
-																		<input type="file" class="form-control" style="height:50px;" name="upload">
+																		<input type="file" class="form-control" style="height:50px;" name="upload"> asdasd
 																	</div>
 																	<div align="right">
 																		<button id="addReviewPhotoFileAtModify" class="btn btn-default">사진 추가</button>
