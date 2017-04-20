@@ -61,7 +61,7 @@
 			   onclick="location.href='update.do?boardNum=${board.boardNum}'">
 			<input type="button" class="btn btn-success" value="삭제" 
 			   onclick="location.href='delete.do?boardNum=${board.boardNum}'">
-			<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+			<input type="button" class="btn btn-warning" value="목록" onclick="location.href='memList.do'">
 			</div>
 	</form>
 	<div class="col-md-2">
