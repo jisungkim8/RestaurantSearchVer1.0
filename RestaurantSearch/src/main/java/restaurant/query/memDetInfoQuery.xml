@@ -20,7 +20,7 @@
  	</select>
  	
  	<select id="checkNicName" resultType="int" parameterType="String">
-		select count(*) from memDetInfo where nickname=#{nickname}
+		select count(*) from memDetInfo where nickname=#{nickname} 
  	</select>
  	
  	<select id="selectMemDetInfo" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">
@@ -54,7 +54,7 @@
  	</update>
  	
  	<delete id="deleteMemDetInfo" parameterType="MemDetInfoDto">
- 		delete from memDetInfo where memberId=#{memberId} 	
+ 		delete from memDetInfo where memberId=#{memberId}  AND NOT memberId = 'kicRestAdmin@rest.com'
  	</delete>
  	
  	<select id="memDetInfobyPasswdSearch" parameterType="MemDetInfoDto" resultType="MemDetInfoDto">
@@ -83,7 +83,7 @@
 		</where>
 		ORDER BY memberId desc)a)
 	<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
+		WHERE rnum >= #{start} AND rnum <= #{end} AND NOT memberId = 'kicRestAdmin@rest.com'
 	]]>
 	</select>
 
@@ -102,6 +102,7 @@
 				nickname like '%' ||
 				#{keyWord} || '%'
 			</if>
+			 AND NOT memberId = 'kicRestAdmin@rest.com'
 		</where>
 	</select>
 	

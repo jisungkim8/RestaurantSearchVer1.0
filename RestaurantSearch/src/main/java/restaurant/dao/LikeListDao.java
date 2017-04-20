@@ -10,4 +10,5 @@ public interface LikeListDao {
 	public int getNewListNum();
 	public void insertLikeList(LikeListDto likeListDto);
 	public void deleteLikeList(LikeListDto likeListDto);
+	public void deleteLikeListByMemberId(String memberId);
 }

@@ -51,6 +51,16 @@
 		SELECT COUNT(*) FROM SHOPREVIEW WHERE RESTAURANTID = #{restaurantId}
 	</select>
 	
+	<select id="selectShopReviewByMemberId" parameterType="String" resultType="ShopReviewCommand">
+		SELECT * FROM SHOPREVIEW 
+		WHERE memberId=#{memberId}
+	</select>
+	 
+	<delete id="deleteShopReviewByMemberId" parameterType="String">
+		DELETE FROM SHOPREVIEW
+		WHERE memberId=#{memberId}
+	</delete>
+	
 </mapper>
 
 

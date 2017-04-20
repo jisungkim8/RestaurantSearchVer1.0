@@ -15,4 +15,6 @@ public interface ShopReviewDao {
 	public void increaseRecommendCnt(int reviewId);
 	public void decreaseRecommendCnt(int reviewId);
 	public int getTotalShopReviewDetView(int restaurantId);
+	public List<ShopReviewCommand> selectShopReviewByMemberId(String memberId);
+	public void deleteShopReviewByMemberId(String memberId);
 }

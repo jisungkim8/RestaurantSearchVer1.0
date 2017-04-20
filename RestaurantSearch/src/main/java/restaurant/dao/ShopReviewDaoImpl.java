@@ -78,4 +78,14 @@ public class ShopReviewDaoImpl extends SqlSessionDaoSupport implements ShopRevie
 		
 		return totalCount;
 	}
+
+	public List<ShopReviewCommand> selectShopReviewByMemberId(String memberId) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("selectShopReviewByMemberId", memberId);
+	}
+	
+	public void deleteShopReviewByMemberId(String memberId) {
+		// TODO Auto-generated method stub
+		getSqlSession().update("deleteShopReviewByMemberId", memberId);
+	}
 }
