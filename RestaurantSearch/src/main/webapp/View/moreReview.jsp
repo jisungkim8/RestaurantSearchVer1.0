@@ -92,7 +92,7 @@
 									<li class="col-sm-3"> <!-- item -->
 										<div class="item-box">
 											<figure>
-												<a href="<c:url value="${reviewPhoto.photoPath}" />">
+												<a href="<c:url value="images/${reviewPhoto.photoPath}" />">
 													<c:if test="${reviewPhotoVs.index <= 2 }">
 														<img class="img-responsive" src="images/${reviewPhoto.photoPath}" width="100" height="100" alt="">
 													</c:if>

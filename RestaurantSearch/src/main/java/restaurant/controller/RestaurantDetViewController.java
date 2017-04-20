@@ -242,7 +242,7 @@ public class RestaurantDetViewController {
 
 						reviewPhotoDto = new ReviewPhotoDto();
 						reviewPhotoDto.setPhotoId(newPhotoId++);
-						reviewPhotoDto.setPhotoPath("design/images/noimg.png");
+						reviewPhotoDto.setPhotoPath("noimg.png");
 						reviewPhotoDto.setReviewId(newReivewId);
 						
 						reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
@@ -322,7 +322,7 @@ public class RestaurantDetViewController {
 					reviewPhotoDto = new ReviewPhotoDto();
 					
 					reviewPhotoDto.setPhotoId(newPhotoId++);
-					reviewPhotoDto.setPhotoPath("images" + serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
+					reviewPhotoDto.setPhotoPath(serverFile.getAbsolutePath().substring(serverFile.getAbsolutePath().lastIndexOf("\\") + 1));
 					reviewPhotoDto.setReviewId(reviewCommand.getReviewId());
 					
 					reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
@@ -335,7 +335,7 @@ public class RestaurantDetViewController {
 
 						reviewPhotoDto = new ReviewPhotoDto();
 						reviewPhotoDto.setPhotoId(newPhotoId++);
-						reviewPhotoDto.setPhotoPath("design/images/noimg.png");
+						reviewPhotoDto.setPhotoPath("noimg.png");
 						reviewPhotoDto.setReviewId(reviewCommand.getReviewId());
 						
 						reviewPhotoDao.insertReviewPhotoDetView(reviewPhotoDto);
