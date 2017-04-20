@@ -6,7 +6,7 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>맛집검색</title>
+<title>맛집검색 - 더이상 속지 마세요!</title>
 
 <!-- mobile settings -->
 <meta name="viewport"
@@ -355,63 +355,93 @@
 				<button type="button" class="btn btn-success">로그인</button> -->
 			<!-- SIGN IN -->
 			<c:choose>
-				<c:when
-					test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'kicRestAdmin@rest.com'}">
-
-					<div class="pull-right nav signin-dd">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"
-							style="background-color: lightgreen"> <span>로그인 성공!
-									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
-							</span>
-						</a>
-							<ul class="dropdown-menu extended logout"
-								style="width: 251px; background-color: blue">
+				<c:when test="${not empty sessionScope.userLoginInfo and sessionScope.userLoginInfo.memberId ne 'kicRestAdmin@rest.com'}">
+					<div class="navbar-collapse nav-main-collapse collapse pull-right nav signin-dd" style="top: -30px;left: 30%;">
+<!-- 					<div class="pull-right nav signin-dd" style="top: -30px;left: 30%;"> -->
+<!-- 						<li class="dropdown"> -->
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
+									<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50">
+								</c:if>
+								
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
+									<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+								
+<%-- 								<span> 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" /> </span> --%>
+							</a>
+							
+							<ul class="dropdown-menu extended logout" style="width: 251px;left: -205px;top: 78%;">
 								<div class="log-arrow-up"></div>
-								<li class="eborder-top"><a href="#" id="myProfile"><i
-										class="icon_profile"></i> My Profile</a></li>
-								<!-- <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
-                            </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
-										class="icon_profile"></i> 로그아웃</a></li>
-								<li class="eborder-top"><a href="#" id="memLeave"><i
-										class="icon_profile"></i> 회원탈퇴</a></li>
-							</ul></li>
+								<li class="eborder-top">
+									<a href="#" id="myProfile">
+										<i class="icon_profile"></i> My Profile
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memberLogout.do">
+										<i class="icon_profile"></i> 로그아웃
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="#" id="memLeave">
+										<i class="icon_profile"></i> 회원탈퇴
+									</a>
+								</li>
+							</ul>
+<!-- 						</li> -->
 						<form name="memInfoForm">
-							<input type="hidden" id="memberId" name="memberId"
-								value="${sessionScope.userLoginInfo.memberId}" /> <input
-								type="hidden" id="password" name="password"
-								value="${sessionScope.userLoginInfo.password}" />
+							<input type="hidden" id="memberId" name="memberId" value="${sessionScope.userLoginInfo.memberId}" /> 
+							<input type="hidden" id="password" name="password" value="${sessionScope.userLoginInfo.password}" />
 						</form>
 					</div>
 				</c:when>
 
-				<c:when
-					test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
-
-					<div class="pull-right nav signin-dd">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"
-							style="background-color: lightgreen"> <span>로그인 성공!
-									닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" />
-							</span>
-						</a>
-							<ul class="dropdown-menu extended logout"
-								style="width: 251px; background-color: blue">
+				<c:when test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
+					<div class="navbar-collapse nav-main-collapse collapse pull-right nav signin-dd" style="top: -30px;left: 30%;">
+<!-- 					<div class="pull-right nav signin-dd"> -->
+<!-- 						<li class="dropdown"> -->
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
+									<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+								
+								<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
+									<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
+								</c:if>
+							
+<%-- 							<span> 닉네임 :<c:out value="${sessionScope.userLoginDetInfo.nickname}" /> </span> --%>
+							</a>
+							
+							<ul class="dropdown-menu extended logout" style="width: 251px;left: -205px;top: 78%;">
 								<div class="log-arrow-up"></div>
-								<li class="eborder-top"><a href="#" id="myProfile"><i
-										class="icon_profile"></i> My Profile</a></li>
-								<li class="eborder-top"><a href="memList.do"><i
-										class="icon_profile"></i> 회원관리</a></li>
-								<!-- <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> 회원정보수정 </a>
-                            </li> -->
-								<li class="eborder-top"><a href="memberLogout.do"><i
-										class="icon_profile"></i> 로그아웃</a></li>
-								<li class="eborder-top"><a href="#" id="memLeave"><i
-										class="icon_profile"></i> 회원탈퇴</a></li>
-							</ul></li>
+								<li class="eborder-top">
+									<a href="#" id="myProfile">
+										<i class="icon_profile"></i> My Profile
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memList.do">
+										<i class="icon_profile"></i> 회원관리
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="memberLogout.do">
+										<i class="icon_profile"></i> 로그아웃
+									</a>
+								</li>
+								
+								<li class="eborder-top">
+									<a href="#" id="memLeave">
+										<i class="icon_profile"></i> 회원탈퇴
+									</a>
+								</li>
+							</ul>
+<!-- 						</li> -->
 						<form name="memInfoForm">
 							<input type="hidden" id="memberId" name="memberId"
 								value="${sessionScope.userLoginInfo.memberId}" /> <input
@@ -425,7 +455,11 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
+<<<<<<< HEAD
+					
+=======
 
+>>>>>>> refs/remotes/origin/master
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
 
@@ -469,6 +503,7 @@
 							<h4>
 								<a href="#" data-toggle="modal" id="pwdSearch" style="color:white">암호를 잊어버리셨나요?</a>
 							</h4>
+							<h5 id="loginmsg">	</h5>
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>

@@ -112,7 +112,7 @@
 	<div class="col-md-10">
 		<table  class="table table-striped table-advance table-hover">
 			<thead>
-				<tr>
+				<tr style="background-color:#F29661">
 				<c:if test="${sessionScope.userLoginInfo.memberId eq 'kicRestAdmin@rest.com'}">
 					<th width="5" style="text-align: center;"><input type="checkbox" name="checkAll" id="th_checkAll"
 						onclick="checkAll();" /></th>
