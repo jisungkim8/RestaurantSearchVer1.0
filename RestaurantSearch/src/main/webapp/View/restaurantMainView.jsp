@@ -1037,9 +1037,9 @@
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="featured-box noradius line-left">
 						<i class="lightgray fa fa-key hidden-xs"></i>
-						<h4>서비스는 무료입니다.</h4>
-						<p>현재 광고없는 무제한 무료 서비스를 지원중입니다.</p>
-						<a href="page-full-width.html" class="btn btn-primary btn-xs">자세히
+						<h4>About Us</h4>
+						<p>프로젝트를 만든 사람들입니다. 한번 들려보세요! </p>
+						<a href="page-team.html" class="btn btn-primary btn-xs">자세히
 							보기</a>
 					</div>
 				</div>
