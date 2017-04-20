@@ -391,11 +391,11 @@
 									</a>
 								</li>
 								
-								<li class="eborder-top">
-									<a href="#" id="memLeave">
-										<i class="icon_profile"></i> 회원탈퇴
-									</a>
-								</li>
+<!-- 								<li class="eborder-top"> -->
+<!-- 									<a href="#" id="memLeave"> -->
+<!-- 										<i class="icon_profile"></i> 회원탈퇴 -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 							</ul>
 <!-- 						</li> -->
 						<form name="memInfoForm">
@@ -447,11 +447,11 @@
 									</a>
 								</li>
 								
-								<li class="eborder-top">
-									<a href="#" id="memLeave">
-										<i class="icon_profile"></i> 회원탈퇴
-									</a>
-								</li>
+<!-- 								<li class="eborder-top"> -->
+<!-- 									<a href="#" id="memLeave"> -->
+<!-- 										<i class="icon_profile"></i> 회원탈퇴 -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 							</ul>
 <!-- 						</li> -->
 						<form name="memInfoForm">

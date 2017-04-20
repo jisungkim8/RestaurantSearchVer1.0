@@ -261,6 +261,7 @@ public class MemberRegiController {
 		System.out.println("___회원 탈퇴___");
 		System.out.println("memberId" + memberId);
 		memberDao.deleteMember(memberId);
+		session.invalidate();
 		return new ModelAndView("redirect:/restaurantMain.do");
 	}
 }

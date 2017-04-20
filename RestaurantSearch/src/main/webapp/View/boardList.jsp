@@ -82,7 +82,7 @@
 		</form> -->
 
 <h2>
-	<br> <strong style="margin-left: 700px;">식당 검색 게시판</strong>
+	<br> <strong style="margin-left: 150px;">식당 검색 게시판</strong>
 	<!-- <small class="font300">게시판</small> -->
 </h2>
 

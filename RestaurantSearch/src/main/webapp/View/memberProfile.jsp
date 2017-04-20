@@ -223,6 +223,26 @@ function modifyCom(){
 }
 
 $(function(){
+	$('#memLeave').click(function() {
+		if (confirm("정말 탈퇴하시겠습니까?") == true) {
+			$.ajax({
+				url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+				//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+				data : {
+					id : $("#memberId").val()
+				},
+				type : "POST",
+				//3.success:콜백함수명(매개변수)
+				success : function(args) {
+					alert("회원 탈퇴가 성공적으로 되었습니다.")
+					self.close();
+					opener.location.href="restaurantMain.do";
+				}
+			})
+		} else {
+			return;
+		}
+	});
 	
 	$("#nicNameRepCheck").click(function(){
 		   if($("#nicName").val()==""){
@@ -558,7 +578,7 @@ $(function(){
 	<!-- WRAPPER -->
 	<!-- <div id="wrapper" style="background-color: #FF00DD"> -->
 
-		<div id="shop" style="background-color: #6799FF">
+		<div id="shop">
 
 			<!-- PAGE TITLE -->
 			<!-- <header id="page-title">
@@ -575,10 +595,10 @@ $(function(){
 
 			<section class="container">
 
-			<div class="row" style="background-color: #6799FF">
+			<div class="row">
 
 				<!-- REGISTER -->
-				<div class="col-md-9" style="background-color: #6799FF">
+				<div class="col-md-9">
 
 				<h2>
 					<c:if test="${memDetInfo.photoPath!='images/null'}">
@@ -607,7 +627,7 @@ $(function(){
 							match!
 						</div> -->
 
-						<div class="row"  style="background-color: #FFE400">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-6">
 									이메일<br>
@@ -637,7 +657,7 @@ $(function(){
 							</div>
 						</div> -->
 						
-						<div class="row" style="background-color: #FFE400">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>생년월일</label> <input type="text" id="birthDate" name="birthDate"  value="${memDetInfo.birthDate}"
@@ -647,7 +667,7 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="row" style="background-color: #FFE400">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>전화번호</label> <input type="text" id="phoneNum" name="phoneNum"  value="${memDetInfo.phoneNum}"
@@ -659,7 +679,7 @@ $(function(){
 						</div>
 						
 						
-						<div class="row" style="background-color: #FFE400">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>성별</label> <input type="text" id="gender" name="gender"
@@ -673,7 +693,7 @@ $(function(){
 							</div>
 						</div>
 												
-						<div class="row" style="background-color: #FFE400">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 										<label>이미지</label> 
@@ -718,7 +738,7 @@ $(function(){
 									</div>
 								</div> --%>
 
-					<div class="row" style="background-color: #86E57F">
+					<div class="row">
 							<div class="form-group">
 								<div class="col-md-2">
 									<label>닉네임</label> <input type="text" size="10" id="nicName"  class="form-control" name="nickname" value="${memDetInfo.nickname}"
@@ -736,7 +756,7 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="row" style="background-color: #86E57F">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>관심음식</label> <input type="text" id="interestFood" name="interestFood" value="${memDetInfo.interestFood}"
@@ -745,7 +765,7 @@ $(function(){
 							</div>
 						</div>
 
-						<div class="row" style="background-color: #86E57F">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>자기소개</label> <%-- <input type="textArea" name="selfIntro"
@@ -755,7 +775,7 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="row" style="background-color: #86E57F">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<label>회원등급</label> <input type="text" name="memberGrade" value="${memSimInfo.memberGrade}"
@@ -764,7 +784,7 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="row" style="background-color: #86E57F">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-6">
 									<label>누적포인트</label><input type="text" id="accuPoint" name="accuPoint"  value="${memSimInfo.accuPoint}"
@@ -779,7 +799,7 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="row" style="background-color: #86E57F">
+						<div class="row">
 							<div class="form-group">
 								<div class="col-md-12">
 									<!-- <label>이메일 수신여부</label> -->
@@ -798,9 +818,10 @@ $(function(){
 							</div>
 						</div>
 
-						<div class="row" style="text-align:right; background-color: #86E57F">
+						<div class="row" style="text-align:right;">
 						        <input type="hidden" id="nicNameDupliCheck" value="checked">
 								<input type="button" id="profileMod" value="수정" style="margin-bottom: 17px; margin-right: 17px;" class="btn btn-primary"  OnClick="trueForm()">
+								<input type="button" id="memLeave" value="탈퇴"  style="margin-bottom: 17px; margin-right: 17px;"  class="btn btn-primary" >
 								<input type="button" id="profileSave" value="저장"  style="margin-bottom: 17px; margin-right: 17px;"  class="btn btn-success" >
 						</div>
 					</form>
