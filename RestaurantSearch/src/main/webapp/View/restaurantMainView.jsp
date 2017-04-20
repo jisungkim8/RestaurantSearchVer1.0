@@ -6,7 +6,7 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>맛집검색 - 헤헤</title>
+<title>맛집검색 - 더이상 속지 마세요!</title>
 
 <!-- mobile settings -->
 <meta name="viewport"
@@ -471,6 +471,7 @@
 							<h4>
 								<a href="#" data-toggle="modal" id="pwdSearch" style="color:white">암호를 잊어버리셨나요?</a>
 							</h4>
+							<h5 id="loginmsg">	</h5>
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
