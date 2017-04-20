@@ -19,6 +19,7 @@ import restaurant.dao.ShopDetInfoDao;
 import restaurant.dto.RestaurantDto;
 import restaurant.dto.ShopDetInfoDto;
 import restaurant.util.FileUtil2;
+import restaurant.util.FileUtil3;
 
 //유효성 검사->입력->ok->boardWriter.jsp 화면에 출력
 @Controller
@@ -26,6 +27,9 @@ public class RestaurantRegiController {
 
 	@Autowired
 	RestaurantRegiDao restaurantRegiDao;
+	
+	@Autowired
+	ShopDetInfoDao shopDetInfoDao;
 
 	private Logger log = Logger.getLogger(this.getClass());// 클래스 이름 불러오기
 
@@ -36,31 +40,51 @@ public class RestaurantRegiController {
 	}
 
 	@RequestMapping(value = "/restaurantRegi.do", method = RequestMethod.POST)
-	public ModelAndView submit(@ModelAttribute("restaurantDto") RestaurantDto restaurantDto)
-		{
-
-		if (log.isDebugEnabled()) {
-			log.debug("restaurantDto=" + restaurantDto); // toString()
-	
-		}
-		
-		int restaurantCount;
-
-	/*@RequestMapping(value = "/restaurantRegi.do", method = RequestMethod.POST)
 	public ModelAndView submit(@ModelAttribute("restaurantDto") RestaurantDto restaurantDto,
 			@ModelAttribute("shopDetInfoDto") ShopDetInfoDto shopDetInfoDto) {
 
 		if (log.isDebugEnabled()) {
 			log.debug("restaurantDto=" + restaurantDto); // toString()
 			log.debug("shopDetInfoDto=" + shopDetInfoDto); // toString()
-		}*/
+
+		}
+
+		/*
+		 * @RequestMapping(value = "/restaurantRegi.do", method =
+		 * RequestMethod.POST) public ModelAndView
+		 * submit(@ModelAttribute("restaurantDto") RestaurantDto restaurantDto,
+		 * 
+		 * @ModelAttribute("shopDetInfoDto") ShopDetInfoDto shopDetInfoDto) {
+		 * 
+		 * if (log.isDebugEnabled()) { log.debug("restaurantDto=" +
+		 * restaurantDto); // toString() log.debug("shopDetInfoDto=" +
+		 * shopDetInfoDto); // toString() }
+		 */
 
 		System.out.println("MemberRegiController RequestMethod.POST 메서드 호출됨!");
+		try {
+			String newPhotoName = "";// 변경할 파일이름
+			// 파일 앞 \img/ 붙이기
 
-		restaurantRegiDao.insertRestaurant(restaurantDto);
-		
-		/*restaurantRegiDao.insertRestaurantDetInfo(shopDetInfoDto);*/
-		// 정상적으로 에러가 발생이 되지 않고 입력을 완수 했다면
+			newPhotoName = FileUtil3.rename(restaurantDto.getUpload().getOriginalFilename());
+			System.out.println("원본파일명=" + restaurantDto.getUpload().getOriginalFilename());
+			// DTO의 객체 filename -> 바뀐파일명 --> 실제로 DB상의 filename
+			System.out.println("newName=" + newPhotoName);
+			restaurantDto.setRepresentPhoto(newPhotoName);
+
+			System.out.println("멤버정보입력전에dto정보" + restaurantDto);
+			restaurantRegiDao.insertRestaurant(restaurantDto);
+			shopDetInfoDao.insertShopDetInfo(shopDetInfoDto);
+			// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
+
+			File file = new File(FileUtil3.UPLOAD_PATH + "/" + restaurantDto.getUpload().getOriginalFilename());
+			restaurantDto.getUpload().transferTo(file); // ~transferTo(전송할객체명)
+
+		} catch (IOException e) { // 시큐어 코딩 방식
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// ModelAndView mav=new ModelAndView("redirect:/list.do")
 		return new ModelAndView("redirect:/restaurantMain.do");
@@ -99,7 +123,7 @@ public class RestaurantRegiController {
 
 		// DB상에 반영하라
 		restaurantRegiDao.updateRestaurant(restaurantDto);
-
+		
 		// 업로드->업로드된 변경된 파일->지정한 업로드 위치로 복사해서 이동
 		if (!restaurantDto.getUpload().isEmpty()) {
 			try {

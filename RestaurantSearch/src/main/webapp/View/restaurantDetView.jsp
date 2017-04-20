@@ -620,7 +620,7 @@
 								<div class="owl-carousel controlls-over" data-plugin-options='{"autoPlay":false, "stopOnHover":false, "items": 1, "singleItem": true, "navigation": true, "pagination": true, "transitionStyle":"fadeUp", "itemsScaleUp":true}'>
 									<c:forEach var="shopPhotoSepNum1" items="design/images/noimg.png">
 										<div>
-											<img alt="" class="img-responsive" src="<c:url value="design/images/noimg.png" />" width="600" height="400" />
+											<img alt="" class="img-responsive" src="<c:url value="design/images/noimg.png" />" width="710" height="470" />
 										</div>
 									</c:forEach>
 								</div>
@@ -635,7 +635,7 @@
 													Lorem Ipsum Dolor Sit Amet...
 												</p>
 											</div>
-											<img alt="" class="img-responsive" src="<c:url value="${shopPhotoSepNum1.photoPath}" />" width="600" height="400" />
+											<img alt="" class="img-responsive" src="<c:url value="${shopPhotoSepNum1.photoPath}" />" width="710" height="470" />
 										</div>
 									</c:forEach>
 								</div>

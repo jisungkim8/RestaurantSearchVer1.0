@@ -12,5 +12,11 @@ public class ShopDetInfoDaoImpl extends SqlSessionDaoSupport implements ShopDetI
 		
 		return getSqlSession().selectOne("selectShopDetInfoDetView", restaurantId);
 	}
+	
+	public void insertShopDetInfo(ShopDetInfoDto shopDetInfoDto) {
+		// TODO Auto-generated method stub
+		getSqlSession().insert("insertShopDetInfo", shopDetInfoDto);
+		System.out.println("RestaurantRegiDaoImpl_shopDetInfoDto");
+	}
 
 }

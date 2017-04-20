@@ -244,15 +244,7 @@ figure.agent-figure.pull-right {
     text-align: left;
 }
 
-#fileselector {
-    margin: 10px; 
-}
-#upload-file-selector {
-    display:none;   
-}
-.margin-correction {
-    margin-right: 10px;   
-}
+
 
 /** Responsive
  **************************************************************** **/

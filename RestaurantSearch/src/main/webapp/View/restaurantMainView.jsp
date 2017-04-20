@@ -80,6 +80,27 @@
 											'thick solid grey');
 
 								})
+						var fileTarget = $('.filebox .upload-hidden');
+						fileTarget.on('change', function() { // 값이 변경되면 
+							if (window.FileReader) { // modern browser
+								var filename = $(this)[0].files[0].name;
+							} else { // old IE
+								var filename = $(this).val().split('/').pop()
+										.split('\\').pop(); // 파일명만 추출 
+							}
+							// 추출한 파일명 삽입 
+							//$(this).siblings('.upload-name').val(filename); 
+							if ($('.upload-name').val() != "") {
+								var ext = filename.split('.').pop()
+										.toLowerCase();
+								if ($.inArray(ext, [ 'gif', 'png', 'jpg',
+										'jpeg' ]) == -1) {
+									alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+									return;
+								}
+							}
+							$('.upload-name').val(filename);
+						});
 
 						$(".relSearButton").click(
 								function() {
@@ -321,7 +342,7 @@
 
 			<!-- Mobile Menu Button -->
 			<button class="btn btn-mobile" data-toggle="collapse"
-				data-target=".nav-main-collapse">
+				data-target=".nav-main-collapse" style="display:none">
 				<i class="fa fa-bars"></i>
 			</button>
 
@@ -436,18 +457,18 @@
 				<c:otherwise>
 
 					<div class="pull-right nav signin-dd">
+<<<<<<< HEAD
 					
+=======
+
+>>>>>>> refs/remotes/origin/master
 						<a id="quick_sign_in" href="page-signin.html"
 							data-toggle="dropdown"><span class="btn btn-success">로그인</span></a>
 
 
 						<div class="dropdown-menu" role="menu"
 							aria-labelledby="quick_sign_in">
-							<h4>
-								Sign In&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"
-									data-toggle="modal" id="pwdSearch"><font color="red">패스워드
-										찾기</font></a>
-							</h4>
+							<h4>Sign In</h4>
 							<form name="memInfo" role="form" method="post"
 								action="memberLogin.do">
 
@@ -473,13 +494,17 @@
 										class="btn btn-primary pull-right push-bottom">
 									</span>
 								</div>
-								<div class="checkbox">
-									<!-- remmember -->
-									<label> <!-- <input type="checkbox"> Remember me &bull; -->
-										<h3 id=loginmsg></h3> <!-- <table><tr><td id="loginmsg" ></td></tr></table> -->
+								<!-- <div class="checkbox">
+									remmember
+									<label> <input type="checkbox"> Remember me &bull;
+										<h3 id=loginmsg></h3> <table><tr><td id="loginmsg" ></td></tr></table>
 									</label>
-								</div>
+								</div> -->
 							</form>
+							<hr />
+							<h4>
+								<a href="#" data-toggle="modal" id="pwdSearch" style="color:white">암호를 잊어버리셨나요?</a>
+							</h4>
 							<hr />
 
 							<!-- <a href="#" class="btn-facebook fullwidth radius3"><i class="fa fa-facebook"></i> Connect With Facebook</a>
@@ -548,12 +573,9 @@
 										<input type="submit" value="검색"
 											class="btn btn-default btn-m view-more pull-right">
 									</form> <span class="clearfix"></span> <!-- /view more button -->
-
 								</span>
-
-
-
 							</div>
+							
 						</div>
 						<div class="subbox">
 							<button class="popSearButton">인기 검색어</button>
@@ -611,7 +633,7 @@
 										</span>
 										</a>
 										<img alt="" class="img-responsive"
-											src="${article.representPhoto}" width="409" height="271" />
+											src="${article.representPhoto}" height="271" width="409" />
 									</figure>
 									<div class="item-box-desc">
 										<h3>${article.restaurantName}</h3>
@@ -876,12 +898,12 @@
 													class="form-control" id="restaurantId" name="restaurantId"
 													placeholder="식당 ">
 											</div> -->
-											<div class="form-group" style="display:none">
+											<div class="form-group" style="display: none">
 												<label for="InputId">식당 Id</label> <input type="text"
-													class="form-control" id="restaurantId"
-													name="restaurantId" placeholder="식당 Id" value="${restaurantCount+1}">
+													class="form-control" id="restaurantId" name="restaurantId"
+													placeholder="식당 Id" value="${restaurantCount+1}">
 											</div>
-											
+
 											<div class="form-group">
 												<label for="InputName">상호명</label> <input type="text"
 													class="form-control" id="restaurantName"
@@ -907,8 +929,8 @@
 													class="form-control" id="averagePrice" name="averagePrice"
 													placeholder="평균 음식 가격">
 											</div>
-											
-											<div class="form-group" style="display:none">
+
+											<div class="form-group" style="display: none">
 												<label for="avgScore">평점</label> <input type="text"
 													class="form-control" id="averageScore" name="averageScore"
 													placeholder="평점은 0부터 시작합니다." value="0" readonly>
@@ -919,23 +941,20 @@
 													class="form-control" id="filterInfo" name="filterInfo"
 													placeholder="예약:가능,주차:가능">
 											</div>
-											
-											<div class="form-group">
-												<label for="mainPhoto">대표 메뉴</label> <input type="text"
-													class="form-control" id="representPhoto" name="representPhoto"
-													placeholder="사진을 넣어주세요">
+
+											<div class="filebox">
+												<label for="mainPhoto">대표 사진</label>
+												<div class="filebox">
+
+													<input type="file" id="ex_filename" name="upload"
+														class="upload-hidden">
+												</div>
 											</div>
 
-											<span id="fileselector"> <label
-												class="btn btn-default" for="upload-file-selector">
-													<input id="upload-file-selector" type="file"> <i
-													class="fa_icon icon-upload-alt margin-correction"></i>upload
-													file
-											</label>
-											</span>
+
 
 											<hr>
-											<!-- <div class="page-header">
+											<div class="page-header">
 												<h1>
 													추가 정보 <small>Extra Information</small>
 												</h1>
@@ -948,8 +967,8 @@
 											</div>
 											<div class="form-group">
 												<label for="openDate">개업일</label> <input type="text"
-													class="form-control" id="openStartDate"
-													name="openStartDate" placeholder="식당의 개업일">
+													class="form-control" id="operStartDate"
+													name="operStartDate" placeholder="예: 20170402">
 											</div>
 											<div class="form-group">
 												<label for="inputMenu">대표 메뉴</label> <input type="text"
@@ -958,17 +977,19 @@
 											</div>
 											<div class="form-group">
 												<label for="inputName">대표자</label> <input type="text"
-													class="form-control" id="representative" name="representative"
-													placeholder="대표 이름">
+													class="form-control" id="representative"
+													name="representative" placeholder="대표 이름">
 											</div>
 											<div class="form-group">
 												<label for="inputHomepage">홈페이지</label> <input type="text"
-													class="form-control" id="homepage" name="homepage" placeholder="홈페이지 주소">
+													class="form-control" id="homepage" name="homepage"
+													placeholder="홈페이지 주소">
 											</div>
 											<div class="form-group">
 												<label for="openHour">영업 시간</label> <input type="text"
-													class="form-control" id="openHour" name="openHour" placeholder="영업 시간">
-											</div> -->
+													class="form-control" id="operHour" name="operHour"
+													placeholder="영업 시간">
+											</div>
 
 											<div class="form-group">
 												<div class="col-sm-12 text-center">

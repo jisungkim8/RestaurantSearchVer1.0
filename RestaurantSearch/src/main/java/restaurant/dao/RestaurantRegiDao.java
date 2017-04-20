@@ -10,12 +10,12 @@ public interface RestaurantRegiDao {
 	
 	public void updateRestaurant(RestaurantDto restaurantDto);
 
-	public void insertRestaurantDetInfo(ShopDetInfoDto shopDetInfoDto);
-	
+	/*public void insertRestaurantDetInfo(ShopDetInfoDto shopDetInfoDto);*/
+
 	public void deleteRestaurant(String restaurantId);
 
 	public int countRestaurantId();
-	
+
 /*	public RestaurantDto selectMemDetInfo(RestaurantDto restaurantDto);
 
 	public RestaurantDto searchMemDetInfo(RestaurantDto restaurantDto);
