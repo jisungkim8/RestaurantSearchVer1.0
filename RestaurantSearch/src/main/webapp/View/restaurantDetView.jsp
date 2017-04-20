@@ -181,24 +181,24 @@
 													}
 												})
 		
-								$('#memLeave').click(function() {
-									if (confirm("정말 탈퇴하시겠습니까?") == true) {
-										$.ajax({
-											url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
-											//2.data:{매개변수명:값,매개변수명2:값2,,,,}
-											data : {
-												id : $("#memberId").val()
-											},
-											type : "POST",
-											//3.success:콜백함수명(매개변수)
-											success : function(args) {
-												alert("회원 탈퇴가 성공적으로 되었습니다.")
-											}
-										})
-									} else {
-										return;
-									}
-								})
+// 								$('#memLeave').click(function() {
+// 									if (confirm("정말 탈퇴하시겠습니까?") == true) {
+// 										$.ajax({
+// 											url : 'memLeave.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
+// 											//2.data:{매개변수명:값,매개변수명2:값2,,,,}
+// 											data : {
+// 												id : $("#memberId").val()
+// 											},
+// 											type : "POST",
+// 											//3.success:콜백함수명(매개변수)
+// 											success : function(args) {
+// 												alert("회원 탈퇴가 성공적으로 되었습니다.")
+// 											}
+// 										})
+// 									} else {
+// 										return;
+// 									}
+// 								})
 		
 								$("#searchBox").autocomplete({
 									source : function(request, response) {
@@ -356,11 +356,11 @@
 									</a>
 								</li>
 								
-								<li class="eborder-top">
-									<a href="#" id="memLeave">
-										<i class="icon_profile"></i> 회원탈퇴
-									</a>
-								</li>
+<!-- 								<li class="eborder-top"> -->
+<!-- 									<a href="#" id="memLeave"> -->
+<!-- 										<i class="icon_profile"></i> 회원탈퇴 -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 							</ul>
 <!-- 						</li> -->
 						<form name="memInfoForm">
@@ -412,11 +412,11 @@
 									</a>
 								</li>
 								
-								<li class="eborder-top">
-									<a href="#" id="memLeave">
-										<i class="icon_profile"></i> 회원탈퇴
-									</a>
-								</li>
+<!-- 								<li class="eborder-top"> -->
+<!-- 									<a href="#" id="memLeave"> -->
+<!-- 										<i class="icon_profile"></i> 회원탈퇴 -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 							</ul>
 <!-- 						</li> -->
 						<form name="memInfoForm">
