@@ -211,16 +211,6 @@ public class MemLoginController {
 			System.out.println("=====restListView.jsp====");
 			mav.setViewName("redirect:restaurantSearch.do?keyword=" + keyword + "&pageNum=" + pageNum);
 		}
-		
-		 /* }else if(pageName.equals("boardView")) {
->>>>>>> refs/heads/SJY
-			System.out.println("=====boardList.jsp====");
-<<<<<<< HEAD
-			mav.setViewName("redirect:list.do?pageNum=1&moreCount=0&keyWord=0");
-		}
-=======
-			mav.setViewName("redirect:restaurantDetView.do?restaurantId=" + restaurantId + "&moreCount=" + moreCount
-		}*/
 		return mav;
 	}
 
@@ -344,13 +334,16 @@ public class MemLoginController {
 	
 	@RequestMapping("restListmemberLogout.do")
 	public ModelAndView restListmemberLogout(@RequestParam("keyword") String keyword,
-			@RequestParam("pageNum") int pageNum, HttpSession session) {
+			@RequestParam("pageNum") int pageNum,
+			HttpSession session) {
 		System.out.println("memberLogout_로그아웃");
 		session.setAttribute("userLoginInfo", null);
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("redirect:restaurantListView.do?keyword=" 
+		System.out.println("keyword = " + keyword);
+		System.out.println("pageNum = " + pageNum);
+		mav.setViewName("redirect:restaurantSearch.do?keyword=" 
 				+ keyword + "&pageNum=" + pageNum);
-		return mav;
+		return mav; 
 	}
 }

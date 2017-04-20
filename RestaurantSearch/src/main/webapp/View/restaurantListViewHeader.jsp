@@ -51,7 +51,7 @@
                             	</li> 
 								
 								<li class="eborder-top">
-									<a href="memberLogout.do">
+									<a href="restListmemberLogout.do?keyword=&pageNum=1">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>
@@ -101,7 +101,7 @@
 								</li>
 								
 								<li class="eborder-top">
-									<a href="memberLogout.do">
+									<a href="restListmemberLogout.do?keyword=&pageNum=1">
 										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>
@@ -134,8 +134,8 @@
 						<div class="dropdown-menu" role="menu"
 							aria-labelledby="quick_sign_in">
 							<h4>Sign In</h4>
-							<form name="memInfo" role="form" method="post"
-								action="memberLogin.do">
+							<form name="memInfo" role="form"  
+								action="memberLoginForList.do" method="post" accept-charset="utf-8">
 
 								<div class="form-group">
 									<!-- email -->
@@ -151,10 +151,9 @@
 
 									<!-- submit button -->
 									<span class="input-group-btn"> <!-- <button class="btn btn-primary btn-xs">로그인</button> -->
-										<input type="hidden" name="restaurantId" value="0"> <input
-										type="hidden" name="moreCount" value="0"> <input
-										type="hidden" name="filterName" value="reviewId"> <input
-										type="hidden" name="pageName" value="restMainView"> <input
+										<input type="hidden" name="pageName" value="restListView">
+										<input type="hidden" name="keyword" value=""> 
+										<input type="hidden" name="pageNum" value="1"> <input
 										type="button" id="login" value="로그인"
 										class="btn btn-primary pull-right push-bottom">
 									</span>
