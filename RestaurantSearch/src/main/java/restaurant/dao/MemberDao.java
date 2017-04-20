@@ -5,6 +5,7 @@ import java.util.Map;
 
 import restaurant.dto.MemDetInfoDto;
 import restaurant.dto.MemSimInfoDto;
+import restaurant.dto.ShopReviewDto;
 
 public interface MemberDao {
 	public void insertMember(MemDetInfoDto memDetInfoDto);
@@ -36,4 +37,6 @@ public interface MemberDao {
 	public MemDetInfoDto selectMember(String memberId);// 상세보기
 
 	public int checkNicName(String nicName);
+	
+	public List<MemDetInfoDto> selectMemberForReview(Map<String, Object> shopReviewDto);
 }

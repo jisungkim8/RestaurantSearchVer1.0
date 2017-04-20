@@ -111,5 +111,15 @@
 		select * from memdetinfo where memberid=#{memberid}
 	</select>
 	
-
+	<select id="selectMemberForReview" parameterType="map" resultType="MemDetInfoDto">
+		SELECT * FROM MEMDETINFO
+		<if test="shopReviewDto != null">
+			<where>
+				<foreach collection="shopReviewDto" item="shopReview" index="index">
+					<if test="index > 0">OR</if>
+					MEMBERID=#{shopReview.memberId}
+				</foreach>
+			</where>
+		</if>
+	</select>
 </mapper>

@@ -27,22 +27,49 @@
 		<div class="divider"></div>
 		<div>
 			<div class="row">
-				<div class="col-md-12" style="background-color:rgba(255, 255, 0, 0.2);">
+				<div class="col-md-12">
 					<br>
 					<br>
 					<div class="col-md-12">
-						<div class="col-md-4" style="align:left">
-							<c:if test="${sessionScope.userLoginDetInfo.photoPath == null}">
-								<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50">
-							</c:if>
-							
-							<c:if test="${sessionScope.userLoginDetInfo.photoPath != null}">
-								<img src="images/${sessionScope.userLoginDetInfo.photoPath}" class="img-circle img-responsive" width="50" height="50"> 
-							</c:if> 
-							${shopReview.memberId} 
+						<div class="col-md-2" align="center">
+							<c:forEach var="member" items="${memberForReview}">
+								<c:if test="${shopReview.memberId == member.memberId}">
+									<c:if test="${member.photoPath == null}">
+										<img src="images/porfilepic_default.jpg" class="img-circle img-responsive" width="50" height="50">
+										${member.nickname}
+									</c:if>
+									
+									<c:if test="${member.photoPath != null}">
+										<img src="images/${member.photoPath}" class="img-circle img-responsive" width="50" height="50">
+										${member.nickname}
+									</c:if>
+								</c:if>
+							</c:forEach>
 						</div>
-						<div class="col-md-8" style="text-align:left">
+						
+						<div class="col-md-8" align="left">
+							<font color="gray"> <fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="short" timeStyle="short"/> </font> <br>
+							
+							<hr style="margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px;">
+
+							<font size="6erm"><strong>${shopReview.title}</strong></font>
+							
+							<hr style="margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px;">
+							
+							${shopReview.content}
+							
+							<hr style="margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px;">
+							
+							방문시간대 : ${shopReview.visitTime}
+							<br>
+							Dinner/Lunch : ${shopReview.dinnerOrLunch}
+							<br>
+							
+						</div>
+						
+						<div class="col-md-2" style="text-align:left">
 							<div align="right">
+								<font color="gray">추천수 : ${shopReview.recommendCnt}</font> <br> <br>
 	
 								<c:if test="${sessionScope.userLoginInfo == null}">
 									<button class="btn btn-default" data-toggle="modal" data-target="#loginFirst">추천</button>
@@ -53,40 +80,12 @@
 								</c:if>
 								
 							</div>
-							<div align="right"><fmt:formatDate value="${shopReview.writeDate}" type="both" dateStyle="short" timeStyle="short"/></div>
 						</div>
 						
 					</div>
 					
-					<hr>
-					
 					<div class="col-md-12">
-						<div class="col-md-4" style="align:left"> 제목 </div> 
-						<div class="col-md-8" style="text-align:left"> ${shopReview.title} </div> 
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-4" style="align:left"> 추천수 </div>
-						<div class="col-md-8" style="text-align:left"> ${shopReview.recommendCnt} </div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-4" style="align:left"> 방문시간대 </div>
-						<div class="col-md-8" style="text-align:left"> ${shopReview.visitTime} </div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-4" style="align:left"> Dinner/Lunch </div>
-						<div class="col-md-8" style="text-align:left"> ${shopReview.dinnerOrLunch} </div>
-					</div>
-					
-					<div class="col-md-12"> 
-						<div class="col-md-4" style="align:left"> 본문 </div> 
-						<div class="col-md-8" style="text-align:left"> ${shopReview.content} </div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-8" style="align:left">
+						<div class="col-md-8" align="left">
 							<ul class="lightbox nomargin-left list-unstyled" data-sort-id="isotope-list" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 								<c:forEach var="reviewPhoto" items="${shopReview.reviewPhotoDtoList}" varStatus="reviewPhotoVs">
 									<li class="col-sm-3"> <!-- item -->

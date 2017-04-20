@@ -231,11 +231,11 @@ $(document).ready(function() {
 //				alert("args = " + args);
 				
 				if (args == "increase") {
-					$("#recommend").attr("class", "btn btn-success");
-					$("#recommend").attr("data-target", "#recommendDelete");
+					$(current).attr("class", "btn btn-success");
+					$(current).attr("data-target", "#recommendDelete");
 				} else {
-					$("#recommend").attr("class", "btn btn-default");
-					$("#recommend").attr("data-target", "#recommendAdd");
+					$(current).attr("class", "btn btn-default");
+					$(current).attr("data-target", "#recommendAdd");
 				}
 			}
 		});
