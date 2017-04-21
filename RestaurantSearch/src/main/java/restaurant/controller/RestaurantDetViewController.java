@@ -148,6 +148,8 @@ public class RestaurantDetViewController {
 			restaurantDto.setAddr(addr[0].trim() + " (" + addr[1].trim() + ")");
 		}
 		
+		int likeCount = likeListDao.getTotListCountByRestaurantId(restaurantId);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -162,6 +164,7 @@ public class RestaurantDetViewController {
 //		mav.addObject("shopReviewDto", shopReviewDto);
 //		mav.addObject("reviewPhotoByReviewIdDto", reviewPhotoByReviewIdDto);
 		mav.addObject("totReviewCnt", totReviewCnt);
+		mav.addObject("likeCount", likeCount);
 		
 		return mav;
 	}
@@ -307,6 +310,8 @@ public class RestaurantDetViewController {
 			
 			
 			for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
+				if (photoPathForDelete.equals("noimg.png")) break;
+				
 				System.out.println("upload Path = " + FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
 				File existFile = new File(FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
 				
@@ -402,6 +407,8 @@ public class RestaurantDetViewController {
 		System.out.println(reviewPhotoDtoForDelete.size());
 		
 		for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
+			if (photoPathForDelete.equals("noimg.png")) break;
+			
 			System.out.println("upload Path = " + FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
 			File existFile = new File(FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
 			

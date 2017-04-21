@@ -6,7 +6,7 @@
 <mapper namespace="MainList">
 	<select id="selectMainRestaurantList" resultType="MainRestaurantListDto">
 	<![CDATA[
-		select restaurantID, representPhoto, averageScore, restaurantName, phonenumber, averagePrice, substr(addr,1, instr(addr,',')-1) as addr from (select * from restaurant order by averagePrice desc) where rownum <=6
+		select restaurantID, representPhoto, averageScore, restaurantName, phonenumber, averagePrice, substr(addr,1, instr(addr,',')-1) as addr from (select * from restaurant order by viewCount desc) where rownum <=6
 		]]> 
 	</select>
 	
