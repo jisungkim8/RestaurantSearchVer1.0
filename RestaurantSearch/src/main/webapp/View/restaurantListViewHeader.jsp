@@ -49,6 +49,12 @@
                                 		<i class="icon_profile"></i>좋아요리스트
                                 	</a>
                             	</li> 
+                            	
+                            	<li class="eborder-top">
+									<a href="list.do" id="quick_board">
+											<i class="icon_profile"></i> 게시판
+									</a>
+								</li>
 								
 								<li class="eborder-top">
 									<a href="restListmemberLogout.do?keyword=&pageNum=1">
@@ -56,11 +62,11 @@
 									</a>
 								</li>
 								
-								<li class="eborder-top">
+								<!-- <li class="eborder-top">
 									<a href="#" id="memLeave">
 										<i class="icon_profile"></i> 회원탈퇴
 									</a>
-								</li>
+								</li> -->
 							</ul>
 <!-- 						</li> -->
 						<form name="memInfoForm">
@@ -101,14 +107,20 @@
 								</li>
 								
 								<li class="eborder-top">
-									<a href="restListmemberLogout.do?keyword=&pageNum=1">
-										<i class="icon_profile"></i> 로그아웃
+									<a href="list.do" id="quick_board">
+											<i class="icon_profile"></i> 게시판
 									</a>
 								</li>
 								
-								<li class="eborder-top">
+								<!-- <li class="eborder-top">
 									<a href="#" id="memLeave">
 										<i class="icon_profile"></i> 회원탈퇴
+									</a>
+								</li> -->
+								
+								<li class="eborder-top">
+									<a href="restListmemberLogout.do?keyword=&pageNum=1">
+										<i class="icon_profile"></i> 로그아웃
 									</a>
 								</li>
 							</ul>
