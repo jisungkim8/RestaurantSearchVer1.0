@@ -66,12 +66,22 @@
 						})
 
 						$("#searchBox").click(function() {
-							this.value = '';
 							this.style.color = "#000";
 							$(".subbox").show();
 
 						})
-
+						$("#searchButton").click(function(){
+							var searchCheck = 0;
+							if ($("#searchBox").val() == "") {
+								alert("검색어를 입력해 주세요.")
+										
+								$("#searchBox").focus();//커서입력
+									return false;
+							}
+							
+						})
+						
+						
 						$(".popSearButton").click(
 								function() {
 									$(".popSearButton").css('border-bottom',
@@ -587,7 +597,7 @@
 											placeholder="검색어로 검색: 혼밥/맛집/속초/데이트" /> <input type="hidden"
 											id="pageNum" name="pageNum" value="1" />
 										<!-- view more button -->
-										<input type="submit" value="검색"
+										<input type="submit" value="검색" id="searchButton"
 											class="btn btn-default btn-m view-more pull-right">
 									</form> <span class="clearfix"></span> <!-- /view more button -->
 								</span>
