@@ -1584,8 +1584,8 @@ div[data-role="editor-toolbar"] {
 
     text-transform: uppercase;
 
-    background-color:#688a7e !important;
-
+    /* background-color:#688a7e !important; */
+    background-color:#2E363F !important;
 }
 
 

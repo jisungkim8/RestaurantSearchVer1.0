@@ -29,6 +29,11 @@
 		DELETE FROM LIKELIST
 		WHERE listNum=#{listNum}
 	</delete>
+	
+	<delete id="deleteLikeListByMemberId" parameterType="String">
+		DELETE FROM LIKELIST
+		WHERE memberId=#{memberId}
+	</delete>
 </mapper>
 
 

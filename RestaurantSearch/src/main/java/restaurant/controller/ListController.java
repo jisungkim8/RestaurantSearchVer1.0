@@ -21,7 +21,7 @@ import restaurant.dto.BoardCommandDto;//DTO
 import restaurant.util.PagingUtil;
 //---------------------------------------------------
 
-@Controller 
+@Controller  
 public class ListController {
 	//로그객체
 	private Logger log = Logger.getLogger(this.getClass());

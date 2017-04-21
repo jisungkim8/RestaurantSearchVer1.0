@@ -53,4 +53,9 @@ public class LikeListDaoImpl extends SqlSessionDaoSupport implements LikeListDao
 		int deleteLikeList = getSqlSession().insert("deleteLikeList", likeListDto);
 		System.out.println("LikeListDaoImple>>deleteLikeList()>>deleteLikeList = " + deleteLikeList);
 	}
+	
+	public void deleteLikeListByMemberId(String memberId) {
+		// TODO Auto-generated method stub
+		getSqlSession().insert("deleteLikeListByMemberId", memberId);
+	}
 }
