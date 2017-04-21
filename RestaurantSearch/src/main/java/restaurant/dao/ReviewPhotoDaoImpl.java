@@ -44,4 +44,11 @@ public class ReviewPhotoDaoImpl extends SqlSessionDaoSupport implements ReviewPh
 		int resultByDelete = getSqlSession().delete("deleteReviewPhotoDetView", reviewId);
 		System.out.println("ReviewPhotoDaoImpl>>resultByDelete = " + resultByDelete);
 	}
+	
+	public List<ReviewPhotoDto> selectReviewPhotoByReviewIdDetViewForDelete(int reviewId) {
+		// TODO Auto-generated method stub
+		System.out.println("ReviewPhotoDaoImpl>>selectReviewPhotoByReviewIdDetViewForDelete() is called!!");
+		
+		return getSqlSession().selectList("selectReviewPhotoByReviewIdDetViewForDelete", reviewId);
+	}
 }

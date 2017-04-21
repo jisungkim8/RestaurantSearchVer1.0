@@ -27,6 +27,11 @@
 		</if>
 	</select>
 	
+	<select id="selectReviewPhotoByReviewIdDetViewForDelete" parameterType="int" resultType="ReviewPhotoDto">
+		SELECT * FROM REVIEWPHOTO
+		WHERE REVIEWID=#{reviewId}
+	</select>
+	
 	<select id="getNewReviewPhotoDetView" resultType="int">
 		SELECT MAX(photoId) FROM REVIEWPHOTO
 	</select>

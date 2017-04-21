@@ -209,16 +209,11 @@
 									
 									<div id="reviewDeleteModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-sm">
-											<div class="modal-content">
+											<div class="modal-content" style="width: 500px;">
 			
 												<div class="modal-header"><!-- modal header -->
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-													<h4 class="modal-title" id="myModalLabel">리뷰 삭제</h4>
-												</div><!-- /modal header -->
-			
-												<!-- modal body -->
-												<div class="modal-body">
-													리뷰를 삭제하시겠습니까??
+													<h5 class="modal-title" id="myModalLabel" style=" color: white;">리뷰를 삭제하시겠습니까??</h5>
 												</div>
 												<!-- /modal body -->
 			

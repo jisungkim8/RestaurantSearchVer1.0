@@ -10,4 +10,5 @@ public interface ReviewPhotoDao {
 	public int getNewReviewPhotoDetView();
 	public void insertReviewPhotoDetView(ReviewPhotoDto reviewPhotoDto);
 	public void deleteReviewPhotoDetView(int reviewId);
+	public List<ReviewPhotoDto> selectReviewPhotoByReviewIdDetViewForDelete(int reviewId);
 }
