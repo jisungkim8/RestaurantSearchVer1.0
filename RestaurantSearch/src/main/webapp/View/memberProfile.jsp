@@ -93,7 +93,7 @@ $(document).ready(function(){
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
 		}
 	
-	   alert("changeFilename=>"+filename);
+// 	   alert("changeFilename=>"+filename);
 	   
 	// 추출한 파일명 삽입 
 			//$(this).siblings('.upload-name').val(filename); 
@@ -132,10 +132,10 @@ function memberReg(id){  //서버에 요청하는 문서이름을 매개변수 2
     		//3.success:콜백함수명(매개변수)
     		success:function(args){
     			if(args=="create"){
-    				alert("가능");
+//     				alert("가능");
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 가능한 이메일입니다.</font>")
      			}else{
-    				alert("불가능")
+//     				alert("불가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 불가능한 이메일입니다.</font>")
     				$("#memberId").focus();
     			}

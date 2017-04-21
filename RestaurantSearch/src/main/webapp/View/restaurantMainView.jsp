@@ -219,7 +219,7 @@
 											memInfoForm.target = "memProfile";
 											memInfoForm.submit();
 											function myProfile() {
-												alert("__myProfile")
+// 												alert("__myProfile")
 												//window.open('popup.html','popup','width=300,height=200,left=0,top=0,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
 											}
 										})

@@ -13,7 +13,7 @@
 
 	/* 삭제(체크박스된 것 전부) */
 	function deleteAction() {
-		alert("deleteAction")
+// 		alert("deleteAction")
 		var checkRow = "";
 		//checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기
 
@@ -27,7 +27,7 @@
 
 			$("input[name='checkRow']:checked").each(function() {
 				checkRow = checkRow + $(this).val() + ",";
-				alert("checkRow=>"+checkRow);
+// 				alert("checkRow=>"+checkRow);
 				$.ajax({
 		    		url:'/RestaurantSearch/adminMemberDelete.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
 		    		//2.data:{매개변수명:값,매개변수명2:값2,,,,}

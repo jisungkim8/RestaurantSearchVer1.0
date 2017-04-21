@@ -134,7 +134,7 @@ $(function(){
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 가능한 닉네임입니다.</font>")
 	    				$("#nicNameDupliCheck").val('checked')
 	    				}else{
-	    				alert("닉네임 불가능")
+// 	    				alert("닉네임 불가능")
 	    				$("#nicNameTxt").html("<font id='idColor' color='red'>사용 불가능한 닉네임입니다.</font>")
 	    				$("#memberId").focus();
 	    			}
@@ -147,7 +147,7 @@ $(function(){
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		
 		 if($("#emailDupliCheck").val()=='unchecked'){
-				alert("에메일 중복확인 버튼을 클릭하세요.")
+				alert("이메일 중복확인 버튼을 클릭하세요.")
 				$("#repeatIdCheckBtn").focus();
 				return;
 		 }
@@ -233,11 +233,11 @@ $(function(){
     		//3.success:콜백함수명(매개변수)
     		success:function(args){
     			if(args=="create"){
-    				alert("가능")
+//     				alert("가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 가능한 이메일입니다.</font>")
     		    	document.registerMem.submit();
      			}else{
-    				alert("불가능")
+//     				alert("불가능")
     				$("#memberIdTxt").html("<font id='idColor' color='red'>사용 불가능한 이메일입니다.</font>")
     				$("#memberId").focus();
     				return;

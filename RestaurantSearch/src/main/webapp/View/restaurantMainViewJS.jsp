@@ -60,10 +60,10 @@
 										function() {
 											var registerCheck, passwd;
 
-											alert("memberId==>"
-													+ $("#memberId").val());
-											alert("password==>"
-													+ $("#password").val());
+// 											alert("memberId==>"
+// 													+ $("#memberId").val());
+// 											alert("password==>"
+// 													+ $("#password").val());
 
 											//document.memInfo.submit()
 
@@ -106,7 +106,7 @@
 														type : "POST",
 														//3.success:콜백함수명(매개변수)
 														success : function(args) {
-															alert(args);
+// 															alert(args);
 															if (args == "register") {
 																alert("회원등록이 되었습니다.")
 																registerCheck = "register"
@@ -126,7 +126,7 @@
 																			//3.success:콜백함수명(매개변수)
 																			success : function(
 																					args) {
-																				alert(args)
+// 																				alert(args)
 																				if (args == "agreement") {
 																					document.memInfo
 																							.submit()
@@ -150,9 +150,9 @@
 						$('#myProfile')
 								.click(
 										function() {
-											alert("id=>" + $('#memberId').val())
-											alert("pwd=>"
-													+ $("#password").val())
+// 											alert("id=>" + $('#memberId').val())
+// 											alert("pwd=>"
+// 													+ $("#password").val())
 
 											var memInfoForm = document.memInfoForm;
 											var url = "memProfile.do";
@@ -166,7 +166,7 @@
 											memInfoForm.target = "memProfile";
 											memInfoForm.submit();
 											function myProfile() {
-												alert("__myProfile")
+// 												alert("__myProfile")
 												//window.open('popup.html','popup','width=300,height=200,left=0,top=0,toobar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no')
 											}
 										})

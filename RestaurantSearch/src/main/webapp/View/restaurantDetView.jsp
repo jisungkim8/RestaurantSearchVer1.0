@@ -129,7 +129,7 @@
 																success : function(args) {
 // 																	alert(args);
 																	if (args == "register") {
-																		alert("회원등록이 되었습니다.")
+// 																		alert("회원등록이 되었습니다.")
 																		registerCheck = "register"
 																		$.ajax({
 																					url : 'memberPwdCheck.do', //요청문서를 지정할때 사용하는 키명(url):요청문서명
