@@ -303,11 +303,7 @@ public class RestaurantDetViewController {
 		}
 		
 		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("reviewId", reviewCommand.getReviewId());
-			
-			ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+			ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetViewForDelete(reviewCommand.getReviewId());
 			
 			
 			for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
