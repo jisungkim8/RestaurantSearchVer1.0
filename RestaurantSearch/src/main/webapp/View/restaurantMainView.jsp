@@ -57,6 +57,7 @@
 
 
 <script>
+	
 	$(document)
 			.ready(
 					function() {
@@ -70,18 +71,17 @@
 							$(".subbox").show();
 
 						})
-						$("#searchButton").click(function(){
+						$("#searchButton").click(function() {
 							var searchCheck = 0;
 							if ($("#searchBox").val() == "") {
 								alert("검색어를 입력해 주세요.")
-										
+
 								$("#searchBox").focus();//커서입력
-									return false;
+								return false;
 							}
-							
+
 						})
-						
-						
+
 						$(".popSearButton").click(
 								function() {
 									$(".popSearButton").css('border-bottom',
