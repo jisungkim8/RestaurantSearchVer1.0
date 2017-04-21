@@ -303,11 +303,7 @@ public class RestaurantDetViewController {
 		}
 		
 		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("reviewId", reviewCommand.getReviewId());
-			
-			ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(map);
+			ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetViewForDelete(reviewCommand.getReviewId());
 			
 			
 			for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
@@ -402,12 +398,8 @@ public class RestaurantDetViewController {
 		map.put("restaurantId", restaurantId);
 		map.put("reviewId", reviewId);
 		
-		Map<String, Object> mapForDelete = new HashMap<String, Object>();
-		
-		map.put("reviewId", reviewId);
-		
-		ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetView(mapForDelete);
-		
+		ArrayList<ReviewPhotoDto> reviewPhotoDtoForDelete = (ArrayList<ReviewPhotoDto>) reviewPhotoDao.selectReviewPhotoByReviewIdDetViewForDelete(reviewId);
+		System.out.println(reviewPhotoDtoForDelete.size());
 		
 		for (ReviewPhotoDto photoPathForDelete : reviewPhotoDtoForDelete) {
 			System.out.println("upload Path = " + FileUtil2.UPLOAD_PATH + "/" + photoPathForDelete.getPhotoPath());
